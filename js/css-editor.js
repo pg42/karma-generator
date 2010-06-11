@@ -1,8 +1,17 @@
 $(function() {
+    $('#tabs').tabs();
     var context_menu;
     var delete_context_menu = function() {
       context_menu.remove();
     };
+    var origin_x, origin_y;
+    var canvas_x = function(event) {
+      return event.pageX - origin_x - 2;
+    };
+    var canvas_y = function(event) {
+      return event.pageY - origin_y - 2;
+    };
+
     var build_context_menu = function(event, items) {
       context_menu = $(document.createElement('div'))
         .css({position: 'absolute',
@@ -23,15 +32,24 @@ $(function() {
         });      
     };
 
+    var last_id = -1;
+    var generate_id = function() {
+      last_id += 1;
+      return 'id' + last_id;
+    }
+
     var start_draw_div = function(event) {
       if (context_menu) {
         delete_context_menu();
         return;
       }
       if (event.originalEvent.mouseHandled) { return; }
-      var x0 = event.pageX;
-      var y0 = event.pageY;
+      var x0 = canvas_x(event);
+      var y0 = canvas_y(event);
+      log('' + x0 + '@' + y0);
+      var id = generate_id();
       var outline = $(document.createElement('div'))
+      .attr({id: id})
       .css({position: 'absolute',
             left: x0,
             top: y0,
@@ -42,12 +60,44 @@ $(function() {
             backgroundColor: 'white'
         })
       .appendTo(canvas);
+
+      var form = $(document.createElement('form'))
+      .hide()
+      .submit(function(event) {
+          $(this).hide();
+          var new_id = id_input.val();
+          if (new_id != '') {
+            id_label.text(new_id);
+            outline.attr({id: new_id});
+          }
+          id_label.show();
+          event.preventDefault();
+        })
+      .appendTo(outline);
+
+      var id_input = $(document.createElement('input'))
+      .attr({type: 'text', name: 'id'})
+      .appendTo(form);
+
+      var id_label = $(document.createElement('div'))
+      .text(id)
+      .show()
+      .click(function() {
+          $(this).hide();
+          id_input.val($(this).text());
+          form.show();
+          id_input.select();
+        })
+      .appendTo(outline);
+
       var resize_outline = function(event) {
+        var x1 = canvas_x(event);
+        var y1 = canvas_y(event);
         outline
-        .css({left: Math.min(x0, event.pageX),
-              top: Math.min(y0, event.pageY),
-              width: Math.abs(event.pageX - x0),
-              height: Math.abs(event.pageY - y0)});
+        .css({left: Math.min(x0, x1),
+              top: Math.min(y0, y1),
+              width: Math.abs(x1 - x0),
+              height: Math.abs(y1 - y0)});
       };
       canvas.mousemove(resize_outline);
       canvas.mouseup(function(event) {
@@ -65,14 +115,60 @@ $(function() {
       event.preventDefault();
     };
 
+    // We add a dummy div so that the containing div takes into account
+    // the space taken by the canvas
+    var dummy = $(document.createElement('div'))
+      .css({width: 1000, height: 300, border: '1px solid red'})
+      .appendTo($('#layout'));
+
     var canvas = $(document.createElement('div'))
       .attr({id: 'canvas'})
-      .css({width: 1200,
+      .css({//width: 1200,
             //height: 900,
+        width: 1000,
             height: 300,
+            position: 'absolute',
+            left: 3,
+            top: 68,
             border: '2px solid black'})
       .mousedown(start_draw_div)
-      .appendTo($('body'));
+      .appendTo(dummy);
+
+    origin_x = canvas.offset().left;
+    origin_y = canvas.offset().top;
+
+    var toolbar = $(document.createElement('div'))
+      .attr({id: 'toolbar'})
+      .css({width: 1200,
+            height: 20})
+      .appendTo($('#layout'));
+
+    $('#layout').css({padding: '1em 0em'});
+
+    var state_to_save = function() {
+      $canvas = $('#canvas');
+      var result = $('#canvas > div').map(function (i, div) {
+          var $div = $(div);
+          return {tag: 'div',
+              id: $div.attr('id'),
+              left: $div.offset().left - $canvas.offset().left,
+              top: $div.offset().top - $canvas.offset().top,
+              width: $div.width(),
+              height: $div.height()};
+        });
+      return result.get();
+    };
+
+    $(document.createElement('button'))
+      .text('save')
+      .click(function() {
+          $.post('save.html',
+                 JSON.stringify(state_to_save()),
+                 function(data) {
+                   // do nothing
+                 });
+        })
+      .appendTo(toolbar);
 
     const resize_handle_size = 10;
 
@@ -95,7 +191,6 @@ $(function() {
       var h = $(document.createElement('div'))
         .css({width: resize_handle_size,
               height: resize_handle_size,
-              backgroundColor: 'white',
               position: 'absolute',
               left: elt.width() - resize_handle_size,
               top: elt.height() - resize_handle_size - 2})
