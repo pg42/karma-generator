@@ -4,12 +4,11 @@ $(function() {
     var delete_context_menu = function() {
       context_menu.remove();
     };
-    var origin_x, origin_y;
     var canvas_x = function(event) {
-      return event.pageX - origin_x - 2;
+      return event.pageX - canvas.offset().left - 2;
     };
     var canvas_y = function(event) {
-      return event.pageY - origin_y - 2;
+      return event.pageY - canvas.offset().top - 2;
     };
 
     var build_context_menu = function(event, items) {
@@ -46,7 +45,6 @@ $(function() {
       if (event.originalEvent.mouseHandled) { return; }
       var x0 = canvas_x(event);
       var y0 = canvas_y(event);
-      log('' + x0 + '@' + y0);
       var id = generate_id();
       var outline = $(document.createElement('div'))
       .attr({id: id})
@@ -134,14 +132,12 @@ $(function() {
       .mousedown(start_draw_div)
       .appendTo(dummy);
 
-    origin_x = canvas.offset().left;
-    origin_y = canvas.offset().top;
 
     var toolbar = $(document.createElement('div'))
       .attr({id: 'toolbar'})
       .css({width: 1200,
             height: 20})
-      .appendTo($('#layout'));
+      .appendTo($('body'));
 
     $('#layout').css({padding: '1em 0em'});
 
@@ -199,6 +195,9 @@ $(function() {
 
       draw_resize_handle_in(h.get()[0]);
     };
+
+
+    
 
     $(document.createElement('div'))
       .attr({id: 'log'})
