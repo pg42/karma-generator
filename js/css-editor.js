@@ -158,10 +158,20 @@ $(function() {
     $(document.createElement('button'))
       .text('save')
       .click(function() {
-          $.post('save.html',
+          $.post('save',
                  JSON.stringify(state_to_save()),
                  function(data) {
                    // do nothing
+                 });
+        })
+      .appendTo(toolbar);
+
+    $(document.createElement('button'))
+      .text('generate')
+      .click(function() {
+          $.post('generate',
+                 JSON.stringify(state_to_save()),
+                 function(data) {
                  });
         })
       .appendTo(toolbar);

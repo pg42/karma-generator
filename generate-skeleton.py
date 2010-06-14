@@ -84,7 +84,7 @@ class HtmlDocument(HtmlElement):
 def create_html(title, css_files, js_files, json_divs):
     doc = HtmlDocument()
     head = doc.head()
-    head.title('CSS editor')
+    head.title('CSS')
     [head.css(css) for css in css_files]
     [head.js(js) for js in js_files]
     body = doc.body()
