@@ -6,15 +6,21 @@ from optparse import OptionParser
 debug = True # doesn't do anything yet
 theLesson = None
 
+# TBD: provide a debug and optimized (minimized) version of the framework files.
+
 framework_js_files = [
     {'name':'jquery',
-     'file':'../js/jquery-1.4.js'}, # Should be the same version
+     'file':'../js/jquery-1.4.js'},
     {'name':'jquery.ui',
      'file':'../js/ui.core-draggable-resizable-dialog.js'},
     {'name':'jquery.svg',
      'file':'../js/jquery.svg.js'},
     {'name':'karma.js',
-     'file':'../js/karma.js'}]
+     'file':'../js/karma.js'}
+    ]
+
+# TBD: sort the JavaScript files so that they are in the correct order (e.g.
+# jquery before jquery.ui)
 
 class Lesson:
     def __init__(self):
@@ -33,11 +39,16 @@ class Lesson:
 
 
 def javaScript(name):
-    theLesson.java_script_files.append(name)
+    def filename():
+        for f in framework_js_files:
+            if f['name'] == name:
+                return f['file']
+        return 'js/' + name
+    theLesson.java_script_files.append(filename())
 
 
 def css(name):
-    theLesson.css_files.append(name)
+    theLesson.css_files.append('css/' + name)
 
 
 def image(name, file):
