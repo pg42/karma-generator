@@ -3,6 +3,7 @@
 import BaseHTTPServer
 import os
 import subprocess
+import json
 
 def extension(path):
     return os.path.splitext(path)[1]
@@ -13,6 +14,24 @@ content_types = {
     '.css' : 'text/css',
     '.png' : 'image/png'
 }
+
+def dict_to_kw_args(dict):
+    def quote(v):
+        if isinstance(v, str) or isinstance(v, unicode):
+            return "'" + v + "'"
+        else:
+            return str(v)
+    return ', '.join([k + '=' + quote(v) for k,v in dict.items()])
+
+
+def create_description(divs):
+    f = open('description.txt', 'w')
+    print >>f, "css('divs.css')"
+    for js in ['json2.js', 'jquery', 'jquery-ui', 'raphael.js']:
+        print >>f, "java_script('%s')" % js
+    for div in divs:
+        print >>f, "div(%s)" % dict_to_kw_args(div)
+    f.close()
 
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_GET(self):
@@ -42,12 +61,13 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.wfile.close()
 
     def save(self, contents):
+        create_description(json.loads(contents))
         print >>open('saved.json', 'w'), contents
         return 'ok'
 
     def generate(self, contents):
         self.save(contents)
-        subprocess.call(['./generate-skeleton.py'])
+        subprocess.call(['./generate-karma-lesson.py', 'description.txt'])
         return 'ok'
 
     def error(self, contents):

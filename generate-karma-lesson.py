@@ -98,7 +98,7 @@ def title(name):
     theLesson.title = name
 
 
-def javaScript(name):
+def java_script(name):
     def filename():
         for f in framework_js_files:
             if f['name'] == name:
@@ -119,7 +119,7 @@ def audio(name, file):
     theLesson.audios.append([name, file])
 
 
-def div(info):
+def div(**info):
     theLesson.divs.append(info)
 
 
@@ -135,4 +135,7 @@ if __name__ == '__main__':
         sys.exit(1)
     theLesson = Lesson()
     execfile(args[0])
-    theLesson.dump_css()
+#     theLesson.dump_html()
+#     theLesson.dump_css()
+    theLesson.print_html_on(open('index.html', 'w'))
+    theLesson.print_css_on(open('css/divs.css', 'w'))
