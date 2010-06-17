@@ -3,6 +3,7 @@
 
 import codecs
 import os
+import shutil
 import sys
 import time
 from optparse import OptionParser
@@ -20,15 +21,28 @@ theLesson = None
 
 # TBD: provide a debug and optimized (minimized) version of the framework files.
 
+karma_root = os.path.expanduser('~/projects/karma/karma')
+
+def karma_path(path):
+    return os.path.relpath(os.path.join(karma_root, path))
+
 framework_js_files = [
     {'name':'jquery',
-     'file':'../js/jquery-1.4.js'},
+     'file':karma_path('js/jquery-1.4.js')},
     {'name':'jquery-ui',
-     'file':'../js/ui.core-draggable-resizable-dialog.js'},
+     'file':karma_path('js/ui.core-draggable-resizable-dialog.js')},
+    {'name':'ui.core',
+     'file':karma_path('js/ui.core.js')},
+    {'name':'ui.draggable',
+     'file':karma_path('js/ui.draggable.js')},
+    {'name':'ui.droppable',
+     'file':karma_path('js/ui.droppable.js')},
     {'name':'jquery.svg',
-     'file':'../js/jquery.svg.js'},
+     'file':karma_path('js/jquery.svg.js')},
     {'name':'karma',
-     'file':'../js/karma.js'}
+     'file':karma_path('js/karma.js')},
+    {'name':'global',
+     'file':karma_path('js/global.js')}
     ]
 
 # Kludge: the script argument to markup.Page.init() should be a
@@ -99,11 +113,57 @@ def page_to_unicode(page):
         end = []
     return page.separator.join(page.header + page.content + page.footer + end)
 
+
+def destination_path(name):
+    images_dir = 'assets/image'
+    sounds_dir = 'assets/audio'
+    dirs = {'.js':'js',
+            '.css':'css',
+            '.png':images_dir,
+            '.jpg':images_dir,
+            '.jpeg':images_dir,
+            '.ogg':sounds_dir,
+            '.wav':sounds_dir}
+    ext = os.path.splitext(name)[1]
+    if ext not in dirs:
+        print 'Don''t know how to handle', name
+        sys.exit(1)
+    return os.path.join(dirs[ext], name)
+
+
+class File:
+    def __init__(self, path, framework=False, generated=False, preload=True):
+        self.name_ = os.path.basename(path)
+        self.copy = not framework and not generated
+        self.preload = preload
+        
+        if self.copy:
+            self.src = frob_path(path)
+        if not framework:
+            self.dest = destination_path(self.name_)
+        else:
+            self.dest = path
+
+    def name(self):
+        return self.name_
+
+    def src_path(self):
+        return self.src
+
+    def dest_path(self):
+        return self.dest
+
+    def copy_if_needed(self):
+        if self.copy:
+            shutil.copy(self.src_path(), self.dest_path())
+
+
 # TBD: sort the JavaScript files so that they are in the correct order (e.g.
 # jquery before jquery.ui)
 
 class Lesson:
     def __init__(self):
+        self.directory = 'work'
         self.title = ''
         self.lesson_title = ''
         self.java_script_files = []
@@ -112,13 +172,21 @@ class Lesson:
         self.audios = []
         self.divs = []
 
+        self.java_script_files.append(File('lesson-karma.js', generated=True))
+
+    def copy_files(self):
+        for f in self.java_script_files + self.css_files:
+            f.copy_if_needed()
+        for f in self.images + self.audios:
+            f[1].copy_if_needed()
+
     def print_html_on(self, stream):
         page = markup.page()
         page.init(doctype='<!DOCTYPE html>',
-                  css=self.css_files,
+                  css=[f.dest_path() for f in self.css_files],
                   title=self.title,
                   charset='utf-8',
-                  script=Scripts(zip(self.java_script_files,
+                  script=Scripts(zip([f.dest_path() for f in self.java_script_files],
                                      constantly('javascript'))))
         [page.addheader('<!-- %s -->' % c) for c in warning_text().split('\n')]
         generate_header(page, self.lesson_title)
@@ -143,14 +211,15 @@ class Lesson:
 
     def print_karma_js_on(self, stream):
         def format_image(img):
-            return "{name:'%s', file:'%s'}" % (img[0], img[1])
+            return "{name:'%s', file:'%s'}" % (img[0], img[1].name())
         def format_audio(a):
-            return "{name:'%s', file:'%s'}" % (a[0], a[1])
+            return "{name:'%s', file:'%s'}" % (a[0], a[1].name())
         def format_assets(name, assets, format_asset):
             prefix = '    %s: [' % name
             sep = ',\n' + len(prefix) * ' '
             postfix = ']'
-            return prefix + sep.join(map(format_asset, assets)) + postfix
+            to_preload = filter(lambda asset: asset[1].preload, assets)
+            return prefix + sep.join(map(format_asset, to_preload)) + postfix
         print >>stream, 'function lesson_karma() {'
         print >>stream, '  return Karma({'
         print >>stream, ',\n'.join([format_assets('image',
@@ -183,35 +252,69 @@ def lesson_title(name):
     theLesson.lesson_title = name
 
 
-def java_script(name):
-    def filename():
-        for f in framework_js_files:
-            if f['name'] == name:
-                return f['file']
-        return name
-    theLesson.java_script_files.append(filename())
+def resolve_framework_file(name, framework_files, **kw):
+    for f in framework_files:
+        if f['name'] == name:
+            return File(f['file'], framework=True, **kw)
+    return File(name, **kw)
+
+
+def java_script(name, **kw):
+    theLesson.java_script_files.append(resolve_framework_file(name,
+                                                              framework_js_files,
+                                                              **kw))
+
+
+framework_css_files = [
+    {'name': 'global',
+     'file':karma_path('css/global.css')}]
 
 
 def css(name):
-    theLesson.css_files.append(name)
+    theLesson.css_files.append(resolve_framework_file(name,
+                                                      framework_css_files))
 
 
-def image(name, file):
-    theLesson.images.append([name, file])
+def image(name, file, **kw):
+    theLesson.images.append([name, File(file, **kw)])
 
 
 def audio(name, file):
-    theLesson.audios.append([name, file])
+    theLesson.audios.append([name, File(file)])
 
 
 def div(**info):
     theLesson.divs.append(info)
 
 
+include_stack = []
+
+
+def frob_path(path):
+    if not os.path.isabs(path):
+        return os.path.normpath(os.path.join(os.path.dirname(include_stack[-1]),
+                                             path))
+    else:
+        return path
+
+def include(path):
+    path = frob_path(path)
+    include_stack.append(path)
+    execfile(path, globals())
+    include_stack.pop()
+
+
+def directory(dir):
+    theLesson.directory = dir
+
+
 def create_directories():
     def create_dir(d):
         if not os.path.exists(d):
             os.makedirs(d)
+    # TBD: create dir, currently impossible due to register_objects
+#     create_dir(theLesson.directory)
+#     os.chdir(theLesson.directory)
     map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
 
 if __name__ == '__main__':
@@ -225,10 +328,11 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(1)
     theLesson = Lesson()
+    include_stack.append(args[0])
     execfile(args[0])
-#     theLesson.dump_html()
-#     theLesson.dump_css()
+    include_stack.pop()
     create_directories()
+    theLesson.copy_files()
     theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
     theLesson.print_css_on(open('css/divs.css', 'w'))
     theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
