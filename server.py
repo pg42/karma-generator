@@ -27,7 +27,7 @@ def dict_to_kw_args(dict):
 def create_description(divs):
     f = open('description.txt', 'w')
     print >>f, "css('divs.css')"
-    for js in ['json2.js', 'jquery', 'jquery-ui', 'raphael.js']:
+    for js in ['json2.js', 'jquery', 'jquery-ui', 'js/raphael.js']:
         print >>f, "java_script('%s')" % js
     for div in divs:
         print >>f, "div(%s)" % dict_to_kw_args(div)
