@@ -260,9 +260,9 @@ def resolve_framework_file(name, framework_files, **kw):
 
 
 def java_script(name, **kw):
-    theLesson.java_script_files.append(resolve_framework_file(name,
-                                                              framework_js_files,
-                                                              **kw))
+    result = resolve_framework_file(name, framework_js_files, **kw)
+    theLesson.java_script_files.append(result)
+    return result
 
 
 framework_css_files = [
@@ -271,16 +271,21 @@ framework_css_files = [
 
 
 def css(name):
-    theLesson.css_files.append(resolve_framework_file(name,
-                                                      framework_css_files))
+    result = resolve_framework_file(name, framework_css_files)
+    theLesson.css_files.append(result)
+    return result
 
 
 def image(name, file, **kw):
-    theLesson.images.append([name, File(file, **kw)])
+    result = File(file, **kw)
+    theLesson.images.append([name, result])
+    return result
 
 
 def audio(name, file):
-    theLesson.audios.append([name, File(file)])
+    result = File(file)
+    theLesson.audios.append([name, result])
+    return result
 
 
 def div(**info):
