@@ -328,10 +328,12 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(1)
     theLesson = Lesson()
+    create_directories()
+
     include_stack.append(args[0])
     execfile(args[0])
     include_stack.pop()
-    create_directories()
+
     theLesson.copy_files()
     theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
     theLesson.print_css_on(open('css/divs.css', 'w'))
