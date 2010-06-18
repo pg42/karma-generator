@@ -27,22 +27,22 @@ def karma_path(path):
     return os.path.relpath(os.path.join(karma_root, path))
 
 framework_js_files = [
-    {'name':'jquery',
-     'file':karma_path('js/jquery-1.4.js')},
-    {'name':'jquery-ui',
-     'file':karma_path('js/ui.core-draggable-resizable-dialog.js')},
-    {'name':'ui.core',
-     'file':karma_path('js/ui.core.js')},
-    {'name':'ui.draggable',
-     'file':karma_path('js/ui.draggable.js')},
-    {'name':'ui.droppable',
-     'file':karma_path('js/ui.droppable.js')},
-    {'name':'jquery.svg',
-     'file':karma_path('js/jquery.svg.js')},
-    {'name':'karma',
-     'file':karma_path('js/karma.js')},
-    {'name':'global',
-     'file':karma_path('js/global.js')}
+    dict(name='jquery',
+         file=karma_path('js/jquery-1.4.js')),
+    dict(name='jquery-ui',
+         file=karma_path('js/ui.core-draggable-resizable-dialog.js')),
+    dict(name='ui.core',
+         file=karma_path('js/ui.core.js')),
+    dict(name='ui.draggable',
+         file=karma_path('js/ui.draggable.js')),
+    dict(name='ui.droppable',
+         file=karma_path('js/ui.droppable.js')),
+    dict(name='jquery.svg',
+         file=karma_path('js/jquery.svg.js')),
+    dict(name='karma',
+         file=karma_path('js/karma.js')),
+    dict(name='global',
+         file=karma_path('js/global.js'))
     ]
 
 # Kludge: the script argument to markup.Page.init() should be a
@@ -266,8 +266,8 @@ def java_script(name, **kw):
 
 
 framework_css_files = [
-    {'name': 'global',
-     'file':karma_path('css/global.css')}]
+    dict(name= 'global',
+         file=karma_path('css/global.css'))]
 
 
 def css(name):
