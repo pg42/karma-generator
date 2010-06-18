@@ -154,7 +154,7 @@ class File:
         return self.dest
 
     def copy_if_needed(self):
-        if self.copy:
+        if self.copy and self.src_path() != self.dest_path():
             shutil.copy(self.src_path(), self.dest_path())
 
 
