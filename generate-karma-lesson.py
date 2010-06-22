@@ -22,30 +22,38 @@ theLesson = None
 
 # TBD: provide a debug and optimized (minimized) version of the framework files.
 
-# TBD
 karma_root = os.path.abspath(os.path.expanduser('~/projects/karma/karma'))
 
 def karma_path(path):
     return os.path.abspath(os.path.join(karma_root, path))
 
-framework_js_files = [
-    dict(name='jquery',
-         file=karma_path('js/jquery-1.4.js')),
-    dict(name='jquery-ui',
-         file=karma_path('js/ui.core-draggable-resizable-dialog.js')),
-    dict(name='ui.core',
-         file=karma_path('js/ui.core.js')),
-    dict(name='ui.draggable',
-         file=karma_path('js/ui.draggable.js')),
-    dict(name='ui.droppable',
-         file=karma_path('js/ui.droppable.js')),
-    dict(name='jquery.svg',
-         file=karma_path('js/jquery.svg.js')),
-    dict(name='karma',
-         file=karma_path('js/karma.js')),
-    dict(name='global',
-         file=karma_path('js/global.js'))
-    ]
+framework_js_files = None;
+framework_css_files = None;
+
+def initialize_framework_paths():
+    global framework_js_files, framework_css_files
+    framework_js_files = [
+        dict(name='jquery',
+             file=karma_path('js/jquery-1.4.js')),
+        dict(name='jquery-ui',
+             file=karma_path('js/ui.core-draggable-resizable-dialog.js')),
+        dict(name='ui.core',
+             file=karma_path('js/ui.core.js')),
+        dict(name='ui.draggable',
+             file=karma_path('js/ui.draggable.js')),
+        dict(name='ui.droppable',
+             file=karma_path('js/ui.droppable.js')),
+        dict(name='jquery.svg',
+             file=karma_path('js/jquery.svg.js')),
+        dict(name='karma',
+             file=karma_path('js/karma.js')),
+        dict(name='global',
+             file=karma_path('js/global.js'))]
+
+    framework_css_files = [
+        dict(name= 'global',
+             file=karma_path('css/global.css'))]
+
 
 #TBD: get rid of markup library
 
@@ -273,11 +281,6 @@ def java_script(name, **kw):
     return result
 
 
-framework_css_files = [
-    dict(name= 'global',
-         file=karma_path('css/global.css'))]
-
-
 def css(name):
     result = resolve_framework_file(name, framework_css_files)
     theLesson.css_files.append(result)
@@ -338,6 +341,8 @@ if __name__ == '__main__':
                       help='use non-minimized JavaScript libraries')
     parser.add_option('-o', '--output', dest='output',
                       help='use output as a destination directory')
+    parser.add_option('-k', '--karma', dest='karma',
+                      help='path to the karma directory')
     (options, args) = parser.parse_args()
     debug = options.debug
     if not args:
@@ -351,6 +356,11 @@ if __name__ == '__main__':
     if options.output:
         theLesson.directory = options.output
         create_directories(options.output)
+
+    if options.karma:
+        karma_root = options.karma
+
+    initialize_framework_paths()
 
     include_stack.append(description)
     execfile(description)
