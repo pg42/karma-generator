@@ -1,0 +1,4 @@
+A simple generator for generating karma
+(http://wiki.sugarlabs.org/go/Karma) lessons.
+
+generate-karma-lesson.py is the main script
