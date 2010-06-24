@@ -236,20 +236,24 @@ class Lesson:
             return "{name:'%s', file:'%s'}" % (img[0], img[1].name())
         def format_audio(a):
             return "{name:'%s', file:'%s'}" % (a[0], a[1].name())
-        def format_assets(name, assets, format_asset):
-            prefix = '    %s: [' % name
-            sep = ',\n' + len(prefix) * ' '
+        def format_assets(name, assets, format_asset, indentation):
+            prefix = '%s: [' % name
+            sep = ',\n' + (len(prefix) + indentation) * ' '
             postfix = ']'
             to_preload = filter(lambda asset: asset[1].preload, assets)
             return prefix + sep.join(map(format_asset, to_preload)) + postfix
         print >>stream, 'function lesson_karma() {'
-        print >>stream, '  return Karma({'
-        print >>stream, ',\n'.join([format_assets('image',
-                                                  self.images,
-                                                  format_image),
-                                    format_assets('audio',
-                                                  self.audios,
-                                                  format_audio)]) + '});'
+        return_karma = '    return Karma({'
+        indentation = len(return_karma)
+        print >>stream, return_karma + (',\n' + indentation * ' ').join(
+            [format_assets('image',
+                           self.images,
+                           format_image,
+                           indentation),
+             format_assets('audio',
+                           self.audios,
+                           format_audio,
+                           indentation)]) + '});'
         print >>stream, '}'
 
     def dump_css(self):

@@ -1,208 +1,210 @@
 function clipRectangle(left, top, width, height) {
-  var right = left + width;
-  var bottom = top + height;
-  return 'rect(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)';
+    var right = left + width;
+    var bottom = top + height;
+    return 'rect(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)';
 }
 
 function makePiece(complete_image, id, column, row, width, height, label) {
-  var left = column * width;
-  var top = row * height;
+    var left = column * width;
+    var top = row * height;
 
-  var result = $(document.createElement('div'))
-    .attr({id: id})
-    .addClass('piece')
-    .addClass('dragme')
-    .css({position: 'relative',
-          float: 'left',
-          width: width,
-          height: height,
-          zIndex: 1});
+    var result = $(document.createElement('div'))
+        .attr({id: id})
+        .addClass('piece')
+        .addClass('dragme')
+        .css({position: 'relative',
+              'float': 'left',
+              width: width,
+              height: height,
+              zIndex: 1});
 
-  $(document.createElement('img'))
-    .attr({src: complete_image.src})
-    .css({position: 'absolute',
-          clip: clipRectangle(left, top, width, height),
-          left: -left,
-          top: -top,
-          zIndex: -1})
-    .appendTo(result);
+    $(document.createElement('img'))
+        .attr({src: complete_image.src})
+        .css({position: 'absolute',
+              clip: clipRectangle(left, top, width, height),
+              left: -left,
+              top: -top,
+              zIndex: -1})
+        .appendTo(result);
 
-  var label_div = $(document.createElement('div'))
-    .css({position: 'absolute',
-          width: width})
-    .appendTo(result);
+    var label_div = $(document.createElement('div'))
+        .css({position: 'absolute',
+              width: width})
+        .appendTo(result);
 
-  $(document.createElement('div'))
-    .attr({className: 'pieceLabel'})
-    .css({textAlign: 'center'})
-    .html(label)
-    .appendTo(label_div);
+    $(document.createElement('div'))
+        .attr({className: 'pieceLabel'})
+        .css({textAlign: 'center'})
+        .html(label)
+        .appendTo(label_div);
 
-  result.appendTo($('body')); // Ensure that label_div has a computed height.
-  label_div.css({top: height / 2 - label_div.height() / 2});
+    result.appendTo($('body')); // Ensure that label_div has a computed height.
+    label_div.css({top: height / 2 - label_div.height() / 2});
 
-  enableDragAndDrop(complete_image, result);
+    enableDragAndDrop(complete_image, result);
 
-  return result[0];
+    return result[0];
 }
 
 function swap(node1, node2) {
-  var tmp = $(document.createElement('div'));
-  tmp.insertBefore(node1);
-  node1.insertBefore(node2);
-  node2.insertBefore(tmp);
-  tmp.remove();
+    var tmp = $(document.createElement('div'));
+    tmp.insertBefore(node1);
+    node1.insertBefore(node2);
+    node2.insertBefore(tmp);
+    tmp.remove();
 }
 
 function scrubPosition(piece) {
-  piece.css({top: '', left: ''});
+    piece.css({top: '', left: ''});
 }
 
 function enableDragAndDrop(image, piece) {
-  /*
-    revert doesn't work well with relative positioning. It adds top
-    and left which cause the piece to drift after multiple reverts.
-    Instead call scrubPosition() to remove the top and left
-    properties.
-  */
-  piece
-    .draggable({
-      stack: {group: '.piece', min: 10}, // Ensure dragged piece is at front.
-      stop: function() { scrubPosition(piece); }
-      }).
-    droppable({
-      over: function() { piece.addClass('dropTarget'); },
-          out: function() { piece.removeClass('dropTarget'); },
-          drop: function(event, ui) {
-          piece.removeClass('dropTarget');
-          swap($(ui.draggable[0]), piece);
-          scrubPosition($(ui.draggable[0]));
-          scrubPosition(piece);
-          checkGameOver(image);
-        }
-      });
+    /*
+     revert doesn't work well with relative positioning. It adds top
+     and left which cause the piece to drift after multiple reverts.
+     Instead call scrubPosition() to remove the top and left
+     properties.
+     */
+    piece
+        .draggable(
+            {stack: {group: '.piece', min: 10}, // Ensure dragged piece is at front.
+             stop: function() { scrubPosition(piece); }
+            }).
+        droppable(
+            {over: function() { piece.addClass('dropTarget'); },
+             out: function() { piece.removeClass('dropTarget'); },
+             drop: function(event, ui) {
+                 piece.removeClass('dropTarget');
+                 swap($(ui.draggable[0]), piece);
+                 scrubPosition($(ui.draggable[0]));
+                 scrubPosition(piece);
+                 checkGameOver(image);
+             }
+            });
 }
 
 function makePieces(complete_image, row_count, column_count) {
-  var row, column;
-  var width = complete_image.media.width / column_count;
-  var height = complete_image.media.height / row_count;
-  var result = [];
-  for (row = 0; row < row_count; ++row) {
-    for (column = 0; column < column_count; ++column) {
-      var i = result.length;
-      result.push(makePiece(complete_image, 'piece' + i,
-                             column, row, width, height,
-                             labelGenerator(i)));
+    var row, column;
+    var width = complete_image.media.width / column_count;
+    var height = complete_image.media.height / row_count;
+    var result = [];
+    for (row = 0; row < row_count; ++row) {
+        for (column = 0; column < column_count; ++column) {
+            var i = result.length;
+            result.push(makePiece(complete_image, 'piece' + i,
+                                  column, row, width, height,
+                                  labelGenerator(i)));
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 function wrongCount(pieces) {
-  var result = 0;
-  for (var i = 0; i < pieces.length; ++i) {
-    if ($(pieces[i]).attr('id') != 'piece' + i) {
-      ++result;
+    var result = 0;
+    for (var i = 0; i < pieces.length; ++i) {
+        if ($(pieces[i]).attr('id') != 'piece' + i) {
+            ++result;
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 function shufflePieces(pieces) {
-  var result = pieces;
-  // Keep shuffling until the result looks 'sufficiently random' for a human,
-  // i.e. no piece on its place.
-  do {
-    result = Karma.shuffle(result);
-  } while (wrongCount(result) < result.length);
-  return result;
+    var result = pieces;
+    // Keep shuffling until the result looks 'sufficiently random' for a human,
+    // i.e. no piece on its place.
+    do {
+        result = Karma.shuffle(result);
+    } while (wrongCount(result) < result.length);
+    return result;
 }
 
 function showReward(image) {
-  var $imgMain = $('#imgMain');
-  $imgMain.empty();
-  $(document.createElement('img'))
-    .attr({src: image.src})
-    .hide()
-    .appendTo($imgMain)
-    .fadeIn(3000);
+    var $imgMain = $('#imgMain');
+    $imgMain.empty();
+    $(document.createElement('img'))
+        .attr({src: image.src})
+        .hide()
+        .appendTo($imgMain)
+        .fadeIn(3000);
 }
 
 function checkGameOver(image) {
-  if (wrongCount($('.piece')) == 0) {
-    showReward(image);
-  }
+    if (wrongCount($('.piece')) == 0) {
+        showReward(image);
+    }
+}
+
+function main(k) {
+    var puzzles = ['puzzle1','puzzle2','puzzle3'];
+
+    var createThumbnail = function(puzzle) {
+        var img = $(document.createElement('img'))
+            .addClass('imageThumb')
+            .attr({src: k.image[puzzle].src})
+        // Disable dragging of img.
+            .mousedown(function (event) { event.preventDefault(); });
+
+        return $(document.createElement('div'))
+            .click(function() { startGame(puzzle); })
+            .append(img);
+    };
+
+    var initialized = false;
+
+    var initialize = function() {
+        if (!initialized) {
+            $imageBar = $(document.createElement('div')).attr({id: 'imageBar'});
+            $('#content')
+                .append($imageBar)
+                .append($(document.createElement('div')).attr({id: 'imgMain'}));
+            $(puzzles.map(createThumbnail)).appendTo($imageBar);
+        }
+        initialized = true;
+    };
+
+    function startGame(puzzle) {
+        initialize();
+        $('#imgMain').empty();
+        var pieces = makePieces(k.image[puzzle], 4, 4);
+        $(shufflePieces(pieces)).appendTo($('#imgMain'));
+    }
+
+    $('#linkBackLesson').click(function() {
+                                   gotoMainStage();
+                               });
+
+    controlButtonDisplay('linkPlayAgain','disabled');
+
+    // TBD: improve controlButtonDisplay, so that flag_start is no
+    // longer needed.
+    var flag_start = false;
+    $('#linkStart').click(function() {
+                              controlButtonDisplay('linkStart','disabled');
+                              controlButtonDisplay('linkPlayAgain','enabled');
+                              if (!flag_start) {
+                                  startGame(puzzles[0]);
+                              }
+                              flag_start = true;
+                          });
+
+    $('#linkPlayAgain').click(function() {
+                                  if (flag_start) {
+                                      startGame(puzzles[0]);
+                                  }
+                              });
+
+    $('#linkHelp')
+        .click(function() {
+                   $('#help').slideDown(2000);
+               })
+        .mouseout(function() {
+                      $('#help').slideUp(2000);
+                  });
+
 }
 
 $(function () {
-    var k = lesson_karma();
-
-    k.ready(function () {
-        var puzzles = ['puzzle1','puzzle2','puzzle3'];
-
-        var createThumbnail = function(puzzle) {
-          var img = $(document.createElement('img'))
-          .addClass('imageThumb')
-          .attr({src: k.image[puzzle].src})
-          // Disable dragging of img.
-          .mousedown(function (event) { event.preventDefault(); });
-
-          return $(document.createElement('div'))
-          .click(function() { startGame(puzzle); })
-          .append(img);
-        };
-
-        var initialized = false;
-
-        var initialize = function() {
-          if (!initialized) {
-            $imageBar = $(document.createElement('div')).attr({id: 'imageBar'});
-            $('#content')
-            .append($imageBar)
-            .append($(document.createElement('div')).attr({id: 'imgMain'}));
-            $(puzzles.map(createThumbnail)).appendTo($imageBar);
-          }
-          initialized = true;
-        }
-
-        function startGame(puzzle) {
-          initialize();
-          $('#imgMain').empty();
-          var pieces = makePieces(k.image[puzzle], 4, 4);
-          $(shufflePieces(pieces)).appendTo($('#imgMain'));
-        }
-
-        $('#linkBackLesson').click(function() {
-            gotoMainStage();
-          });
-
-        controlButtonDisplay('linkPlayAgain','disabled');
-
-        // TBD: improve controlButtonDisplay, so that flag_start is no
-        // longer needed.
-        var flag_start = false;
-        $('#linkStart').click(function() {
-            controlButtonDisplay('linkStart','disabled');
-            controlButtonDisplay('linkPlayAgain','enabled');
-            if (!flag_start) {
-              startGame(puzzles[0]);
-            }
-            flag_start = true;
-          });
-
-        $('#linkPlayAgain').click(function() {
-            if (flag_start) {
-              startGame(puzzles[0]);
-            }
-          });
-
-        $('#linkHelp')
-          .click(function() {
-              $('#help').slideDown(2000);
-            })
-          .mouseout(function() {
-              $('#help').slideUp(2000);
-            });
-      });
+      var k = lesson_karma();
+      k.ready(function() { main(k); });
   });
