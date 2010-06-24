@@ -101,11 +101,17 @@ def generate_header(page, title):
     page.div.close()
 
 
+gFooterConfiguration = dict(link_previous=True,
+                            link_next=True)
+
+
 def generate_footer(page):
     page.div(id='footer')
 
-    page.div('', title='Next', id='linkNextLesson', class_='linkNext')
-    page.div('', title='Previous', id='linkPrevLesson', class_='linkBack')
+    if gFooterConfiguration['link_next']:
+        page.div('', title='Next', id='linkNextLesson', class_='linkNext')
+    if gFooterConfiguration['link_previous']:
+        page.div('', title='Previous', id='linkPrevLesson', class_='linkBack')
 
     page.div(id='botbtn_right')
     page.div('',title='Play Again', id='linkPlayAgain')
@@ -301,6 +307,12 @@ def audio(name, file):
 
 def div(**info):
     theLesson.divs.append(info)
+
+
+def footer_configuration(**kw):
+    global gFooterConfiguration
+    for k,v in kw.items():
+        gFooterConfiguration[k] = v
 
 
 include_stack = []
