@@ -170,41 +170,60 @@ function main(k) {
         $(shufflePieces(pieces)).appendTo($('#imgMain'));
     }
 
-    $('#linkBackLesson').click(function() {
-                                   gotoMainStage();
-                               });
-
-    controlButtonDisplay('linkPlayAgain','disabled');
-
-    // TBD: improve controlButtonDisplay, so that flag_start is no
-    // longer needed.
-    var flag_start = false;
-    $('#linkStart').click(function() {
-                              controlButtonDisplay('linkStart','disabled');
-                              controlButtonDisplay('linkPlayAgain','enabled');
-                              if (!flag_start) {
-                                  startGame(puzzles[0]);
-                              }
-                              flag_start = true;
-                          });
-
-    $('#linkPlayAgain').click(function() {
-                                  if (flag_start) {
-                                      startGame(puzzles[0]);
-                                  }
-                              });
-
-    $('#linkHelp')
-        .click(function() {
-                   $('#help').slideDown(2000);
-               })
-        .mouseout(function() {
-                      $('#help').slideUp(2000);
-                  });
-
+    setupLinkBackLesson();
+    setupStartAndPlayAgainButtons(function() { startGame(puzzles[0]); });
+    setupHelp();
 }
 
 $(function () {
       var k = lesson_karma();
       k.ready(function() { main(k); });
   });
+
+
+// Move the stuff below to global.js
+
+function controlButtonClickCallback($button, callback) {
+    $button.click(function() {
+                      if (!$button.data('disabled')) {
+                          callback();
+                      }
+                  });
+}
+
+function enableControlButton($button) {
+    $button.css({opacity: 1, cursor: 'pointer'});
+    $button.data('disabled', false);
+}
+
+function disableControlButton($button) {
+    $button.css({opacity: 0.3, cursor: 'default'});
+    $button.data('disabled', true);
+}
+
+function setupLinkBackLesson() {
+    $('#linkBackLesson').click(gotoMainStage);
+}
+
+function setupStartAndPlayAgainButtons(start_game) {
+    // Why two buttons?
+    // Why not:
+    // * only a play button?
+    // -or-
+    // * a button that is initially play, later replay?
+    disableControlButton($('#linkPlayAgain'));
+    controlButtonClickCallback($('#linkStart'),
+                               function() {
+                                   disableControlButton($('#linkStart'));
+                                   enableControlButton($('#linkPlayAgain'));
+                                   start_game();
+                                   });
+    controlButtonClickCallback($('#linkPlayAgain'), start_game);
+}
+
+function setupHelp() {
+    $help = $('#help');
+    $('#linkHelp')
+        .click(function () { $help.slideDown(2000); })
+        .mouseout(function () { $help.slideUp(2000); });
+}
