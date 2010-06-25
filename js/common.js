@@ -1,7 +1,6 @@
 // This file can replace global.js in karma.
 
-
-function  controlButtonClickCallback($button, callback) {
+function controlButtonClickCallback($button, callback) {
     $button.click(function () {
                       if (!$button.data('disabled')) {
                           callback();

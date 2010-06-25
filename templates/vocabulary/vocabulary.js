@@ -3,7 +3,7 @@ function generateScreen0(karma, $container) {
         .attr('id', 'vocabImg')
         .appendTo($container);
 
-    var object_css = function(object) {
+    var objectCss = function(object) {
         var result = object.position;
         result.position = 'absolute';
         result.height = 50;
@@ -12,7 +12,7 @@ function generateScreen0(karma, $container) {
 
     $(objects.map(function (object) {
                       return $(document.createElement('div'))
-                          .css(object_css(object))
+                          .css(objectCss(object))
                           .click(function () {
                                      karma.audio[object.name].play();
                                  });
@@ -48,7 +48,7 @@ function generateScreen1(karma, $container) {
     var images = objects.map(createImage);
     var words = objects.map(createWord);
 
-    var enable_drag_and_drop = function (word, target) {
+    var enableDragAndDrop = function (word, target) {
         word.draggable({containment: '#content', revert: true});
         target.droppable(
             {tolerance: 'intersect',
@@ -72,7 +72,7 @@ function generateScreen1(karma, $container) {
     };
 
     for (var i = 0; i < images.length; ++i) {
-        enable_drag_and_drop(words[i], $('.dropObjects', images[i]));
+        enableDragAndDrop(words[i], $('.dropObjects', images[i]));
     }
 
     var $ques_section = $(document.createElement('div'))
