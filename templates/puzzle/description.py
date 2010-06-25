@@ -9,7 +9,7 @@ central_js_files = [
     'ui.draggable',
     'ui.droppable',
     'karma',
-    'global']
+    '../../js/common.js']
 
 for f in central_js_files:
     java_script(f)

@@ -135,95 +135,33 @@ function checkGameOver(image) {
     }
 }
 
-function main(k) {
-    var puzzles = ['puzzle1','puzzle2','puzzle3'];
+var puzzles = ['puzzle1','puzzle2','puzzle3'];
 
-    var createThumbnail = function(puzzle) {
-        var img = $(document.createElement('img'))
-            .addClass('imageThumb')
-            .attr({src: k.image[puzzle].src})
-        // Disable dragging of img.
-            .mousedown(function (event) { event.preventDefault(); });
-
-        return $(document.createElement('div'))
-            .click(function() { startGame(puzzle); })
-            .append(img);
-    };
-
-    var initialized = false;
-
-    var initialize = function() {
-        if (!initialized) {
-            $imageBar = $(document.createElement('div')).attr({id: 'imageBar'});
-            $('#content')
-                .append($imageBar)
-                .append($(document.createElement('div')).attr({id: 'imgMain'}));
-            $(puzzles.map(createThumbnail)).appendTo($imageBar);
-        }
-        initialized = true;
-    };
-
-    function startGame(puzzle) {
-        initialize();
-        $('#imgMain').empty();
-        var pieces = makePieces(k.image[puzzle], 4, 4);
-        $(shufflePieces(pieces)).appendTo($('#imgMain'));
-    }
-
-    setupLinkBackLesson();
-    setupStartAndPlayAgainButtons(function() { startGame(puzzles[0]); });
-    setupHelp();
+function createThumbnail(karma, puzzle) {
+    var img = $(document.createElement('img'))
+        .addClass('imageThumb')
+        .attr({src: karma.image[puzzle].src})
+    // Disable dragging of img.
+        .mousedown(function (event) { event.preventDefault(); });
+    
+    return $(document.createElement('div'))
+        .click(function() { startGame(karma, puzzle); })
+        .append(img);
 }
 
-$(function () {
-      var k = lesson_karma();
-      k.ready(function() { main(k); });
-  });
-
-
-// Move the stuff below to global.js
-
-function controlButtonClickCallback($button, callback) {
-    $button.click(function() {
-                      if (!$button.data('disabled')) {
-                          callback();
-                      }
-                  });
+function initialize(karma) {
+    $imageBar = $(document.createElement('div')).attr({id: 'imageBar'});
+    $('#content')
+        .append($imageBar)
+        .append($(document.createElement('div')).attr({id: 'imgMain'}));
+    $(puzzles.map(function (puzzle) { return createThumbnail(karma, puzzle); }))
+        .appendTo($imageBar);
 }
 
-function enableControlButton($button) {
-    $button.css({opacity: 1, cursor: 'pointer'});
-    $button.data('disabled', false);
+function startGame(karma, puzzle) {
+    $('#imgMain').empty();
+    var pieces = makePieces(karma.image[puzzle], 4, 4);
+    $(shufflePieces(pieces)).appendTo($('#imgMain'));
 }
 
-function disableControlButton($button) {
-    $button.css({opacity: 0.3, cursor: 'default'});
-    $button.data('disabled', true);
-}
-
-function setupLinkBackLesson() {
-    $('#linkBackLesson').click(gotoMainStage);
-}
-
-function setupStartAndPlayAgainButtons(start_game) {
-    // Why two buttons?
-    // Why not:
-    // * only a play button?
-    // -or-
-    // * a button that is initially play, later replay?
-    disableControlButton($('#linkPlayAgain'));
-    controlButtonClickCallback($('#linkStart'),
-                               function() {
-                                   disableControlButton($('#linkStart'));
-                                   enableControlButton($('#linkPlayAgain'));
-                                   start_game();
-                                   });
-    controlButtonClickCallback($('#linkPlayAgain'), start_game);
-}
-
-function setupHelp() {
-    $help = $('#help');
-    $('#linkHelp')
-        .click(function () { $help.slideDown(2000); })
-        .mouseout(function () { $help.slideUp(2000); });
-}
+setUpLesson(initialize, function(karma) { startGame(karma, puzzles[0]); });
