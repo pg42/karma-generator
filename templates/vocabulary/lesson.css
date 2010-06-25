@@ -77,3 +77,22 @@
 	background:url(../assets/image/help.png);
 	z-index:40;
 }
+
+.dropObjects {
+    width: 125px;
+    height: 33px;
+    margin: 0.5em 2em;
+    border: 2px solid black;
+    text-align: center;
+    font: 30px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    line-height: 30px;
+}
+
+.dragObjects {
+    float: left;
+    width: 135px;
+    height: 33px;
+    text-align: center;
+    cursor: move;
+    font: 30px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}

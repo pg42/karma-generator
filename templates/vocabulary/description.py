@@ -7,7 +7,7 @@ central_js_files = [
     'ui.draggable',
     'ui.droppable',
     'karma',
-    'global']
+    '../../js/common.js']
 
 for f in central_js_files:
     java_script(f)
@@ -19,23 +19,18 @@ div(id='content')
 div(id='help')
 
 def register_objects(objects):
-    positions = []
-    dimensions = []
-    names = []
     for o in objects:
         name = o['name']
         image(name, name + '.png')
         audio(name, name + '.wav')
-        names.append(name)
-        positions.append(o['left'])
-        positions.append(o['top'])
-        dimensions.append(o['width'])
     f = open(lesson_js.dest_path(), 'w')
-    print >>f, 'var lesson_data = {'
-    print >>f, '    objectPosition:', positions, ','
-    print >>f, '    objectDimension:', dimensions, ','
-    print >>f, '    imgNames:', names
-    print >>f, '};'
+    prefix = 'var objects = ['
+    print >>f, prefix + (',\n' + ' ' * len(prefix)).join(
+        ["{name: '%s', position: {left: %s, top: %s, width: %s}}" % (o['name'],
+                                                                     o['left'],
+                                                                     o['top'],
+                                                                     o['width'])
+         for o in objects]) + '];'
 
 for x in ['correct', 'incorrect', 'trigger']:
     audio(x, x + '.ogg')
