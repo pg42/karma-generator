@@ -1,6 +1,5 @@
 Grep for TBD in the code.
 
-* move setUpMultiScreen to common.js (see vocabulary.js), and refactor (remove the need to hide the button manually)
 * make header and footer configurable
 * clean up vocabulary lesson template (see vocabulary.js)
 * clean up controlButtonDisplay/flag_start
