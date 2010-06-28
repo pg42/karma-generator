@@ -1,5 +1,5 @@
 Grep for TBD in the code.
 
 * make header and footer configurable
-* clean up vocabulary lesson template (see vocabulary.js)
-* clean up controlButtonDisplay/flag_start
+* add html files to lessons: lesson plan, etc.
+* add more vocabulary lessons
