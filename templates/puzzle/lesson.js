@@ -4,7 +4,7 @@ function clipRectangle(left, top, width, height) {
     return 'rect(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)';
 }
 
-function makePiece(complete_image, id, column, row, width, height, label) {
+function makePiece(img, id, column, row, width, height, label) {
     var left = column * width;
     var top = row * height;
 
@@ -18,8 +18,8 @@ function makePiece(complete_image, id, column, row, width, height, label) {
               height: height,
               zIndex: 1});
 
-    $(document.createElement('img'))
-        .attr({src: complete_image.src})
+    (img.clone())
+        .show()
         .css({position: 'absolute',
               clip: clipRectangle(left, top, width, height),
               left: -left,
@@ -41,7 +41,7 @@ function makePiece(complete_image, id, column, row, width, height, label) {
     result.appendTo($('body')); // Ensure that label_div has a computed height.
     label_div.css({top: height / 2 - label_div.height() / 2});
 
-    enableDragAndDrop(complete_image, result);
+    enableDragAndDrop(img, result);
 
     return result[0];
 }
@@ -83,15 +83,15 @@ function enableDragAndDrop(image, piece) {
             });
 }
 
-function makePieces(complete_image, row_count, column_count) {
+function makePieces(img, row_count, column_count) {
     var row, column;
-    var width = complete_image.media.width / column_count;
-    var height = complete_image.media.height / row_count;
+    var width = img.width() / column_count;
+    var height = img.height() / row_count;
     var result = [];
     for (row = 0; row < row_count; ++row) {
         for (column = 0; column < column_count; ++column) {
             var i = result.length;
-            result.push(makePiece(complete_image, 'piece' + i,
+            result.push(makePiece(img, 'piece' + i,
                                   column, row, width, height,
                                   labelGenerator(i)));
         }
@@ -120,14 +120,10 @@ function shufflePieces(pieces) {
 }
 
 function showReward(image) {
-    var $imgMain = $('#imgMain');
-    $imgMain.empty();
-    $(document.createElement('img'))
-        .attr({src: image.src})
-        .hide()
-        .appendTo($imgMain)
-        .fadeIn(3000);
+    $('.piece').remove();
+    image.fadeIn(3000);
 }
+
 
 function checkGameOver(image) {
     if (wrongCount($('.piece')) == 0) {
@@ -138,15 +134,10 @@ function checkGameOver(image) {
 var puzzles = ['puzzle1','puzzle2','puzzle3'];
 
 function createThumbnail(karma, puzzle) {
-    var img = $(document.createElement('img'))
-        .addClass('imageThumb')
-        .attr({src: karma.image[puzzle].src})
-    // Disable dragging of img.
-        .mousedown(function (event) { event.preventDefault(); });
-    
     return $(document.createElement('div'))
         .click(function() { startGame(karma, puzzle); })
-        .append(img);
+        .append(karma.createImg(puzzle)
+                .addClass('imageThumb'));
 }
 
 function initialize(karma) {
@@ -160,8 +151,12 @@ function initialize(karma) {
 }
 
 function startGame(karma, puzzle) {
-    $('#imgMain').empty();
-    var pieces = makePieces(karma.image[puzzle], 4, 4);
+    var $imgMain = $('#imgMain');
+    $imgMain.empty();
+    var img = karma.createImg(puzzle)
+        .hide()
+        .appendTo($imgMain);
+    var pieces = makePieces(img, 4, 4);
     $(shufflePieces(pieces)).appendTo($('#imgMain'));
 }
 
