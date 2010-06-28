@@ -56,7 +56,7 @@ function setUpHelp() {
  * Each time a game is started or restarted, starte_game is called
  * with the karma object as an argument.
  */
-function setUpLesson(draw_screen_fns, start_game) {
+function setUpLesson(initialize, start_game) {
     $(function () {
           var karma = lesson_karma();
           karma.ready(
@@ -135,3 +135,31 @@ function disableSelection(target) {
         target.style.cursor = 'default';
     }
 }
+
+function disableImageDragging(img) {
+    $(img).mousedown(function (event) { event.preventDefault(); });    
+}
+
+// TBD: move to Karma
+function randomElement(collection) {
+    return collection[Karma.rand(0, collection.length)];
+}
+
+// TBD: move to Karma
+function range(lower, upper) {
+    var result = [];
+    for (var i = lower; i < upper; ++i) {
+        result.push(i);
+    }
+    return result;
+}
+
+Karma.createImg = function (name, disable_dragging) {
+    disable_dragging = typeof(disable_dragging) != 'undefined' ? disable_dragging : true;
+    var result = $(document.createElement('img'))
+        .attr('src', this.image[name].src);
+    if (disable_dragging) {
+        disableImageDragging(result);
+    }
+    return result;
+};

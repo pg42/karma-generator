@@ -26,13 +26,8 @@ function generateScreen1(karma, $container) {
         // TBD: is this div needed?
         var imgObject = $(document.createElement('div'))
             .addClass('imgObject')
+            .append(karma.createImg(object.name))
             .appendTo(img_area);
-        $(document.createElement('img'))
-            .attr('src', karma.image[object.name].src)
-            .mousedown(function (event) {
-                           event.preventDefault(); // No dragging
-                       })
-            .appendTo(imgObject);
         $(document.createElement('div'))
             .addClass('dropObjects')
             .appendTo(img_area);

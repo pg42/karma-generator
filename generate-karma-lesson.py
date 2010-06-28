@@ -43,6 +43,10 @@ def initialize_framework_paths():
              file=karma_path('js/ui.draggable.js')),
         dict(name='ui.droppable',
              file=karma_path('js/ui.droppable.js')),
+        dict(name='jquery.watermarkinput',
+             file=karma_path('js/jquery.watermarkinput.js')),
+        dict(name='ui.scoreboard',
+             file=karma_path('js/ui.scoreboard.js')),
         dict(name='jquery.svg',
              file=karma_path('js/jquery.svg.js')),
         dict(name='karma',
@@ -52,7 +56,9 @@ def initialize_framework_paths():
 
     framework_css_files = [
         dict(name= 'global',
-             file=karma_path('css/global.css'))]
+             file=karma_path('css/global.css')),
+        dict(name='ui.scoreboard',
+             file=karma_path('css/ui.scoreboard.css'))]
 
 
 #TBD: get rid of markup library
