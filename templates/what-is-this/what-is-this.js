@@ -1,14 +1,14 @@
 var positions = [
-    {left: -20, top: 105}, // TBD: this is off-screen
+    {left: -20, top: 105}, // TBD: this is partially off-screen
     {left: 185, top: 100},
     {left: 550, top: 150},
     {left: 800, top: 160},
-    {left: 1025, top: 120},
+    {left: 1025, top: 120}, // TBD: off-screen for e.g. kite
     {left: -20, top: 450}, // TBD: this is off-screen
     {left: 185, top: 460},
     {left: 550, top: 465},
     {left: 800, top: 340},
-    {left: 1025, top: 440}
+    {left: 1025, top: 440} // TBD: off-screen for e.g. kite
 ];
 
 var scoreboard;
