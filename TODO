@@ -7,6 +7,8 @@ Grep for TBD in the code.
 * vocabulary lessons: don't embed the words in the picture on the first page
 * rename Karma.rand to Karma.random
 * if you include the template description.py before you call directory, and the template generates a file, the path will be wrong (cfr. what-is-this): either fix destination_path or add a check that directory is called before include
+* div(id='help') in every lesson -> if you configure your header with a help button, you should not have to do this
+* scoreboard should be an option of footer (what-is-this.js, identification.js)
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
@@ -18,3 +20,5 @@ Bugs in existing lessons:
 * 6_English_alphabeticalOrder_13_K: rhinosorous iso rhinoceros
 * 6_English_crossword_10_K: the layout is completely messed up
 * 2_English_hangmanNumbers_9_K: "There are one stoves"
+* capitalization of titles of different lessons is inconsistent
+* 2_English_animalIdentification_8_K vs. 6_English_whatsThisWord_1_K: scoreboard visible from the start (before play) + feedback message is different
