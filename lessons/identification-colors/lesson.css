@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+/****** Page Styles ****/
+
+/*  Designed for 1200*900 px screen resolution  */ 
+ 
+
+/**** Game Styles  ****/
+
+#content{
+    overflow-y: hidden;
+    text-align: center;	
+}
+
+#title{
+    margin: 2em auto;
+    font: 40px/45px Verdana, Geneva, Arial, sans-serif;
+    font-weight: bold;
+}
+
+#listenAgain{
+    left: 2.7em;
+    top: 17em;
+}
+
+#questionBox{
+    margin: 2em 0em 2em 1.5em;
+}
+
+#imageBox{
+    margin: 2em auto;
+}
+
+#checkedOption{
+    margin-top: 5em;
+}
+
+#optionSection{
+    margin: 4em 0 0 10em;
+    clear: both;
+}

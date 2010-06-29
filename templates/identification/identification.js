@@ -27,6 +27,9 @@ function startGame(karma) {
     var $content = $('#content')
         .removeClass('backOpaque') // TBD: needed?
         .empty();
+    if (configuration.title) {
+        $content.append(createDiv('title').html(configuration.title));
+    }
     var div_ids = ['listenAgain',
                    'questionBox',
                    'imageBox',
@@ -35,7 +38,7 @@ function startGame(karma) {
 
     $(div_ids.map(createDiv)).appendTo($content);
 
-    $('#questionBox').html('What is this ?'); // TBD: space before '?'
+    $('#questionBox').html(configuration.question);
 
     var next_things = Karma.shuffle(things);
     var current_thing;
@@ -101,7 +104,7 @@ function startGame(karma) {
             .click(function () {
                        ++try_count;
 		       if (name == current_thing) {
-                           $(this).unbind('click');
+                           $('.optImg').unbind('click');
 		           $('#listenAgain').hide();
 		           karma.audio.correct.play();
 		           if (try_count == 1) {
@@ -111,7 +114,7 @@ function startGame(karma) {
 		           $('#checkedOption')
                                .empty()
                                .append(karma.createImg('correct'));
-                           timer = setTimeout(gotoNext);
+                           timer = setTimeout(gotoNext, 1000);
 		       } else {
 		           $('#listenAgain').show();
 		           karma.audio.incorrect.play();
