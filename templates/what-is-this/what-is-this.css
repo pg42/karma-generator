@@ -36,8 +36,6 @@
 
 input.blankBox {
     font: 35px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    height:45px;
-    width: 150px;
     color:red;
     text-align:center;
 }

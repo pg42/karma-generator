@@ -48,6 +48,10 @@ function createPointer(karma) {
         .appendTo($('#content'));
 }
 
+function aOrAn(word) {
+    return ('aeiou'.indexOf(word[0]) != -1) ? 'an' : 'a';
+}
+
 function startGame(karma) {
     $('#score_box').show();
     $(scoreboard).scoreboard('reset');
@@ -77,6 +81,7 @@ function startGame(karma) {
 
     var createQuestion = function () {
         var word = current_picture.data('word');
+        var answer_info = setUpAnswer(word);
         var $questionSection = $(document.createElement('div'))
             .attr('id', 'questionSection')
             .appendTo($('#content'));
@@ -86,30 +91,12 @@ function startGame(karma) {
             .html('What is this?')
             .appendTo($questionSection);
 
-        var $blank = $(document.createElement('span'))
-            .addClass('objectWord');
-
-        var aOrAn = function (word) {
-            return ('aeiou'.indexOf(word[0]) != -1) ? 'an' : 'a';
-        };
-
-        var input = $(document.createElement('input'))
-            .attr('type', 'text')
-            .addClass('blankBox')
-            .Watermark('?')
-            .appendTo($blank);
-
-        $(document.createElement('div'))
-            .attr('id', 'answers')
-            .append("It's ")
-            .append(aOrAn(word))
-            .append($blank)
-            .append('.')
-            .appendTo($questionSection);
+        var input = answer_info.input;
+        answer_info.answers_div.appendTo($questionSection);
 
         var checkAnswer = function () {
             var textval = input.val();
-            if (word == textval.toLowerCase()) {
+            if (answer_info.expected == textval.toLowerCase()) {
                 input.unbind('keypress');
 	        input.addClass('correct');
 	        if (!input.hasClass('incorrect')) {

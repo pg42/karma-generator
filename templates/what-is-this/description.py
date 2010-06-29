@@ -48,8 +48,7 @@ for o in objects:
 image('ladybird', 'ladybird.png')
 image('ant', 'ant.png')
 
-# TBD: path
-f = open('6_English_whatsThisWord_1_K/' + objects_js.dest_path(), 'w')
+f = open(objects_js.dest_path(), 'w')
 print >>f, 'objects = [%s];' % (', '.join(["'%s'" % o for o in objects]))
 f.close()
 

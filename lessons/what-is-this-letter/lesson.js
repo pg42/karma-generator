@@ -1,0 +1,33 @@
+function setUpAnswer(word) {
+    var i = Karma.rand(0, word.length);
+
+    var $blank = $(document.createElement('span'))
+        .addClass('objectWord');
+
+    var input;
+
+    for (var j = 0; j < word.length; ++j) {
+        if (i == j) {
+            input = $(document.createElement('input'))
+                .attr({type: 'text',
+                       maxlength: 1})
+                .addClass('blankBox')
+                .Watermark('?')
+                .appendTo($blank);
+        } else {
+            $blank.append(word[j]);
+        }
+    }
+
+    var answers_div = $(document.createElement('div'))
+        .attr('id', 'answers')
+        .append("It's ")
+        .append(aOrAn(word))
+        .append(' ')
+        .append($blank)
+        .append('.');
+
+    return {expected: word[i],
+            input: input,
+            answers_div: answers_div};
+}

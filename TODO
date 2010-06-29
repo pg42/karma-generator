@@ -4,6 +4,9 @@ Grep for TBD in the code.
 * add html files to lessons: lesson plan, etc.
 * add more vocabulary lessons
 * make puzzle configurable: # rows x # columns
+* vocabulary lessons: don't embed the words in the picture on the first page
+* rename Karma.rand to Karma.random
+* if you include the template description.py before you call directory, and the template generates a file, the path will be wrong (cfr. what-is-this): either fix destination_path or add a check that directory is called before include
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit

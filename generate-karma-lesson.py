@@ -88,10 +88,10 @@ def generate_header(page, title):
     page.div.close()
 
     page.div(id='lesson_title')
-    page.img(src=karma_root + '/assets/image/title_block_lt.png',
+    page.img(src=karma_path('/assets/image/title_block_lt.png'),
              width=33, height=75, align='absmiddle')
     page.add(title)
-    page.img(src=karma_root + '/assets/image/title_block_rt.png',
+    page.img(src=karma_path('/assets/image/title_block_rt.png'),
              width=33, height=75, align='absmiddle')
     page.div.close()
  
