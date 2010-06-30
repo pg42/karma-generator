@@ -27,3 +27,5 @@ Bugs in existing lessons:
 * 2_English_animalIdentification_8_K vs. 6_English_whatsThisWord_1_K: scoreboard visible from the start (before play) + feedback message is different
 * 2_English_matchingWordsAndObjects_23_K (and other matching lessons): cursor becomes pointer even when square is already matched
 * 2_English_matchingWordsAndObjects_23_K: if you click twice on the same square, they disappear after a delay (you should click two different squares)
+* 6_Maths_matchingAnglesAndShapes_5_K: the pictures are slightly clipped (also in generated version)
+* 6_Maths_matchingAnglesAndShapes_5_K: nonagon and decagon pictures are swapped

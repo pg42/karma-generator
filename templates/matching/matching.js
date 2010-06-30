@@ -63,6 +63,7 @@ Clock.prototype.reset = function () {
 var clock = null;
 
 function initialize() {
+    disableSelection($('body').get()[0]);
     clock = new Clock();
     // TBD: move this to common.js
     $('#footer')
@@ -100,8 +101,14 @@ function startGame(karma) {
         }
     };
 
+
+    var key = function (x) {
+        var result = x.data('key');
+        return result;
+    };
+
     var piecesMatch = function (piece1, piece2) {
-        return face(piece1).data('key') == face(piece2).data('key');
+        return key(face(piece1)) == key(face(piece2));
     };
 
     var hidePiece = function (piece) {
@@ -161,6 +168,27 @@ function startGame(karma) {
     };
 
     createPieces();
+}
+
+function createImage(karma, word, key) {
+    return createDiv()
+        .data('key', key)
+        .addClass('pieceFace')
+        .append(karma.createImg(word));
+}
+
+function createText(word, key) {
+    return createDiv()
+        .data('key', key)
+        .addClass('textColor')
+        .addClass('pieceFace')
+        .html(word);
+}
+
+function createImageAndTextFromNames(karma, names) {
+    return Array.prototype.concat(
+        names.map(function (x) { return createImage(karma, x, x); }),
+        names.map(function (x) { return createText(x, x); }));
 }
 
 setUpLesson(initialize, startGame);

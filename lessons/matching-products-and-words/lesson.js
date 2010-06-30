@@ -17,18 +17,10 @@ function createFaces(karma) {
         ['Bottle', 'Glass']
     ];
 
-    var createText = function (word, key) {
-        return createDiv()
-            .data('key', key)
-            .addClass('textColor')
-            .addClass('pieceFace')
-            .html(word);
-    };
-
-
     var createFirst = function(pair) {
       return createText(pair[0], pair[0]);
     };
+
     var createSecond = function(pair) {
       return createText(pair[1], pair[0]);
     };

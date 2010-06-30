@@ -2,7 +2,7 @@ directory('2_English_matchingWordsAndObjects_23_K')
 
 include('../../templates/matching/description.py')
 
-title('English Matching Words and Objects')
+title('Class 2 English Matching Words and Objects')
 lesson_title('Matching Words and Objects')
 
 register_objects(['Apple',
