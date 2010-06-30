@@ -36,7 +36,7 @@ def register_things(things):
         image(thing, thing + '.png')
         audio(thing, thing + '.wav')
     f = open(lesson_js.dest_path(), 'w')
-    print >>f, 'var things = [' + ', '.join([quote(x) for x in things]) + ']'
+    print >>f, 'var things = [' + ', '.join([quote(x) for x in things]) + '];'
     f.close()
 
 footer_configuration(link_next=False, link_previous=False)
