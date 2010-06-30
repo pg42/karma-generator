@@ -9,3 +9,4 @@ java_script('configuration.js')
 
 register_things(['cat', 'cow', 'deer', 'dog', 'elephant', 'horse', 'sheep'])
 image('background', 'background.jpg', preload=False)
+image('help', 'help.png', preload=False)

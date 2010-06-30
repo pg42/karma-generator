@@ -18,3 +18,4 @@ animals = [
 register_objects(animals)
 
 image('vocabImg', 'vocabImg.jpg', preload=False)
+image('help', 'help.png', preload=False)

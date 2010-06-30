@@ -7,3 +7,4 @@ lesson_title("What's this word")
 
 java_script('lesson.js')
 css('lesson.css')
+image('help', 'help.png', preload=False)
