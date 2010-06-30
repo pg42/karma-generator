@@ -4,6 +4,7 @@
 import codecs
 import os
 import shutil
+import string
 import sys
 import time
 from optparse import OptionParser
@@ -82,7 +83,7 @@ def constantly(x):
 #TBD: make header/footer customizable
 def generate_header(page, title):
     page.div(id='header')
-   
+
     page.div(id='topbtn_left')
     page.div('',id='linkBackLesson', title='Back', class_='linkBack')
     page.div.close()
@@ -94,7 +95,7 @@ def generate_header(page, title):
     page.img(src=karma_path('assets/image/title_block_rt.png'),
              width=33, height=75, align='absmiddle')
     page.div.close()
- 
+
 
     page.div(id='topbtn_right')
     page.div('', title='Help', id='linkHelp')
@@ -103,7 +104,7 @@ def generate_header(page, title):
     page.div(id='topbtn_right')
     page.div('', title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित', id='linkOle')
     page.div.close()
-    
+
     page.div.close()
 
 
@@ -160,7 +161,7 @@ class File:
         self.name_ = os.path.basename(path)
         self.copy = not framework and not generated
         self.preload = preload
-        
+
         if self.copy:
             self.src = frob_path(path)
         if not framework:
@@ -274,7 +275,20 @@ class Lesson:
         print 'images:', self.images
         print 'audios:', self.audios
         print 'divs:', self.divs
-    
+
+def _title(x): title(x)
+
+def lesson(grade, subject, title, week, browser_title=None, nepalese_title=None):
+    def camelcase(title):
+        words = title.replace("'", '').split()
+        return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
+
+    directory('%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week))
+    lesson_title(nepalese_title if nepalese_title else title)
+    if browser_title:
+        _title(browser_title)
+    else:
+        _title('Class %s %s %s' % (grade, subject, title))
 
 def title(name):
     theLesson.title = name

@@ -1,9 +1,6 @@
+lesson(grade=2, subject='English', title='Vocabulary Domestic Animals', week=4)
+
 include('../../templates/vocabulary/description.py')
-
-directory('2_English_vocabularyDomesticAnimals_4_K')
-
-title('Class 2 English Vocabulary Domestic Animals')
-lesson_title('Domestic Animals')
 
 items = [
     dict(name='cow', left = 545, top = 295, width = 100),

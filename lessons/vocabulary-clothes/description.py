@@ -1,9 +1,6 @@
+lesson(grade=2, subject='English', title='Vocabulary Clothes', week=15)
+
 include('../../templates/vocabulary/description.py')
-
-directory('2_English_vocabularyClothes_15_K')
-
-title('Class 2 English Vocabulary Clothes')
-lesson_title('Vocabulary Clothes')
 
 items = [
     dict(name='cap', left = 138, top = 290, width = 85),

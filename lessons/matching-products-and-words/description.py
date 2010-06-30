@@ -1,9 +1,6 @@
-directory('6_English_matchingProductsAndWords_8_K')
+lesson(grade=6, subject='English', title='Matching Products and Words', week=8)
 
 include('../../templates/matching/description.py')
-
-title('Class 6 English Matching Products and Words')
-lesson_title('Matching Products and Words')
 
 java_script('lesson.js')
 image('help', 'help.png', preload=False)

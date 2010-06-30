@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-
-directory('6_Maths_matchingFactorsAndProducts_4_K')
+lesson(grade=6, subject='Maths', title='Matching Factors and Products',
+       nepalese_title=u'गुणनखण्ड र गुणनफल',
+       week=4)
 
 include('../../templates/matching/description.py')
-
-title('Class 6 Maths Matching Factors and Products')
-lesson_title(u'गुणनखण्ड र गुणनफल')
 
 java_script('lesson.js')
 image('help', 'help.png', preload=False)

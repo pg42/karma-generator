@@ -1,9 +1,6 @@
-directory('2_English_matchingWordsAndObjects_23_K')
+lesson(grade=2, subject='English', title='Matching Words and Objects', week=23)
 
 include('../../templates/matching/description.py')
-
-title('Class 2 English Matching Words and Objects')
-lesson_title('Matching Words and Objects')
 
 register_objects(['Apple',
                   'Bag',

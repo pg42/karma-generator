@@ -1,7 +1,4 @@
-directory('2_English_colorIdentification_8_K')
-
-title('Class 2 English Colour Identification')
-lesson_title('Colour Identification')
+lesson(grade=2, subject='English', title='Colour Identification', week=8)
 
 include('../../templates/identification/description.py')
 

@@ -1,9 +1,6 @@
+lesson(grade=2, subject='English', title='Vocabulary Body Parts', week=14)
+
 include('../../templates/vocabulary/description.py')
-
-directory('2_English_vocabularyBodyParts_14_K')
-
-title('Class 2 English Vocabulary Body Parts')
-lesson_title('Vocabulary Body Parts')
 
 parts = [
     dict(name='ear', left = 208, top = 75, width = 80),

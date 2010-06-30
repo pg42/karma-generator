@@ -1,9 +1,6 @@
-directory('2_English_vocabularyBirds_11_K')
+lesson(grade=2, subject='English', title='Vocabulary Birds', week=11)
 
 include('../../templates/vocabulary/description.py')
-
-title('Class 2 English Vocabulary Birds')
-lesson_title('Vocabulary Birds')
 
 animals = [
     dict(name='crow', left = 465, top = 69, width = 130),

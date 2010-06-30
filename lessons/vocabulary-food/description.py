@@ -1,9 +1,6 @@
-directory('2_English_vocabularyFood_16_K')
+lesson(grade=2, subject='English', title='Vocabulary Food', week=16)
 
 include('../../templates/vocabulary/description.py')
-
-title('Class 2 English Vocabulary Food')
-lesson_title('Vocabulary Food')
 
 foods = [
     dict(name='rice', left = 130, top = 260, width = 95),

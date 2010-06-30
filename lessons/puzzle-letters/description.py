@@ -1,9 +1,6 @@
-directory('2_English_alphabetPuzzle_1_K')
+lesson(grade=2, subject='English', title='Alphabet Puzzle', week=1)
 
 include('../../templates/puzzle/description.py')
-
-title('Class 2 English Alphabet Puzzle')
-lesson_title('Alphabet Puzzle')
 
 for i in range(1, 4):
     image('puzzle%s' % i, 'img%s.png' % i)
