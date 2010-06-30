@@ -13,15 +13,6 @@ function initialize() {
     disableSelection($('body').get()[0]);
 }
 
-// TBD: move this to common.js
-function createDiv(id) {
-    var result = $(document.createElement('div'));
-    if (typeof(id) != 'undefined') {
-        result.attr('id', id);
-    }
-    return result;
-}
-
 function startGame(karma) {
     scoreboard.scoreboard('reset');
     var $content = $('#content')

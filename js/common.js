@@ -163,3 +163,11 @@ Karma.createImg = function (name, disable_dragging) {
     }
     return result;
 };
+
+function createDiv(id) {
+    var result = $(document.createElement('div'));
+    if (typeof(id) != 'undefined') {
+        result.attr('id', id);
+    }
+    return result;
+}
