@@ -1,6 +1,7 @@
 Grep for TBD in the code.
 
-* make header and footer configurable
+* directory, title, lesson title have overlapping info, replace them by: lesson_info(grade:2, subject: 'English', title: 'Matching Words and Objects', week: 23)
+* make header and footer more configurable: timer, clickcounter, score
 * add html files to lessons: lesson plan, etc.
 * add favicon
 * add more vocabulary lessons
@@ -24,3 +25,5 @@ Bugs in existing lessons:
 * 2_English_hangmanNumbers_9_K: "There are one stoves"
 * capitalization of titles of different lessons is inconsistent
 * 2_English_animalIdentification_8_K vs. 6_English_whatsThisWord_1_K: scoreboard visible from the start (before play) + feedback message is different
+* 2_English_matchingWordsAndObjects_23_K (and other matching lessons): cursor becomes pointer even when square is already matched
+* 2_English_matchingWordsAndObjects_23_K: if you click twice on the same square, they disappear after a delay (you should click two different squares)
