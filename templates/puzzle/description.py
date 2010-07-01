@@ -17,6 +17,5 @@ for f in central_js_files:
 java_script('lesson.js')
 
 div(id='content')
-div(id='help')
 
 image('background', 'background.jpg', preload=False)

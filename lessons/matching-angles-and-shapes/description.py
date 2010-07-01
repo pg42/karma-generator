@@ -24,5 +24,4 @@ register_objects(['Acute-Angle',
                   'Obtuse-Angle']);
 
 java_script('lesson.js')
-image('help', 'help.png', preload=False)
 css('lesson.css')

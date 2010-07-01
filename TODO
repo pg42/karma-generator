@@ -8,7 +8,6 @@ Grep for TBD in the code.
 * vocabulary lessons: don't embed the words in the picture on the first page
 * rename Karma.rand to Karma.random
 * if you include the template description.py before you call directory, and the template generates a file, the path will be wrong (cfr. what-is-this): either fix destination_path or add a check that directory is called before include
-* div(id='help') + image('help', 'help.png', preload=False) in every lesson -> if you configure your header with a help button, you should not have to do this
 * scoreboard should be an option of footer (what-is-this.js, identification.js)
 * .wav files in current lessons -> convert to .ogg (maybe in generator?)
 
@@ -29,3 +28,4 @@ Bugs in existing lessons:
 * 6_Maths_matchingAnglesAndShapes_5_K: the pictures are slightly clipped (also in generated version)
 * 6_Maths_matchingAnglesAndShapes_5_K: nonagon and decagon pictures are swapped
 * 6_Maths_setsPictures_6_K: score is a bit confusing, it just indicates the page. Replay doesn't reset the score, and doesn't start from the start.
+* 6_English_crossword_10_K, 6_Maths_setsPictures_6_K: missing help

@@ -4,4 +4,4 @@ include('../../templates/what-is-this/description.py')
 
 java_script('lesson.js')
 css('lesson.css')
-image('help', 'help.png', preload=False)
+

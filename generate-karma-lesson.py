@@ -371,6 +371,15 @@ def create_directories(destination_dir):
     os.chdir(destination_dir)
     map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
 
+def add_help():
+    help_path = os.path.join(os.path.dirname(include_stack[-1]),
+                             'help.png')
+    if (os.path.exists(help_path)):
+        div(id='help')
+        image('help', 'help.png', preload=False)
+    else:
+        print 'Warning: the file ' + str(help_path) + ' doesn''t exist.'
+
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
     parser.add_option('-d', '--debug', dest='debug', default=True,
@@ -399,6 +408,7 @@ if __name__ == '__main__':
     initialize_framework_paths()
 
     include_stack.append(description)
+    add_help()
     execfile(description)
     include_stack.pop()
 

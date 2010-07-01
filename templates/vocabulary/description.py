@@ -16,7 +16,6 @@ lesson_js = java_script('lesson.js', generated=True)
 java_script('vocabulary.js')
 
 div(id='content')
-div(id='help')
 
 def register_objects(objects):
     for o in objects:

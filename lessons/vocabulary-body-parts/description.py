@@ -15,4 +15,3 @@ parts = [
 register_objects(parts)
 
 image('vocabImg', 'vocabImg.jpg', preload=False)
-image('help', 'help.png', preload=False)

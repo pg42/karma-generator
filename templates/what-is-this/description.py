@@ -19,7 +19,6 @@ objects_js = java_script('objects.js', generated=True)
 java_script('what-is-this.js')
 
 div(id='content')
-div(id='help')
 div(id='gameOver')
 
 objects = [

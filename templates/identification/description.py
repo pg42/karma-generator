@@ -15,7 +15,6 @@ java_script('identification.js')
 css('identification.css')
 
 div(id='content')
-div(id='help')
 
 for name in ['correct', 'incorrect']:
     image(name, name + '.png')
