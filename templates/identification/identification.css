@@ -1,26 +1,26 @@
 @CHARSET "UTF-8";
 /****** Page Styles ****/
 
-/*  Designed for 1200*900 px screen resolution  */ 
- 
+/*  Designed for 1200*900 px screen resolution  */
+
 
 /**** Game Styles  ****/
 
 #currentTitle {
     width: 150px;
     height: 80px;
-    font: 25px/30px "Courier New", Courier, monospace;	
+    font: 25px/30px "Courier New", Courier, monospace;
     font-weight: bold;
     color: red;
 }
 
 #content {
-    position: relative;	
+    position: relative;
     margin: 0 auto;
     margin-top: 74px;
     width: 1198px;
     height: 750px;
-    background: url(../assets/image/background.jpg) no-repeat center;	
+    background: url(../assets/image/background.jpg) no-repeat center;
 }
 
 #listenAgain {
@@ -99,5 +99,5 @@
     left: 30%;
     color: blue;
     text-align: center;
-    font : bold 45px/65px Arial Black, Times New Roman;
+    font: bold 45px/65px Arial Black, Times New Roman;
 }
