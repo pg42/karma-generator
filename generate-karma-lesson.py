@@ -213,6 +213,9 @@ class Lesson:
                   charset='utf-8',
                   script=Scripts(zip([f.dest_path() for f in self.java_script_files],
                                      constantly('javascript'))))
+        page.link(href=os.path.relpath(karma_path('assets/default/image/favicon.ico')),
+                  rel='icon',
+                  type='image/ico')
         [page.addheader('<!-- %s -->' % c) for c in warning_text.split('\n')]
         generate_header(page, self.lesson_title)
         for div in self.divs:

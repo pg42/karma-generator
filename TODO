@@ -2,7 +2,6 @@ Grep for TBD in the code.
 
 * make header and footer more configurable: timer, clickcounter, score
 * add html files to lessons: lesson plan, etc.
-* add favicon
 * add more vocabulary lessons
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
