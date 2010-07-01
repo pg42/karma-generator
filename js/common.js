@@ -142,7 +142,7 @@ function disableImageDragging(img) {
 
 // TBD: move to Karma
 function randomElement(collection) {
-    return collection[Karma.rand(0, collection.length)];
+    return collection[Karma.random(0, collection.length)];
 }
 
 // TBD: move to Karma
@@ -163,6 +163,8 @@ Karma.createImg = function (name, disable_dragging) {
     }
     return result;
 };
+
+Karma.random = Karma.rand;
 
 function createDiv(id) {
     var result = $(document.createElement('div'));

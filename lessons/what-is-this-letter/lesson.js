@@ -1,5 +1,5 @@
 function setUpAnswer(word) {
-    var i = Karma.rand(0, word.length);
+    var i = Karma.random(0, word.length);
 
     var $blank = $(document.createElement('span'))
         .addClass('objectWord');

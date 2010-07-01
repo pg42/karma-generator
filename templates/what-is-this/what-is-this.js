@@ -41,8 +41,8 @@ function createPointer(karma) {
     return $(document.createElement('div'))
         .addClass('pointerBg')
         .css({position: 'absolute',
-              left: Karma.rand(10, 1000),
-              top: Karma.rand(5, 500),
+              left: Karma.random(10, 1000),
+              top: Karma.random(5, 500),
               backgroundColor: '#F5F29E'})
         .append(karma.createImg(randomElement(['ladybird', 'ant'])))
         .appendTo($('#content'));
