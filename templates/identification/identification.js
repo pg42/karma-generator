@@ -1,20 +1,14 @@
 var things = ['cat', 'cow', 'deer', 'dog', 'elephant', 'horse', 'sheep'];
 
-var scoreboard;
-
 // TBD move this to common.js
 function initialize() {
-    var score_box = $(document.createElement('div'))
-        .attr('id', 'score_box')
-        .appendTo($('#footer'));
-
-    scoreboard = score_box.scoreboard({layout: 'horizontal',
-		                       winningScore: things.length});
+    scoreboardInitialize({layout: 'horizontal',
+		          winningScore: things.length});
     disableSelection($('body').get()[0]);
 }
 
 function startGame(karma) {
-    scoreboard.scoreboard('reset');
+    scoreboardReset();
     var $content = $('#content')
         .removeClass('backOpaque') // TBD: needed?
         .empty();
@@ -99,9 +93,10 @@ function startGame(karma) {
 		           $('#listenAgain').hide();
 		           karma.audio.correct.play();
 		           if (try_count == 1) {
-			       scoreboard.scoreboard('inc');
-		           }
-		           scoreboard.scoreboard('incTotal');
+			       scoreboardHit();
+		           } else {
+                               scoreboardMiss();
+                           }
 		           $('#checkedOption')
                                .empty()
                                .append(karma.createImg('correct'));

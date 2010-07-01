@@ -2,7 +2,6 @@ css('global')
 css('lesson.css')
 
 central_js_files = [
-    'jquery',
     'ui.core',
     'ui.draggable',
     'ui.droppable',

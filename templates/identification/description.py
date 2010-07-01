@@ -1,10 +1,7 @@
-css('ui.scoreboard')
 css('global')
 
 central_js_files = [
-    'jquery',
     'ui.core',
-    'ui.scoreboard',
     'karma',
     '../../js/common.js']
 
@@ -38,4 +35,4 @@ def register_things(things):
     print >>f, 'var things = [' + ', '.join([quote(x) for x in things]) + '];'
     f.close()
 
-footer_configuration(link_next=False, link_previous=False)
+footer_configuration(link_next=False, link_previous=False, scoreboard=True)

@@ -137,7 +137,7 @@ function disableSelection(target) {
 }
 
 function disableImageDragging(img) {
-    $(img).mousedown(function (event) { event.preventDefault(); });    
+    $(img).mousedown(function (event) { event.preventDefault(); });
 }
 
 // TBD: move to Karma

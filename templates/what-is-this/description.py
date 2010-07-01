@@ -1,13 +1,10 @@
 css('global')
-css('ui.scoreboard')
 css('what-is-this.css')
 
-footer_configuration(link_previous=False, link_next=False)
+footer_configuration(link_previous=False, link_next=False, scoreboard=True)
 
 central_js_files = [
-    'jquery',
     'ui.core',
-    'ui.scoreboard',
     'karma',
     'jquery.watermarkinput',
     '../../js/common.js']

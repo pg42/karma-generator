@@ -4,7 +4,6 @@ css('lesson.css')
 footer_configuration(link_previous=False, link_next=False)
 
 central_js_files = [
-    'jquery',
     'ui.core',
     'ui.draggable',
     'ui.droppable',

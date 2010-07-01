@@ -11,17 +11,10 @@ var positions = [
     {left: 1025, top: 440} // TBD: off-screen for e.g. kite
 ];
 
-var scoreboard;
-
 // TBD move this to common.js
 function initialize() {
-    var score_box = $(document.createElement('div'))
-        .attr('id', 'score_box')
-        .hide()
-        .appendTo($('#footer'));
-
-    scoreboard = score_box.scoreboard({layout: 'horizontal',
-		                       winningScore: 10});
+    scoreboardInitialize({layout: 'horizontal',
+		          winningScore: 10});
 }
 
 function displayPictures(karma, objects) {
@@ -53,8 +46,7 @@ function aOrAn(word) {
 }
 
 function startGame(karma) {
-    $('#score_box').show();
-    $(scoreboard).scoreboard('reset');
+    scoreboardReset();
 
     $('#gameOver').hide();
     $('#content')
@@ -101,10 +93,11 @@ function startGame(karma) {
 	        input.addClass('correct');
 	        if (!input.hasClass('incorrect')) {
 	            input.blur();
-	            scoreboard.scoreboard('inc');
-	        }
+                    scoreboardHit();
+	        } else {
+                    scoreboardMiss();
+                }
 	        karma.audio[word].play();
-	        scoreboard.scoreboard('incTotal');
 
                 setTimeout(remaining_pictures.length == 0 ? gameOver: gotoNextObject,
                           1000);
@@ -123,9 +116,9 @@ function startGame(karma) {
                 .append('Game Over !!!')
                 .append(
                     '<div id="gameOverInfo">You got  <span class="specialText">'
-                        + scoreboard.scoreboard('getScore')
+                        + scoreboardScore()
                         + '</span> correct out of <span class="specialText">'
-                        + scoreboard.scoreboard('getTotal')
+                        + scoreboardTotal()
                         + '</span>   questions.</div>');
         };
 
