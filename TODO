@@ -1,5 +1,7 @@
 Grep for TBD in the code.
 
+* better checks and error handling: e.g. if you give a wrong argument to generate_karma_lesson, if a file doesn't exist, etc.
+* documentation
 * make header and footer more configurable: timer, clickcounter, score
 * add html files to lessons: lesson plan, etc.
 * add more vocabulary lessons

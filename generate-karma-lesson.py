@@ -180,6 +180,7 @@ class File:
 
     def copy_if_needed(self):
         if self.copy and self.src_path() != self.dest_path():
+            check_file_exists(self.src_path())
             shutil.copy(self.src_path(), self.dest_path())
 
 
@@ -356,6 +357,7 @@ def frob_path(path):
 def include(path):
     path = frob_path(path)
     include_stack.append(path)
+    check_file_exists(path)
     execfile(path, globals())
     include_stack.pop()
 
@@ -381,7 +383,12 @@ def add_help():
         div(id='help')
         image('help', 'help.png', preload=False)
     else:
-        print 'Warning: the file ' + str(help_path) + ' doesn''t exist.'
+        print 'Warning: the file ' + str(help_path) + ' doesn\'t exist.'
+
+def check_file_exists(path):
+    if not os.path.isfile(path):
+        print 'Error: the file ' + path + ' doesn\'t exist.'
+        sys.exit(1)
 
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
@@ -412,6 +419,7 @@ if __name__ == '__main__':
 
     include_stack.append(description)
     add_help()
+    check_file_exists(description)
     execfile(description)
     include_stack.pop()
 
