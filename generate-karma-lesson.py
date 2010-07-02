@@ -68,12 +68,10 @@ class GeneratedFile():
 
 class File():
     def __init__(self, lesson, path):
+        self._lesson = lesson
         self._name = os.path.basename(path)
         self.src = frob_path(path)
         self.dest = destination_path(self._name)
-
-    def name(self):
-        return self._name
 
     def src_path(self):
         return self.src
@@ -82,7 +80,7 @@ class File():
         return os.path.relpath(self.absolute_path(), start)
 
     def absolute_path(self):
-        return self.dest
+        return os.path.join(self._lesson.directory, self.dest)
 
     def make_available(self):
         if self.src_path() != self.absolute_path():
@@ -238,18 +236,11 @@ def page_to_unicode(page):
 
 
 def destination_path(name):
-    images_dir = 'assets/image'
-    sounds_dir = 'assets/audio'
     dirs = {'.js':'js',
-            '.css':'css',
-            '.png':images_dir,
-            '.jpg':images_dir,
-            '.jpeg':images_dir,
-            '.ogg':sounds_dir,
-            '.wav':sounds_dir}
+            '.css':'css'}
     ext = os.path.splitext(name)[1]
     if ext not in dirs:
-        print 'Don''t know how to handle', name
+        print 'Don\'t know how to handle', name
         sys.exit(1)
     return os.path.join(dirs[ext], name)
 
@@ -401,22 +392,6 @@ class Lesson:
                            indentation)]) + '});'
         print >>stream, '}'
 
-    def dump_css(self):
-        self.print_css_on(sys.stdout)
-
-    def dump_html(self):
-        self.print_html_on(sys.stdout)
-
-    def dump(self):
-        print 'java_script_files:', self.java_script_files
-        print 'css_files:', self.css_files
-        print 'image_files:', self.image_files
-        print 'audio_files:', self.audio_files
-        print 'divs:', self.divs
-
-
-def _title(x): title(x)
-
 
 def lesson(grade, subject, title, week, browser_title=None, nepalese_title=None):
     def camelcase(title):
@@ -424,19 +399,11 @@ def lesson(grade, subject, title, week, browser_title=None, nepalese_title=None)
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
 
     directory('%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week))
-    lesson_title(nepalese_title if nepalese_title else title)
+    theLesson.lesson_title = nepalese_title if nepalese_title else title
     if browser_title:
-        _title(browser_title)
+        theLesson.title = browser_title
     else:
-        _title('Class %s %s %s' % (grade, subject, title))
-
-
-def title(name):
-    theLesson.title = name
-
-
-def lesson_title(name):
-    theLesson.lesson_title = name
+        theLesson.title = 'Class %s %s %s' % (grade, subject, title)
 
 
 def resolve_karma_file(name, karma_files, **kw):

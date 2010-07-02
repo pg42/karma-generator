@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-
-directory('6_Maths_matchingAnglesAndShapes_5_K')
+lesson(grade=6, subject='Maths', title='Matching Angles and Shapes', week=5,
+       nepalese_title=u'ज्यामितीय आकारका नामहरू')
 
 include('../../templates/matching/description.py')
-
-title('Class 6 Maths Matching Angles and Shapes')
-lesson_title(u'ज्यामितीय आकारका नामहरू')
 
 register_objects(['Acute-Angle',
                   'Circle',
