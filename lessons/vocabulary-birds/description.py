@@ -14,4 +14,4 @@ animals = [
 
 register_objects(animals)
 
-image('vocabImg', 'vocabImg.jpg', preload=False)
+image('vocabImg.jpg')

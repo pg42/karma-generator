@@ -17,4 +17,4 @@ java_script('lesson.js')
 
 div(id='content')
 
-image('background', 'background.jpg', preload=False)
+image('background.jpg')

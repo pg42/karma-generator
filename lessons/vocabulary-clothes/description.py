@@ -14,4 +14,4 @@ items = [
 
 register_objects(items)
 
-image('vocabImg', 'vocabImg.jpg', preload=False)
+image('vocabImg.jpg')

@@ -19,11 +19,10 @@ div(id='content')
 def register_objects(objects):
     for o in objects:
         name = o['name']
-        image(name, name + '.png')
-        audio(name, name + '.wav')
-    f = open(lesson_js.dest_path(), 'w')
+        image(name + '.png', name)
+        audio(name + '.wav', name)
     prefix = 'var objects = ['
-    print >>f, prefix + (',\n' + ' ' * len(prefix)).join(
+    print >>lesson_js, prefix + (',\n' + ' ' * len(prefix)).join(
         ["{name: '%s', position: {left: %s, top: %s, width: %s}}" % (o['name'],
                                                                      o['left'],
                                                                      o['top'],
@@ -31,5 +30,5 @@ def register_objects(objects):
          for o in objects]) + '];'
 
 for x in ['correct', 'incorrect', 'trigger']:
-    audio(x, x + '.ogg')
+    audio(x + '.ogg', x)
 

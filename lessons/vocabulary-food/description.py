@@ -14,4 +14,4 @@ foods = [
 
 register_objects(foods)
 
-image('vocabImg', 'vocabImg.jpg', preload=False)
+image('vocabImg.jpg')

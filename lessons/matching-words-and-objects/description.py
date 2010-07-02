@@ -19,4 +19,3 @@ register_objects(['Apple',
                   'Boat'])
 
 java_script('lesson.js')
-image('help', 'help.png', preload=False)

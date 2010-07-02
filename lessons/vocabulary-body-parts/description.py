@@ -14,4 +14,4 @@ parts = [
 
 register_objects(parts)
 
-image('vocabImg', 'vocabImg.jpg', preload=False)
+image('vocabImg.jpg')

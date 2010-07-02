@@ -13,10 +13,8 @@ objects_js = java_script('objects.js', generated=True)
 
 def register_objects(objects):
     for object in objects:
-        image(object, object + '.png')
-    f = open(objects_js.dest_path(), 'w')
-    print >>f, 'var objects = [' + ', '.join([quote(x) for x in objects]) + '];'
-    f.close()
+        image(object + '.png', object)
+    print >>objects_js, 'var objects = [' + ', '.join([quote(x) for x in objects]) + '];'
 
 div(id='content')
 

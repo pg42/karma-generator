@@ -14,13 +14,13 @@ css('identification.css')
 div(id='content')
 
 for name in ['correct', 'incorrect']:
-    image(name, name + '.png')
+    image(name + '.png', name)
 
 for name in ['optionBorder', 'optionBorderHover', 'listenAgain']:
-    image(name, name + '.png', preload=False)
+    image(name + '.png')
 
-audio('correct', 'en_correct.ogg')
-audio('incorrect', 'en_incorrect.ogg')
+audio('en_correct.ogg', 'correct')
+audio('en_incorrect.ogg', 'incorrect')
 
 def quote(x):
     return "'%s'" % x
@@ -29,10 +29,8 @@ lesson_js = java_script('lesson.js', generated=True)
 
 def register_things(things):
     for thing in things:
-        image(thing, thing + '.png')
-        audio(thing, thing + '.wav')
-    f = open(lesson_js.dest_path(), 'w')
-    print >>f, 'var things = [' + ', '.join([quote(x) for x in things]) + '];'
-    f.close()
+        image(thing + '.png', thing)
+        audio(thing + '.wav', thing)
+    print >>lesson_js, 'var things = [' + ', '.join([quote(x) for x in things]) + '];'
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)

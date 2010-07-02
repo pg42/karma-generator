@@ -38,15 +38,13 @@ objects = [
     'tree']
 
 for o in objects:
-    audio(o, o + '.wav')
-    image(o, o + '.png')
+    audio(o + '.wav', o)
+    image(o + '.png', o)
 
-image('ladybird', 'ladybird.png')
-image('ant', 'ant.png')
+image('ladybird.png', 'ladybird')
+image('ant.png', 'ant')
 
-f = open(objects_js.dest_path(), 'w')
-print >>f, 'objects = [%s];' % (', '.join(["'%s'" % o for o in objects]))
-f.close()
+print >>objects_js, 'objects = [%s];' % (', '.join(["'%s'" % o for o in objects]))
 
-audio('correct', 'correct.ogg')
-audio('incorrect', 'incorrect.ogg')
+audio('correct.ogg', 'correct')
+audio('incorrect.ogg', 'incorrect')
