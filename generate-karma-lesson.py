@@ -37,60 +37,62 @@ class KarmaFile():
     def name(self):
         return self._name
 
-    def relative_path(self, start=os.curdir):
+    def relative_path(self, start):
         return os.path.relpath(os.path.join(karma_root, self._karma_path),
                                start)
 
-    def dest_path(self):
-        return self.relative_path()
-
-    def copy_if_needed(self):
+    def make_available(self):
         pass
 
 
 class GeneratedFile():
-    def __init__(self, path):
-        self._path = path
+    def __init__(self, lesson, name):
+        self.lesson = lesson
+        self.name = name
         self.data = ''
 
     def write(self, x):
         self.data = self.data + x
 
-    def dest_path(self):
-        return os.path.join('js', self._path)
+    def relative_path(self, start):
+        return os.path.relpath(self.absolute_path(), start)
 
-    def copy_if_needed(self):
-        self.generate()
+    def absolute_path(self):
+        return os.path.join(self.lesson.directory, 'js', self.name)
 
-    def generate(self):
-        f = open(self.dest_path(), 'w')
+    def make_available(self):
+        f = open(self.absolute_path(), 'w')
         print >>f, self.data
         f.close()
 
 
 class File():
-    def __init__(self, path):
-        self.name_ = os.path.basename(path)
+    def __init__(self, lesson, path):
+        self._name = os.path.basename(path)
         self.src = frob_path(path)
-        self.dest = destination_path(self.name_)
+        self.dest = destination_path(self._name)
 
     def name(self):
-        return self.name_
+        return self._name
 
     def src_path(self):
         return self.src
 
-    def dest_path(self):
-        return os.path.relpath(self.dest)
+    def relative_path(self, start):
+        return os.path.relpath(self.absolute_path(), start)
 
-    def copy_if_needed(self):
-        if self.src_path() != self.dest_path():
+    def absolute_path(self):
+        return self.dest
+
+    def make_available(self):
+        if self.src_path() != self.absolute_path():
             check_file_exists(self.src_path())
-            shutil.copy(self.src_path(), self.dest_path())
+            shutil.copy(self.src_path(), self.absolute_path())
 
 
 class AssetFile():
-    def __init__(self, path, name):
+    def __init__(self, lesson, path, name):
+        self._lesson = lesson
         self._name = name
         self._path = absolute_path(path)
         check_file_exists(self._path)
@@ -101,12 +103,16 @@ class AssetFile():
     def preload(self):
         return self._name != None
 
-    def copy_if_needed(self):
-        shutil.copy(self._path, self.dest_path())
+    def relative_path(self, start):
+        return os.path.relpath(self.absolute_path(), start)
 
-    def dest_path(self):
-        return os.path.join(self.dest_dir(),
-                            os.path.basename(self._path))
+    def absolute_path(self):
+        return os.path.join(self._lesson.directory,
+                            self.dest_dir(),
+                            self.basename())
+
+    def make_available(self):
+        shutil.copy(self._path, self.absolute_path())
 
     def dest_dir(self):
         assert(False)
@@ -116,16 +122,16 @@ class AssetFile():
 
 
 class ImageFile(AssetFile):
-    def __init__(self, path, name=None):
-        AssetFile.__init__(self, path, name)
+    def __init__(self, lesson, path, name=None):
+        AssetFile.__init__(self, lesson, path, name)
 
     def dest_dir(self):
         return 'assets/image'
 
 
 class AudioFile(AssetFile):
-    def __init__(self, path, name):
-        AssetFile.__init__(self, path, name)
+    def __init__(self, lesson, path, name):
+        AssetFile.__init__(self, lesson, path, name)
 
     def dest_dir(self):
         return 'assets/audio'
@@ -170,7 +176,7 @@ def constantly(x):
 #TBD: factor this out in a separate file, so it is easy to provide
 #     your own header/footer
 #TBD: make header/footer customizable
-def generate_header(page, title):
+def generate_header(dir, page, title):
     page.div(id='header')
 
     page.div(id='topbtn_left')
@@ -178,10 +184,10 @@ def generate_header(page, title):
     page.div.close()
 
     page.div(id='lesson_title')
-    page.img(src=KarmaFile('title_block_lt', 'assets/image/title_block_lt.png').relative_path(),
+    page.img(src=KarmaFile('title_block_lt', 'assets/image/title_block_lt.png').relative_path(dir),
              width=33, height=75, align='absmiddle')
     page.add(title)
-    page.img(src=KarmaFile('title_block_rt', 'assets/image/title_block_rt.png').relative_path(),
+    page.img(src=KarmaFile('title_block_rt', 'assets/image/title_block_rt.png').relative_path(dir),
              width=33, height=75, align='absmiddle')
     page.div.close()
 
@@ -324,29 +330,29 @@ class Lesson:
         self.audio_files = []
         self.divs = []
 
-        self.java_script_files.append(GeneratedFile('lesson-karma.js'))
+        self.java_script_files.append(GeneratedFile(self, 'lesson-karma.js'))
 
     def copy_files(self):
         for f in self.java_script_files + self.css_files:
-            f.copy_if_needed()
+            f.make_available()
         for f in self.image_files + self.audio_files:
-            f[1].copy_if_needed()
+            f[1].make_available()
 
     def print_html_on(self, stream):
         page = markup.page()
         page.init(doctype='<!DOCTYPE html>',
-                  css=[f.dest_path() for f in self.css_files],
+                  css=[f.relative_path(self.directory) for f in self.css_files],
                   title=self.title,
                   charset='utf-8',
-                  script=Scripts(zip([f.dest_path() for f
+                  script=Scripts(zip([f.relative_path(self.directory) for f
                                       in sort_java_script_files(self.java_script_files)],
                                      constantly('javascript'))))
         # TBD: ends up in body iso head
-        page.link(href=KarmaFile('favicon', 'assets/default/image/favicon.ico').relative_path(),
+        page.link(href=KarmaFile('favicon', 'assets/default/image/favicon.ico').relative_path(self.directory),
                   rel='icon',
                   type='image/ico')
         [page.addheader('<!-- %s -->' % c) for c in warning_text_lines]
-        generate_header(page, self.lesson_title)
+        generate_header(self.directory, page, self.lesson_title)
         for div in self.divs:
             page.div('', id=div['id'])
         generate_footer(page)
@@ -437,13 +443,13 @@ def resolve_karma_file(name, karma_files, **kw):
     for f in karma_files:
         if f.name() == name:
             return f
-    return File(name, **kw)
+    return File(theLesson, name, **kw)
 
 
 def java_script(name, **kw):
     result = None
     if 'generated' in kw and kw['generated']:
-        result = GeneratedFile(name)
+        result = GeneratedFile(theLesson, name)
     else:
         result = resolve_karma_file(name, karma_java_script_files, **kw)
     theLesson.java_script_files.append(result)
@@ -457,13 +463,13 @@ def css(name):
 
 
 def image(file, name=None):
-    result = ImageFile(file, name)
+    result = ImageFile(theLesson, file, name)
     theLesson.image_files.append([name, result])
     return result
 
 
 def audio(file, name):
-    result = AudioFile(file, name)
+    result = AudioFile(theLesson, file, name)
     theLesson.audio_files.append([name, result])
     return result
 
@@ -507,7 +513,7 @@ def include(path):
 
 def directory(dir):
     if not theLesson.directory:
-        theLesson.directory = dir
+        theLesson.directory = os.path.abspath(dir)
         create_directories(dir)
         java_script('jquery')
 
@@ -556,7 +562,7 @@ if __name__ == '__main__':
 
     theLesson = Lesson()
     if options.output:
-        theLesson.directory = options.output
+        theLesson.directory = os.path.abspath(options.output)
         create_directories(options.output)
         java_script('jquery')
 
