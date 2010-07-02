@@ -1,5 +1,5 @@
 function setUpAnswer(word) {
-    var i = Karma.random(0, word.length);
+    var i = Karma.random(0, word.length - 1);
 
     var $blank = $(document.createElement('span'))
         .addClass('objectWord');
@@ -19,8 +19,7 @@ function setUpAnswer(word) {
         }
     }
 
-    var answers_div = $(document.createElement('div'))
-        .attr('id', 'answers')
+    var answers_div = createDiv('answers')
         .append("It's ")
         .append(aOrAn(word))
         .append(' ')

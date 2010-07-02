@@ -20,7 +20,7 @@ function initialize() {
 function displayPictures(karma, objects) {
     return objects.map(
         function (object, i) {
-            return $(document.createElement('div'))
+            return createDiv()
                 .data('word', object)
                 .css({position: 'absolute',
                       top: positions[i].top,
@@ -31,7 +31,7 @@ function displayPictures(karma, objects) {
 }
 
 function createPointer(karma) {
-    return $(document.createElement('div'))
+    return createDiv()
         .addClass('pointerBg')
         .css({position: 'absolute',
               left: Karma.random(10, 1000),
@@ -74,12 +74,10 @@ function startGame(karma) {
     var createQuestion = function () {
         var word = current_picture.data('word');
         var answer_info = setUpAnswer(word);
-        var $questionSection = $(document.createElement('div'))
-            .attr('id', 'questionSection')
+        var $questionSection = createDiv('questionSection')
             .appendTo($('#content'));
 
-        $(document.createElement('div'))
-            .attr('id', 'question')
+        createDiv('question')
             .html('What is this?')
             .appendTo($questionSection);
 

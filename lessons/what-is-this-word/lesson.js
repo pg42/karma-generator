@@ -8,8 +8,7 @@ function setUpAnswer(word) {
         .Watermark('?')
         .appendTo($blank);
 
-    var answers_div = $(document.createElement('div'))
-        .attr('id', 'answers')
+    var answers_div = createDiv('answers')
         .append("It's ")
         .append(aOrAn(word))
         .append(' ')
