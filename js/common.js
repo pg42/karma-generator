@@ -142,7 +142,7 @@ function disableImageDragging(img) {
 
 // TBD: move to Karma
 function randomElement(collection) {
-    return collection[Karma.random(0, collection.length)];
+    return collection[Karma.random(0, collection.length - 1)];
 }
 
 // TBD: move to Karma
