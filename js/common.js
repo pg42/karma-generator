@@ -9,13 +9,15 @@ function controlButtonClickCallback($button, callback) {
 }
 
 function enableControlButton($button) {
-    $button.css({opacity: 1, cursor: 'pointer'});
-    $button.data('disabled', false);
+    $button
+        .css({opacity: 1, cursor: 'pointer'})
+        .data('disabled', false);
 }
 
 function disableControlButton($button) {
-    $button.css({opacity: 0.3, cursor: 'default'});
-    $button.data('disabled', true);
+    $button
+        .css({opacity: 0.3, cursor: 'default'})
+        .data('disabled', true);
 }
 
 function setUpLinkBackLesson() {
@@ -58,6 +60,8 @@ function setUpHelp() {
  */
 function setUpLesson(initialize, start_game) {
     $(function () {
+          $('#linkPrevLesson').hide();
+          $('#linkNextLesson').hide();
           var karma = lesson_karma();
           karma.ready(
               function () {

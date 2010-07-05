@@ -1,6 +1,5 @@
 var things = ['cat', 'cow', 'deer', 'dog', 'elephant', 'horse', 'sheep'];
 
-// TBD move this to common.js
 function initialize() {
     scoreboardInitialize({layout: 'horizontal',
 		          winningScore: things.length});
@@ -34,7 +33,7 @@ function startGame(karma) {
                                          });
         var options = Karma.shuffle(other_things).slice(0, 3);
         options.push(current_thing);
-        return Karma.shuffle(options);        
+        return Karma.shuffle(options);
     };
 
     var sayCurrentThing = function () {
