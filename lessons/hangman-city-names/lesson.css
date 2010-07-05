@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+a {
+    color: black;
+}
+
+#content {
+    margin: 2px auto;
+    margin-top: 74px;
+    width: 1198px;
+    height: 750px;
+    position: relative;
+}
+
+#section {
+    float: left;
+    margin: 70px 0 0 70px;
+}
+
+.imgHangMan {
+    padding: 5px;
+    width: 800px;
+    height: 200px;
+}
+
+#answerSection {
+    margin: 5px auto;
+    padding: 2px;
+    width: 380px;
+    height: 28px;
+    color: black;
+    font: 18px Geneva, Helvetica, Verdana, Arial, sans-serif;
+    text-align: center;
+}
+
+.answerBox {
+    width: 50px;
+    height: 40px;
+    color: #82C682;
+    padding: 0px 5px;
+    margin: 0.1em;
+    font: 25px/30px Verdana, Geneva, Helvetica, Arial, sans-serif;
+    border-bottom: 2px solid #000;
+}
+
+#infoSection {
+    margin: 50px auto;
+    text-align: center;
+    padding: 0px auto;
+    width: 600px;
+    height: 50px;
+    color: #FF9900;
+    font: 20px Geneva, Helvetica, Verdana, Arial, sans-serif;
+}
+
+#keyboard {
+    margin: 100px auto;
+    z-index: 5;
+}
+
+.alphaKeys {
+    color: black;
+}
+
+#missedText {
+    margin-top: 150px;
+}
+
+#hangManSection {
+    position: absolute;
+    top: 15%;
+    left: 72%;
+    width: 275px;
+    height: 285px;
+}
+
+.imgHang {
+    width: 275px;
+    height: 285px;
+}
+
+#hangFooterImg {
+    position: absolute;
+    bottom: 10px;
+    width: 1150px;
+    height: 171px;
+    background-image: url(../assets/image/footer_hangman.png);
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+#gameOverSection {
+    display: none;
+    margin: 2px auto;
+    margin-top: 200px;
+    font: 35px/40px Verdana, Geneva, Helvetica, Arial, sans-serif;
+    color: gold;
+    padding: 5px;
+    text-align: center;
+    width: 450px;
+    height: 80px;
+}

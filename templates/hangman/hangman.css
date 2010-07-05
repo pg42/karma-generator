@@ -1,25 +1,5 @@
 @CHARSET "UTF-8";
 
-/*  Designed for 1200*900 px screen resolution  */
-
-#currentTitle {
-    width: 150px;
-    height: 80px;
-    font: 25px/30px "Courier New", Courier, monospace;
-    font-weight: bold;
-    color: red;
-}
-
-#content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
-    overflow-y: hidden;
-    background: url(../assets/image/background.jpg) no-repeat center;
-    text-align: center;
-}
 
 p {
     color: black;
@@ -29,15 +9,6 @@ p {
 p#blue {
     color: blue;
     font: 20px/22px Verdana, Geneva, Arial, Helvetica, sans-serif;
-}
-
-#gameTitle {
-    padding: 5px;
-    width: 200px;
-    height: 20px;
-    color: blue;
-    font: 20px/22px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    text-align: left;
 }
 
 #def {
@@ -58,45 +29,12 @@ p#blue {
     width: 300px;
     height: 20px;
     font: 16px Geneva, Helvetica, Verdana, Arial, sans-serif;
-    text-align: left;
-}
-
-#answerSection {
-    padding: 2px;
-    width: 480px;
-    height: 28px;
-    color: black;
-    font: 18px Geneva, Helvetica, Verdana, Arial, sans-serif;
-    text-align: left;
 }
 
 #answers {
     color: #82C682;
     width: 150px;
     height: 50px;
-}
-
-.answerBox {
-    width: 40px;
-    height: 40px;
-    color: #82C682;
-    padding: 0px 5px;
-    margin: 0.1em;
-    font: 18px/30px Verdana, Geneva, Helvetica, Arial, sans-serif;
-    border-bottom: 2px solid #000;
-}
-
-#infoSection {
-    position: absolute;
-    left: 42%;
-    top: 52%;
-    text-align: center;
-    padding: 0px auto;
-    width: 300px;
-    height: 50px;
-    color: #FF9900;
-    font: 14px Geneva, Helvetica, Verdana, Arial, sans-serif;
-    border-left: 2px dotted #CCC;
 }
 
 #keyboard {
@@ -139,43 +77,12 @@ p#blue {
 }
 
 #missedText {
-    display: none;
-    margin-top: 50px;
     font: 25px/35px Verdana, Geneva, Helvetica, Arial, sans-serif;
     color: blue;
     padding: 5px;
     text-align:center;
     width: 590px;
     height: 80px;
-}
-
-#hangManSection {
-    position: absolute;
-    top: 55%;
-    left: 72%;
-    width:	180px;
-    height: 184px;
-}
-
-.imgHang {
-    width: 180px;
-    height: 184px;
-}
-
-#gameOverSection {
-	display: none;
-	margin: 2px auto;
-	padding: 5px;
-	width: 680px;
-	height:450px;
-	color:blue;
-	font: 20px/22px Verdana, Geneva, Arial, Helvetica, sans-serif;
-}
-
-.oneOrMoreUtensils {
-    margin-top: 5em;
-    width: 1002px;
-    height: 576px;
 }
 
 #help {
@@ -187,14 +94,4 @@ p#blue {
     height: 697px;
     background:url(../assets/image/help.png);
     z-index:40;
-}
-
-#gameOver {
-    opacity: 1;
-    position: absolute;
-    top: 50%;
-    left: 30%;
-    color: blue;
-    text-align: center;
-    font: bold 45px/65px Arial Black, Times New Roman;
 }

@@ -1,39 +1,30 @@
 var qwerty_keys = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
 
-var questions_and_answers = [
-    ['table spoons', 'eight'],
-    ['cups', 'seventeen'],
-    ['frying pans', 'three'],
-    ['serving spoons', 'six'],
-    ['kettles', 'three'],
-    ['stoves', 'one'],
-    ['knives', 'five'],
-    ['plates', 'ten'],
-    ['glasses', 'thirteen'],
-    ['buckets', 'two']];
-
 function showHangMan(karma, i) {
     $('#hangManSection')
         .empty()
         .append(karma.createImg('hang' + i).addClass('imgHang'));
 }
 
-function drawKeyboard() {
+function createKeyboard(capitalize) {
     var drawRow = function (row, i) {
         var $keys = createDiv('keys' + i);
         $(Array.prototype.map.apply(row,
                                     [function (letter) {
+                                         var x = capitalize ?
+                                             letter.toUpperCase() :
+                                             letter;
                                          return createDiv()
-                                             .html(letter)
-                                             .addClass(letter)
+                                             .html(x)
+                                             .addClass(x)
                                              .addClass('alphaKeys');
                                     }]))
             .appendTo($keys);
         return $keys;
     };
-    var $keyboard = createDiv('keyboard')
-        .appendTo('#content');
+    var $keyboard = createDiv('keyboard');
     $(qwerty_keys.map(drawRow)).appendTo($keyboard);
+    return $keyboard;
 }
 
 function initialize(karma) {
@@ -42,38 +33,26 @@ function initialize(karma) {
     disableSelection($('body').get()[0]);
 }
 
-function startGame(karma) {
-    $('#content')
-        .empty()
-        .append(createDiv('gameTitle').html('Number in words'))
-        .append(createDiv('def')
-                .html('Count and click on the letters to spell the number'))
-        .append(karma.createImg('mainImage').addClass('imgHangMan'))
-        .append(createDiv('questionSection'))
-        .append(createDiv('answerSection'))
-        .append(createDiv('infoSection')
-                .html('Click on the letters that fit in the answer. ' +
-                      'You are given 3 chances to complete the answer.'));
-    drawKeyboard();
-    $('#content')
-        .append(createDiv('missedText')
-                .html('Sorry You Missed It.')
-                .hide())
-        .append(createDiv('hangManSection'));
-    showHangMan(karma, 0);
-    $('#questionSection')
-        .append('How many ')
-        .append($(document.createElement('span')).addClass('objectName'))
-        .append(' are there?');
+function createAnswerBoxes(string, $answerSection) {
+    Array.prototype.forEach.apply(string,
+                                  [function (letter) {
+                                       $(document.createElement('span'))
+                                           .addClass('answerBox')
+                                           .addClass(letter)
+                                           .html('#')
+                                           .appendTo($answerSection);
+                                   }]);
+}
 
+function startGame(karma) {
+    createContentDivs(karma);
 
     $('#missedText').hide();
     $('#linkNextLesson').hide();
 
     var mistakeCount = 0;
 
-    var q_and_a_s = Karma.shuffle(questions_and_answers);
-    var current_question = null;
+    var remaining_tasks = Karma.shuffle(tasks);
     var current_answer = null;
 
     var keyClicked = function () {
@@ -91,7 +70,7 @@ function startGame(karma) {
         } else {
             ++mistakeCount;
             showHangMan(karma, mistakeCount);
-            if (mistakeCount == 3) {
+            if (mistakeCount == number_of_tries) {
                 $('#keyboard').hide();
                 $('#missedText').show();
                 $('#linkNextLesson').show();
@@ -108,23 +87,6 @@ function startGame(karma) {
     };
 
     var generateAnswerBoxes = function () {
-        var $answerSection = $('#answerSection').empty();
-        $answerSection.append('There are ');
-        Array.prototype.forEach.apply(current_answer,
-                                      [function (letter, i) {
-                                           $(document.createElement('span'))
-                                               .addClass('answerBox')
-                                               .addClass(letter)
-                                               .html('#')
-                                               .appendTo($answerSection);
-                                       }]);
-        $answerSection
-            .append('&nbsp;&nbsp;')
-            .append($(document.createElement('span')).addClass('objectName'))
-            .append('.');
-        $('.objectName')
-            .empty()
-            .append(current_question);
     };
 
     var nextQuestion = function () {
@@ -133,15 +95,13 @@ function startGame(karma) {
             .click(keyClicked)
             .css('background-color', '');
 
-        if (q_and_a_s.length) {
+        if (remaining_tasks.length) {
             $('#missedText').hide();
             $('#linkNextLesson').hide();
             $('#keyboard').show();
             mistakeCount = 0;
             showHangMan(karma, mistakeCount);
-            var q_and_a = q_and_a_s.pop();
-            current_question = q_and_a[0];
-            current_answer = q_and_a[1];
+            current_answer = setUpAnswer(remaining_tasks.pop());
             generateAnswerBoxes();
         } else {
             $('#content')
