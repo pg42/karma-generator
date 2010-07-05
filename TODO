@@ -7,7 +7,6 @@ Grep for TBD in the code.
 * add more vocabulary lessons
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
-* if you include the template description.py before you call directory, and the template generates a file, the path will be wrong (cfr. what-is-this): either fix destination_path or add a check that directory is called before include
 * scoreboard should be an option of footer (what-is-this.js, identification.js)
 * .wav files in current lessons -> convert to .ogg (maybe in generator?)
 * maybe throw out markup and roll our own. pros: remove work-arounds for bugs in markup, remove external dependency, more control over generated html
