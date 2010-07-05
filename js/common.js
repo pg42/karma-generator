@@ -177,3 +177,11 @@ function createDiv(id) {
     }
     return result;
 }
+
+// Return 'n' elements from 'all', amongst which 'x'.
+function randomElementsIncluding(all, x, n) {
+    var others = all.filter(function (y) { return x != y; });
+    var result = Karma.shuffle(others).slice(0, n - 1);
+    result.push(x);
+    return Karma.shuffle(result);
+}
