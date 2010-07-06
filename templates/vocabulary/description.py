@@ -20,7 +20,7 @@ def register_objects(objects):
     for o in objects:
         name = o['name']
         image(name + '.png', name)
-        audio(name + '.wav', name)
+        audio(name + '.ogg', name)
     prefix = 'var objects = ['
     print >>lesson_js, prefix + (',\n' + ' ' * len(prefix)).join(
         ["{name: '%s', position: {left: %s, top: %s, width: %s}}" % (o['name'],
