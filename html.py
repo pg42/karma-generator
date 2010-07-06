@@ -15,7 +15,7 @@ html_escapes = [(u'&', u'&amp;'),
                 (u'>', u'&gt;'),
                 (u'<', u'&lt;'),
                 (u'"', u'&quot;'),
-                (u"'", u'&quot;')]
+                (u"'", u'&apos;')]
 
 
 def escape(string):
