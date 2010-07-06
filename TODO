@@ -8,6 +8,7 @@ Grep for TBD in the code.
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
 * .wav files in current lessons -> convert to .ogg (maybe in generator?)
+* topbtn_right, botbtn_right: ids used multiple times (maybe use class?)
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
@@ -27,3 +28,4 @@ Bugs in existing lessons:
 * 6_Maths_matchingAnglesAndShapes_5_K: nonagon and decagon pictures are swapped
 * 6_Maths_setsPictures_6_K: score is a bit confusing, it just indicates the page. Replay doesn't reset the score, and doesn't start from the start.
 * 6_English_crossword_10_K, 6_Maths_setsPictures_6_K: missing help
+* 2_English_animalIdentification_8_K, 2_English_colourIdentification_8_K: only one of the two has byebye.ogg sound

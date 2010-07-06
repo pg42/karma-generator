@@ -68,6 +68,7 @@ function startGame(karma) {
         clearTimeout(timer);
         $('#checkedOption').empty();
         if (next_things.length == 0) {
+            karma.audio.byebye.play();
 	    $('#content')
                 .empty()
                 .append(createDiv('gameOver').html('GAME OVER !!!'));
