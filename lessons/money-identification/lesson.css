@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+/****** Page Styles ****/
+
+/*  Designed for 1200*900 px screen resolution  */ 
+ 
+
+/**** Game Styles  ****/
+
+#currentTitle{
+	width: 150px;
+	height: 80px;
+	font:25px/30px "Courier New", Courier, monospace;	
+	font-weight: bold;
+	color: red;
+}
+#content{
+	position:relative;	
+	margin: 0 auto;
+	margin-top: 74px;
+	width: 1198px;
+	height: 750px;
+	overflow-y:hidden;
+	background: url(../assets/image/background.jpg) no-repeat center;
+	text-align:center;	
+}
+#title{
+	margin: 2em auto;
+	font: 40px/45px Verdana, Geneva, Arial, sans-serif;
+	font-weight:bold;
+}
+#listenAgain{
+	position:absolute;
+	left: 10em;
+	top: 17em;
+	width:120px;
+	height:120px;
+	background: url(../assets/image/listenAgain.png);
+	cursor:pointer;
+}
+
+#imageBox{
+	float:left;
+	margin: 2em 0 5em 20em;
+	width: 200px;
+    height: 200px;
+}
+
+#checkedOption{
+	float:right;
+	margin-top: 5em;
+	margin-right: 10em;
+	width:128px;
+	height:128px;
+	padding: 5px;
+}
+
+#optionSection{
+	float:left;
+	margin: 4em 0 0 10em;
+	width:900px;
+	height:80px;
+	clear:both;
+}
+
+.optImg{
+	float:left;
+	cursor:pointer;
+	width:200px;
+	height: 64px;
+	font: 40px/50px Verdana, Geneva, Arial, sans-serif;
+	text-align:center;
+	background: url(../assets/image/optionBorder.png);
+	margin: 0 .6em 0 0;
+}
+.optImg:Hover{
+	width:200px;
+	height: 64px;
+	background: url(../assets/image/optionBorderHover.png);
+}
+
+#help{
+	display:none;
+	position:absolute;
+	right: 60px;
+	top: 75px;;
+	width: 297px;
+	height: 697px;
+	background:url(../assets/image/help.png);
+	z-index:40;
+}
+
+		
+#gameOver{
+	opacity: 1;
+	position:absolute;
+	top: 50%;
+	left:30%;
+	color: blue;
+	text-align:center;
+	font : bold 45px/65px Arial Black, Times New Roman;
+}

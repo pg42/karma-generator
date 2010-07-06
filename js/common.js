@@ -9,13 +9,15 @@ function controlButtonClickCallback($button, callback) {
 }
 
 function enableControlButton($button) {
-    $button.css({opacity: 1, cursor: 'pointer'});
-    $button.data('disabled', false);
+    $button
+        .css({opacity: 1, cursor: 'pointer'})
+        .data('disabled', false);
 }
 
 function disableControlButton($button) {
-    $button.css({opacity: 0.3, cursor: 'default'});
-    $button.data('disabled', true);
+    $button
+        .css({opacity: 0.3, cursor: 'default'})
+        .data('disabled', true);
 }
 
 function setUpLinkBackLesson() {
@@ -58,6 +60,8 @@ function setUpHelp() {
  */
 function setUpLesson(initialize, start_game) {
     $(function () {
+          $('#linkPrevLesson').hide();
+          $('#linkNextLesson').hide();
           var karma = lesson_karma();
           karma.ready(
               function () {
@@ -172,4 +176,12 @@ function createDiv(id) {
         result.attr('id', id);
     }
     return result;
+}
+
+// Return 'n' elements from 'all', amongst which 'x'.
+function randomElementsIncluding(all, x, n) {
+    var others = all.filter(function (y) { return x != y; });
+    var result = Karma.shuffle(others).slice(0, n - 1);
+    result.push(x);
+    return Karma.shuffle(result);
 }
