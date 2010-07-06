@@ -7,7 +7,6 @@ Grep for TBD in the code.
 * add more vocabulary lessons
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
-* scoreboard should be an option of footer (what-is-this.js, identification.js)
 * .wav files in current lessons -> convert to .ogg (maybe in generator?)
 
 Bugs in existing lessons:
