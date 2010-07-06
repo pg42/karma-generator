@@ -83,6 +83,7 @@ function startGame(karma) {
             .html(name)
             .click(function () {
                        ++try_count;
+                       clearTimeout(timer);
 		       if (name == current_thing) {
                            $('.optImg').unbind('click');
 		           $('#listenAgain').hide();
