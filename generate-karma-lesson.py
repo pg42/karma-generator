@@ -1,6 +1,7 @@
 #! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
+from html import HtmlDocument
 import codecs
 import os
 import shutil
@@ -8,9 +9,6 @@ import string
 import sys
 import time
 from optparse import OptionParser
-
-sys.path.append(sys.path[0] + '/markup-1.7')
-import markup
 
 
 argv0 = sys.argv[0]
@@ -154,51 +152,34 @@ karma_css_files = [
     KarmaFile('ui.scoreboard', 'css/ui.scoreboard.css')
     ]
 
-
-#TBD: get rid of markup library
-
-# Kludge: the script argument to markup.Page.init() should be a
-# dictionary, but we need to guarantee an order for the scripts.
-class Scripts(dict):
-    def __init__(self, items):
-        self.items = items
-
-    def iteritems(self):
-        return self.items
-
-def constantly(x):
-    while True:
-        yield x
+favicon = KarmaFile('favicon', 'assets/default/image/favicon.ico')
+title_block_lt = KarmaFile('title_block_lt', 'assets/image/title_block_lt.png')
+title_block_rt = KarmaFile('title_block_rt', 'assets/image/title_block_rt.png')
 
 
 #TBD: factor this out in a separate file, so it is easy to provide
 #     your own header/footer
 #TBD: make header/footer customizable
-def generate_header(dir, page, title):
-    page.div(id='header')
+def generate_header(dir, body, title):
+    header = body.div(id='header')
 
-    page.div(id='topbtn_left')
-    page.div('',id='linkBackLesson', title='Back', class_='linkBack')
-    page.div.close()
+    header.div(id='topbtn_left').div(id='linkBackLesson',
+                                     title='Back',
+                                     className='linkBack')
 
-    page.div(id='lesson_title')
-    page.img(src=KarmaFile('title_block_lt', 'assets/image/title_block_lt.png').relative_path(dir),
+    lesson_title = header.div(id='lesson_title')
+    lesson_title.img(src=title_block_lt.relative_path(dir),
+                     width=33, height=75, align='absmiddle')
+    lesson_title.text(title)
+    lesson_title.img(src=title_block_rt.relative_path(dir),
              width=33, height=75, align='absmiddle')
-    page.add(title)
-    page.img(src=KarmaFile('title_block_rt', 'assets/image/title_block_rt.png').relative_path(dir),
-             width=33, height=75, align='absmiddle')
-    page.div.close()
 
 
-    page.div(id='topbtn_right')
-    page.div('', title='Help', id='linkHelp')
-    page.div.close()
+    header.div(id='topbtn_right').div(title='Help', id='linkHelp')
 
-    page.div(id='topbtn_right')
-    page.div('', title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित', id='linkOle')
-    page.div.close()
-
-    page.div.close()
+    # TBD: twice the id topbtn_right?
+    header.div(id='topbtn_right').div(title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित',
+                                      id='linkOle')
 
 
 gFooterConfiguration = dict(link_previous=True,
@@ -206,33 +187,18 @@ gFooterConfiguration = dict(link_previous=True,
                             scoreboard=False)
 
 
-def generate_footer(page):
-    page.div(id='footer')
+def generate_footer(body):
+    footer = body.div(id='footer')
 
     if gFooterConfiguration['link_next']:
-        page.div('', title='Next', id='linkNextLesson', class_='linkNext')
+        footer.div(title='Next', id='linkNextLesson', className='linkNext')
     if gFooterConfiguration['link_previous']:
-        page.div('', title='Previous', id='linkPrevLesson', class_='linkBack')
+        footer.div(title='Previous', id='linkPrevLesson', className='linkBack')
     if gFooterConfiguration['scoreboard']:
-        page.div('', id='score_box', display='none')
+        footer.div(id='score_box', display='none')
 
-    page.div(id='botbtn_right')
-    page.div('',title='Play Again', id='linkPlayAgain')
-    page.div.close()
-
-    page.div(id='botbtn_right')
-    page.div('', title='Start', id='linkStart')
-    page.div.close()
-
-    page.div.close()
-
-
-def page_to_unicode(page):
-    if page._full and (page.mode == 'strict_html' or page.mode == 'loose_html'):
-        end = ['</body>', '</html>']
-    else:
-        end = []
-    return page.separator.join(page.header + page.content + page.footer + end)
+    footer.div(id='botbtn_right').div(title='Play Again', id='linkPlayAgain')
+    footer.div(id='botbtn_right').div(title='Start', id='linkStart')
 
 
 def destination_path(name):
@@ -330,24 +296,29 @@ class Lesson:
             f[1].make_available()
 
     def print_html_on(self, stream):
-        page = markup.page()
-        page.init(doctype='<!DOCTYPE html>',
-                  css=[f.relative_path(self.directory) for f in self.css_files],
-                  title=self.title,
-                  charset='utf-8',
-                  script=Scripts(zip([f.relative_path(self.directory) for f
-                                      in sort_java_script_files(self.java_script_files)],
-                                     constantly('javascript'))))
-        # TBD: ends up in body iso head
-        page.link(href=KarmaFile('favicon', 'assets/default/image/favicon.ico').relative_path(self.directory),
+        doc = HtmlDocument()
+        for line in warning_text_lines:
+            doc.comment(line)
+        html = doc.html()
+        head = html.head()
+        head.title().text(self.title)
+        head.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
+        for file in self.css_files:
+            head.link(type='text/css',
+                      rel='stylesheet',
+                      href=file.relative_path(self.directory))
+        head.link(type='image/ico',
                   rel='icon',
-                  type='image/ico')
-        [page.addheader('<!-- %s -->' % c) for c in warning_text_lines]
-        generate_header(self.directory, page, self.lesson_title)
+                  href=favicon.relative_path(self.directory))
+        for file in sort_java_script_files(self.java_script_files):
+            head.script(type='text/javascript',
+                        src=file.relative_path(self.directory))
+        body = html.body()
+        generate_header(self.directory, body, self.lesson_title)
         for div in self.divs:
-            page.div('', id=div['id'])
-        generate_footer(page)
-        print >>stream, page_to_unicode(page)
+            body.div(id=div['id'])
+        generate_footer(body)
+        doc.print_on(stream)
 
     def print_css_on(self, stream):
         print >>stream, '/*'
