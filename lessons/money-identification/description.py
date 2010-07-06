@@ -9,7 +9,7 @@ for f in ['ui.core', 'karma', '../../js/common.js']:
 
 for i in [1, 2, 5, 10, 20, 25, 50, 100, 500, 1000]:
     image('Rs%s.png' % i, i)
-    audio('Rs%s.wav' % i, i)
+    audio('Rs%s.ogg' % i, i)
 
 image('correct.png', 'correct')
 image('incorrect.png', 'incorrect')
@@ -20,7 +20,7 @@ image('listenAgain.png')
 
 audio('ne_correct.wav', 'correct')
 audio('ne_incorrect.wav', 'incorrect')
-audio('byebye.wav', 'byebye')
+audio('byebye.ogg', 'byebye')
 
 css('lesson.css')
 java_script('lesson.js')

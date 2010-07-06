@@ -38,7 +38,7 @@ objects = [
     'tree']
 
 for o in objects:
-    audio(o + '.wav', o)
+    audio(o + '.ogg', o)
     image(o + '.png', o)
 
 image('ladybird.png', 'ladybird')
