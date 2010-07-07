@@ -25,6 +25,7 @@
 
 #listenAgain {
     position: absolute;
+    display: none;
     left: 3em;
     top: 10em;
     width: 120px;

@@ -3,12 +3,12 @@ css('global')
 central_js_files = [
     'ui.core',
     'karma',
-    '../../js/common.js']
+    '../../js/common.js',
+    '../../js/multiple-choice.js']
 
 for f in central_js_files:
     java_script(f)
 
-java_script('identification.js')
 css('identification.css')
 
 div(id='content')
@@ -33,5 +33,7 @@ def register_things(things):
         image(thing + '.png', thing)
         audio(thing + '.ogg', thing)
     print >>lesson_js, 'var things = [' + ', '.join([quote(x) for x in things]) + '];'
+
+java_script('identification.js')
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)

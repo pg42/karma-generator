@@ -160,6 +160,9 @@ function range(lower, upper) {
 
 Karma.createImg = function (name, disable_dragging) {
     disable_dragging = typeof(disable_dragging) != 'undefined' ? disable_dragging : true;
+    if (!this.image[name]) {
+        alert('Missing image: ' + name);
+    }
     var result = $(document.createElement('img'))
         .attr('src', this.image[name].src);
     if (disable_dragging) {

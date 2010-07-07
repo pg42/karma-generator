@@ -1,11 +1,12 @@
-lesson(grade=2, subject='English', title='Deriction of Arrows', week=1)
+lesson(grade=2, subject='English', title='Direction of Arrows', week=1)
 
 css('global')
 css('lesson.css')
 
 for f in ['ui.core',
           'karma',
-          '../../js/common.js']:
+          '../../js/common.js',
+          '../../js/multiple-choice.js']:
     java_script(f)
 
 java_script('lesson.js')

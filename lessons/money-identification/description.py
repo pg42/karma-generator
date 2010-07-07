@@ -4,7 +4,10 @@ lesson(grade=2, subject='Maths', title='Money Identification', week=18,
 
 css('global')
 
-for f in ['ui.core', 'karma', '../../js/common.js']:
+for f in ['ui.core',
+          'karma',
+          '../../js/common.js',
+          '../../js/multiple-choice.js']:
     java_script(f)
 
 for i in [1, 2, 5, 10, 20, 25, 50, 100, 500, 1000]:
