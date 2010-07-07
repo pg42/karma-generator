@@ -32,3 +32,4 @@ Bugs in existing lessons:
 * 2_English_directionOfArrows_1_K: background of options has white pixels
 * 2_English_whatSomeoneIsDoing_15_K: "The cat is chasing the rat." It's a mouse.
 * 2_English_whatSomeoneIsDoing_15_K: Click "Play Again" to restart. The button label is in Nepali.
+* 6_English_multipleChoiceActionVerb_3_K: if you answer the last question, and immediately click the next button, you get the game over message twice.

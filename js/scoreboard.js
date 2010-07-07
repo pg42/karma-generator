@@ -30,3 +30,16 @@ function scoreboardScore() {
 function scoreboardTotal() {
     return scoreboard().scoreboard('getTotal');
 }
+
+function scoreboardAppendGameOverMessage(div) {
+    div
+        .append('You got  ')
+        .append($(document.createElement('span'))
+                .addClass('specialText')
+                .append(scoreboardScore()))
+        .append(' correct out of ')
+        .append($(document.createElement('span'))
+                .addClass('specialText')
+                .append(scoreboardTotal()))
+        .append('  questions .');
+}
