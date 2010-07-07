@@ -1,0 +1,98 @@
+The generate-karma-lesson.py script takes a description of a lesson
+and generates a lesson from that.
+
+A description is a python file which can use call the following
+functions to describe the lesson:
+
+* lesson(grade, subject, title, week, browser_title=None, nepalese_title=None)
+  The arguments are:
+  * grade: the grade. Used to determine the name of the directory of the generated
+    lesson.
+  * subject: 'English' or 'Maths'. Used to determine the name of the directory of the
+    generated lesson, and in the default browser window title.
+  * title: the title of the lesson. It is used in three places: to determine the name
+    of the directory of the generated lesson (this can be overridden on the command
+    line when calling generate-karma-lesson.py), in the title of the browser window
+    (overridden by browser_title when specified) and in the title of the lesson
+    displayed in the header (overridden by nepalese_title)
+  * week: the week in which this lesson should be given. Used in the name of the
+    directory of the generated lesson.
+  E.g.
+        lesson(grade=2, subject='English', title='Direction of Arrows', week=1)
+
+
+* java_script(name, **keywords)
+  Include a JavaScript file in the generated index.html (as a <script> element) and
+  make sure that the JavaScript file is accessible from the generated lesson.
+  The arguments are:
+  * name: the name of the JavaScript file. This can be one of the JavaScript files
+    provided by Karma: 'jquery', 'jquery-ui', 'ui.core', 'ui.draggable', 'ui.droppable',
+   'jquery.watermarkinput', 'ui.scoreboard', 'jquery.svg', 'karma', 'global'. Or it can
+   be the path (relative to the position of the description file) to a javascript file.
+  * keywords: the only supported keyword is currently 'generated', when the file
+   is generated and not present in the filesystem. The result of the call is a file
+   like object that you can write to in the description file.
+  E.g.
+        java_script('ui.droppable')
+        java_script('lesson.js')
+        f = java_script('objects.js')
+        print >>f, "var objects = ['x', 'y', 'z'];"
+
+* css(name)
+  Include a link to the specified CSS file in the generated index.html and make
+  sure that the CSS file is accessible from the generated lesson.
+  Arguments:
+  * name: the name of the CSS file. This can be one one of the CSS files provided
+    by Karma ('global' or 'ui.scoreboard') or the relative path to a css file.
+  E.g.
+        css('global')
+        css('lesson.css')
+
+* image(file, name=None)
+  Include an image file in the generated lesson.
+  Arguments:
+  * file: the relative path to an image file.
+  * name: optional name by which it can be accessed through the karma object. If
+    it is provided, karma will preload the the file.
+  E.g.
+        image('pic1.png')
+        image('pic2.png', my_pic)
+        // In JavaScript you can then call:
+        karma.createImg('my_pic');
+
+* audio(file, name)
+  Include an audio file in the generated lesson.
+  Arguments:
+  * file: the relative path to an image file.
+  * name: the name by which it can be accessed through the karma object. Audio
+    files are always preloaded.
+  E.g.
+        audio('correct.ogg', correct)
+        // In JavaScript:
+        karma.audio.correct.play();
+
+* div(**keywords)
+  Include a div element in the generated index.html.
+  Arguments:
+  * keywords: currently only the 'id' keyword is supported
+  E.g. div(id='content')
+
+* include(path)
+  Processes the description file pointed to by 'path'.
+  Arguments:
+  * path: path to another description file
+
+* footer_configuration(**kw)
+  Configure the footer of the lesson.
+  Possible keyword arguments:
+  * link_previous: if True, there will be a left arrow on the bottom of the page
+  * link_next: if True, there will be a right arrow on the bottom of the page
+  * scoreboard: if True, a scoreboard will be shown in the footer of the page. Have
+    a look at js/scoreboard.js for functions you can call from JavaScript.
+
+From the description generate-karma-lesson.py will create a directory containing
+an index.html file with references to all assets, CSS and JavaScript files. It will also
+copy the necessary files into that directory.
+
+Of course you can also use any Python construct in the description file: for-loops,
+functions, etc.

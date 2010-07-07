@@ -1,0 +1,19 @@
+Often we have a number of lessons that are very similar, e.g. we have a number
+of vocabulary lessons where the only difference is the pictures shown and the
+words.
+
+To avoid duplicating code we make a template and then a number of lessons,
+which include that template.
+
+As an example, you can have a look at template/vocabulary and
+lessons/vocabulary-food.
+
+The template directory contains CSS files, JavaScript files and assets
+that are common to all lessons that use that template. It also contains a
+description file for the generator.
+
+The lesson directory contains CSS files, JavaScript files and assets that are
+specific to one lesson. It contains a description file that includes the
+the description file for the generator (by calling the include() function). You
+generate the lesson by giving its description file as an argument to
+generate-karma-lesson.py.
