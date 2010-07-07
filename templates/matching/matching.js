@@ -63,7 +63,6 @@ Clock.prototype.reset = function () {
 var clock = null;
 
 function initialize() {
-    disableSelection($('body').get()[0]);
     clock = new Clock();
     // TBD: move this to common.js
     $('#footer')

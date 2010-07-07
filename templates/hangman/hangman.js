@@ -30,7 +30,6 @@ function createKeyboard(capitalize) {
 function initialize(karma) {
     scoreboardInitialize({layout: 'horizontal',
                           winningScore: 10});
-    disableSelection($('body').get()[0]);
 }
 
 function createAnswerBoxes(string, $answerSection) {

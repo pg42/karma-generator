@@ -75,8 +75,6 @@ function generateScreen1(karma, $container) {
         .appendTo($container);
     $(Karma.shuffle(images)).appendTo($ques_section);
 
-    disableSelection($ques_section.get()[0]);
-
     var $option_section = $(document.createElement('div'))
         .attr({id: 'optionSection'})
         .appendTo($container);

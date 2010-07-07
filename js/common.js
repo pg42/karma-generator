@@ -60,6 +60,7 @@ function setUpHelp() {
  */
 function setUpLesson(initialize, start_game) {
     $(function () {
+          disableSelection($('body').get()[0]);
           $('#linkPrevLesson').hide();
           $('#linkNextLesson').hide();
           var karma = lesson_karma();
@@ -74,6 +75,7 @@ function setUpLesson(initialize, start_game) {
 
 function setUpMultiScreenLesson(draw_screen_fns) {
     $(function () {
+          disableSelection($('body').get()[0]);
           $('#linkPrevLesson').hide();
           $('#linkNextLesson').hide();
 

@@ -145,7 +145,6 @@ function initialize(karma) {
     $content = $('#content')
         .append($imageBar)
         .append($(document.createElement('div')).attr({id: 'imgMain'}));
-    disableSelection($content.get()[0]);
     $(puzzles.map(function (puzzle) { return createThumbnail(karma, puzzle); }))
         .appendTo($imageBar);
 }
