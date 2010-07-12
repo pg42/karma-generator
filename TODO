@@ -15,7 +15,7 @@ Bugs in existing lessons:
 * images can be dragged in vocabulary lessons and what's this lessons
 * you can drag images on the left to the puzzle area in the puzzle game and things will go awry (try first swapping two pieces)
 * dragging the mouse in the second screen of the vocabulary games will select elements on the page
-* 6_Maths_quickAddition_1_K: timer overlaps with play button
+* 6_Maths_quickAddition_1_K: timer overlaps with play button, doesn't stop at end of lesson
 * 6_English_whatsThisWord_1_K: doesn't have a link to ole
 * 6_English_alphabeticalOrder_13_K: rhinosorous iso rhinoceros
 * 6_English_crossword_10_K: the layout is completely messed up
