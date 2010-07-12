@@ -3,7 +3,7 @@ $(document).ready(function(){
         .append(createDiv('section')
             .append(createDiv('left-side')
                 .append(createDiv('tv')
-                    .append(createDiv('tvLayer').addClass('tvOff'))
+                    .append(createDiv('tvLayer').addClass('tvOn'))
                 )
                 .append(createDiv('cupBoard'))
             )

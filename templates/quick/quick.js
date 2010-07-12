@@ -1,18 +1,34 @@
 var i,j;
 var totalCounter;
 var currentQuestion;
-var randPositions = [];
-var numFst;
-var num2nd;
-var s = 0;var t,quesTimer;
+var randPositions;
+var numFst, num2nd, answer;
+var s;
+var t,quesTimer;
 var flag_busy;
 
-var initializefunction = function() {
-	game_start();
+var initialize = function() {
 };
 
 start_game = function() {
-	game_start();
+	$('#tvLayer').html('');
+	$('#calcSection').html('');
+	$('#tvLayer').toggleClass('tvOff tvOn').html('');
+	
+	randPositions=[];
+	s=0;
+	totalCounter = 0;
+	correctCounter = 0;
+	stopTimer();
+	startTimer();  	
+	$('#imgDisplay').html('');
+	for(var i = 0; i< TOTAL_QUES; i++){
+		$('#imgDisplay').append('<div id="img'+i+'></div>');
+		$('#img'+i).addClass('default');
+	}			
+	$('#timerBar').show();
+	genRandPosition();
+	next_question();
 }
 	
 setUpLesson(initialize, start_game)
@@ -43,27 +59,34 @@ var increaseTime = function(){
 	quesTimer=setTimeout(function(){increaseTime();},1000);
 };
 
-var genRandPosition=function (){correctCounter = 0;
-	randPositions[0] = Karma.rand(0,TOTAL_QUES-1);
-	for(i=1; i<TOTAL_QUES; i++){
-		do{
-			flag = 0;
-			randPositions[i] = Karma.rand(0,TOTAL_QUES-1);
-			for(j=0; j<i; j++){
-				if(randPositions[i] === randPositions[j]){
-					flag++;
-				}
-			}
-		}while(flag != 0 );  //end of do while loop	
+var genRandPosition=function (){
+	correctCounter = 0;
+	for(i=0; i<TOTAL_QUES; i++){
+		randPositions[i] = i;
 	}
+	randPositions=Karma.shuffle(randPositions);
 };
 	
-var next_question = function (){	
+var next_question = function (){
 	flag_busy = 0;
-	numFst = Karma.rand(10,99);
-	num2nd = Karma.rand(10,99);
 
-	$('#calcSection').html('').append(numFst +' + '+num2nd+' = ');
+	if(LESSON_TYPE=="div") {
+		numFst = Karma.rand(12,99);
+		num2nd = Karma.rand(2,12);	
+		do{
+			numFst = Karma.rand(20,99);
+			answer=numFst/num2nd;
+			if(isInteger(answer)){
+				break;
+			}
+		}while(true);
+	} else {
+		numFst = Karma.rand(10,99);
+		num2nd = Karma.rand(10,99);
+		answer = numFst+num2nd;	
+	}
+	
+	$('#calcSection').html('').append(numFst +SIGN+num2nd+' = ');
 	$('#calcSection').append('<input type="text" class="textBox" maxlength="3" />');
 	foucs_blur();				
 	$('.textBox').focus();
@@ -80,12 +103,12 @@ var delay_gameOver = function(){
 		$('#imgDisplay').append('<div id="img'+i+'></div>');
 		$('#img'+i).removeClass('correct').addClass('default');				
 	}
-	$('#tvLayer').addClass('tvOn').html('खेल खत्तम।');
+	$('#tvLayer').toggleClass('tvOff tvOn').html('खेल खत्तम।');
 };
 
 var check_answer = function(){	
 	textVal = $('.textBox').val();
-	if((numFst+num2nd) == textVal){
+	if(textVal==answer){
 		totalCounter++;
 		flag_busy = 1;
 		Karma.audio.correct.play();
@@ -98,7 +121,7 @@ var check_answer = function(){
 		}
 	}
 	else{
-		k.audio.incorrect.play();
+		Karma.audio.incorrect.play();
 	}
 };
 		
@@ -116,23 +139,17 @@ function foucs_blur(){
 				check_answer();
 			}
 		}
-		
 	});
 }
 
-function game_start(){
-	$('#tvLayer').html('');
-	$('#calcSection').html('');
-	totalCounter = 0;
-	correctCounter = 0;
-	stopTimer();
-	startTimer();  	
-	$('#imgDisplay').html('');
-	for(var i = 0; i< TOTAL_QUES; i++){
-		$('#imgDisplay').append('<div id="img'+i+'></div>');
-		$('#img'+i).addClass('default');
-	}			
-	$('#timerBar').show();
-	genRandPosition();
-	next_question();
-}
+var isInteger = function(s){
+    var i;
+    s = s.toString();
+    for (i = 0; i < s.length; i++){
+        var c = s.charAt(i);
+        if (isNaN(c)) {
+            return false;
+        }
+    }
+    return true;
+};
