@@ -180,16 +180,15 @@ function startLesson(karma) {
             $('#answer').empty();
             $('#optionSection')
                 .empty()
-                .append(createDiv('gameOver')
-                        .append(createDiv('gameOver').html('Game Over !!!'))
-                        .append(createDiv('gameOverInfo'))
-                        .show());
+                .append(createDiv('gameOver').html('Game Over !!!'))
+                .append(createDiv('gameOverInfo'))
+                .show();
             scoreboardAppendGameOverMessage($('#gameOverInfo'));
         }
     };
     var q = Object
         .create(OneShotMCQuiz, extensions)
-        .initialize(karma, tasks);
+        .initialize(karma, {}, tasks);
     q.start();
 }
 

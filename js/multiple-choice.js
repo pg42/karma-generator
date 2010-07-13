@@ -1,16 +1,19 @@
 var MCQuiz = Object.create(
     {},
     {
-        initialize: function (karma, tasks) {
+        initialize: function (karma, configuration, tasks) {
             this.karma = karma;
             this.tasks = tasks;
+            this.configuration = configuration;
             return this;
         },
         start: function () {
             scoreboardInitialize({winningScore: this.tasks.length});
             scoreboardReset();
             this.i = 0;
-            this.tasks = Karma.shuffle(this.tasks);
+            if (!this.configuration.tasks_in_order) {
+                this.tasks = Karma.shuffle(this.tasks);
+            }
             this.presentTask();
         },
         currentTask: function () {
@@ -80,7 +83,7 @@ var SimpleMCQuiz = Object.create(
             // - title: string
             // - has_audio: boolean
             // - question: string
-            MCQuiz.initialize.apply(this, [karma, tasks]);
+            MCQuiz.initialize.apply(this, [karma, configuration, tasks]);
             this.configuration = configuration || {};
             return this;
         },
@@ -188,8 +191,8 @@ function setUpSimpleMCQuiz(configuration, extensions, objects) {
 var OneShotMCQuiz = Object.create(
     MCQuiz,
     {
-        initialize: function (karma, tasks) {
-            MCQuiz.initialize.apply(this, [karma, tasks]);
+        initialize: function (karma, configuration, tasks) {
+            MCQuiz.initialize.apply(this, [karma, configuration, tasks]);
             return this;
         },
         start: function () {
