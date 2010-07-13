@@ -3,9 +3,12 @@ lesson(grade=6, subject='English', title='Multiple Choice Action Verb', week=3)
 css('global')
 css('lesson.css')
 
+objects_js = java_script('objects.js', generated=True)
+
 for f in ['ui.core',
           'karma',
-          '../../js/common.js']:
+          '../../js/common.js',
+          '../../js/multiple-choice.js']:
     java_script(f)
 
 java_script('lesson.js')
@@ -27,8 +30,7 @@ objects = ['boy',
 def quote(x):
     return "'" + x + "'"
 
-f = java_script('objects.js', generated=True)
-print >>f, 'var objects = [%s];' % (', '.join(map(quote, objects)))
+print >>objects_js, 'var objects = [%s];' % (', '.join(map(quote, objects)))
 
 for o, i in zip(objects, range(0, len(objects))):
     image(str(i) + '.png', o)

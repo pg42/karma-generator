@@ -85,7 +85,7 @@ var SimpleMCQuiz = Object.create(
             return this;
         },
         start: function () {
-                var that = this;
+            var that = this;
             $('#content')
                 .empty()
                 .removeClass('backOpaque');
@@ -111,7 +111,7 @@ var SimpleMCQuiz = Object.create(
             MCQuiz.start.apply(this, []);
         },
         sayCurrent: function () {
-             this.playAudio(this.currentTask().question);
+            this.playAudio(this.currentTask().question);
         },
         presentQuestion: function (what) {
             $('#imageBox')
@@ -188,14 +188,28 @@ function setUpSimpleMCQuiz(configuration, extensions, objects) {
 var OneShotMCQuiz = Object.create(
     MCQuiz,
     {
-        initialize: function (karma) {
-            MCQuiz.initialize.apply(this, [karma]);
+        initialize: function (karma, tasks) {
+            MCQuiz.initialize.apply(this, [karma, tasks]);
             return this;
+        },
+        start: function () {
+            var that = this;
+            $('#content')
+                .empty()
+                .removeClass('backOpaque');
+            $('#content')
+                .append(createDiv('topText'))
+                .append(createDiv('question'))
+                .append(createDiv('optionSection'))
+                .append(createDiv('answer'))
+                .append(createDiv('imgStory'));
+            MCQuiz.start.apply(this, []);
         },
         presentQuestion: function (what) {
             $('#question')
                 .empty()
-                .append('3. What is the ' + what + ' doing ?');
+                .append((scoreboardScore() + 1) + '. ' +
+                        'What is the ' + what + ' doing ?');
             $('#imgStory')
                 .empty()
                 .append(this.createImg(what));
@@ -203,15 +217,17 @@ var OneShotMCQuiz = Object.create(
                 .empty();
             $('#check')
                 .empty();
+            $('#linkNextLesson').hide();
         },
         presentOption: function (x, i, result) {
+            var that = this;
             var parent = $('#optionSection');
             var check = createDiv()
                 .addClass('check')
                 .appendTo(parent);
             var icon = createDiv()
                 .addClass('options')
-                .click(function () { check.append(this.createImg(result)); })
+                .click(function () { check.append(that.createImg(result)); })
                 .append(this.createImg('abcd'[i]))
                 .appendTo(parent);
             createDiv()
@@ -223,9 +239,9 @@ var OneShotMCQuiz = Object.create(
         clicked: function (result) {
             $('.options').unbind('click');
             if (result == 'correct') {
-                this.scoreboardHit();
+                scoreboardHit();
             } else {
-                this.scoreboardMiss();
+                scoreboardMiss();
             }
             this.displayMessage();
             this.progress();
