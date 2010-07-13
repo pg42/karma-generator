@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Money Identification', week=18,
-       nepalese_title=u'रुपियाँको चिनारी')
+       lesson_title=u'रुपियाँको चिनारी')
 
 css('global')
 

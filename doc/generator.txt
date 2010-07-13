@@ -4,7 +4,7 @@ and generates a lesson from that.
 A description is a python file which can use call the following
 functions to describe the lesson:
 
-* lesson(grade, subject, title, week, browser_title=None, nepalese_title=None)
+* lesson(grade, subject, title, week, browser_title=None, lesson_title=None)
   The arguments are:
   * grade: the grade. Used to determine the name of the directory of the generated
     lesson.
@@ -14,7 +14,7 @@ functions to describe the lesson:
     of the directory of the generated lesson (this can be overridden on the command
     line when calling generate-karma-lesson.py), in the title of the browser window
     (overridden by browser_title when specified) and in the title of the lesson
-    displayed in the header (overridden by nepalese_title)
+    displayed in the header (overridden by lesson_title)
   * week: the week in which this lesson should be given. Used in the name of the
     directory of the generated lesson.
   E.g.

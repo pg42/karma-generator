@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Numeric Puzzle',
-       nepalese_title = u'सङ्ख्याको क्रम', week=1)
+       lesson_title = u'सङ्ख्याको क्रम', week=1)
 
 include('../../templates/puzzle/description.py')
 

@@ -363,18 +363,14 @@ class Lesson:
                            indentation)]) + '});'
         print >>stream, '}'
 
-# TBD: replace nepalese_title by lesson_title
-def lesson(grade, subject, title, week, browser_title=None, nepalese_title=None):
-    def camelcase(title):
-        words = title.replace("'", '').split()
+def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
+    def camelcase(str):
+        words = str.replace("'", '').split()
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
 
     directory('%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week))
-    theLesson.lesson_title = nepalese_title if nepalese_title else title
-    if browser_title:
-        theLesson.title = browser_title
-    else:
-        theLesson.title = 'Class %s %s %s' % (grade, subject, title)
+    theLesson.lesson_title = lesson_title or title
+    theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
 
 
 def resolve_karma_file(name, karma_files, **kw):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Matching Angles and Shapes', week=5,
-       nepalese_title=u'ज्यामितीय आकारका नामहरू')
+       lesson_title=u'ज्यामितीय आकारका नामहरू')
 
 include('../../templates/matching/description.py')
 
