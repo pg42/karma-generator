@@ -35,7 +35,7 @@ print >>objects_js, 'var objects = [%s];' % (', '.join(map(quote, objects)))
 for o, i in zip(objects, range(0, len(objects))):
     image(str(i) + '.png', o)
 
-for x in ['a', 'b', 'c', 'd']:
+for x in 'abcd':
     image(x + '.png', x)
 
 image('correct.png', 'correct')

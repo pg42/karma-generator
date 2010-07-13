@@ -193,7 +193,6 @@ var OneShotMCQuiz = Object.create(
             return this;
         },
         start: function () {
-            var that = this;
             $('#content')
                 .empty()
                 .removeClass('backOpaque');
@@ -267,6 +266,7 @@ var OneShotMCQuiz = Object.create(
         },
         displayMessage: function () {
             $('#answer')
+                .empty()
                 .append(this.currentMessage());
         },
         gameOver: function () {

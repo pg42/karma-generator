@@ -35,4 +35,5 @@ Bugs in existing lessons:
 * 6_English_multipleChoiceActionVerb_3_K: if you answer the last question, and immediately click the next button, you get the game over message twice.
 * 2_English_colourIdentification_8_K: the say again button is not completely sensitive because it is partly behind the title.
 * 2_English_directionOfArrows_1_K: background image too small? (big black box at bottom)
+* 6_English_prepositions_11_K: 'infront' should be 'in front of', the options for tree are a bit weird (It's in of the house.)
 
