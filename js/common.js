@@ -190,3 +190,29 @@ function randomElementsIncluding(all, x, n) {
     result.push(x);
     return Karma.shuffle(result);
 }
+
+function extend(object, properties) {
+    for (prop in properties) {
+        if (properties.hasOwnProperty(prop)) {
+            object[prop] = properties[prop];
+        }
+    }
+}
+
+function toBeOverridden(method) {
+    return function () {
+        alert('Override ' + method);
+    };
+}
+
+if (typeof Object.create !== 'function') {
+    Object.create = function (o, extensions) {
+        function F() {}
+        F.prototype = o;
+        var result = new F();
+        if (extensions) {
+            extend(result, extensions);
+        }
+        return result;
+    };
+}
