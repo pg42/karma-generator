@@ -1,7 +1,9 @@
 css('global')
 css('matching.css')
 
-for f in ['karma', '../../js/common.js']:
+for f in ['karma',
+          '../../js/common.js',
+          '../../js/clock.js']:
     java_script(f)
 
 java_script('matching.js')

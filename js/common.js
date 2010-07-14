@@ -1,5 +1,14 @@
 // This file can replace global.js in karma.
 
+function padLeft(str, pad_character, length) {
+    str = str.toString();
+    pad_character = pad_character.toString();
+    while (str.length < length) {
+        str = pad_character + str;
+    }
+    return str;
+}
+
 function controlButtonClickCallback($button, callback) {
     $button.click(function () {
                       if (!$button.data('disabled')) {
