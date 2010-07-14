@@ -174,7 +174,7 @@ function startLesson(karma) {
             var task = this.currentTask();
             return task.answer_template.replace('_', task.correct_option);
         },
-        gameOver: function () {
+        displayGameOverMessage: function () {
             $('#linkNextLesson').hide();
             $('#question').empty();
             $('#answer').empty();

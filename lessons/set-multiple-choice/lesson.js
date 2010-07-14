@@ -94,7 +94,7 @@ function startLesson(karma) {
             var task = this.currentTask();
             return karma.createImg(task.answer);
         },
-        gameOver: function () {
+        displayGameOverMessage: function () {
             $('#linkNextLesson').hide();
             $('#question').hide();
             $('#topText').hide();

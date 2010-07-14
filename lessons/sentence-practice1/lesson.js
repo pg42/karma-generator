@@ -76,7 +76,7 @@ function startLesson(karma) {
                 .empty()
                 .append(task.question.replace('_', task.correct_option));
         },
-        gameOver: function () {
+        displayGameOverMessage: function () {
             $('#linkNextLesson').hide();
             $('#question').hide();
             $('#topText').hide();

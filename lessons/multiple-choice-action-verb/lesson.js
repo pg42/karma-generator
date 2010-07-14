@@ -16,7 +16,7 @@ var answers = {
 
 function startLesson (karma) {
     var extensions = {
-        gameOver: function () {
+        displayGameOverMessage: function () {
             $('#linkNextLesson').hide();
             $('#content')
                 .empty()
