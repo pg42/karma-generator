@@ -41,5 +41,5 @@ function scoreboardAppendGameOverMessage(div) {
         .append($(document.createElement('span'))
                 .addClass('specialText')
                 .append(scoreboardTotal()))
-        .append('  questions .');
+        .append(' questions.');
 }

@@ -210,7 +210,7 @@ var OneShotMCQuiz = Object.create(
         presentQuestion: function (what) {
             $('#question')
                 .empty()
-                .append((scoreboardScore() + 1) + '. ' +
+                .append((scoreboardTotal() + 1) + '. ' +
                         'What is the ' + what + ' doing ?');
             $('#imgStory')
                 .empty()
@@ -270,6 +270,7 @@ var OneShotMCQuiz = Object.create(
         displayMessage: function () {
             $('#answer')
                 .empty()
+                .show()
                 .append(this.currentMessage());
         },
         gameOver: function () {
