@@ -141,8 +141,8 @@ function createThumbnail(karma, puzzle) {
 }
 
 function initialize(karma) {
-    $imageBar = $(document.createElement('div')).attr({id: 'imageBar'});
-    $content = $('#content')
+    var $imageBar = $(document.createElement('div')).attr({id: 'imageBar'});
+    var $content = $('#content')
         .append($imageBar)
         .append($(document.createElement('div')).attr({id: 'imgMain'}));
     $(puzzles.map(function (puzzle) { return createThumbnail(karma, puzzle); }))
