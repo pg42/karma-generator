@@ -1,8 +1,8 @@
-lesson(grade=6, subject='Maths', title='QuickAddition', week=1)
+lesson(grade=6, subject='Maths', title='Quick Addition', week=1)
 
-#java_script('../../templates/quick/division.js')
-java_script('../../templates/quick/addition.js')
-include('../../templates/quick/quick.py')
+#java_script('../../templates/quick-arithmetic/division.js')
+java_script('../../templates/quick-arithmetic/addition.js')
+include('../../templates/quick-arithmetic/quick.py')
 
 #total number of question. Max and default is 16
 totalQues(16);
