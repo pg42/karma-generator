@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+#content {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 75px;
+    width: 1198px;
+    height: 750px;
+    overflow-y: hidden;
+    background: url(../assets/image/background.jpg) no-repeat center;
+    text-align: center;
+}
+
+#questArea {
+    position: absolute;
+    top: 2em;
+    left: 8em;
+    width: 200px;
+    height: 80px;
+    font: 50px/70px Arial Black,Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: gold;
+}
+
+#optionArea {
+    position: absolute;
+    right: 0em;
+    bottom: 0em;
+    width: 15em;
+    height: 6em;
+    font: 50px/120px Arial Black,Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.optionBox {
+    position: absolute;
+    cursor: pointer;
+    text-align: center;
+    color: green;
+}
+
+.optionBox:hover {
+    color:  red;
+}
+
+#help {
+    display: none;
+    position: absolute;
+    right: 60px;
+    top: 75px;;
+    width: 297px;
+    height: 697px;
+    background: url(../assets/image/help.png);
+    z-index: 40;
+}
+
+#gameOver {
+    opacity: 1;
+    position: absolute;
+    top: 2em;
+    left: 8em;
+    color: blue;
+    text-align: center;
+    font : bold 45px/65px Arial Black, Times New Roman;
+}
