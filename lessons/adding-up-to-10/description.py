@@ -18,7 +18,6 @@ audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')
 audio('trigger.ogg', 'trigger')
 
-image('yellowBox.png', 'yellowBox')
 image('plussign.png', 'plussign')
 image('scorebox.png', 'scorebox')
 

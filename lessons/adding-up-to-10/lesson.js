@@ -70,7 +70,7 @@ function startLesson(karma) {
                          $('#bottomRightBox')];
     var score = 0;
 
-    var scoreAnswer = function (is_correct) {
+    var processAnswer = function (is_correct) {
         $('.bottomCard').unbind('click');
         if (is_correct) {
             score++;
@@ -168,7 +168,9 @@ function startLesson(karma) {
                      12000 - level * 1000,
                     function () {
                         karma.audio.trigger.play();
-                        scoreAnswer(false);
+                        // Timeout is needed because otherwise it doesn't
+                        // start counting down again after time runs out.
+                        setTimeout(function () { processAnswer(false); }, 0);
                     });
     };
 
@@ -246,7 +248,7 @@ function startLesson(karma) {
                                 var correct = choice == total;
                                 karma.audio[correct ? 'correct' : 'incorrect']
                                     .play();
-                                scoreAnswer(correct);
+                                processAnswer(correct);
                             });
             }
         );
