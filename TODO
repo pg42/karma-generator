@@ -40,3 +40,9 @@ Bugs in existing lessons:
 * 6_Maths_SetMultipleChoice_7_K: you don't get the time to read the answer to the last question
 * 2_English_whatSomeoneIsDoing_15_K: 'What Someone is Doing ?', better 'What is Someone Doing?'
 * 2_English_whatSomeoneIsDoing_15_K: confusing interface. There are two next buttons on the page, the one at the bottom takes you to an exercise, the one at the top to the next screen. If you go to the exercise and then back, you start again at the first screen.
+* 2_Maths_addingUpto10FunGame_3_K: image of ball is cut off at the bottom
+* 2_Maths_addingUpto10FunGame_3_K: images can fall partly outside of their container
+* 2_Maths_addingUpto10FunGame_3_K: it is possible (but not very likely) that an image is obscured by a number of other images (since the minimum distance between their midpoints is only 12 px). E.g. a ball (37 px across) can be obscured if you put balls 12px east, west, north and south of it.
+* 2_Maths_addingUpto10FunGame_3_K: rounded corners are fuzzy
+* 2_Maths_addingUpto10FunGame_3_K: if you play the game twice, the second time, the big gorilla doesn't disappear when you click it.
+* 2_Maths_addingUpto10FunGame_3_K: when restarting, the speed doesn't reset
