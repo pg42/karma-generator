@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+
+#content {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 74px;
+    width: 1198px;
+    height: 750px;
+    background: url(../assets/image/background.jpg) no-repeat center;
+}
+
+#help {
+    display: none;
+    position: absolute;
+    right: 60px;
+    top: 75px;;
+    width: 297px;
+    height: 697px;
+    background: url(../assets/image/help.png);
+    z-index: 410;
+}
+
+.panel {
+    background: #efebba;
+    border: 2px solid #efeb3e;
+    padding: 5px 15px 10px;
+}
+
+.titles {
+    text-align: center;
+}
+
+.titles h1 {
+    font-size: 3em;
+}
+
+.titles h2 {
+    font-size: 2em;
+}
+
+#gameArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1198px;
+    height: 750px;
+    overflow: hidden;
+}
+
+#dropTarget {
+    position: absolute;
+    width: 650px;
+    height: 430px;
+    left: 430px;
+    top: 400px;
+}
+
+.ui-draggable-dragging {
+    background: url(../assets/image/shadow.png) no-repeat;
+}
+
+#discardTarget {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+}
+
+.sheep {
+    position: absolute;
+}
+
+#sheep1 {
+    left: 38px;
+    bottom: 20px;
+}
+
+#sheep2 {
+    left: 15px;
+    bottom: 125px;
+}
+
+#sheep3 {
+    left: 178px;
+    bottom: 20px;
+}
+
+#information {
+    position: absolute;
+    top: 4em;
+    left: 0.1em;
+    width: 18em;
+    height: 5em;
+    color: red;
+    font: 25px "MS Sans Serif", Geneva, sans-serif;
+    font-weight: bold;
+}

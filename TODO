@@ -10,6 +10,7 @@ Grep for TBD in the code.
 * files ne_correct.wav and ne_incorrect.wav: get ogg files for these
 * topbtn_right, botbtn_right: ids used multiple times (maybe use class?)
 * check that timer is always cleared, even when restarting a lesson.
+* use Karma.convertNumToLocale iso array of digits
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
@@ -46,3 +47,4 @@ Bugs in existing lessons:
 * 2_Maths_addingUpto10FunGame_3_K: rounded corners are fuzzy
 * 2_Maths_addingUpto10FunGame_3_K: if you play the game twice, the second time, the big gorilla doesn't disappear when you click it.
 * 2_Maths_addingUpto10FunGame_3_K: when restarting, the speed doesn't reset
+* 2_Maths_countingSheep_2_K: title needs to be translated to nepali
