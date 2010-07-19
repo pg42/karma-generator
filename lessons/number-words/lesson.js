@@ -104,10 +104,6 @@ var alphabet = range(0, 26).map(
     }
 );
 
-function capitalize(str) {
-    return str[0].toUpperCase() + str.slice(1);
-}
-
 function startLesson(karma) {
     $('#content')
         .empty()

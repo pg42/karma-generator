@@ -114,13 +114,17 @@ function setUpMultiScreenLesson(draw_screen_fns) {
 
           $('#linkNextLesson')
               .click(function () {
-                         karma.audio.trigger.play();
+                         if (karma.audio.trigger) {
+                             karma.audio.trigger.play();
+                         }
                          ++current_screen;
                          updateScreen();
                      });
           $('#linkPrevLesson')
               .click(function () {
-                         karma.audio.trigger.play();
+                         if (karma.audio.trigger) {
+                             karma.audio.trigger.play();
+                         }
                          --current_screen;
                          updateScreen();
                      });
@@ -224,4 +228,8 @@ if (typeof Object.create !== 'function') {
         }
         return result;
     };
+}
+
+function capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1);
 }
