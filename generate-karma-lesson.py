@@ -24,7 +24,7 @@ theLesson = None
 
 # TBD: provide a debug and optimized (minimized) version of the framework files.
 
-karma_root = os.path.abspath(os.path.expanduser('~/projects/karma/karma'))
+karma_root = os.path.abspath(os.path.dirname(argv0))
 
 
 class KarmaFile():
@@ -134,8 +134,8 @@ class AudioFile(AssetFile):
 
 
 karma_java_script_files = [
-    KarmaFile('jquery', 'js/jquery-1.4.js'),
-    KarmaFile('jquery-ui', 'js/ui.core-draggable-resizable-dialog.js'),
+    KarmaFile('jquery', 'js/jquery-1.4.2.js'),
+    KarmaFile('jquery-ui', 'js/jquery-ui-1.8.2.js'),
     KarmaFile('ui.core', 'js/ui.core.js'),
     KarmaFile('ui.draggable', 'js/ui.draggable.js'),
     KarmaFile('ui.droppable', 'js/ui.droppable.js'),
@@ -152,9 +152,9 @@ karma_css_files = [
     KarmaFile('ui.scoreboard', 'css/ui.scoreboard.css')
     ]
 
-favicon = KarmaFile('favicon', 'assets/default/image/favicon.ico')
-title_block_lt = KarmaFile('title_block_lt', 'assets/image/title_block_lt.png')
-title_block_rt = KarmaFile('title_block_rt', 'assets/image/title_block_rt.png')
+favicon = KarmaFile('favicon', 'image/favicon.ico')
+title_block_lt = KarmaFile('title_block_lt', 'image/title_block_lt.png')
+title_block_rt = KarmaFile('title_block_rt', 'image/title_block_rt.png')
 
 
 #TBD: factor this out in a separate file, so it is easy to provide
@@ -168,10 +168,10 @@ def generate_header(dir, body, title):
                                      className='linkBack')
 
     lesson_title = header.div(id='lesson_title')
-    lesson_title.img(src=title_block_lt.relative_path(dir),
+    lesson_title.img(src=string.replace(title_block_lt.relative_path(dir), '\\', '/'),
                      width=33, height=75, align='absmiddle')
     lesson_title.text(title)
-    lesson_title.img(src=title_block_rt.relative_path(dir),
+    lesson_title.img(src=string.replace(title_block_rt.relative_path(dir), '\\', '/'),
              width=33, height=75, align='absmiddle')
 
 
@@ -197,8 +197,8 @@ def generate_footer(body):
     if gFooterConfiguration['scoreboard']:
         footer.div(id='score_box', display='none')
 
-    footer.div(id='botbtn_right').div(title='Play Again', id='linkPlayAgain')
-    footer.div(id='botbtn_right').div(title='Start', id='linkStart')
+    footer.div(className='botbtn_right').div(title='Play Again', id='linkPlayAgain')
+    footer.div(className='botbtn_right').div(title='Start', id='linkStart')
 
 
 def destination_path(name):
@@ -278,6 +278,7 @@ def sort_java_script_files(files):
 
 class Lesson:
     def __init__(self):
+        self.parent_directory = None
         self.directory = None
         self.title = ''
         self.lesson_title = ''
@@ -290,11 +291,21 @@ class Lesson:
         self.java_script_files.append(GeneratedFile(self, 'lesson-karma.js'))
 
     def copy_files(self):
+        def create_dir(d):
+            if not os.path.exists(d):
+                os.makedirs(d)
+        create_dir(self.directory)
+        os.chdir(self.directory)
+        map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
+        
         for f in self.java_script_files + self.css_files:
             f.make_available()
         for f in self.image_files + self.audio_files:
             f[1].make_available()
 
+    def set_directory(self, dir):
+        self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
+            
     def print_html_on(self, stream):
         doc = HtmlDocument()
         for line in warning_text_lines:
@@ -306,13 +317,13 @@ class Lesson:
         for file in self.css_files:
             head.link(type='text/css',
                       rel='stylesheet',
-                      href=file.relative_path(self.directory))
+                      href=string.replace(file.relative_path(self.directory), '\\', '/'))
         head.link(type='image/ico',
                   rel='icon',
-                  href=favicon.relative_path(self.directory))
+                  href=string.replace(favicon.relative_path(self.directory), '\\', '/'))
         for file in sort_java_script_files(self.java_script_files):
             head.script(type='text/javascript',
-                        src=file.relative_path(self.directory))
+                        src=string.replace(file.relative_path(self.directory), '\\', '/'))
         body = html.body()
         generate_header(self.directory, body, self.lesson_title)
         for div in self.divs:
@@ -368,7 +379,8 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
         words = str.replace("'", '').split()
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
 
-    directory('%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week))
+    dirname = '%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week);
+    theLesson.set_directory( dirname )
     theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
 
@@ -445,22 +457,6 @@ def include(path):
     include_stack.pop()
 
 
-def directory(dir):
-    if not theLesson.directory:
-        theLesson.directory = os.path.abspath(dir)
-        create_directories(dir)
-        java_script('jquery')
-
-
-def create_directories(destination_dir):
-    def create_dir(d):
-        if not os.path.exists(d):
-            os.makedirs(d)
-    create_dir(destination_dir)
-    os.chdir(destination_dir)
-    map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
-
-
 def add_help():
     help_path = os.path.join(os.path.dirname(include_stack[-1]),
                              'help.png')
@@ -475,7 +471,7 @@ def check_file_exists(path):
     if not os.path.isfile(path):
         print 'Error: the file ' + path + ' doesn\'t exist.'
         sys.exit(1)
-
+    
 
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
@@ -484,7 +480,7 @@ if __name__ == '__main__':
     parser.add_option('-o', '--output', dest='output',
                       help='use output as a destination directory')
     parser.add_option('-k', '--karma', dest='karma',
-                      help='path to the karma directory')
+                      help='DEPRECATED - path to the karma directory')
     (options, args) = parser.parse_args()
     debug = options.debug
     if not args:
@@ -492,17 +488,16 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(1)
 
+    if options.karma:
+        print "WARNING: 'karma' option (-k, --karma) is deprecated and no longer needed"
+
     description = os.path.abspath(args[0])
 
     theLesson = Lesson()
     if options.output:
-        theLesson.directory = os.path.abspath(options.output)
-        create_directories(options.output)
-        java_script('jquery')
+        theLesson.parent_directory = os.path.abspath(options.output)
 
-    if options.karma:
-        karma_root = options.karma
-
+	java_script('jquery')
     include_stack.append(description)
     add_help()
     check_file_exists(description)

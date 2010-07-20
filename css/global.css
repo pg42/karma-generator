@@ -10,7 +10,7 @@ body {
 	background-color: #FFFFCC;
 }
 #header {
-	background-image: url(../assets/image/bg_header.png);
+	background-image: url(../image/bg_header.png);
 	background-repeat: repeat-x;
 	height: 75px;
 	width: 100%;
@@ -31,10 +31,10 @@ body {
 	.linkBack{
 			cursor:pointer;
 			width: 60px;		height: 59px;
-			background:url(../assets/image/btn_back.png);
+			background:url(../image/btn_back.png);
 		}
 	.linkBack:hover{
-			background:url(../assets/image/btn_back_hover.png);
+			background:url(../image/btn_back_hover.png);
 		}
 	
 #lesson_title {
@@ -44,7 +44,7 @@ body {
 	font-weight: bold;
 	color: #FFFFFF;
 	margin-left: 10px;
-	background-image: url(../assets/image/bg_title_block.png);
+	background-image: url(../image/bg_title_block.png);
 }
 #topbtn_right {
 	float: right;
@@ -55,31 +55,31 @@ body {
 }
 		#linkHelp{
 			width: 60px;		height: 60px;
-			background:url(../assets/image/btn_help.png);
+			background:url(../image/btn_help.png);
 			cursor:pointer;
 		}
 		#linkHelp:hover{
-			background:url(../assets/image/btn_help_hover.png);
+			background:url(../image/btn_help_hover.png);
 		}
 		#linkOle{
 			cursor:pointer;
 			width: 60px;		height: 60px;
-			background:url(../assets/image/btn_ole.png);
+			background:url(../image/btn_ole.png);
 		}
 		#linkOle:hover{
-			background:url(../assets/image/btn_ole_hover.png);
+			background:url(../image/btn_ole_hover.png);
 		}
 		.linkNext{
 			cursor:pointer;
 			width: 60px;		height: 60px;
-			background:url(../assets/image/btn_next.png);
+			background:url(../image/btn_next.png);
 		}
 		.linkNext:hover{
-			background:url(../assets/image/btn_next_hover.png);
+			background:url(../image/btn_next_hover.png);
 		}
 #footer {
 	position:relative;
-	background-image: url(../assets/image/bg_footer.png);
+	background-image: url(../image/bg_footer.png);
 	background-repeat: repeat-x;
 	height: 75px;
 	width: 100%;
@@ -95,7 +95,7 @@ body {
 	font-size: 16pt;
 	font-weight: bold;
 }
-#botbtn_right {
+.botbtn_right {
 	float: right;
 	height: 55px;
 	padding-right: 5px;
@@ -104,30 +104,30 @@ body {
 	#linkCheck{
 			margin: 1em 3em 0 0;
 			width: 101px;			height: 30px;
-			background-image: url(../assets/image/check.png);
+			background-image: url(../image/check.png);
 		}
 		
 	#linkStart{
 			cursor:pointer;
 			width: 251px;		height: 55px;
-			background:url(../assets/image/btn_start.png);
+			background:url(../image/btn_start.png);
 		}
 		#linkStart:hover{
-			background:url(../assets/image/btn_start_hover.png);
+			background:url(../image/btn_start_hover.png);
 		}
 		#linkStart:active{
-			background:url(../assets/image/btn_start_mouse_down.png);
+			background:url(../image/btn_start_mouse_down.png);
 		}
 		#linkPlayAgain{
 			cursor:pointer;
 			width: 251px;		height: 55px;
-			background:url(../assets/image/btn_play_again.png);
+			background:url(../image/btn_play_again.png);
 		}
 		#linkPlayAgain:hover{
-			background:url(../assets/image/btn_play_again_hover.png);
+			background:url(../image/btn_play_again_hover.png);
 		}
 		#linkPlayAgain:active{
-			background:url(../assets/image/btn_play_again_mouse_down.png);
+			background:url(../image/btn_play_again_mouse_down.png);
 		}
 #linkNextLesson{
 	position:absolute;
@@ -155,7 +155,7 @@ body {
 		float:left;
 		width:32px;
 		height: 32px;
-		background: url(../assets/image/picClock.png);
+		background: url(../image/picClock.png);
 	}
 	
 	.timerBoxes{   /* Show the timer running after the game has began.... */
