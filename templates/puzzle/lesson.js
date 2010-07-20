@@ -75,8 +75,8 @@ function enableDragAndDrop(image, piece) {
              out: function() { piece.removeClass('dropTarget'); },
              drop: function(event, ui) {
                  piece.removeClass('dropTarget');
-                 swap($(ui.draggable[0]), piece);
-                 scrubPosition($(ui.draggable[0]));
+                 swap(ui.draggable, piece);
+                 scrubPosition(ui.draggable);
                  scrubPosition(piece);
                  checkGameOver(image);
              }
