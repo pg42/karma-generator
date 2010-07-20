@@ -67,8 +67,7 @@
 	
 	.drophover{
 		background-color: #FF9900;
-	}
-		
+	}	
 	.dropMonthArea{
 		float:left;
 		margin-left: 60px;
@@ -78,7 +77,12 @@
 		height:100px;
 		text-align:center;		
 	}
-	
+	.dropObjects{
+		width: 160px; 
+		height: 33px; 
+		margin: 10px 0px 10px 100px; 
+		border-bottom: 2px solid black;
+	}
 	
 	#dragMonthArea{
 		position:absolute;
@@ -86,8 +90,17 @@
 		top:600px;
 		width: 1185px;
 		height: 90px;
-		border: 1px solid #D0F692;	
-			
+		border: 1px solid #D0F692;		
+	}
+	.dragObjects{
+		float: left; 
+		cursor: move;
+		height: 30px; 
+		margin: 0.3em;
+		padding: 5px 15px;
+		color: rgb(51, 0, 204); 
+		font: 22px/25px bold Arial,Verdana,Geneva,Helvetica; 
+		position: relative;
 	}
 	
 	input.blankBox{

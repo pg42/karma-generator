@@ -6,10 +6,13 @@ lesson(grade=6, subject='English', title='Months of the Year', week=3,
 css('global')
 css('lesson.css')
 
-for f in ['ui.core',
+for f in [
+		'jquery-ui',
 		'karma',
+		'jquery.watermarkinput',
 		'../../js/common.js',
-		'lesson.js']:
+		'lesson.js'
+	]:
 	java_script(f)
 
 div(id='content')
