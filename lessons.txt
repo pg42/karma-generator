@@ -3,7 +3,6 @@ o       2_Maths_barGraph_16_K
 o       2_Maths_largestNumber_6_K
 o       2_Maths_quickMultiplication_15_K
 o       2_Maths_shapes_10_K
-o       6_English_actionVerb_3_K
 o       6_English_alphabeticalOrder_13_K
 o       6_English_articles_7_K
 o       6_English_crossword_10_K
@@ -51,6 +50,7 @@ v       2_Maths_addingUpto10FunGame_3_K
 v       2_Maths_countingSheep_2_K
 v       2_Maths_moneyIdentification_18_K
 v       2_Maths_numericPuzzle_1_K
+v       6_English_actionVerb_3_K
 v       6_English_hangmanCityNames_2_K
 v       6_English_matchingProductsAndWords_8_K
 v       6_English_multipleChoiceActionVerb_3_K
