@@ -4,41 +4,41 @@ function startLesson(karma) {
         return karma.createImg(img_name)
             .attr('id', img_name)
             .addClass('sheep')
-	    .draggable(
+            .draggable(
                 {
-		    helper: function () {
-			return $(this).clone().removeAttr('id');
-		    },
-		    containment: '#gameArea',
-		    appendTo: '#gameArea',
-		    distance: 10,
-		    start: function () {
-			bringToFront(this);
-		    },
-		    stop: function (ev, ui) {
-			// Make a persistent clone of the helper unless we
+                    helper: function () {
+                        return $(this).clone().removeAttr('id');
+                    },
+                    containment: '#gameArea',
+                    appendTo: '#gameArea',
+                    distance: 10,
+                    start: function () {
+                        bringToFront(this);
+                    },
+                    stop: function (ev, ui) {
+                        // Make a persistent clone of the helper unless we
                         // dropped on the rubbish bin.
-			if (ui.helper.is(':visible')) {
+                        if (ui.helper.is(':visible')) {
                             ui.helper.clone()
                                 .removeClass('ui-draggable-dragging')
                                 .addClass('clone')
                                 .data('count', count)
                                 .draggable({
-				               start: function() {
-					           bringToFront(this);
-				               }
-				           })
-			        .appendTo('#gameArea');
+                                               start: function() {
+                                                   bringToFront(this);
+                                               }
+                                           })
+                                .appendTo('#gameArea');
                             updateScore();
-			}
-		    }
-		}
+                        }
+                    }
+                }
             );
     };
 
     $('#content')
         .empty()
-	.append(createDiv('information'))
+        .append(createDiv('information'))
         .append(createDiv('gameArea')
                 .append(createDiv()
                         .addClass('titles')
@@ -56,10 +56,10 @@ function startLesson(karma) {
 
     $('#gameArea').droppable(
         {
-	    drop: function (event, ui) {
-		updateScore();
-	    }
-	}
+            drop: function (event, ui) {
+                updateScore();
+            }
+        }
     );
 
     var show_rubbish_can = function (img_name) {
@@ -70,27 +70,27 @@ function startLesson(karma) {
 
     $('#discardTarget').droppable(
         {
-	    tolerance: 'intersect',
-	    over: function (event, ui) {
-		ui.helper.hide();
+            tolerance: 'intersect',
+            over: function (event, ui) {
+                ui.helper.hide();
                 show_rubbish_can('rubbish_open');
-	    },
-	    out: function(event, ui) {
-		ui.helper.show();
+            },
+            out: function(event, ui) {
+                ui.helper.show();
                 show_rubbish_can('rubbish');
-	    },
-	    drop: function(event, ui) {
+            },
+            drop: function(event, ui) {
                 ui.helper.remove();
                 show_rubbish_can('rubbish');
-	    }
-	}
+            }
+        }
     );
 
     var updateScore = function () {
         var total = 0;
         $('.clone')
             .each(function (i, sheep) {
- 		      if (boundsWithin($(sheep), $('#dropTarget'))) {
+                      if (boundsWithin($(sheep), $('#dropTarget'))) {
                           total += $(sheep).data('count');
  		      }
  	          });
