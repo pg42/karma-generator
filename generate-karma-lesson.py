@@ -263,6 +263,7 @@ java_script_dependencies = [
     ('ui.core', 'ui.droppable'),
     ('jquery', 'jquery.watermarkinput'),
     ('ui.core', 'ui.scoreboard'),
+    ('jquery-ui', 'ui.scoreboard'),
     ('jquery', 'jquery.svg')
     ]
 
@@ -278,7 +279,7 @@ def sort_java_script_files(files):
 
 class Lesson:
     def __init__(self):
-        self.parent_directory = None
+        self.parent_directory = ''
         self.directory = None
         self.title = ''
         self.lesson_title = ''
@@ -383,6 +384,7 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
     theLesson.set_directory( dirname )
     theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
+    java_script('jquery')
 
 
 def resolve_karma_file(name, karma_files, **kw):
@@ -496,8 +498,7 @@ if __name__ == '__main__':
     theLesson = Lesson()
     if options.output:
         theLesson.parent_directory = os.path.abspath(options.output)
-
-	java_script('jquery')
+    
     include_stack.append(description)
     add_help()
     check_file_exists(description)
