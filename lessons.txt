@@ -1,12 +1,10 @@
 o       2_English_whatSomeoneIsDoing_15_K
-o       2_Maths_barGraph_16_K
 o       2_Maths_largestNumber_6_K
 o       2_Maths_quickMultiplication_15_K
 o       2_Maths_shapes_10_K
 o       6_English_alphabeticalOrder_13_K
 o       6_English_articles_7_K
 o       6_English_crossword_10_K
-o       6_English_months_1_K
 o       6_English_namesOfColor_6_K
 o       6_English_oneOrMany_5_K
 o       6_English_rajuAndTheWolf_7_K
@@ -47,12 +45,14 @@ v       2_English_vocabularyFruits_10_K
 v       2_English_vocabularyObjects_5_K
 v       2_Maths_addingNumbers_4_K
 v       2_Maths_addingUpto10FunGame_3_K
+v       2_Maths_barGraph_16_K
 v       2_Maths_countingSheep_2_K
 v       2_Maths_moneyIdentification_18_K
 v       2_Maths_numericPuzzle_1_K
 v       6_English_actionVerb_3_K
 v       6_English_hangmanCityNames_2_K
 v       6_English_matchingProductsAndWords_8_K
+v       6_English_months_1_K
 v       6_English_multipleChoiceActionVerb_3_K
 v       6_English_prepositions_11_K
 v       6_English_sentencePractice1_12_K
