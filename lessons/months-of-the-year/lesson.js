@@ -40,6 +40,7 @@ function startLesson(karma, contentDiv) {
 	for (i in month_names){
 		$('#monthLessonBoxes').append( createMonthLessonBox(month_names[i]) );
 	}
+	$("#linkCheck").hide();
 }
 
 function startGame(karma, contentDiv) {
@@ -59,13 +60,17 @@ function startGame(karma, contentDiv) {
 		return 'th';
 	}
 	var createMonthDropBox = function (month_name, index) {
-		return createDiv('monthDrop' + month_name).addClass('dropMonthArea')
+		return createDiv('monthDrop' + month_name)
+			.addClass('dropMonthArea')
 			.append(karma.createImg('small_' + month_name).addClass('imgSmall'))
 			.append(createDiv()
 				.text( index + ordinalSuffix(index) )
 				.addClass('orderTxt')
 			)
-			.append(createDiv('drop' + index).addClass('dropObjects'))
+			.append(createDiv('drop' + index)
+				.addClass('dropObjects')
+				.attr('monthName', month_name)
+			)
 			.append($(document.createElement('span')).addClass('check'));
 	};
 	var createMonthDragBox = function (month_name) {
@@ -77,12 +82,15 @@ function startGame(karma, contentDiv) {
 		var month_suf = '';
 		if ( missing_char < month_name.length - 1 ) month_suf = month_name.substring(missing_char +1);
 		
-		return createDiv('monthDrag' + month_name).addClass('dragObjects')
+		return createDiv('monthDrag' + month_name)
+			.addClass('dragObjects')
+			.attr('monthName', month_name)
 			.append($(document.createElement('span')).text( month_pref ))
 			.append($(document.createElement('input'))
 				.attr({
 					type: 'text',
-					maxlength: 1
+					maxlength: 1,
+					correctAnswer: month_name[missing_char]
 				})
 				.addClass('blankBox')
 				.Watermark('?')
@@ -146,6 +154,30 @@ function startGame(karma, contentDiv) {
 			}
 		}
 	});
+    
+    $("#linkCheck").click(function(){
+        $('.dropObjects').each(function(index, value){
+			var correct = true;
+			var dragChild = currentDroppedPositions[ $(this).attr('id') ];
+			if ( dragChild == null ){
+				// nothing in this target
+				correct = false;
+			} else if ( $(this).attr('monthName') != dragChild.attr('monthName') ){
+				// incorrect month dropped
+				correct = false;
+			} else if ( dragChild.children('input').val().toLowerCase() != dragChild.children('input').attr('correctAnswer').toLowerCase() ){
+				// they typed the wrong character in the input field
+				correct = false;
+			}
+			console.log('dropObject ' + index, $(this), ' has correct: ' + correct );
+			
+			if (correct){
+				$(this).siblings('.check').html( Karma.createImg('correct') );
+			} else {
+				$(this).siblings('.check').html( Karma.createImg('incorrect') );
+			}
+		});
+    }).show();
 }
 
 setUpMultiScreenLesson([startLesson, startGame]);

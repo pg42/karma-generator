@@ -38,7 +38,9 @@ for month in months:
 	
 audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')
-audio('trigger.ogg', 'trigger')
-image('check.png', 'check')
 
-footer_configuration(link_next=True, link_previous=True, scoreboard=True)
+image('check.png', 'check')
+image('correct.png', 'correct')
+image('incorrect.png', 'incorrect')
+
+footer_configuration(link_next=True, link_previous=True, scoreboard=True, link_check_answer=True)

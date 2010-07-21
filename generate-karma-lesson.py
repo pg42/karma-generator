@@ -184,7 +184,8 @@ def generate_header(dir, body, title):
 
 gFooterConfiguration = dict(link_previous=True,
                             link_next=True,
-                            scoreboard=False)
+                            scoreboard=False,
+                            link_check_answer=False)
 
 
 def generate_footer(body):
@@ -199,6 +200,9 @@ def generate_footer(body):
 
     footer.div(className='botbtn_right').div(title='Play Again', id='linkPlayAgain')
     footer.div(className='botbtn_right').div(title='Start', id='linkStart')
+    
+    if gFooterConfiguration['link_check_answer']:
+        footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
 
 
 def destination_path(name):
