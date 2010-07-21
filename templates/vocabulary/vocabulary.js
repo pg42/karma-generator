@@ -14,7 +14,7 @@ function generateScreen0(karma, $container) {
                       return $(document.createElement('div'))
                           .css(objectCss(object))
                           .click(function () {
-                                     karma.audio[object.name].play();
+                                     karma.play(object.name);
                                  });
                   })).appendTo($vocab_img);
 }
@@ -53,9 +53,9 @@ function generateScreen1(karma, $container) {
                  if (dropped_word.get()[0] === word.get()[0]) {
                      dropped_word.remove();
                      $(this).text(dropped_word.text());
-                     karma.audio.correct.play();
+                     karma.play('correct');
                  } else {
-                     karma.audio.incorrect.play();
+                     karma.play('incorrect');
                  }
                  if ($('.dragObjects').size() == 0) {
                      $(document.createElement('div'))

@@ -95,13 +95,13 @@ function startGame(karma) {
 	        } else {
                     scoreboardMiss();
                 }
-	        karma.audio[word].play();
+	        karma.play(word);
 
                 setTimeout(remaining_pictures.length == 0 ? gameOver: gotoNextObject,
                           1000);
             } else {
 	        input.addClass('incorrect');
-	        karma.audio.incorrect.play();
+	        karma.play('incorrect');
             }
         };
 

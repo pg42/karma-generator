@@ -70,7 +70,7 @@ function startLesson(karma) {
                     drop: function (event, ui) {
                         var dragged = ui.draggable;
                         if (accept == dragged.data('key')) {
-                            karma.audio.correct.play();
+                            karma.play('correct');
                             var r = row_count - 1
                                 - $('.' + accept, $('#barGraph')).length;
                             dragged
@@ -81,7 +81,7 @@ function startLesson(karma) {
                                 startQuestions();
                             }
                         } else {
-                            karma.audio.incorrect.play();
+                            karma.play('incorrect');
                             dragged.css({ top: 5, left: 5 });
                         }
                     }
@@ -131,10 +131,10 @@ function startLesson(karma) {
         $('.answerButton')
             .click(function () {
                        if ($(this).data('key') == currentTask.answer) {
-                           karma.audio.correct.play();
+                           karma.play('correct');
                            nextTask();
                        } else {
-                           karma.audio.incorrect.play();
+                           karma.play('incorrect');
                        }
                    });
         nextTask();

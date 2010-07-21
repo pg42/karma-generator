@@ -188,6 +188,13 @@ Karma.createImg = function (name, disable_dragging) {
     return result;
 };
 
+Karma.play = function (sound_name) {
+    if (!this.audio[sound_name]) {
+        alert('Missing sound file: ' + name);
+    }
+    this.audio[sound_name].play();
+}
+
 Karma.random = Karma.rand;
 
 function createDiv(id) {

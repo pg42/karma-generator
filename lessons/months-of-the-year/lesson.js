@@ -22,7 +22,7 @@ function startLesson(karma, contentDiv) {
                     .text(month_name)
                     .addClass('monthsName')
                     .click(function(){
-                               karma.audio[month_name].play();
+                               karma.play(month_name);
                            })
                    )
             .append(karma.createImg(month_name).addClass('imgBox'));

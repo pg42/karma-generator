@@ -167,7 +167,7 @@ function startLesson(karma) {
             .animate({ top: 130 },
                      12000 - level * 1000,
                     function () {
-                        karma.audio.trigger.play();
+                        karma.play('trigger');
                         // Timeout is needed because otherwise it doesn't
                         // start counting down again after time runs out.
                         setTimeout(function () { processAnswer(false); }, 0);
@@ -246,8 +246,7 @@ function startLesson(karma) {
                 displayObjects(paper, img_name, choice);
                 paper.click(function () {
                                 var correct = choice == total;
-                                karma.audio[correct ? 'correct' : 'incorrect']
-                                    .play();
+                                karma.play(correct ? 'correct' : 'incorrect');
                                 processAnswer(correct);
                             });
             }

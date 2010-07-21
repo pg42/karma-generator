@@ -133,9 +133,9 @@ var checkAnswer = function (karma) {
     var concat = String.prototype.concat;
     if (!correct_answer ||
         concat.apply('', correct_answer) != concat.apply('', words)) {
-        karma.audio.incorrect.play();
+        karma.play('incorrect');
     } else {
-        karma.audio.correct.play();
+        karma.play('correct');
     }
 };
 
