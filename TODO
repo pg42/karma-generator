@@ -19,6 +19,8 @@ Grep for TBD in the code.
 * generation should use a standard folder structure to merge into EPaath framework
 * have POT file for translatable strings, from which JSON language object is generated
 * javascript library to apply translation strings (printf / plural rules)
+* interface guidelines
+* startup of a lesson (why a start button?)
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
