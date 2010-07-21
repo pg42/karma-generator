@@ -25,8 +25,12 @@ function controlButtonDisplay(button,status){
 	};
 	$('#'+button).css(buttonCss);
 }
+
+// TBD: remove these functions when all lessons are converted.
+
 //generate a random numbers between two limits
 function genRand( lower, upper ){
+    alert('Don\'t use genRand, use Karma.random instead.');
 	  return Math.floor(Math.random() * (upper - lower + 1) + lower);
 };
 
@@ -39,6 +43,7 @@ function genRand( lower, upper ){
 	Currently it generates numbers betweem 0-upper (exclude upper)
 */
 function shuffleNumbers(randVar,lower,upper)  {
+    alert('Don\'t use shuffleNumbers, use Karma.shuffle(range(lower, upper + 1)))');
 	var total_nums = upper-lower;
 	randVar[0] = genRand(0,total_nums-1);
 	for(i= 1; i < total_nums; i++){
