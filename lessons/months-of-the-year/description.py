@@ -15,8 +15,6 @@ for f in [
 	]:
         java_script(f)
 
-div(id='content')
-
 months = [
         'January',
         'February',

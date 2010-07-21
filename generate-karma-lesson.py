@@ -200,7 +200,7 @@ def generate_footer(body):
 
     footer.div(className='botbtn_right').div(title='Play Again', id='linkPlayAgain')
     footer.div(className='botbtn_right').div(title='Start', id='linkStart')
-    
+
     if gFooterConfiguration['link_check_answer']:
         footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
 
@@ -281,7 +281,7 @@ def sort_java_script_files(files):
     return result
 
 
-class Lesson:
+class Lesson():
     def __init__(self):
         self.parent_directory = ''
         self.directory = None
@@ -291,7 +291,7 @@ class Lesson:
         self.css_files = []
         self.image_files = []
         self.audio_files = []
-        self.divs = []
+        self.divs = [{'id': 'content'}]
 
         self.java_script_files.append(GeneratedFile(self, 'lesson-karma.js'))
 
@@ -302,7 +302,7 @@ class Lesson:
         create_dir(self.directory)
         os.chdir(self.directory)
         map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
-        
+
         for f in self.java_script_files + self.css_files:
             f.make_available()
         for f in self.image_files + self.audio_files:
@@ -310,7 +310,7 @@ class Lesson:
 
     def set_directory(self, dir):
         self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
-            
+
     def print_html_on(self, stream):
         doc = HtmlDocument()
         for line in warning_text_lines:
@@ -427,6 +427,9 @@ def audio(file, name):
 
 
 def div(**info):
+    if 'id' in info and info['id'] == 'content':
+        print 'Warning: div(id=\'content\') no longer needed (it\'s added automatically).'
+        return
     theLesson.divs.append(info)
 
 
@@ -477,7 +480,7 @@ def check_file_exists(path):
     if not os.path.isfile(path):
         print 'Error: the file ' + path + ' doesn\'t exist.'
         sys.exit(1)
-    
+
 
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
@@ -502,7 +505,7 @@ if __name__ == '__main__':
     theLesson = Lesson()
     if options.output:
         theLesson.parent_directory = os.path.abspath(options.output)
-    
+
     include_stack.append(description)
     add_help()
     check_file_exists(description)

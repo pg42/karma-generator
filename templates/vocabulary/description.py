@@ -14,7 +14,6 @@ for f in central_js_files:
 lesson_js = java_script('lesson.js', generated=True)
 java_script('vocabulary.js')
 
-div(id='content')
 
 def register_objects(objects):
     for o in objects:

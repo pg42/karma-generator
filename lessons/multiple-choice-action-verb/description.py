@@ -41,6 +41,5 @@ for x in 'abcd':
 image('correct.png', 'correct')
 image('wrong.png', 'incorrect')
 
-div(id='content')
 
 footer_configuration(link_previous=False, link_next=True, scoreboard=True)

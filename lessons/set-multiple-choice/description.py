@@ -24,6 +24,5 @@ image('wrong.png', 'incorrect')
 for i in range(1, 9):
     image('ques%sdef.png' % i, 'answer%s' % i)
 
-div(id='content')
 
 footer_configuration(link_next=True, link_previous=False, scoreboard=True)

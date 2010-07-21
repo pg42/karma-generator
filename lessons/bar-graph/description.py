@@ -28,4 +28,3 @@ for object in objects:
 audio('ne_correct.wav', 'correct')
 audio('ne_incorrect.wav', 'incorrect')
 
-div(id='content')

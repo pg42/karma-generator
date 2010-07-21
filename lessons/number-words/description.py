@@ -15,5 +15,4 @@ audio('en_incorrect.ogg', 'incorrect')
 image('football.png', 'football')
 image('gameOver.png', 'gameOver')
 
-div(id='content')
 

@@ -28,6 +28,5 @@ audio('byebye.ogg', 'byebye')
 css('lesson.css')
 java_script('lesson.js')
 
-div(id='content')
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)

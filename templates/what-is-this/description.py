@@ -15,7 +15,6 @@ for f in central_js_files:
 objects_js = java_script('objects.js', generated=True)
 java_script('what-is-this.js')
 
-div(id='content')
 div(id='gameOver')
 
 objects = [

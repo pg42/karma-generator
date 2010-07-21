@@ -18,6 +18,5 @@ def register_objects(objects):
         image(object + '.png', object)
     print >>objects_js, 'var objects = [' + ', '.join([quote(x) for x in objects]) + '];'
 
-div(id='content')
 
 footer_configuration(link_next=False, link_previous=False)

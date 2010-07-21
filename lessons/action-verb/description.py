@@ -88,4 +88,3 @@ for f in ['ui.core',
           'lesson.js']:
     java_script(f)
 
-div(id='content')

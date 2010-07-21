@@ -23,6 +23,5 @@ image('main.png', 'main')
 image('correct.png', 'correct')
 image('wrong.png', 'incorrect')
 
-div(id='content')
 
 footer_configuration(link_next=True, link_previous=False, scoreboard=True)

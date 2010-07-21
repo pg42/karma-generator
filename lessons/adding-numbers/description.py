@@ -12,7 +12,6 @@ for f in ['ui.core',
           'lesson.js']:
     java_script(f)
 
-div(id='content')
 
 audio('byebye.ogg', 'byebye')
 audio('ne_correct.wav', 'correct')
