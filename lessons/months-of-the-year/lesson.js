@@ -1,183 +1,182 @@
 var month_names = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
 ];
 
 var currentDroppedPositions = {};
 
 function startLesson(karma, contentDiv) {
-	var createMonthLessonBox = function (month_name) {
-		return createDiv('monthLesson' + month_name).addClass('imgArea')
-			.append(createDiv('title')
-				.text(month_name)
-				.addClass('monthsName')
-				.click(function(){
-					karma.audio[month_name].play();
-				})
-			)
-			.append(karma.createImg(month_name).addClass('imgBox'));
-	};
-	
-	contentDiv
-		.append(createDiv('main')
-			.append(createDiv('heading')
-				.text('Learn the spelling of each month.')
-				.addClass('topText')
-			)
-			.append(createDiv('monthLessonBoxes'))
-		);
-	
-	for (i in month_names){
-		$('#monthLessonBoxes').append( createMonthLessonBox(month_names[i]) );
-	}
-	$("#linkCheck").hide();
+    var createMonthLessonBox = function (month_name) {
+        return createDiv('monthLesson' + month_name).addClass('imgArea')
+            .append(createDiv('title')
+                    .text(month_name)
+                    .addClass('monthsName')
+                    .click(function(){
+		               karma.audio[month_name].play();
+			   })
+	           )
+	    .append(karma.createImg(month_name).addClass('imgBox'));
+    };
+
+    contentDiv
+	.append(createDiv('main')
+		.append(createDiv('heading')
+			.text('Learn the spelling of each month.')
+			.addClass('topText')
+		       )
+		.append(createDiv('monthLessonBoxes'))
+	       );
+
+    $(month_names.map(createMonthLessonBox)).appendTo($('#monthLessonBoxes'));
+    $("#linkCheck").hide();
 }
 
 function startGame(karma, contentDiv) {
-	var ordinalSuffix = function ( num ){
-		num = num % 100;
-		if ( num >= 11 && num <= 13){
-			return 'th';
-		}
-		switch( num % 10 ){
-			case 1:
-				return 'st';
-			case 2:
-				return 'nd';
-			case 3:
-				return 'rd'; 
-		}
-		return 'th';
+    var ordinalSuffix = function (num){
+	num = num % 100;
+	if (num >= 11 && num <= 13){
+	    return 'th';
 	}
-	var createMonthDropBox = function (month_name, index) {
-		return createDiv('monthDrop' + month_name)
-			.addClass('dropMonthArea')
-			.append(karma.createImg('small_' + month_name).addClass('imgSmall'))
-			.append(createDiv()
-				.text( index + ordinalSuffix(index) )
-				.addClass('orderTxt')
-			)
-			.append(createDiv('drop' + index)
-				.addClass('dropObjects')
-				.attr('monthName', month_name)
-			)
-			.append($(document.createElement('span')).addClass('check'));
-	};
-	var createMonthDragBox = function (month_name) {
-		var missing_char = Karma.random(0, month_name.length - 1);
-		
-		var month_pref = '';
-		if ( missing_char > 0 ) month_pref = month_name.substring(0, missing_char);
-		
-		var month_suf = '';
-		if ( missing_char < month_name.length - 1 ) month_suf = month_name.substring(missing_char +1);
-		
-		return createDiv('monthDrag' + month_name)
-			.addClass('dragObjects')
-			.attr('monthName', month_name)
-			.append($(document.createElement('span')).text( month_pref ))
-			.append($(document.createElement('input'))
-				.attr({
-					type: 'text',
-					maxlength: 1,
-					correctAnswer: month_name[missing_char]
-				})
-				.addClass('blankBox')
-				.Watermark('?')
-				.click(function(){
-					this.select();
-				})
-			)
-			.append($(document.createElement('span')).text( month_suf ));
-	};
-	
-	contentDiv
-		.append(createDiv('main')
-			.append(createDiv('heading')
-				.text('Fill in the blanks and place month in right order.')
-				.addClass('topText')
-			)
-			.append(
-				createDiv('gameArea')
-				.append(createDiv('dragMonthArea'))
-			)
-			.append(createDiv('gameOver'))
-		);
-	
-	for (i in month_names){
-		var index = parseInt(i) + 1;
-		$('#gameArea').append( createMonthDropBox(month_names[i], index) );
+	switch(num % 10){
+	case 1:
+	    return 'st';
+	case 2:
+	    return 'nd';
+	case 3:
+	    return 'rd';
 	}
-	
-	var shuffled_month_names = Karma.shuffle(month_names);
-	for (i in shuffled_month_names){
-		$('#dragMonthArea').append( createMonthDragBox(shuffled_month_names[i]) );
-	}
-	
-	$('.dragObjects').draggable({ containment: '#content',
-		start: function(event, ui){
-			for (var target in currentDroppedPositions ){
-				if ( currentDroppedPositions[target] == ui.helper ){
-					currentDroppedPositions[target] = null;
-					$('#' + target).droppable( 'option' , 'hoverClass' , 'drophover' );
-					return true;
-				}
-			}
-		},
-		stop: function(event, ui) {
-			for (var target in currentDroppedPositions ){
-				if ( currentDroppedPositions[target] == ui.helper ){
-					return true;
-				}
-			}
-			// not on a valid target, so animate back home
-			ui.helper.animate({left: 0, top: 0});
+	return 'th';
+    };
+    var createMonthDropBox = function (month_name, i) {
+        var index = i + 1;
+	return createDiv('monthDrop' + month_name).addClass('dropMonthArea')
+	    .append(karma.createImg('small_' + month_name).addClass('imgSmall'))
+	    .append(createDiv()
+		    .text(index + ordinalSuffix(index))
+		    .addClass('orderTxt')
+		   )
+	    .append(createDiv('drop' + index)
+		    .addClass('dropObjects')
+		    .data('monthName', month_name)
+		   )
+	    .append($(document.createElement('span')).addClass('check'));
+    };
+    var createMonthDragBox = function (month_name) {
+	var missing_char = Karma.random(0, month_name.length - 1);
+
+	var month_pref = '';
+	if (missing_char > 0) month_pref = month_name.substring(0, missing_char);
+
+	var month_suf = '';
+	if (missing_char < month_name.length - 1) month_suf = month_name.substring(missing_char +1);
+	return createDiv('monthDrag' + month_name)
+	    .addClass('dragObjects')
+	    .data('monthName', month_name)
+	    .append($(document.createElement('span')).text(month_pref))
+	    .append($(document.createElement('input'))
+		    .attr({
+			      type: 'text',
+			      maxlength: 1
+			  })
+                    .data('correctLetter', month_name[missing_char])
+		    .addClass('blankBox')
+		    .Watermark('?')
+		    .click(function(){
+			       this.select();
+			   })
+		   )
+	    .append($(document.createElement('span')).text(month_suf));
+    };
+
+    contentDiv
+	.append(createDiv('main')
+		.append(createDiv('heading')
+			.text('Fill in the blanks and place month in right order.')
+			.addClass('topText')
+		       )
+		.append(
+		    createDiv('gameArea')
+			.append(createDiv('dragMonthArea'))
+		)
+		.append(createDiv('gameOver'))
+	       );
+
+    $(month_names.map(createMonthDropBox)).appendTo($('#gameArea'));
+    $(Karma.shuffle(month_names).map(createMonthDragBox))
+        .appendTo('#dragMonthArea');
+
+    $('.dragObjects').draggable(
+        {
+            containment: '#content',
+	    start: function(event, ui){
+		for (var target in currentDroppedPositions){
+		    if (currentDroppedPositions[target] == ui.helper){
+			currentDroppedPositions[target] = null;
+			$('#' + target).droppable('option' , 'hoverClass' , 'drophover');
+			return;
+		    }
 		}
+	    },
+	    stop: function(event, ui) {
+		for (var target in currentDroppedPositions){
+		    if (currentDroppedPositions[target] == ui.helper){
+			return;
+		    }
+		}
+		// not on a valid target, so animate back home
+		ui.helper.animate({left: 0, top: 0});
+	    }
 	});
-	$('.dropObjects').droppable({ tolerence: 'intersect', hoverClass: 'drophover',
-		drop: function(event, ui) {
-			if ( currentDroppedPositions[ $(this).attr('id') ] == null ){
-				currentDroppedPositions[ $(this).attr('id') ] = ui.draggable;
-				// snap draggable to this drop point
-				ui.draggable.position({ my: 'center', at: 'center', of: $(this) });
-				$(this).droppable( 'option' , 'hoverClass' , '' );
-			}
+    $('.dropObjects').droppable(
+        {
+            tolerance: 'intersect',
+            hoverClass: 'drophover',
+	    drop: function(event, ui) {
+		if (currentDroppedPositions[ $(this).attr('id') ] == null){
+		    currentDroppedPositions[ $(this).attr('id') ] = ui.draggable;
+		    // snap draggable to this drop point
+		    ui.draggable.position({ my: 'center', at: 'center', of: $(this) });
+		    $(this).droppable('option' , 'hoverClass' , '');
 		}
+	    }
 	});
-    
-    $("#linkCheck").click(function(){
-        $('.dropObjects').each(function(index, value){
-			var correct = true;
-			var dragChild = currentDroppedPositions[ $(this).attr('id') ];
-			if ( dragChild == null ){
-				// nothing in this target
-				correct = false;
-			} else if ( $(this).attr('monthName') != dragChild.attr('monthName') ){
-				// incorrect month dropped
-				correct = false;
-			} else if ( dragChild.children('input').val().toLowerCase() != dragChild.children('input').attr('correctAnswer').toLowerCase() ){
-				// they typed the wrong character in the input field
-				correct = false;
-			}
-			console.log('dropObject ' + index, $(this), ' has correct: ' + correct );
-			
-			if (correct){
-				$(this).siblings('.check').html( Karma.createImg('correct') );
-			} else {
-				$(this).siblings('.check').html( Karma.createImg('incorrect') );
-			}
+
+    $("#linkCheck").click(
+        function(){
+            $('.dropObjects').each(
+                function (index, value) {
+                    var correctLetter = function (input_field) {
+                        return input_field.val().toLowerCase() == input_field.data('correctLetter').toLowerCase();
+                    };
+		    var correct = true;
+		    var dragChild = currentDroppedPositions[ $(this).attr('id') ];
+		    if (dragChild == null){
+			// nothing in this target
+			correct = false;
+		    } else if ($(this).data('monthName') != dragChild.data('monthName')){
+			// incorrect month dropped
+			correct = false;
+		    } else if (!correctLetter(dragChild.children('input'))) {
+			// they typed the wrong character in the input field
+			correct = false;
+		    }
+		    if (correct){
+			$(this).siblings('.check').html(Karma.createImg('correct'));
+		    } else {
+			$(this).siblings('.check').html(Karma.createImg('incorrect'));
+		    }
 		});
-    }).show();
+        }).show();
 }
 
 setUpMultiScreenLesson([startLesson, startGame]);
