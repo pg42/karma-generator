@@ -1,6 +1,6 @@
 /*
- * Functions that are common in all lessons 
- * 
+ * Functions that are common in all lessons
+ *
  */
 
 var flag_start = 0,i,j,flag;
@@ -10,7 +10,7 @@ function gotoMainStage(){
 	window.location = path;
 }
 //enable or disable the control buttons
-function controlButtonDisplay(button,status){ 
+function controlButtonDisplay(button,status){
 	var opacity;
 	if(status === 'enabled'){
 		opacity = 1;
@@ -23,11 +23,11 @@ function controlButtonDisplay(button,status){
 			'opacity':opacity,
 			'cursor':cursor
 	};
-	$('#'+button).css(buttonCss);		
+	$('#'+button).css(buttonCss);
 }
 //generate a random numbers between two limits
 function genRand( lower, upper ){
-	  return Math.floor(Math.random() * (upper - lower + 1) + lower);  
+	  return Math.floor(Math.random() * (upper - lower + 1) + lower);
 };
 
 /*
@@ -40,17 +40,17 @@ function genRand( lower, upper ){
 */
 function shuffleNumbers(randVar,lower,upper)  {
 	var total_nums = upper-lower;
-	randVar[0] = genRand(0,total_nums-1); 
+	randVar[0] = genRand(0,total_nums-1);
 	for(i= 1; i < total_nums; i++){
 			do{
 				flag = 0;
-				randVar[i] = genRand(0,total_nums-1); 
+				randVar[i] = genRand(0,total_nums-1);
 				for(j=0; j<i; j++){
 					if(randVar[i] === randVar[j]){
 						flag++;
 					}
 				}
-			}while(flag != 0 );  //end of do while loop	
+			}while(flag != 0 );  //end of do while loop
 		}
 }
 
