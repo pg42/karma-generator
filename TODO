@@ -13,7 +13,7 @@ Grep for TBD in the code.
 * use hand cursor for interactive buttons in lessons (see adding-up-to-ten)
 * use Karma.convertNumToLocale iso array of digits
 * delay on interactive buttons, so that double-clicking does not answer two consecutive questions
-* help files can be either HTML or PNG
+* help HTML content needs padding and styling
 * ability to have multiple help files, displaying the right one based on the screen showing
 * centralise common assets (correct / incorrect sounds)
 * generation should use a standard folder structure to merge into EPaath framework
@@ -21,7 +21,6 @@ Grep for TBD in the code.
 * javascript library to apply translation strings (printf / plural rules)
 * interface guidelines
 * startup of a lesson (why a start button?)
-* move repo to git.olenepal.org - DONE!
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit

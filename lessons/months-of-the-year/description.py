@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=6, subject='English', title='Months', week=1,
-       browser_title='Class 6 English Months',
-       lesson_title='Months of the Year')
+lesson(grade=6, subject='English', title='Months of the Year', week=1, browser_title='Class 6 English Months', lesson_title='Months of the Year')
 
 css('global')
 css('lesson.css')
@@ -12,7 +10,7 @@ for f in [
         'jquery.watermarkinput',
         '../../js/common.js',
         'lesson.js'
-	]:
+    ]:
         java_script(f)
 
 months = [

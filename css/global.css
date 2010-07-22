@@ -61,6 +61,16 @@ body {
 		#linkHelp:hover{
 			background:url(../image/btn_help_hover.png);
 		}
+		#help {
+			display: none;
+			position: absolute;
+			right: 60px;
+			top: 75px;
+			width: 297px;
+			height: 697px;
+			z-index: 40;
+			background:url(../image/help_bg.png);
+		}
 		#linkOle{
 			cursor:pointer;
 			width: 60px;		height: 60px;

@@ -67,6 +67,11 @@ class HtmlElementFactory():
         self.children.append(result)
         return result
 
+    def innerhtml(self, html):
+        result = HtmlSource(html)
+        self.children.append(result)
+        return result
+
     def comment(self, txt):
         result = HtmlComment(txt)
         self.children.append(result)
@@ -143,3 +148,11 @@ class HtmlComment():
 
     def print_on(self, stream):
         print >>stream, '<!--', self.text, '-->'
+
+
+class HtmlSource():
+    def __init__(self, txt):
+        self.text = txt
+
+    def print_on(self, stream):
+        print >>stream, self.text

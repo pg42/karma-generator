@@ -99,7 +99,9 @@ class AssetFile():
     def preload(self):
         return self._name != None
 
-    def relative_path(self, start):
+    def relative_path(self, start=None):
+        if start == None:
+            start = self._lesson.directory
         return os.path.relpath(self.absolute_path(), start)
 
     def absolute_path(self):
@@ -332,23 +334,11 @@ class Lesson():
         body = html.body()
         generate_header(self.directory, body, self.lesson_title)
         for div in self.divs:
-            body.div(id=div['id'])
+            created_div = body.div(id=div['id'])
+            if 'innerhtml' in div:
+                created_div.innerhtml(div['innerhtml'])
         generate_footer(body)
         doc.print_on(stream)
-
-    def print_css_on(self, stream):
-        print >>stream, '/*'
-        for l in warning_text_lines:
-            print >>stream, ' *', l
-        print >>stream, ' */'
-        for div in self.divs:
-            print >>stream, '#%s {' % div['id']
-            for k,v in div.items():
-                if k != 'id':
-                    print >>stream, '  %s: %spx;' % (k, v)
-            print >>stream, '  border: 1px solid black;'
-            print >>stream, '  position: absolute;'
-            print >>stream, '}'
 
     def print_karma_js_on(self, stream):
         print >>stream, '/*'
@@ -389,6 +379,7 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
     theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     java_script('jquery')
+    add_help()
 
 
 def resolve_karma_file(name, karma_files, **kw):
@@ -457,7 +448,6 @@ def frob_path(path):
     else:
         return os.path.abspath(path)
 
-
 def include(path):
     path = frob_path(path)
     include_stack.append(path)
@@ -467,11 +457,18 @@ def include(path):
 
 
 def add_help():
-    help_path = os.path.join(os.path.dirname(include_stack[-1]),
-                             'help.png')
-    if (os.path.exists(help_path)):
-        div(id='help')
-        image('help.png')
+    # add html help content if it exists, otherwise the help image
+    help_html = frob_path('help.html')
+    help_img = frob_path('help.png')
+    if (os.path.exists(help_html)):
+        f = codecs.open(help_html, 'r', 'UTF-8')
+        div(id='help', innerhtml=f.read())
+
+    elif (os.path.exists(help_img)):
+        img = image(help_img, 'help')
+        src = string.replace(img.relative_path(), '\\', '/')
+        src = u'<img src="%s">' % src
+        div(id='help', innerhtml=src)
     else:
         print 'Warning: the file ' + str(help_path) + ' doesn\'t exist.'
 
@@ -507,12 +504,10 @@ if __name__ == '__main__':
         theLesson.parent_directory = os.path.abspath(options.output)
 
     include_stack.append(description)
-    add_help()
     check_file_exists(description)
     execfile(description)
     include_stack.pop()
 
     theLesson.copy_files()
     theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
-    theLesson.print_css_on(open('css/divs.css', 'w'))
     theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
