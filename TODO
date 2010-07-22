@@ -8,7 +8,6 @@ Grep for TBD in the code.
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
 * files ne_correct.wav and ne_incorrect.wav: get ogg files for these
-* topbtn_right, botbtn_right: ids used multiple times (maybe use class?)
 * check that timer is always cleared, even when restarting a lesson.
 * use hand cursor for interactive buttons in lessons (see adding-up-to-ten)
 * use Karma.convertNumToLocale iso array of digits

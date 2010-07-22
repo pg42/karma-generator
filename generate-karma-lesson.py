@@ -177,11 +177,10 @@ def generate_header(dir, body, title):
              width=33, height=75, align='absmiddle')
 
 
-    header.div(id='topbtn_right').div(title='Help', id='linkHelp')
+    header.div(className='topbtn_right').div(title='Help', id='linkHelp')
 
-    # TBD: twice the id topbtn_right?
-    header.div(id='topbtn_right').div(title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित',
-                                      id='linkOle')
+    header.div(className='topbtn_right').div(title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित',
+                                             id='linkOle')
 
 
 gFooterConfiguration = dict(link_previous=True,
