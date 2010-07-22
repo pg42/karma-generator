@@ -21,6 +21,8 @@ Grep for TBD in the code.
 * javascript library to apply translation strings (printf / plural rules)
 * interface guidelines
 * startup of a lesson (why a start button?)
+* sounds are sometimes truncated (e.g. march in months-of-the-year lesson)
+* in vocabulary-plants: if you quickly drag two objects, correct is only played once.
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
