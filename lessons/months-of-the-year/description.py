@@ -9,6 +9,7 @@ for f in [
         'karma',
         'jquery.watermarkinput',
         '../../js/common.js',
+        '../../js/jquery.clickable.js',
         'lesson.js'
     ]:
         java_script(f)

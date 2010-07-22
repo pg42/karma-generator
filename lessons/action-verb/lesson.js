@@ -57,13 +57,13 @@ function setUpScreen(karma, instruction,
         addActions(subject);
         user_select_subject(subject);
         $('#actions_list a')
-            .click(function () {
-                       $('.selected.action').removeClass('selected');
-                       $(this).addClass('selected');
-                       var action = $(this).attr('id');
-                       showPicture(action);
-                       user_select_action(subject, action);
-                   });
+            .clickable(function () {
+                           $('.selected.action').removeClass('selected');
+                           $(this).addClass('selected');
+                           var action = $(this).attr('id');
+                           showPicture(action);
+                           user_select_action(subject, action);
+                       });
     };
 
     var showPicture = function (name) {
@@ -75,7 +75,7 @@ function setUpScreen(karma, instruction,
     addElementsToList($('#subjects_list'), subjects, 'subject');
 
     $('#subjects_list a')
-        .click(function () { selectSubject($(this).attr('id')); });
+        .clickable(function () { selectSubject($(this).attr('id')); });
 
     selectSubject('he');
 }
@@ -170,7 +170,7 @@ function screen2(karma) {
                 .append(createDiv('page2_box')
                         .addClass('word_box'))
                 .append(karma.createImg('question_mark')
-                        .click(function () { checkAnswer(karma); })
+                        .clickable(function () { checkAnswer(karma); })
                         .addClass('question_mark')));
     $(range(0, 4).map(createBlank))
         .appendTo('#page2_question');
@@ -213,7 +213,7 @@ function screen3(karma) {
                 .append(createDiv('page3_box')
                         .addClass('word_box'))
                 .append(karma.createImg('question_mark')
-                        .click(function () { checkAnswer(karma); })
+                        .clickable(function () { checkAnswer(karma); })
                         .addClass('question_mark')));
 
 }

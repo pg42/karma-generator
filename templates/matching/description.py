@@ -3,7 +3,8 @@ css('matching.css')
 
 for f in ['karma',
           '../../js/common.js',
-          '../../js/clock.js']:
+          '../../js/clock.js',
+          '../../js/jquery.clickable.js']:
     java_script(f)
 
 java_script('matching.js')

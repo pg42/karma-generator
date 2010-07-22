@@ -129,14 +129,14 @@ function startLesson(karma) {
                  { question: 'कप र फुलमा कुन बढी ?', answer: 'cup' },
                  { question: 'केरा र बलमा कुन बढी ?', answer: 'banana' }];
         $('.answerButton')
-            .click(function () {
-                       if ($(this).data('key') == currentTask.answer) {
-                           karma.play('correct');
-                           nextTask();
-                       } else {
-                           karma.play('incorrect');
-                       }
-                   });
+            .clickable(function () {
+                           if ($(this).data('key') == currentTask.answer) {
+                               karma.play('correct');
+                               nextTask();
+                           } else {
+                               karma.play('incorrect');
+                           }
+                       });
         nextTask();
     };
     var nextTask = function () {
@@ -148,7 +148,7 @@ function startLesson(karma) {
                         .addClass('questions')
                         .append(currentTask.question));
         } else {
-            $('.answerButton').unbind('click');
+            $('.answerButton').unclickable();
 	    $('#questionSection')
                 .empty()
                 .append(createDiv()

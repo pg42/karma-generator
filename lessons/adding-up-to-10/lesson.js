@@ -70,7 +70,7 @@ function startLesson(karma) {
     var score = 0;
 
     var processAnswer = function (is_correct) {
-        $('.bottomCard').unbind('click');
+        $('.bottomCard').uninteractive();
         if (is_correct) {
             score++;
         } else {
@@ -202,10 +202,10 @@ function startLesson(karma) {
                              width: 300,
                              height: 400
                          })
-                    .click(function () {
-                              $('#overlay').hide();
-                              $('#overlayPaper').hide();
-                           }))
+                    .interactive(function () {
+                                     $('#overlay').hide();
+                                     $('#overlayPaper').hide();
+                                 }))
             .append(createDiv()
                     .html('Great Job!')
                     .css({
@@ -243,16 +243,16 @@ function startLesson(karma) {
             function (choice, i) {
                 var paper = choice_papers[i];
                 displayObjects(paper, img_name, choice);
-                paper.click(function () {
-                                var correct = choice == total;
-                                karma.play(correct ? 'correct' : 'incorrect');
-                                processAnswer(correct);
-                            });
+                paper.interactive(function () {
+                                      var correct = choice == total;
+                                      karma.play(correct ? 'correct' : 'incorrect');
+                                      processAnswer(correct);
+                                  });
             }
         );
         startTimer();
     };
-    choice_papers.forEach(function (x) { x.unbind('click'); });
+    choice_papers.forEach(function (x) { x.uninteractive(); });
     next();
 }
 

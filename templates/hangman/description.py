@@ -3,7 +3,8 @@ css('global')
 central_js_files = [
     'ui.core',
     'karma',
-    '../../js/common.js'
+    '../../js/common.js',
+    '../../js/jquery.clickable.js'
     ]
 
 for f in central_js_files:

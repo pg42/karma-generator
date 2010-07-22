@@ -53,6 +53,7 @@ function startGame(karma) {
     };
 
     var disablePiece = function (piece) {
+        piece.unclickable();
         hidePiece(piece);
         piece.addClass('matched');
     };
@@ -95,7 +96,7 @@ function startGame(karma) {
     var createPiece = function (face) {
         return createDiv()
             .addClass('default')
-            .click(function () { pieceClicked($(this)); })
+            .clickable(function () { pieceClicked($(this)); })
             .append(face.hide());
     };
 

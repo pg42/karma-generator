@@ -135,7 +135,7 @@ var puzzles = ['puzzle1','puzzle2','puzzle3'];
 
 function createThumbnail(karma, puzzle) {
     return $(document.createElement('div'))
-        .click(function() { startGame(karma, puzzle); })
+        .clickable(function() { startGame(karma, puzzle); })
         .append(karma.createImg(puzzle)
                 .addClass('imageThumb'));
 }

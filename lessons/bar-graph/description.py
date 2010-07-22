@@ -10,6 +10,7 @@ for f in ['ui.core',
           'ui.draggable',
           'ui.droppable',
           '../../js/common.js',
+          '../../js/jquery.clickable.js',
           'lesson.js']:
     java_script(f)
 

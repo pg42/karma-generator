@@ -21,9 +21,9 @@ function startLesson(karma, contentDiv) {
             .append(createDiv('title')
                     .text(month_name)
                     .addClass('monthsName')
-                    .click(function(){
-                               karma.play(month_name);
-                           })
+                    .clickable(function(){
+                                   karma.play(month_name);
+                               })
                    )
             .append(karma.createImg(month_name).addClass('imgBox'));
     };
@@ -91,9 +91,9 @@ function startGame(karma, contentDiv) {
                     .data('correctLetter', month_name[missing_char])
                     .addClass('blankBox')
                     .Watermark('?')
-                    .click(function(){
-                               this.select();
-                           })
+                    .clickable(function(){
+                                   this.select();
+                               })
                    )
             .append($(document.createElement('span')).text(month_suf));
     };
@@ -151,13 +151,14 @@ function startGame(karma, contentDiv) {
             }
         });
 
-    $("#linkCheck").click(
+    $("#linkCheck").clickable(
         function(){
             $('.dropObjects').each(
                 function (index, value) {
                     var correctLetter = function (input_field) {
                         return input_field.val().toLowerCase() == input_field.data('correctLetter').toLowerCase();
                     };
+                    var dragChild = currentDroppedPositions[$(this).attr('id')];
                     var correct =
                         dragChild != null &&
                         $(this).data('monthName') == dragChild.data('monthName') &&

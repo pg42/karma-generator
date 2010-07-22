@@ -5,7 +5,6 @@
     width: 187px;
     height: 55px;
     background-image: url(../assets/image/check.png);
-    cursor: pointer;
 }
 
 #content {
@@ -44,7 +43,6 @@
 }
 
 .monthsName {
-    cursor: pointer;
     text-align: center;
     font: 26px/30px Arial, Helvetica, sans-serif;
 }

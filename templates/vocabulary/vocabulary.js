@@ -12,9 +12,9 @@ function generateScreen0(karma, $container) {
     $(objects.map(function (object) {
                       return createDiv()
                           .css(objectCss(object))
-                          .click(function () {
-                                     karma.play(object.name);
-                                 });
+                          .clickable(function () {
+                                         karma.play(object.name);
+                                     });
                   })).appendTo($vocab_img);
 }
 
