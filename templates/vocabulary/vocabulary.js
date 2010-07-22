@@ -1,6 +1,5 @@
 function generateScreen0(karma, $container) {
-    var $vocab_img = $(document.createElement('div'))
-        .attr('id', 'vocabImg')
+    var $vocab_img = createDiv('vocabImg')
         .appendTo($container);
 
     var objectCss = function(object) {
@@ -11,7 +10,7 @@ function generateScreen0(karma, $container) {
     };
 
     $(objects.map(function (object) {
-                      return $(document.createElement('div'))
+                      return createDiv()
                           .css(objectCss(object))
                           .click(function () {
                                      karma.play(object.name);
@@ -21,21 +20,21 @@ function generateScreen0(karma, $container) {
 
 function generateScreen1(karma, $container) {
     var createImage = function (object) {
-        var img_area = $(document.createElement('div'))
+        var img_area = createDiv()
             .addClass('imgArea');
         // TBD: is this div needed?
-        var imgObject = $(document.createElement('div'))
+        var imgObject = createDiv()
             .addClass('imgObject')
             .append(karma.createImg(object.name))
             .appendTo(img_area);
-        $(document.createElement('div'))
+        createDiv()
             .addClass('dropObjects')
             .appendTo(img_area);
         return img_area;
     };
 
     var createWord = function (object) {
-        return $(document.createElement('div'))
+        return createDiv()
             .addClass('dragObjects')
             .html(object.name);
     };
@@ -58,7 +57,7 @@ function generateScreen1(karma, $container) {
                      karma.play('incorrect');
                  }
                  if ($('.dragObjects').size() == 0) {
-                     $(document.createElement('div'))
+                     createDiv()
                          .addClass('gameOver')
                          .text('GAME OVER')
                          .appendTo($('#optionSection'));
@@ -70,13 +69,11 @@ function generateScreen1(karma, $container) {
         enableDragAndDrop(words[i], $('.dropObjects', images[i]));
     }
 
-    var $ques_section = $(document.createElement('div'))
-        .attr({id: 'quesSection'})
+    var $ques_section = createDiv('quesSection')
         .appendTo($container);
     $(Karma.shuffle(images)).appendTo($ques_section);
 
-    var $option_section = $(document.createElement('div'))
-        .attr({id: 'optionSection'})
+    var $option_section = createDiv('optionSection')
         .appendTo($container);
     $(Karma.shuffle(words)).appendTo($option_section);
 }
