@@ -9,7 +9,6 @@ Grep for TBD in the code.
 * vocabulary lessons: don't embed the words in the picture on the first page
 * files ne_correct.wav and ne_incorrect.wav: get ogg files for these
 * check that timer is always cleared, even when restarting a lesson.
-* use hand cursor for interactive buttons in lessons (see adding-up-to-ten)
 * use Karma.convertNumToLocale iso array of digits
 * delay on interactive buttons, so that double-clicking does not answer two consecutive questions
 * help HTML content needs padding and styling
