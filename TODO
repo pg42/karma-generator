@@ -60,3 +60,4 @@ Bugs in existing lessons:
 * 2_Maths_addingUpto10FunGame_3_K: if you play the game twice, the second time, the big gorilla doesn't disappear when you click it.
 * 2_Maths_addingUpto10FunGame_3_K: when restarting, the speed doesn't reset
 * 2_Maths_countingSheep_2_K: title needs to be translated to nepali
+* 6_English_articles_7_K, 2nd screen: if you click on an answer, and then immediately on another picture, the question will disappear
