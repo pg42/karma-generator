@@ -144,21 +144,6 @@ body {
     background-image: url(../image/check.png);
 }
 
-#linkStart {
-    cursor: pointer;
-    width: 251px;
-    height: 55px;
-    background: url(../image/btn_start.png);
-}
-
-#linkStart:hover {
-    background: url(../image/btn_start_hover.png);
-}
-
-#linkStart:active {
-    background: url(../image/btn_start_mouse_down.png);
-}
-
 #linkPlayAgain {
     cursor: pointer;
     width: 251px;
