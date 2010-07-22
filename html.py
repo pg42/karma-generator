@@ -100,6 +100,7 @@ class HtmlElement(HtmlElementFactory):
 
     def attr(self, **kw):
         self.attributes = kw
+        return self
 
     def print_on(self, stream):
         def attribute_key_to_string(k):

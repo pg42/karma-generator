@@ -1,7 +1,7 @@
 #! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
-from html import HtmlDocument
+from html import HtmlDocument, HtmlElement
 import codecs
 import os
 import shutil
@@ -283,6 +283,9 @@ def sort_java_script_files(files):
     return result
 
 
+def createDiv(id):
+    return HtmlElement('div', True).attr(id=id)
+
 class Lesson():
     def __init__(self):
         self.parent_directory = ''
@@ -293,7 +296,7 @@ class Lesson():
         self.css_files = []
         self.image_files = []
         self.audio_files = []
-        self.divs = [{'id': 'content'}]
+        self.divs = [createDiv('content')]
 
         self.java_script_files.append(GeneratedFile(self, 'lesson-karma.js'))
 
@@ -333,10 +336,7 @@ class Lesson():
                         src=string.replace(file.relative_path(self.directory), '\\', '/'))
         body = html.body()
         generate_header(self.directory, body, self.lesson_title)
-        for div in self.divs:
-            created_div = body.div(id=div['id'])
-            if 'innerhtml' in div:
-                created_div.innerhtml(div['innerhtml'])
+        body.children.extend(self.divs)
         generate_footer(body)
         doc.print_on(stream)
 
@@ -420,8 +420,10 @@ def audio(file, name):
 def div(**info):
     if 'id' in info and info['id'] == 'content':
         print 'Warning: div(id=\'content\') no longer needed (it\'s added automatically).'
-        return
-    theLesson.divs.append(info)
+        return None
+    result = createDiv(info['id'])
+    theLesson.divs.append(result)
+    return result
 
 
 def footer_configuration(**kw):
@@ -462,13 +464,12 @@ def add_help():
     help_img = frob_path('help.png')
     if (os.path.exists(help_html)):
         f = codecs.open(help_html, 'r', 'UTF-8')
-        div(id='help', innerhtml=f.read())
+        div(id='help').div(id='helpText').innerhtml(f.read())
 
     elif (os.path.exists(help_img)):
         img = image(help_img, 'help')
         src = string.replace(img.relative_path(), '\\', '/')
-        src = u'<img src="%s">' % src
-        div(id='help', innerhtml=src)
+        div(id='help').img(src=src)
     else:
         print 'Warning: the file ' + str(help_path) + ' doesn\'t exist.'
 
