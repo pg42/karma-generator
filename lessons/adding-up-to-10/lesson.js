@@ -13,7 +13,6 @@ function initialize(karma) {
             .addClass('chimp')
             .hide();
     };
-    // TBD: in the original lesson this happens before you click 'play'
     $('#content')
         .append(createDiv('main')
                 .append(createDiv('top')
@@ -253,6 +252,7 @@ function startLesson(karma) {
         );
         startTimer();
     };
+    choice_papers.forEach(function (x) { x.unbind('click'); });
     next();
 }
 
