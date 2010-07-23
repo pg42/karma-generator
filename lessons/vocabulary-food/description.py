@@ -15,3 +15,4 @@ foods = [
 register_objects(foods)
 
 image('vocabImg.jpg')
+css('lesson.css')

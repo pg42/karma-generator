@@ -1,5 +1,5 @@
 css('global')
-css('lesson.css')
+css('vocabulary.css')
 
 central_js_files = [
     'ui.core',

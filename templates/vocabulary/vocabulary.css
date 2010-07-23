@@ -94,7 +94,7 @@
 
 .dragObjects {
     float: left;
-    width: 135px;
+	margin-left: 25px;
     height: 33px;
     text-align: center;
     cursor: move;
