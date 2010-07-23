@@ -1,174 +1,202 @@
 @CHARSET "UTF-8";
-/****** Page Styles ****/
 
-/*  Designed for 1200*900 px screen resolution  */ 
- 
+/*  Designed for 1200*900 px screen resolution  */
+
 body {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-	margin: 0px;
-	background-color: #FFFFCC;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    margin: 0px;
+    background-color: #FFFFCC;
 }
+
 #header {
-	background-image: url(../image/bg_header.png);
-	background-repeat: repeat-x;
-	height: 75px;
-	width: 100%;
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index:10;
+    background-image: url(../image/bg_header.png);
+    background-repeat: repeat-x;
+    height: 75px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
 }
+
 #topbtn_left {
-	float: left;
-	height: 60px;
-	width: 60px;
-	padding-top: 6px;
-	padding-left: 15px;
+    float: left;
+    height: 60px;
+    width: 60px;
+    padding-top: 6px;
+    padding-left: 15px;
 }
-	
-	
-	.linkBack{
-			cursor:pointer;
-			width: 60px;		height: 59px;
-			background:url(../image/btn_back.png);
-		}
-	.linkBack:hover{
-			background:url(../image/btn_back_hover.png);
-		}
-	
+
+
+.linkBack {
+    cursor: pointer;
+    width: 60px;
+    height: 59px;
+    background: url(../image/btn_back.png);
+}
+
+.linkBack:hover {
+    background: url(../image/btn_back_hover.png);
+}
+
 #lesson_title {
-	float: left;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 16pt;
-	font-weight: bold;
-	color: #FFFFFF;
-	margin-left: 10px;
-	background-image: url(../image/bg_title_block.png);
+    float: left;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-left: 10px;
+    background-image: url(../image/bg_title_block.png);
 }
-#topbtn_right {
-	float: right;
-	height: 60px;
-	width: 60px;
-	padding-top: 6px;
-	padding-right: 15px;
+
+.topbtn_right {
+    float: right;
+    height: 60px;
+    width: 60px;
+    padding-top: 6px;
+    padding-right: 15px;
 }
-		#linkHelp{
-			width: 60px;		height: 60px;
-			background:url(../image/btn_help.png);
-			cursor:pointer;
-		}
-		#linkHelp:hover{
-			background:url(../image/btn_help_hover.png);
-		}
-		#linkOle{
-			cursor:pointer;
-			width: 60px;		height: 60px;
-			background:url(../image/btn_ole.png);
-		}
-		#linkOle:hover{
-			background:url(../image/btn_ole_hover.png);
-		}
-		.linkNext{
-			cursor:pointer;
-			width: 60px;		height: 60px;
-			background:url(../image/btn_next.png);
-		}
-		.linkNext:hover{
-			background:url(../image/btn_next_hover.png);
-		}
+
+#linkHelp {
+    width: 60px;
+    height: 60px;
+    background: url(../image/btn_help.png);
+    cursor: pointer;
+}
+
+#linkHelp:hover {
+    background: url(../image/btn_help_hover.png);
+}
+
+#help {
+    display: none;
+    position: absolute;
+    right: 60px;
+    top: 75px;
+    width: 297px;
+    height: 697px;
+    z-index: 1000;
+}
+
+#helpText {
+    border: 2px solid #B303DF;
+    background-color: #EFEBBA;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#linkOle {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background: url(../image/btn_ole.png);
+}
+
+#linkOle:hover {
+    background: url(../image/btn_ole_hover.png);
+}
+
+.linkNext {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background: url(../image/btn_next.png);
+}
+
+.linkNext:hover {
+    background: url(../image/btn_next_hover.png);
+}
+
 #footer {
-	position:relative;
-	background-image: url(../image/bg_footer.png);
-	background-repeat: repeat-x;
-	height: 75px;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
+    position: relative;
+    background-image: url(../image/bg_footer.png);
+    background-repeat: repeat-x;
+    height: 75px;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
 }
+
 #score_box {
-	float: left;
-	padding-left: 5px;
-	padding-top: 0.7em;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #FFFF00;
-	font-size: 16pt;
-	font-weight: bold;
+    float: left;
+    padding-left: 5px;
+    padding-top: 0.7em;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #FFFF00;
+    font-size: 16pt;
+    font-weight: bold;
 }
+
 .botbtn_right {
-	float: right;
-	height: 55px;
-	padding-right: 5px;
-	padding-top: 10px;
-}	
-	#linkCheck{
-			margin: 1em 3em 0 0;
-			width: 101px;			height: 30px;
-			background-image: url(../image/check.png);
-		}
-		
-	#linkStart{
-			cursor:pointer;
-			width: 251px;		height: 55px;
-			background:url(../image/btn_start.png);
-		}
-		#linkStart:hover{
-			background:url(../image/btn_start_hover.png);
-		}
-		#linkStart:active{
-			background:url(../image/btn_start_mouse_down.png);
-		}
-		#linkPlayAgain{
-			cursor:pointer;
-			width: 251px;		height: 55px;
-			background:url(../image/btn_play_again.png);
-		}
-		#linkPlayAgain:hover{
-			background:url(../image/btn_play_again_hover.png);
-		}
-		#linkPlayAgain:active{
-			background:url(../image/btn_play_again_mouse_down.png);
-		}
-#linkNextLesson{
-	position:absolute;
-	bottom: 75px;
-	right: 10px;
+    float: right;
+    height: 55px;
+    padding-right: 5px;
+    padding-top: 10px;
 }
-#linkPrevLesson{
-	position:absolute;
-	bottom: 75px;
-	left: 10px;
+
+#linkCheck {
+    margin: 1em 3em 0 0;
+    width: 101px;
+    height: 30px;
+    background-image: url(../image/check.png);
 }
+
+#linkPlayAgain {
+    cursor: pointer;
+    width: 251px;
+    height: 55px;
+    background: url(../image/btn_play_again.png);
+}
+
+#linkPlayAgain:hover {
+    background: url(../image/btn_play_again_hover.png);
+}
+
+#linkPlayAgain:active {
+    background: url(../image/btn_play_again_mouse_down.png);
+}
+
+#linkNextLesson {
+    position: absolute;
+    bottom: 75px;
+    right: 10px;
+}
+
+#linkPrevLesson {
+    position: absolute;
+    bottom: 75px;
+    left: 10px;
+}
+
 #timerBar {
+    position: absolute;
+    left: 30%;
+    bottom: 25%;
+    width: 210px;
+    height: 35px;
+    padding-left: 10px;
+    color: #FFFF00;
+    font-size: 16pt;
+    font-weight: bold;
+}
 
-		position: absolute;
-		left: 30%;
-		bottom: 25%;
-		width: 210px;
-		height:35px;
-		padding-left: 10px;
-		color: #FFFF00;
-		font-size: 16pt;
-		font-weight: bold;
-	}
-	#picClock{
-		float:left;
-		width:32px;
-		height: 32px;
-		background: url(../image/picClock.png);
-	}
-	
-	.timerBoxes{   /* Show the timer running after the game has began.... */
-		float:right;
-		width: 50px;
-		height: 35px;
-		border: 2px dotted green;		
-		color: blue;
-		text-align:center;
-		font : bold 25px Arial Black, Times New Roman;
-		background: #ACC;
-	}
+#picClock {
+    float: left;
+    width: 32px;
+    height: 32px;
+    background: url(../image/picClock.png);
+}
 
-/**** End of the page style ****/
-
-
+.timerBoxes {
+    float: right;
+    width: 50px;
+    height: 35px;
+    border: 2px dotted green;
+    color: blue;
+    text-align: center;
+    font : bold 25px Arial Black, Times New Roman;
+    background: #ACC;
+}
