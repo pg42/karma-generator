@@ -10,6 +10,7 @@ Grep for TBD in the code.
 * files ne_correct.wav and ne_incorrect.wav: get ogg files for these
 * check that timer is always cleared, even when restarting a lesson.
 * delay on interactive buttons, so that double-clicking does not answer two consecutive questions
+* convert help.png to help.html for all lessons.
 * help HTML content needs padding and styling
 * ability to have multiple help files, displaying the right one based on the screen showing
 * centralise common assets (correct / incorrect sounds)
