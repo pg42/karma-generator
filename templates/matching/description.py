@@ -3,7 +3,8 @@ css('matching.css')
 
 for f in ['karma',
           '../../js/common.js',
-          '../../js/clock.js']:
+          '../../js/clock.js',
+          '../../js/jquery.clickable.js']:
     java_script(f)
 
 java_script('matching.js')
@@ -18,6 +19,5 @@ def register_objects(objects):
         image(object + '.png', object)
     print >>objects_js, 'var objects = [' + ', '.join([quote(x) for x in objects]) + '];'
 
-div(id='content')
 
 footer_configuration(link_next=False, link_previous=False)

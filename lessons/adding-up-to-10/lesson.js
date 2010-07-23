@@ -13,7 +13,6 @@ function initialize(karma) {
             .addClass('chimp')
             .hide();
     };
-    // TBD: in the original lesson this happens before you click 'play'
     $('#content')
         .append(createDiv('main')
                 .append(createDiv('top')
@@ -71,7 +70,7 @@ function startLesson(karma) {
     var score = 0;
 
     var processAnswer = function (is_correct) {
-        $('.bottomCard').unbind('click');
+        $('.bottomCard').uninteractive();
         if (is_correct) {
             score++;
         } else {
@@ -167,7 +166,7 @@ function startLesson(karma) {
             .animate({ top: 130 },
                      12000 - level * 1000,
                     function () {
-                        karma.audio.trigger.play();
+                        karma.play('trigger');
                         // Timeout is needed because otherwise it doesn't
                         // start counting down again after time runs out.
                         setTimeout(function () { processAnswer(false); }, 0);
@@ -203,10 +202,10 @@ function startLesson(karma) {
                              width: 300,
                              height: 400
                          })
-                    .click(function () {
-                              $('#overlay').hide();
-                              $('#overlayPaper').hide();
-                           }))
+                    .interactive(function () {
+                                     $('#overlay').hide();
+                                     $('#overlayPaper').hide();
+                                 }))
             .append(createDiv()
                     .html('Great Job!')
                     .css({
@@ -244,16 +243,16 @@ function startLesson(karma) {
             function (choice, i) {
                 var paper = choice_papers[i];
                 displayObjects(paper, img_name, choice);
-                paper.click(function () {
-                                var correct = choice == total;
-                                karma.audio[correct ? 'correct' : 'incorrect']
-                                    .play();
-                                processAnswer(correct);
-                            });
+                paper.interactive(function () {
+                                      var correct = choice == total;
+                                      karma.play(correct ? 'correct' : 'incorrect');
+                                      processAnswer(correct);
+                                  });
             }
         );
         startTimer();
     };
+    choice_papers.forEach(function (x) { x.uninteractive(); });
     next();
 }
 

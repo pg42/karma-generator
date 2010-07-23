@@ -71,18 +71,6 @@
 .optImg:Hover{
 	background-color: #92CEF2;
 }
-
-#help{
-	display:none;
-	position:absolute;
-	right: 60px;
-	top: 75px;;
-	width: 297px;
-	height: 697px;
-	background:url(../assets/image/help.png);
-	z-index:40;
-}
-
 		
 #gameOver{
 	opacity: 1;

@@ -3,7 +3,8 @@ css('global')
 central_js_files = [
     'ui.core',
     'karma',
-    '../../js/common.js'
+    '../../js/common.js',
+    '../../js/jquery.clickable.js'
     ]
 
 for f in central_js_files:
@@ -12,7 +13,6 @@ for f in central_js_files:
 java_script('hangman.js')
 css('hangman.css')
 
-div(id='content')
 
 nr_of_tries_js = java_script('number_of_tries.js', generated=True)
 

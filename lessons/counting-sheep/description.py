@@ -22,5 +22,4 @@ image('sheep2.png', 'sheep2')
 image('sheep3.png', 'sheep3')
 image('title.png', 'title')
 
-div(id='content')
 

@@ -26,6 +26,5 @@ image('scale.png', 'scale')
 image('lines.png', 'lines')
 
 
-div(id='content')
 
 footer_configuration(link_next=True, link_previous=False, scoreboard=True)

@@ -10,6 +10,7 @@ for f in ['ui.core',
           'ui.draggable',
           'ui.droppable',
           '../../js/common.js',
+          '../../js/jquery.clickable.js',
           'lesson.js']:
     java_script(f)
 
@@ -28,4 +29,3 @@ for object in objects:
 audio('ne_correct.wav', 'correct')
 audio('ne_incorrect.wav', 'incorrect')
 
-div(id='content')

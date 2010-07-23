@@ -9,10 +9,10 @@ css('lesson.css')
 for f in ['ui.core',
           'karma',
           '../../js/common.js',
+          '../../js/jquery.interactive.js',
           'lesson.js']:
     java_script(f)
 
-div(id='content')
 
 audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')

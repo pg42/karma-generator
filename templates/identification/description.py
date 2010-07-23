@@ -11,7 +11,6 @@ for f in central_js_files:
 
 css('identification.css')
 
-div(id='content')
 
 for name in ['correct', 'incorrect']:
     image(name + '.png', name)

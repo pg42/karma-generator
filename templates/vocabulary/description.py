@@ -6,7 +6,8 @@ central_js_files = [
     'ui.draggable',
     'ui.droppable',
     'karma',
-    '../../js/common.js']
+    '../../js/common.js',
+    '../../js/jquery.clickable.js']
 
 for f in central_js_files:
     java_script(f)
@@ -14,7 +15,6 @@ for f in central_js_files:
 lesson_js = java_script('lesson.js', generated=True)
 java_script('vocabulary.js')
 
-div(id='content')
 
 def register_objects(objects):
     for o in objects:

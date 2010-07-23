@@ -18,7 +18,6 @@ java_script('quick.js')
 java_script('init.js')
 lesson_js = java_script('lesson.js', generated=True)
 
-div(id='content')
 
 def totalQues(num):
     print >>lesson_js, "var TOTAL_QUES = "+ str(num)+";"

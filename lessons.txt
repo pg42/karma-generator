@@ -43,6 +43,7 @@ v       2_English_vocabularyDomesticAnimals_4_K
 v       2_English_vocabularyFood_16_K
 v       2_English_vocabularyFruits_10_K
 v       2_English_vocabularyObjects_5_K
+v       2_English_vocabularyPlants_17_K
 v       2_Maths_addingNumbers_4_K
 v       2_Maths_addingUpto10FunGame_3_K
 v       2_Maths_barGraph_16_K
@@ -64,7 +65,6 @@ v       6_Maths_matchingAnglesAndShapes_5_K
 v       6_Maths_matchingFactorsAndProducts_4_K
 v       6_Maths_quickAddition_1_K
 
-x       2_English_vocabularyPlants_17_K
 x       2_English_vocabularyProfessions_6_K
 x       2_English_vocabularyStructures_11_K
 x       2_English_vocabularyTransportation_9_K

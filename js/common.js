@@ -36,29 +36,16 @@ function setUpLinkBackLesson() {
                });
 }
 
-function setUpStartAndPlayAgainButtons(karma, initialize, start_game) {
-    // Why two buttons?
-    // Why not:
-    // * only a play button?
-    // -or-
-    // * a button that is initially play, later replay?
-    disableControlButton($('#linkPlayAgain'));
-    controlButtonClickCallback($('#linkStart'),
-                               function () {
-                                   initialize(karma);
-                                   disableControlButton($('#linkStart'));
-                                   enableControlButton($('#linkPlayAgain'));
-                                   start_game(karma);
-                               });
-    controlButtonClickCallback($('#linkPlayAgain'),
-                               function () { start_game(karma); });
-}
-
 function setUpHelp() {
-    $help = $('#help');
+    var $help = $('#help');
     $('#linkHelp')
         .click(function () { $help.slideDown(2000); })
         .mouseout(function () { $help.slideUp(2000); });
+}
+
+function setUpPlayAgain(karma, start_game) {
+    controlButtonClickCallback($('#linkPlayAgain'),
+                               function () { start_game(karma); });
 }
 
 /*
@@ -77,8 +64,10 @@ function setUpLesson(initialize, start_game) {
           karma.ready(
               function () {
                   setUpLinkBackLesson();
-                  setUpStartAndPlayAgainButtons(karma, initialize, start_game);
                   setUpHelp();
+                  setUpPlayAgain(karma, start_game);
+                  initialize(karma);
+                  start_game(karma);
               });
       });
 }
@@ -94,8 +83,8 @@ function setUpMultiScreenLesson(draw_screen_fns) {
           var $content = $('#content'); // TBD: error if absent
           var current_screen = 0;
 
-          var gotoScreen = function(i) {
-              current_screen = i;
+          var gotoFirstScreen = function() {
+              current_screen = 0;
               updateScreen();
           };
 
@@ -134,12 +123,9 @@ function setUpMultiScreenLesson(draw_screen_fns) {
           karma.ready(
               function () {
                   setUpLinkBackLesson();
-                  setUpStartAndPlayAgainButtons(karma,
-                                                function () {},
-                                                function (karma) {
-                                                    gotoScreen(0);
-                                                });
                   setUpHelp();
+                  setUpPlayAgain(karma, gotoFirstScreen);
+                  gotoFirstScreen();
               });
       });
 }
@@ -187,6 +173,13 @@ Karma.createImg = function (name, disable_dragging) {
     }
     return result;
 };
+
+Karma.play = function (sound_name) {
+    if (!this.audio[sound_name]) {
+        alert('Missing sound file: ' + name);
+    }
+    this.audio[sound_name].play();
+}
 
 Karma.random = Karma.rand;
 

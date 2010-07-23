@@ -1,7 +1,7 @@
 #! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
-from html import HtmlDocument
+from html import HtmlDocument, HtmlElement
 import codecs
 import os
 import shutil
@@ -99,7 +99,9 @@ class AssetFile():
     def preload(self):
         return self._name != None
 
-    def relative_path(self, start):
+    def relative_path(self, start=None):
+        if start == None:
+            start = self._lesson.directory
         return os.path.relpath(self.absolute_path(), start)
 
     def absolute_path(self):
@@ -175,11 +177,10 @@ def generate_header(dir, body, title):
              width=33, height=75, align='absmiddle')
 
 
-    header.div(id='topbtn_right').div(title='Help', id='linkHelp')
+    header.div(className='topbtn_right').div(title='Help', id='linkHelp')
 
-    # TBD: twice the id topbtn_right?
-    header.div(id='topbtn_right').div(title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित',
-                                      id='linkOle')
+    header.div(className='topbtn_right').div(title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित',
+                                             id='linkOle')
 
 
 gFooterConfiguration = dict(link_previous=True,
@@ -199,8 +200,7 @@ def generate_footer(body):
         footer.div(id='score_box', display='none')
 
     footer.div(className='botbtn_right').div(title='Play Again', id='linkPlayAgain')
-    footer.div(className='botbtn_right').div(title='Start', id='linkStart')
-    
+
     if gFooterConfiguration['link_check_answer']:
         footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
 
@@ -281,7 +281,10 @@ def sort_java_script_files(files):
     return result
 
 
-class Lesson:
+def createDiv(id):
+    return HtmlElement('div', True).attr(id=id)
+
+class Lesson():
     def __init__(self):
         self.parent_directory = ''
         self.directory = None
@@ -291,7 +294,7 @@ class Lesson:
         self.css_files = []
         self.image_files = []
         self.audio_files = []
-        self.divs = []
+        self.divs = [createDiv('content')]
 
         self.java_script_files.append(GeneratedFile(self, 'lesson-karma.js'))
 
@@ -302,7 +305,7 @@ class Lesson:
         create_dir(self.directory)
         os.chdir(self.directory)
         map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
-        
+
         for f in self.java_script_files + self.css_files:
             f.make_available()
         for f in self.image_files + self.audio_files:
@@ -310,7 +313,7 @@ class Lesson:
 
     def set_directory(self, dir):
         self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
-            
+
     def print_html_on(self, stream):
         doc = HtmlDocument()
         for line in warning_text_lines:
@@ -331,24 +334,9 @@ class Lesson:
                         src=string.replace(file.relative_path(self.directory), '\\', '/'))
         body = html.body()
         generate_header(self.directory, body, self.lesson_title)
-        for div in self.divs:
-            body.div(id=div['id'])
+        body.children.extend(self.divs)
         generate_footer(body)
         doc.print_on(stream)
-
-    def print_css_on(self, stream):
-        print >>stream, '/*'
-        for l in warning_text_lines:
-            print >>stream, ' *', l
-        print >>stream, ' */'
-        for div in self.divs:
-            print >>stream, '#%s {' % div['id']
-            for k,v in div.items():
-                if k != 'id':
-                    print >>stream, '  %s: %spx;' % (k, v)
-            print >>stream, '  border: 1px solid black;'
-            print >>stream, '  position: absolute;'
-            print >>stream, '}'
 
     def print_karma_js_on(self, stream):
         print >>stream, '/*'
@@ -389,6 +377,7 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
     theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     java_script('jquery')
+    add_help()
 
 
 def resolve_karma_file(name, karma_files, **kw):
@@ -427,7 +416,12 @@ def audio(file, name):
 
 
 def div(**info):
-    theLesson.divs.append(info)
+    if 'id' in info and info['id'] == 'content':
+        print 'Warning: div(id=\'content\') no longer needed (it\'s added automatically).'
+        return None
+    result = createDiv(info['id'])
+    theLesson.divs.append(result)
+    return result
 
 
 def footer_configuration(**kw):
@@ -454,7 +448,6 @@ def frob_path(path):
     else:
         return os.path.abspath(path)
 
-
 def include(path):
     path = frob_path(path)
     include_stack.append(path)
@@ -464,11 +457,17 @@ def include(path):
 
 
 def add_help():
-    help_path = os.path.join(os.path.dirname(include_stack[-1]),
-                             'help.png')
-    if (os.path.exists(help_path)):
-        div(id='help')
-        image('help.png')
+    # add html help content if it exists, otherwise the help image
+    help_html = frob_path('help.html')
+    help_img = frob_path('help.png')
+    if (os.path.exists(help_html)):
+        f = codecs.open(help_html, 'r', 'UTF-8')
+        div(id='help').div(id='helpText').innerhtml(f.read())
+
+    elif (os.path.exists(help_img)):
+        img = image(help_img, 'help')
+        src = string.replace(img.relative_path(), '\\', '/')
+        div(id='help').img(src=src)
     else:
         print 'Warning: the file ' + str(help_path) + ' doesn\'t exist.'
 
@@ -477,7 +476,7 @@ def check_file_exists(path):
     if not os.path.isfile(path):
         print 'Error: the file ' + path + ' doesn\'t exist.'
         sys.exit(1)
-    
+
 
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
@@ -502,14 +501,12 @@ if __name__ == '__main__':
     theLesson = Lesson()
     if options.output:
         theLesson.parent_directory = os.path.abspath(options.output)
-    
+
     include_stack.append(description)
-    add_help()
     check_file_exists(description)
     execfile(description)
     include_stack.pop()
 
     theLesson.copy_files()
     theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
-    theLesson.print_css_on(open('css/divs.css', 'w'))
     theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))

@@ -163,7 +163,7 @@ function startLesson(karma) {
                         .click(function () {
                                    if (word == current_word.word) {
                                        $(this).unbind('click');
-                                       karma.audio.correct.play();
+                                       karma.play('correct');
                                        // TBD: maybe remove hover?
                                        $(word_selector)
                                            .removeClass('highlight')
@@ -173,7 +173,7 @@ function startLesson(karma) {
                                            .css({color: randomElement(colors)});
                                        nextWord();
                                    } else {
-                                       karma.audio.incorrect.play();
+                                       karma.play('incorrect');
                                    }
                                })
                         .html(letter.toUpperCase());

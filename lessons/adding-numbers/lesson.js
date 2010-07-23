@@ -114,7 +114,7 @@ function startLesson(karma) {
     var current_task;
 
     var gameOver = function () {
-        karma.audio.byebye.play();
+        karma.play('byebye');
         $('#content')
             .empty()
             .append(createDiv('gameOver')
@@ -138,18 +138,18 @@ function startLesson(karma) {
             function (option, i) {
                 option_boxes[i]
                     .html(option)
-                    .click(function () {
-                               $('.optionBox').unbind('click');
-                               if (option == current_task.correct_option) {
-                                   correct_count++;
-                                   scoreboardHit();
-                                   karma.audio.correct.play();
-                               } else {
-                                   scoreboardMiss();
-                                   karma.audio.incorrect.play();
-                               }
-                               timer = setTimeout(nextTask, 1000);
-                           });
+                    .clickable(function () {
+                                   $('.optionBox').unclickable();
+                                   if (option == current_task.correct_option) {
+                                       correct_count++;
+                                       scoreboardHit();
+                                       karma.play('correct');
+                                   } else {
+                                       scoreboardMiss();
+                                       karma.play('incorrect');
+                                   }
+                                   timer = setTimeout(nextTask, 1000);
+                               });
             }
         );
     };

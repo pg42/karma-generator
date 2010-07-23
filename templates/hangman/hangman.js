@@ -55,7 +55,7 @@ function startGame(karma) {
     var current_answer = null;
 
     var keyClicked = function () {
-        $(this).unbind('click');
+        $(this).unclickable();
         var letter = $(this).html();
         $(this).css('background-color', 'white');
         if (current_answer.indexOf(letter) != -1) {
@@ -90,8 +90,8 @@ function startGame(karma) {
 
     var nextQuestion = function () {
         $('.alphaKeys')
-            .unbind('click')
-            .click(keyClicked)
+            .unclickable()
+            .clickable(keyClicked)
             .css('background-color', '');
 
         if (remaining_tasks.length) {
@@ -117,7 +117,7 @@ function startGame(karma) {
         $('#linkNextLesson').hide();
     };
 
-    $('#linkNextLesson').click(nextQuestion);
+    $('#linkNextLesson').clickable(nextQuestion);
 
     nextQuestion();
 }

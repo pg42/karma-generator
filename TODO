@@ -8,20 +8,17 @@ Grep for TBD in the code.
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
 * files ne_correct.wav and ne_incorrect.wav: get ogg files for these
-* topbtn_right, botbtn_right: ids used multiple times (maybe use class?)
 * check that timer is always cleared, even when restarting a lesson.
-* use hand cursor for interactive buttons in lessons (see adding-up-to-ten)
-* use Karma.convertNumToLocale iso array of digits
 * delay on interactive buttons, so that double-clicking does not answer two consecutive questions
-* help files can be either HTML or PNG
+* help HTML content needs padding and styling
 * ability to have multiple help files, displaying the right one based on the screen showing
 * centralise common assets (correct / incorrect sounds)
 * generation should use a standard folder structure to merge into EPaath framework
 * have POT file for translatable strings, from which JSON language object is generated
 * javascript library to apply translation strings (printf / plural rules)
 * interface guidelines
-* startup of a lesson (why a start button?)
-* move repo to git.olenepal.org - DONE!
+* sounds are sometimes truncated (e.g. march in months-of-the-year lesson)
+* in vocabulary-plants: if you quickly drag two objects, correct is only played once.
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
@@ -59,3 +56,4 @@ Bugs in existing lessons:
 * 2_Maths_addingUpto10FunGame_3_K: if you play the game twice, the second time, the big gorilla doesn't disappear when you click it.
 * 2_Maths_addingUpto10FunGame_3_K: when restarting, the speed doesn't reset
 * 2_Maths_countingSheep_2_K: title needs to be translated to nepali
+* 6_English_articles_7_K, 2nd screen: if you click on an answer, and then immediately on another picture, the question will disappear

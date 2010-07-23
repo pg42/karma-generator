@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=6, subject='English', title='Months', week=1,
-       browser_title='Class 6 English Months',
-       lesson_title='Months of the Year')
+lesson(grade=6, subject='English', title='Months of the Year', week=1, browser_title='Class 6 English Months', lesson_title='Months of the Year')
 
 css('global')
 css('lesson.css')
@@ -11,11 +9,10 @@ for f in [
         'karma',
         'jquery.watermarkinput',
         '../../js/common.js',
+        '../../js/jquery.clickable.js',
         'lesson.js'
-	]:
+    ]:
         java_script(f)
-
-div(id='content')
 
 months = [
         'January',

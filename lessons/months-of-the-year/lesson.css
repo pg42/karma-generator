@@ -1,22 +1,10 @@
 @CHARSET "UTF-8";
 
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 40;
-}
-
 #linkCheck {
     margin: 0em 3em 1em 0;
     width: 187px;
     height: 55px;
     background-image: url(../assets/image/check.png);
-    cursor: pointer;
 }
 
 #content {
@@ -55,7 +43,6 @@
 }
 
 .monthsName {
-    cursor: pointer;
     text-align: center;
     font: 26px/30px Arial, Helvetica, sans-serif;
 }
