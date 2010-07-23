@@ -23,7 +23,7 @@ image('optionBox.png')
 
 audio('en_correct.ogg', 'correct')
 audio('en_incorrect.ogg', 'incorrect')
-audio('byebye.wav', 'byebye')
+audio('byebye.ogg', 'byebye')
 
 
 footer_configuration(link_previous=False, link_next=False, scoreboard=True)

@@ -70,7 +70,7 @@ function startLesson(karma) {
     var score = 0;
 
     var processAnswer = function (is_correct) {
-        $('.bottomCard').uninteractive();
+        $('.bottomCard').unclickable();
         if (is_correct) {
             score++;
         } else {
@@ -145,7 +145,7 @@ function startLesson(karma) {
                        $('.chimp').hide();
                        $('#normal_chimp').show();
                    },
-                  800);
+                   800);
     };
 
     var resetTimer = function () {
@@ -165,12 +165,12 @@ function startLesson(karma) {
         $('#timerIndicator')
             .animate({ top: 130 },
                      12000 - level * 1000,
-                    function () {
-                        karma.play('trigger');
-                        // Timeout is needed because otherwise it doesn't
-                        // start counting down again after time runs out.
-                        setTimeout(function () { processAnswer(false); }, 0);
-                    });
+                     function () {
+                         karma.play('trigger');
+                         // Timeout is needed because otherwise it doesn't
+                         // start counting down again after time runs out.
+                         setTimeout(function () { processAnswer(false); }, 0);
+                     });
     };
 
     var gameOver = function () {
@@ -202,10 +202,10 @@ function startLesson(karma) {
                              width: 300,
                              height: 400
                          })
-                    .interactive(function () {
-                                     $('#overlay').hide();
-                                     $('#overlayPaper').hide();
-                                 }))
+                    .clickable(function () {
+                                   $('#overlay').hide();
+                                   $('#overlayPaper').hide();
+                               }))
             .append(createDiv()
                     .html('Great Job!')
                     .css({
@@ -243,16 +243,16 @@ function startLesson(karma) {
             function (choice, i) {
                 var paper = choice_papers[i];
                 displayObjects(paper, img_name, choice);
-                paper.interactive(function () {
-                                      var correct = choice == total;
-                                      karma.play(correct ? 'correct' : 'incorrect');
-                                      processAnswer(correct);
-                                  });
+                paper.clickable(function () {
+                                    var correct = choice == total;
+                                    karma.play(correct ? 'correct' : 'incorrect');
+                                    processAnswer(correct);
+                                });
             }
         );
         startTimer();
     };
-    choice_papers.forEach(function (x) { x.uninteractive(); });
+    choice_papers.forEach(function (x) { x.unclickable(); });
     next();
 }
 
