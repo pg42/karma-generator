@@ -61,8 +61,6 @@ var tasks = [
           return x;
       });
 
-var nepaliDigits = '०१२३४५६७८९';
-
 function startLesson(karma) {
     var extensions = {
         start: function () {
@@ -82,7 +80,7 @@ function startLesson(karma) {
             var task = this.currentTask();
             $('#question')
                 .empty()
-                .append(nepaliDigits[scoreboardTotal() + 1] + '. ' +
+                .append(Karma.convertNumToLocale(scoreboardTotal() + 1, 'ne') + '. ' +
                         task.question);
             $('#check')
                 .empty();
