@@ -19,17 +19,6 @@
     overflow: hidden;
 }
 
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 240;
-}
-
 #main {
     float: left;
     position: relative;

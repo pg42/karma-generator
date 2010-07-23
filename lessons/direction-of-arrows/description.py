@@ -4,12 +4,9 @@ css('global')
 css('lesson.css')
 
 for f in ['ui.core',
-          'karma',
-          '../../js/common.js',
-          '../../js/multiple-choice.js']:
+          'multiple-choice']:
     java_script(f)
 
-java_script('lesson.js')
 
 for i in range(1, 9):
     name = 'arrow%s' % i

@@ -39,25 +39,14 @@
     margin: 10em 4em 1em 7em;
     width: 700px;
     height: 480px;
-    float : right;
     padding : 10px;
-    position: relative;
+    position: absolute;
+    right: 0px;
 }
 
 #imgShow {
     display: none;
     margin: 1em;
-}
-
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 40;
 }
 
 .piece {

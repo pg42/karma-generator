@@ -26,9 +26,14 @@ function startGame(karma) {
     var pieceClicked = function (piece) {
         if (piece.hasClass('matched') ||
             turned_pieces.length == 2 ||
-            turned_pieces.indexOf(piece) != -1) {
+            (
+                turned_pieces.length == 1 &&
+                piecesMatch(turned_pieces[0], piece) &&
+                face(turned_pieces[0]).data('pair') == face(piece).data('pair')
+            )) {
             return;
         }
+
         ++click_count;
         $('#clickBox').html(padLeft(click_count, '0', 2));
         turned_pieces.push(piece);
@@ -110,14 +115,14 @@ function startGame(karma) {
 
 function createImage(karma, word, key) {
     return createDiv()
-        .data('key', key)
+        .data({'key': key, pair: 'image'})
         .addClass('pieceFace')
         .append(karma.createImg(word));
 }
 
 function createText(word, key) {
     return createDiv()
-        .data('key', key)
+        .data({'key': key, pair: 'text'})
         .addClass('textColor')
         .addClass('pieceFace')
         .html(word);

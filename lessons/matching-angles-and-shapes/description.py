@@ -20,5 +20,4 @@ register_objects(['Acute-Angle',
                   'Triangle',
                   'Obtuse-Angle']);
 
-java_script('lesson.js')
 css('lesson.css')

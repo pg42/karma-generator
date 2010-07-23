@@ -5,9 +5,7 @@ lesson(grade=2, subject='Maths', title='Money Identification', week=18,
 css('global')
 
 for f in ['ui.core',
-          'karma',
-          '../../js/common.js',
-          '../../js/multiple-choice.js']:
+          'multiple-choice']:
     java_script(f)
 
 for i in [1, 2, 5, 10, 20, 25, 50, 100, 500, 1000]:
@@ -26,7 +24,6 @@ audio('ne_incorrect.ogg', 'incorrect')
 audio('byebye.ogg', 'byebye')
 
 css('lesson.css')
-java_script('lesson.js')
 
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)

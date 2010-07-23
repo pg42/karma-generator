@@ -6,32 +6,29 @@ css('lesson.css')
 
 for f in [
         'jquery-ui',
-        'karma',
         'jquery.watermarkinput',
-        '../../js/common.js',
-        '../../js/jquery.clickable.js',
-        'lesson.js'
+        'jquery.clickable'
     ]:
         java_script(f)
 
 months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-        ]
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+]
 for month in months:
-        image(month + '.png', month)
-        image('small_' + month + '.png', 'small_' + month)
-        audio(month + '.ogg', month)
+    image(month + '.png', month)
+    image('small_' + month + '.png', 'small_' + month)
+    audio(month + '.ogg', month)
 
 audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')

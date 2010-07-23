@@ -7,13 +7,11 @@ central_js_files = [
     'ui.core',
     'ui.draggable',
     'ui.droppable',
-    'karma',
-    '../../js/common.js']
+    'clock']
 
 for f in central_js_files:
     java_script(f)
 
-java_script('../../js/clock.js')
 java_script('quick.js')
 java_script('init.js')
 lesson_js = java_script('lesson.js', generated=True)

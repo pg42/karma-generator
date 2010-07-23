@@ -81,11 +81,8 @@ for x in ['exclamation_point', 'question_mark', 'question_mark2']:
     image(x + '.png', x)
 
 for f in ['ui.core',
-          'karma',
           'ui.draggable',
           'ui.droppable',
-          '../../js/common.js',
-          '../../js/jquery.clickable.js',
-          'lesson.js']:
+          'jquery.clickable']:
     java_script(f)
 

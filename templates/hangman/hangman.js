@@ -45,6 +45,7 @@ function createAnswerBoxes(string, $answerSection) {
 
 function startGame(karma) {
     createContentDivs(karma);
+    scoreboardReset();
 
     $('#missedText').hide();
     $('#linkNextLesson').hide();

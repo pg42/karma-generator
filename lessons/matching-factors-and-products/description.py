@@ -4,5 +4,3 @@ lesson(grade=6, subject='Maths', title='Matching Factors and Products',
        week=4)
 
 include('../../templates/matching/description.py')
-
-java_script('lesson.js')

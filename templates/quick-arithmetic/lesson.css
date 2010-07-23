@@ -1,20 +1,4 @@
 @CHARSET "UTF-8";
-/****** Page Styles ****/
-
-#help{
-	display:none;
-	position:absolute;
-	right: 60px;
-	top: 75px;;
-	width: 297px;
-	height: 697px;
-	background:url(../assets/image/help.png);
-	z-index:40;
-}
-
-
-
-/**** End of the page style ****/
 
 
 /**** Game Styles  ****/
@@ -28,10 +12,10 @@
     position:relative;
 
 }
-	#section{	
+	#section{
 		width: 900px;
 		height: 375px;
-		margin: 0 auto;			
+		margin: 0 auto;
 		z-index: 1;
         margin-top:150px;
 	}
@@ -43,7 +27,7 @@
 			z-index: 2;
 		}
 		#tv{
-			position:relative;	
+			position:relative;
 			margin-left: 12px;
 			width: 215px;
 			height: 191px;
@@ -56,14 +40,14 @@
 			left: 16px;
 			width: 179px;
 			height: 128px;
-			font: 40px/60px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+			font: 40px/60px Verdana, Geneva, Arial, Helvetica, sans-serif;
 			color: #FFF;
 			text-align:center;
-			font-weight:bold;		
+			font-weight:bold;
 			-moz-border-radius : 10px;
 			-webkit-border-radius : 10px;
 			border-radius : 10px;
-			z-index: 1;			
+			z-index: 1;
 		}
 		.tvOff{
 			background-color: #78040E;
@@ -104,7 +88,7 @@
 					width: 69px;
 					height: 48px;
 					background-color:#FCFFA4;
-					border: 2px solid #FCFFA4;  
+					border: 2px solid #FCFFA4;
 				}
 				.correct{
 					float:left;
@@ -120,12 +104,12 @@
 			text-align:center;
 			font: 30px/35px Verdana, Geneva, Arial, Helvetica, sans-serif;
 			color: #000;
-			font-weight: bold;			
+			font-weight: bold;
 		}
 			
 		input.textBox{
 			size:3;
-			font: 30px/35px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+			font: 30px/35px Verdana, Geneva, Arial, Helvetica, sans-serif;
 			font-weight: bold;
 			height:35px;
 			width: 80px;

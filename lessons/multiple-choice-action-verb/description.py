@@ -6,12 +6,9 @@ css('lesson.css')
 objects_js = java_script('objects.js', generated=True)
 
 for f in ['ui.core',
-          'karma',
-          '../../js/common.js',
-          '../../js/multiple-choice.js']:
+          'multiple-choice']:
     java_script(f)
 
-java_script('lesson.js')
 
 audio('en_correct.ogg', 'correct')
 audio('en_incorrect.ogg', 'incorrect')

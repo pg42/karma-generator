@@ -1,10 +1,8 @@
 css('global')
 css('matching.css')
 
-for f in ['karma',
-          '../../js/common.js',
-          '../../js/clock.js',
-          '../../js/jquery.clickable.js']:
+for f in ['clock',
+          'jquery.clickable']:
     java_script(f)
 
 java_script('matching.js')

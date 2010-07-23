@@ -63,17 +63,6 @@ td {
     margin: 0 0 0 50px;
 }
 
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 40;
-}
-
 .football {
     width: 25px;
     height: 25px;

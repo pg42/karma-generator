@@ -24,8 +24,9 @@ theLesson = None
 
 # TBD: provide a debug and optimized (minimized) version of the framework files.
 
-karma_root = os.path.abspath(os.path.dirname(argv0))
-
+karma_root = os.path.abspath(os.path.join(os.path.dirname(argv0), 'deploy', 'karma'))
+lesson_src = '';
+lesson_dest = '';
 
 class KarmaFile():
     def __init__(self, name, karma_path):
@@ -135,6 +136,20 @@ class AudioFile(AssetFile):
         return 'assets/audio'
 
 
+java_script_dependencies = [
+    ('jquery', 'jquery-ui'),
+    ('jquery', 'ui.core'),
+    ('ui.core', 'ui.draggable'),
+    ('ui.core', 'ui.droppable'),
+    ('jquery', 'jquery.watermarkinput'),
+    ('jquery', 'jquery.clickable'),
+    ('ui.core', 'ui.scoreboard'),
+    ('jquery-ui', 'ui.scoreboard'),
+    ('jquery', 'jquery.svg'),
+    ('common', 'multiple-choice'),
+    ('jquery', 'clock')
+    ]
+
 karma_java_script_files = [
     KarmaFile('jquery', 'js/jquery-1.4.2.js'),
     KarmaFile('jquery-ui', 'js/jquery-ui-1.8.2.js'),
@@ -145,7 +160,11 @@ karma_java_script_files = [
     KarmaFile('ui.scoreboard', 'js/ui.scoreboard.js'),
     KarmaFile('jquery.svg', 'js/jquery.svg.js'),
     KarmaFile('karma', 'js/karma.js'),
-    KarmaFile('global', 'js/global.js')
+    KarmaFile('global', 'js/global.js'),
+    KarmaFile('common', 'js/common.js'),
+    KarmaFile('jquery.clickable', 'js/jquery.clickable.js'),
+    KarmaFile('multiple-choice', 'js/multiple-choice.js'),
+    KarmaFile('clock', 'js/clock.js')
     ]
 
 
@@ -260,17 +279,6 @@ def topological_sort(nodes, dependencies, key):
     return result
 
 
-java_script_dependencies = [
-    ('jquery', 'jquery-ui'),
-    ('jquery', 'ui.core'),
-    ('ui.core', 'ui.draggable'),
-    ('ui.core', 'ui.droppable'),
-    ('jquery', 'jquery.watermarkinput'),
-    ('ui.core', 'ui.scoreboard'),
-    ('jquery-ui', 'ui.scoreboard'),
-    ('jquery', 'jquery.svg')
-    ]
-
 
 def sort_java_script_files(files):
     karma_files = filter(lambda x: isinstance(x, KarmaFile), files)
@@ -310,9 +318,14 @@ class Lesson():
             f.make_available()
         for f in self.image_files + self.audio_files:
             f[1].make_available()
+        # if a screenshot.jpg exists in the source, copy it to the dest
+        screenshot_img = os.path.join(lesson_src, 'screenshot.jpg')
+        if (os.path.exists(screenshot_img)):
+            shutil.copy(screenshot_img, os.path.join(self.directory, 'screenshot.jpg'))
 
     def set_directory(self, dir):
         self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
+        lesson_dest = self.directory
 
     def print_html_on(self, stream):
         doc = HtmlDocument()
@@ -377,6 +390,12 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
     theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     java_script('jquery')
+    java_script('karma')
+    java_script('common')
+    # include the lesson.js if it exists
+    lesson_js = frob_path('lesson.js')
+    if (os.path.exists(lesson_js)):
+        java_script('lesson.js')
     add_help()
 
 
@@ -435,7 +454,7 @@ def footer_configuration(**kw):
     if gFooterConfiguration['scoreboard']:
         css('ui.scoreboard')
         java_script('ui.scoreboard')
-        java_script('../../js/scoreboard.js') #TBD: fix path
+        java_script('../../deploy/karma/js/scoreboard.js') #TBD: fix path
 
 
 include_stack = []
@@ -497,10 +516,10 @@ if __name__ == '__main__':
         print "WARNING: 'karma' option (-k, --karma) is deprecated and no longer needed"
 
     description = os.path.abspath(args[0])
+    lesson_src = os.path.abspath(os.path.dirname(description))
 
     theLesson = Lesson()
-    if options.output:
-        theLesson.parent_directory = os.path.abspath(options.output)
+    theLesson.parent_directory = os.path.abspath('deploy/Activities')
 
     include_stack.append(description)
     check_file_exists(description)

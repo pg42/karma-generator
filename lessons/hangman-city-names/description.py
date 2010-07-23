@@ -6,7 +6,6 @@ include('../../templates/hangman/description.py')
 
 set_number_of_tries(7)
 
-java_script('lesson.js')
 css('lesson.css')
 
 image('footer_hangman.png')

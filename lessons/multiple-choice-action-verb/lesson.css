@@ -1,23 +1,9 @@
 @CHARSET "UTF-8";
-/****** Page Styles ****/
-
-	#help{
-	display:none;
-	position:absolute;
-	right: 60px;
-	top: 75px;;
-	width: 297px;
-	height: 697px;
-	background:url(../assets/image/help.png);
-	z-index:40;
-}	
-	
-/**** End of the page style ****/
 
 /**** Game Styles  ****/
 
 
-#content{	
+#content{
 	margin: 0px auto;
 	margin-top: 74px;
 	width: 1198px;
@@ -27,8 +13,8 @@
 	
 
 }
-#section{	
-	margin:150px auto;	
+#section{
+	margin:150px auto;
 	
 }
 
@@ -42,14 +28,14 @@
 	}
 	#question{
 		margin:60px 0 0 40px;
-		padding:5px;		
+		padding:5px;
 		height:30px;
 		font: 35px/32px Arial, Helvetica, sans-serif;
 		color: #0000FF;
 	}
 	#answer{
 		margin-left: 100px;
-		padding:5px;	
+		padding:5px;
 		height:30px;
 		font: 35px/32px Arial, Helvetica, sans-serif;
 		color: #000000;
@@ -88,7 +74,7 @@
 		text-align:center;
 		position:absolute;
 		top:15em;
-		right: 15em;	
+		right: 15em;
 		
 	}
 
@@ -97,7 +83,7 @@
 	text-align:center;
 	font: 30px/35px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-weight:bold;
-	color:red;		
+	color:red;
 }
 #gameOverInfo{
 	margin-top: 35px;
