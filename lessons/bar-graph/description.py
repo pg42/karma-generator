@@ -26,6 +26,6 @@ print >>objects_js, 'var objects = [{0}];'.format(', '.join(map(quote, objects))
 for object in objects:
     image(object + '.png', object)
 
-audio('ne_correct.wav', 'correct')
-audio('ne_incorrect.wav', 'incorrect')
+audio('ne_correct.ogg', 'correct')
+audio('ne_incorrect.ogg', 'incorrect')
 

@@ -15,8 +15,8 @@ for f in ['ui.core',
 
 
 audio('byebye.ogg', 'byebye')
-audio('ne_correct.wav', 'correct')
-audio('ne_incorrect.wav', 'incorrect')
+audio('ne_correct.ogg', 'correct')
+audio('ne_incorrect.ogg', 'incorrect')
 
 image('background.jpg')
 

@@ -7,7 +7,6 @@ Grep for TBD in the code.
 * add more vocabulary lessons
 * make puzzle configurable: # rows x # columns
 * vocabulary lessons: don't embed the words in the picture on the first page
-* files ne_correct.wav and ne_incorrect.wav: get ogg files for these
 * check that timer is always cleared, even when restarting a lesson.
 * delay on interactive buttons, so that double-clicking does not answer two consecutive questions
 * convert help.png to help.html for all lessons.
