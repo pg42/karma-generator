@@ -9,7 +9,7 @@ css('lesson.css')
 for f in ['ui.core',
           'karma',
           '../../js/common.js',
-          '../../js/jquery.interactive.js',
+          '../../js/jquery.clickable.js',
           'lesson.js']:
     java_script(f)
 
