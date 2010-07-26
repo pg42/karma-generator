@@ -19,6 +19,7 @@ Grep for TBD in the code.
 * interface guidelines
 * sounds are sometimes truncated (e.g. march in months-of-the-year lesson)
 * in vocabulary-plants: if you quickly drag two objects, correct is only played once.
+* use content parameter in callbacks i.s.o. $('#content')
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
@@ -57,3 +58,6 @@ Bugs in existing lessons:
 * 2_Maths_addingUpto10FunGame_3_K: when restarting, the speed doesn't reset
 * 2_Maths_countingSheep_2_K: title needs to be translated to nepali
 * 6_English_articles_7_K, 2nd screen: if you click on an answer, and then immediately on another picture, the question will disappear
+* 2_English_whatSomeoneIsDoing_15_K: missing icon
+* 2_English_whatSomeoneIsDoing_15_K: in the lesson, click on play icon, immediately go to the next screen. Part of the div is displayed.
+
