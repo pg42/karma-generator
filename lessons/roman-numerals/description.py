@@ -1,0 +1,26 @@
+﻿# -*- coding: utf-8 -*-
+lesson(grade=6, subject='Maths', title='Roman Numerals', week=12,
+       browser_title='Roman Numerals',
+       lesson_title=u'रोमन संङ्ख्या')
+
+css('global')
+css('lesson.css')
+
+for f in ['ui.core',
+          'karma',
+          '../../js/common.js',
+          '../../js/jquery.clickable.js',
+          'lesson.js']:
+    java_script(f)
+    
+audio('correct.ogg', 'correct')
+audio('incorrect.ogg', 'incorrect')
+
+image('confirm.png', 'confirm')
+image('correct.png', 'correct')
+image('gameOver.png', 'gameOver')
+image('img2title.png', 'titleImg')
+image('incorrect.png', 'incorrect')
+image('quesBox.png', 'quesBox')
+image('confirm.png', 'confirm')
+image('img_think.png', 'thinkImg')
