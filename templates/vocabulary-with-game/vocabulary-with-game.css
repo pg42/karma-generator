@@ -69,7 +69,7 @@
     text-align: center;
 }
 
-#imgAnimalsDisplay {
+#imgObjectsDisplay {
     margin: 5px auto;
     position: absolute;
     top: 200px;
@@ -80,7 +80,7 @@
     border: 1px dotted black;
 }
 
-#animalText {
+#objectText {
     margin: 5px auto;
     position: absolute;
     bottom: 150px;

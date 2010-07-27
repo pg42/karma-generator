@@ -1,18 +1,24 @@
-function showAnimal(karma, content, animal) {
+var configuration = {
+    objects: 'wild animals'
+};
+
+function showObject(karma, content, object) {
     content
         .append(createDiv('section')
                .append(createDiv('topText')
                        .html('Click on the speaker and listen to the name '
-                             + 'of the wild animals'))
-               .append(createDiv('imgAnimalsDisplay')
-                       .append(karma.createImg(animal)))
-               .append(createDiv('animalText')
+                             + 'of the '
+                             + configuration.objects
+                             + '.'))
+               .append(createDiv('imgObjectsDisplay')
+                       .append(karma.createImg(object)))
+               .append(createDiv('objectText')
                        .append(createDiv()
                                .addClass('imgVol')
                                .click(function () {
-                                          karma.play(animal);
+                                          karma.play(object);
                                       }))
-                       .append(animal)));
+                       .append(object)));
 }
 
 function puzzleScreen(karma, content) {
@@ -28,18 +34,20 @@ function puzzleScreen(karma, content) {
                                         + 'complete vocabulary section.')));
             return;
         }
-        var animal = remaining_objects.shift();
+        var current_object = remaining_objects.shift();
         content
             .empty()
             .append(createDiv('section')
                     .append(createDiv('infoText')
-                            .append('Listen to the name of the animal '
-                                    + 'and drag and drop the pieces to complete '
-                                    + 'the picture of the animal you just heard '
-                                    + 'the name of.')
+                            .append('Listen to the name of the '
+                                    + configuration.object
+                                    + ' and drag and drop the pieces to '
+                                    + 'complete  the picture of the '
+                                    + configuration.object
+                                    + ' you just heard the name of.')
                             .append(createDiv()
                                     .addClass('imgVol')
-                                    .click(function () { karma.play(animal); })))
+                                    .click(function () { karma.play(object); })))
                     .append(createDiv('imgPuzzleArea'))
                     .append(createDiv('dragImgSection')));
         $(range(0, 9).map(
@@ -74,7 +82,7 @@ function puzzleScreen(karma, content) {
             .appendTo('#imgPuzzleArea');
         var confirmAnswer = function () {
             var confirmClicked = function () {
-                if (x == animal) {
+                if (x == object) {
                     karma.play('correct');
                     $('#checkAnswer').append(karma.createImg('correct'));
                 } else {
@@ -86,8 +94,9 @@ function puzzleScreen(karma, content) {
             content
                 .append(createDiv('confirmSection')
                         .append(createDiv('confirmInstruction')
-                                .html('Click on the name of the animal you '
-                                      + 'just made.'))
+                                .html('Click on the name of the '
+                                      + configuration.object
+                                      + ' you just made.'))
                         .append(createDiv('dragTxtSection')));
             $(Karma.shuffle(objects).map(
                   function (object) {
@@ -95,7 +104,7 @@ function puzzleScreen(karma, content) {
                           .addClass('confirmOption')
                           .append(object)
                           .click(function () {
-                                     if (object == animal) {
+                                     if (current_object == object) {
                                          $('.confirmOption').unbind('click');
                                          karma.play('correct');
                                          setTimeout(next, 1000);
@@ -144,7 +153,8 @@ function puzzleScreen(karma, content) {
             function (row) {
                 range(0, 3).forEach(
                     function (col) {
-                        pieces.push(createPiece(animal, col, row, 100, 100)
+                        pieces.push(createPiece(current_object, col, row,
+                                                100, 100)
                                     .data('key', row * 3 + col)
                                     .draggable({ revert: true }));
                     }
@@ -152,8 +162,8 @@ function puzzleScreen(karma, content) {
             }
         );
         var other_objects = Karma.shuffle(objects.filter(
-                                              function (object) {
-                                                  return object != animal;
+                                              function (o) {
+                                                  return current_object != o;
                                               }
                                           ));
         for (var i = 0; i < 6; ++i) {
@@ -169,11 +179,12 @@ function puzzleScreen(karma, content) {
     next();
 }
 
-var lesson_screens = Karma.shuffle(objects)
-    .map(function (object) {
-             return function (karma, content) {
-                 showAnimal(karma, content, object);
-             };
-         });
-
-setUpMultiScreenLesson(lesson_screens.concat([puzzleScreen]));
+function setUp(objects) {
+    var lesson_screens = Karma.shuffle(objects)
+        .map(function (object) {
+                 return function (karma, content) {
+                     showObject(karma, content, object);
+                 };
+             });
+    setUpMultiScreenLesson(lesson_screens.concat([puzzleScreen]));
+}
