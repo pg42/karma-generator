@@ -43,7 +43,7 @@ function puzzleScreen(karma, content) {
                                     + ' you just heard the name of.')
                             .append(createDiv()
                                     .addClass('imgVol')
-                                    .click(function () { karma.play(object); })))
+                                    .click(function () { karma.play(current_object); })))
                     .append(createDiv('imgPuzzleArea'))
                     .append(createDiv('dragImgSection')));
         $(range(0, 9).map(
