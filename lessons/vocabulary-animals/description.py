@@ -18,9 +18,7 @@ css('lesson.css')
 for f in ['ui.core',
           'ui.draggable',
           'ui.droppable',
-          'karma',
-          '../../js/common.js',
-          '../../js/jquery.clickable.js']:
+          'jquery.clickable']:
     java_script(f)
 
 objects_js = java_script('objects.js', generated=True)
