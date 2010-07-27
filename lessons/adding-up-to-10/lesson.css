@@ -9,16 +9,6 @@
     -webkit-border-radius: 40px;
 }
 
-#content {
-    position:relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
-    text-align: center;
-    overflow: hidden;
-}
-
 #main {
     float: left;
     position: relative;

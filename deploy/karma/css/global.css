@@ -110,6 +110,16 @@ body {
     background: url(../image/btn_next_hover.png);
 }
 
+#content {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 74px;
+    width: 1198px;
+    height: 750px;
+    overflow-y: hidden;
+	text-align:center;
+}
+
 #footer {
     position: relative;
     background-image: url(../image/bg_footer.png);

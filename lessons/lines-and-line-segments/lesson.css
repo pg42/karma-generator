@@ -2,15 +2,7 @@
 
 /**** Game Styles  ****/
 
-#content{
-	margin: 0px auto;
-	margin-top: 74px;
-	width: 1198px;
-	height: 750px;
-	position:relative;
-	overflow-y:hidden;
 
-}
 #section{
 	margin:100px auto;
 	margin-bottom: 10px;

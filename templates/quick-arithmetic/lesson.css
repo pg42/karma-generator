@@ -4,13 +4,7 @@
 /**** Game Styles  ****/
 
 #content{
-	margin: 0 auto;
-	margin-top: 74px;
-	width: 1198px;
 	padding: 0.5em;
-	height:750px;
-    position:relative;
-
 }
 	#section{
 		width: 900px;

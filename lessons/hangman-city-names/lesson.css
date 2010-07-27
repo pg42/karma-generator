@@ -4,14 +4,6 @@ a {
     color: black;
 }
 
-#content {
-    margin: 2px auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
-    position: relative;
-}
-
 #section {
     float: left;
     margin: 70px 0 0 70px;

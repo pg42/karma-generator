@@ -1,15 +1,10 @@
 @CHARSET "UTF-8";
 /****** Page Styles ****/
 
-/*  Designed for 1200*900 px screen resolution  */ 
- 
+/*  Designed for 1200*900 px screen resolution  */
+
 
 /**** Game Styles  ****/
-
-#content{
-    overflow-y: hidden;
-    text-align: center;	
-}
 
 #title{
     margin: 2em auto;

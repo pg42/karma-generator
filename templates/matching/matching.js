@@ -28,8 +28,7 @@ function startGame(karma) {
             turned_pieces.length == 2 ||
             (
                 turned_pieces.length == 1 &&
-                piecesMatch(turned_pieces[0], piece) &&
-                face(turned_pieces[0]).data('pair') == face(piece).data('pair')
+				face(turned_pieces[0]).attr('id') == face(piece).attr('id')
             )) {
             return;
         }
@@ -113,16 +112,20 @@ function startGame(karma) {
     createPieces();
 }
 
+var tileCount = 0;
+
 function createImage(karma, word, key) {
-    return createDiv()
-        .data({'key': key, pair: 'image'})
+	var divId = 'image' + (tileCount++);
+    return createDiv(divId)
+        .data({'key': key})
         .addClass('pieceFace')
         .append(karma.createImg(word));
 }
 
 function createText(word, key) {
-    return createDiv()
-        .data({'key': key, pair: 'text'})
+	var divId = 'text' + (tileCount++);
+    return createDiv(divId)
+        .data({'key': key})
         .addClass('textColor')
         .addClass('pieceFace')
         .html(word);

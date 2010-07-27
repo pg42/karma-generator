@@ -11,9 +11,6 @@ function setUpScreen(karma, instruction,
             .append($(document.createElement('h2'))
                     .addClass(title)
                     .html(capitalize(title) + ':'))
-            .append(createDiv()
-                    .addClass('exclamation_point')
-                    .append(karma.createImg('exclamation_point')))
             .append($(document.createElement('ul'))
                     .attr('id', id + '_list'));
     };

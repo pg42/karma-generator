@@ -1,14 +1,7 @@
 /**** Game Styles  ****/
 
 #content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
-    overflow-y: hidden;
     background: url(../assets/image/background.jpg) no-repeat center;
-    text-align: center;
 }
 
 #section {

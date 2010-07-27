@@ -1,13 +1,7 @@
 @CHARSET "UTF-8";
 
 #content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
     background: url(../assets/image/background.jpg) no-repeat center;
-    overflow-y: hidden;
 }
 
 .dragme {
