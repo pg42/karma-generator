@@ -12,7 +12,7 @@ for f in ['ui.core',
           '../../js/jquery.clickable.js',
           'lesson.js']:
     java_script(f)
-    
+
 audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')
 
