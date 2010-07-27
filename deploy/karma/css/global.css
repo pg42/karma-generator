@@ -133,7 +133,7 @@ body {
 #score_box {
     float: left;
     padding-left: 5px;
-    padding-top: 0.7em;
+    padding-top: 15px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #FFFF00;
     font-size: 16pt;
@@ -148,10 +148,10 @@ body {
 }
 
 #linkCheck {
-    margin: 1em 3em 0 0;
-    width: 101px;
-    height: 30px;
-    background-image: url(../image/check.png);
+	margin:0 40px 0 0;
+	background-image:url("../image/btn_check.png");
+	height:55px;
+	width:187px;
 }
 
 #linkPlayAgain {

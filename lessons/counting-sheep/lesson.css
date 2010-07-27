@@ -15,11 +15,11 @@
 }
 
 .titles h1 {
-    font-size: 3em;
+    font-size: 44px;
 }
 
 .titles h2 {
-    font-size: 2em;
+    font-size: 36px;
 }
 
 #gameArea {
@@ -69,12 +69,6 @@
 }
 
 #information {
-    position: absolute;
-    top: 4em;
-    left: 0.1em;
-    width: 18em;
-    height: 5em;
     color: red;
-    font: 25px "MS Sans Serif", Geneva, sans-serif;
     font-weight: bold;
 }

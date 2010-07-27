@@ -6,8 +6,8 @@
 
 #questArea {
     position: absolute;
-    top: 2em;
-    left: 8em;
+    top: 100px;
+    left: 400px;
     width: 200px;
     height: 80px;
     font: 50px/70px Arial Black,Arial, Helvetica, sans-serif;
@@ -17,10 +17,10 @@
 
 #optionArea {
     position: absolute;
-    right: 0em;
-    bottom: 0em;
-    width: 15em;
-    height: 6em;
+    right: 0;
+    bottom: 0;
+    width: 750px;
+    height: 300px;
     font: 50px/120px Arial Black,Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
@@ -38,8 +38,8 @@
 #gameOver {
     opacity: 1;
     position: absolute;
-    top: 2em;
-    left: 8em;
+    top: 100px;
+    left: 400px;
     color: blue;
     text-align: center;
     font : bold 45px/65px Arial Black, Times New Roman;

@@ -1,12 +1,5 @@
 @CHARSET "UTF-8";
 
-#linkCheck {
-    margin: 0em 3em 1em 0;
-    width: 187px;
-    height: 55px;
-    background-image: url(../assets/image/check.png);
-}
-
 #section {
     margin: 0px auto;
     width: 1190px;
@@ -106,7 +99,7 @@ input.blankBox {
 
 .imgDisplay {
     float: left;
-    margin: 0em;
+    margin: 0;
 }
 
 .check {

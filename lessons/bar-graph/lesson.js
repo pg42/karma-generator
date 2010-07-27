@@ -1,4 +1,4 @@
-var object_counts = {
+﻿var object_counts = {
     ball: 2,
     banana: 3,
     cup: 2,
@@ -17,7 +17,9 @@ function flatten(list_of_lists) {
 function startLesson(karma) {
     $('#content')
         .empty()
-        .append(createDiv('imageSection'))
+        .append(createDiv('imageSection')
+			.append(createDiv('questionText').text('माथी भएका चित्र तला चित्र हेरी तानेर ठीक ठाउँमा राख ।'))
+		)
         .append(createDiv('questionSection')
                 .hide())
         .append(createDiv('barGraphSection')

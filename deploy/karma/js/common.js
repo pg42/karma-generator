@@ -60,6 +60,7 @@ function setUpLesson(initialize, start_game) {
           $('#linkPrevLesson').hide();
           $('#linkNextLesson').hide();
           $("#linkCheck").hide();
+		  disableImageDragging("#lesson_title img");
           var karma = lesson_karma();
           karma.ready(
               function () {
@@ -78,6 +79,7 @@ function setUpMultiScreenLesson(draw_screen_fns) {
           $('#linkPrevLesson').hide();
           $('#linkNextLesson').hide();
           $("#linkCheck").hide();
+		  disableImageDragging("#lesson_title img");
 
           var karma = lesson_karma();
           var $content = $('#content'); // TBD: error if absent
