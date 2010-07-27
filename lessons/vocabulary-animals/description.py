@@ -14,6 +14,8 @@ animals = ['cheetah',
            'whale',
            'zebra']
 
+java_script('configuration.js')
+
 register_objects(animals)
 
 image('volImage.png')

@@ -1,7 +1,3 @@
-var configuration = {
-    objects: 'wild animals'
-};
-
 function showObject(karma, content, object) {
     content
         .append(createDiv('section')
