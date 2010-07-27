@@ -7,9 +7,7 @@ css('global')
 css('lesson.css')
 
 for f in ['ui.core',
-          'karma',
-          '../../js/common.js',
-          '../../js/jquery.clickable.js',
+          'jquery.clickable',
           'lesson.js']:
     java_script(f)
 
