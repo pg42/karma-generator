@@ -116,7 +116,7 @@ body {
     margin-top: 74px;
     width: 1198px;
     height: 750px;
-    overflow-y: hidden;
+    overflow: hidden;
 	text-align:center;
 }
 
