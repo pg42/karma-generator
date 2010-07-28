@@ -2,14 +2,6 @@
 
 /**** Game Styles  ****/
 
-#content {
-    position:relative;
-    margin: 0 auto;
-    margin-top:74px;
-    width: 1198px;
-    height: 750px;
-    text-align:center;
-}
 
 #questionSection {
     position:absolute;
@@ -55,17 +47,6 @@ input.blankBox {
 .backOpaque {
     background-color: #A4A4A4;
     opacity: 0.2;
-}
-
-#help {
-    display:none;
-    position:absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background:url(../assets/image/help.png);
-    z-index:40;
 }
 
 #gameOver {

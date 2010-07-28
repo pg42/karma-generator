@@ -2,9 +2,7 @@ css('global')
 
 central_js_files = [
     'ui.core',
-    'karma',
-    '../../js/common.js',
-    '../../js/multiple-choice.js']
+    'multiple-choice']
 
 for f in central_js_files:
     java_script(f)

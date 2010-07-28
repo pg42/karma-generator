@@ -1,11 +1,5 @@
 #content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
     background: url(../assets/image/background.jpg) no-repeat center;
-    text-align: center;
 }
 
 #barGraphSection {
@@ -122,15 +116,4 @@
     margin-top: 35px;
     text-align: center;
     font: 35px/40px Helvetica,Verdana, Geneva, Arial, sans-serif;
-}
-
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 40;
 }

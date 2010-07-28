@@ -1,51 +1,11 @@
-#content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
-}
-
-h1 {
-    float: left;
-    margin-left: 1em;
-    width: 80%;
-}
 
 h2 {
     margin-top: 10px;
     margin-bottom: -5px;
-    margin-left: 1em;
-    float: left;
     text-align: center;
 }
 
-#help_icon {
-    float: right;
-    margin: 5px;
-}
-
-#help_text {
-    position: absolute;
-    right: 60px;
-    top: 75px;
-    z-index: 10;
-}
-
-#main {
-    position: absolute;
-    top: 60px;
-    float: left;
-    height: 520px;
-    width: 97%;
-    margin: 1%;
-}
-
-
-
 #instruction {
-    float: left;
-    width: 100%;
     text-align: center;
     font-size: xx-large;
     color: blue;
@@ -54,37 +14,37 @@ h2 {
 
 #subjects {
     float: left;
-    width: 20%;
-    margin-left: 10%;
+	margin-left:115px;
+	width:230px;
 }
 
 #subjects_list {
     background-color: lightGreen;
     border: 1px solid yellowGreen;
     float: left;
-    width: 100%;
     height: 200px;
+	width:230px;
 }
 
 #pic {
     float: left;
     margin-top: 40px;
-    margin-left: 10%;
-    width: 20%;
+    margin-left: 160px;
+    width: 200px;
 }
 
 #actions {
     float: right;
-    width: 20%;
-    margin-right: 10%;
+	width:230px;
+    margin-right: 115px;
 }
 
 #actions_list {
     background-color: lightGreen;
     border: 1px solid yellowGreen;
     float: right;
-    width: 100%;
     height: 200px;
+	width:230px;
 }
 
 ul {
@@ -116,13 +76,6 @@ li {
 
 .verb {
     color: green;
-}
-
-.exclamation_point {
-    width: 20%;
-    float: left;
-    margin-top: 10px;
-    margin-left: .4em;
 }
 
 #page1 {
@@ -219,32 +172,4 @@ li {
 
 #page3_question {
     font-size: xx-large;
-}
-
-#navigation {
-    position: absolute;
-    float: left;
-    width: 100%;
-    bottom: 0px;
-}
-
-#previous {
-    float:left;
-    margin: 5px;
-}
-
-#next {
-    float: right;
-    margin: 5px;
-}
-
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 40;
 }

@@ -7,14 +7,11 @@ central_js_files = [
     'ui.core',
     'ui.draggable',
     'ui.droppable',
-    'karma',
-    '../../js/common.js',
-    '../../js/jquery.clickable.js']
+    'jquery.clickable']
 
 for f in central_js_files:
     java_script(f)
 
 java_script('lesson.js')
-
 
 image('background.jpg')

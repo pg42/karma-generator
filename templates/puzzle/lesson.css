@@ -1,13 +1,7 @@
 @CHARSET "UTF-8";
 
 #content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
     background: url(../assets/image/background.jpg) no-repeat center;
-    overflow-y: hidden;
 }
 
 .dragme {
@@ -39,25 +33,14 @@
     margin: 10em 4em 1em 7em;
     width: 700px;
     height: 480px;
-    float : right;
     padding : 10px;
-    position: relative;
+    position: absolute;
+    right: 0px;
 }
 
 #imgShow {
     display: none;
     margin: 1em;
-}
-
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 40;
 }
 
 .piece {

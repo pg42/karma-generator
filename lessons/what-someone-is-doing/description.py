@@ -7,8 +7,6 @@ css('lesson.css')
 for f in ['ui.core',
           'ui.draggable',
           'ui.droppable',
-          'karma',
-          '../../js/common.js',
           'lesson.js']:
     java_script(f)
 

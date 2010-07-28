@@ -3,10 +3,7 @@ lesson(grade=2, subject='English', title= 'Number Words', week=14)
 css('global')
 css('lesson.css')
 
-for f in ['ui.core',
-          'karma',
-          '../../js/common.js',
-          'lesson.js']:
+for f in ['ui.core']:
     java_script(f)
 
 audio('en_correct.ogg', 'correct')

@@ -7,5 +7,4 @@ set_number_of_tries(3)
 image('hang_man_image.png', 'mainImage')
 image('one_or_more_kitchen_utensils.png', 'kitchen')
 
-java_script('lesson.js')
 css('lesson.css')

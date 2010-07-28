@@ -5,9 +5,7 @@ footer_configuration(link_previous=False, link_next=False, scoreboard=True)
 
 central_js_files = [
     'ui.core',
-    'karma',
-    'jquery.watermarkinput',
-    '../../js/common.js']
+    'jquery.watermarkinput']
 
 for f in central_js_files:
     java_script(f)

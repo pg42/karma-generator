@@ -9,27 +9,6 @@
     -webkit-border-radius: 40px;
 }
 
-#content {
-    position:relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
-    text-align: center;
-    overflow: hidden;
-}
-
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 240;
-}
-
 #main {
     float: left;
     position: relative;

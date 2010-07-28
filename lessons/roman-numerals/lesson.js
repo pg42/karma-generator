@@ -142,14 +142,12 @@ function initialScreen(karma, content) {
         clock.hide();
     }
     content
-        .empty()
         .append(createDiv('frontDisplay')
                 .append(karma.createImg('imgFront'))
                 );
 }
 
-setUpMultiScreenLesson([
-                       function (karma, content) { initialScreen(karma, content); },
+setUpMultiScreenLesson([initialScreen,
                        function (karma, content) { showQuestions(karma, content, question_set1); },
                        function (karma, content) { showQuestions(karma, content, question_set2); }]);
 

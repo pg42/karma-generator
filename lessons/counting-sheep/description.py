@@ -7,10 +7,7 @@ css('lesson.css')
 
 for f in ['ui.core',
           'ui.draggable',
-          'ui.droppable',
-          'karma',
-          '../../js/common.js',
-          'lesson.js']:
+          'ui.droppable']:
     java_script(f)
 
 image('background.jpg')

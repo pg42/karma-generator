@@ -15,7 +15,6 @@ register_objects(['Apple',
                   'Pigeon',
                   'Rat',
                   'Tomato',
-                  'Tree', 
+                  'Tree',
                   'Boat'])
 
-java_script('lesson.js')

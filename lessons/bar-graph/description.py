@@ -6,12 +6,9 @@ css('global')
 css('lesson.css')
 
 for f in ['ui.core',
-          'karma',
           'ui.draggable',
           'ui.droppable',
-          '../../js/common.js',
-          '../../js/jquery.clickable.js',
-          'lesson.js']:
+          'jquery.clickable']:
     java_script(f)
 
 

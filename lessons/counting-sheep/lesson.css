@@ -1,23 +1,7 @@
 @CHARSET "UTF-8";
 
 #content {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 74px;
-    width: 1198px;
-    height: 750px;
     background: url(../assets/image/background.jpg) no-repeat center;
-}
-
-#help {
-    display: none;
-    position: absolute;
-    right: 60px;
-    top: 75px;;
-    width: 297px;
-    height: 697px;
-    background: url(../assets/image/help.png);
-    z-index: 410;
 }
 
 .panel {
