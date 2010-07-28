@@ -1,5 +1,7 @@
 var question_set1 = [10, 2, 150, 50, 500, 1500, 12, 120, 250, 40];
 var question_set2 = [3, 16, 62, 59, 127, 355, 400, 757, 935, 1205];
+var count_correct;
+var clock = null;
 
 function toRoman(x) {
     var mapping = [
@@ -32,6 +34,12 @@ function toRoman(x) {
 }
 
 function showQuestions(karma, content, questions) {
+    if(clock == null){
+        clock = new Clock();        
+    }
+    clock.reset();
+    clock.show();
+    clock.start();
     content
         .append(createDiv('section')
                 .append(createDiv('gameArea')
@@ -64,6 +72,7 @@ function showQuestions(karma, content, questions) {
         var feedback;
         if (correct_answer == $(answer_box).val().toUpperCase()) {
             feedback = createCheckBox('correct');
+            count_correct++;
         } else {
             feedback = $()
                 .add(createCheckBox('incorrect'))
@@ -80,7 +89,31 @@ function showQuestions(karma, content, questions) {
     };
 
     var checkAnswers = function () {
+        count_correct = 0;
         $('.ansBox').map(function (i, answer_box)  { checkAnswer(answer_box); });
+        if(count_correct == $('.ansBox').length) {
+            gameOver();
+        }
+    };
+    
+    var gameOver = function () {
+        clock.stop();
+        var hms = clock.hours_minutes_seconds();
+        content
+            .append(createDiv('gameOver')
+                    .append(karma.createImg('gameOver'))
+                    .append(createDiv()
+                            .addClass('specialText')
+                            .html('Total time taken '
+                                  + hms.hours + ' hours '
+                                  + hms.minutes + ' minutes '
+                                  + hms.seconds + ' seconds.')
+                            )
+                    .append(createDiv()
+                            .html('Click next/back button to play another set.')
+                            )
+                    .show());
+        $("#confirmBtn").hide();
     };
 
     var createQuestion = function (x) {
@@ -104,7 +137,19 @@ function showQuestions(karma, content, questions) {
     Karma.shuffle(questions).forEach(createQuestion);
 }
 
+function initialScreen(karma, content) {
+    if(clock != null) {
+        clock.hide();
+    }
+    content
+        .empty()
+        .append(createDiv('frontDisplay')
+                .append(karma.createImg('imgFront'))
+                );
+}
+
 setUpMultiScreenLesson([
+                       function (karma, content) { initialScreen(karma, content); },
                        function (karma, content) { showQuestions(karma, content, question_set1); },
                        function (karma, content) { showQuestions(karma, content, question_set2); }]);
 

@@ -10,11 +10,9 @@ for f in ['ui.core',
           'karma',
           '../../js/common.js',
           '../../js/jquery.clickable.js',
+          '../../js/clock.js',
           'lesson.js']:
     java_script(f)
-
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
 
 image('confirm.png', 'confirm')
 image('correct.png', 'correct')
@@ -24,3 +22,4 @@ image('incorrect.png', 'incorrect')
 image('quesBox.png', 'quesBox')
 image('confirm.png', 'confirm')
 image('img_think.png', 'thinkImg')
+image('image1.png', 'imgFront')

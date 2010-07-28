@@ -50,3 +50,11 @@ Clock.prototype.reset = function () {
     this.seconds = 0;
     this.display();
 };
+
+Clock.prototype.hide = function () {
+    $('#timerBar').hide();
+}
+
+Clock.prototype.show = function () {
+    $('#timerBar').show();
+}
