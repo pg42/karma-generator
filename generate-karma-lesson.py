@@ -24,75 +24,53 @@ theLesson = None
 
 # TBD: provide a debug and optimized (minimized) version of the framework files.
 
+include_stack = []
 karma_root = os.path.abspath(os.path.join(os.path.dirname(argv0), 'deploy', 'karma'))
 lesson_src = '';
 lesson_dest = '';
 
-class KarmaFile():
-    def __init__(self, name, karma_path):
-        self._name = name
-        self._karma_path = karma_path
-
-    def name(self):
-        return self._name
-
-    def relative_path(self, start):
-        return os.path.relpath(os.path.join(karma_root, self._karma_path),
-                               start)
-
-    def make_available(self):
-        pass
-
-
-class GeneratedFile():
-    def __init__(self, lesson, name):
-        self.lesson = lesson
-        self.name = name
-        self.data = ''
-
-    def write(self, x):
-        self.data = self.data + x
-
-    def relative_path(self, start):
-        return os.path.relpath(self.absolute_path(), start)
-
-    def absolute_path(self):
-        return os.path.join(self.lesson.directory, 'js', self.name)
-
-    def make_available(self):
-        f = open(self.absolute_path(), 'w')
-        print >>f, self.data
-        f.close()
-
 
 class File():
-    def __init__(self, lesson, path):
-        self._lesson = lesson
-        self._name = os.path.basename(path)
-        self.src = frob_path(path)
-        self.dest = destination_path(self._name)
+    _name = None
+    src = ''
+    deploy_subfolder = ''
+    lesson_deploy = True
+    create_file = False
+    data = ''
 
-    def src_path(self):
-        return self.src
-
-    def relative_path(self, start):
-        return os.path.relpath(self.absolute_path(), start)
-
-    def absolute_path(self):
-        return os.path.join(self._lesson.directory, self.dest)
-
-    def make_available(self):
-        if self.src_path() != self.absolute_path():
-            check_file_exists(self.src_path())
-            shutil.copy(self.src_path(), self.absolute_path())
-
-
-class AssetFile():
-    def __init__(self, lesson, path, name):
-        self._lesson = lesson
+    def __init__(self, path, name=None, **kw):
         self._name = name
-        self._path = absolute_path(path)
-        check_file_exists(self._path)
+        self.src = path
+
+        if 'type' in kw:
+            self.deploy_subfolder = kw['type']
+            if kw['type'] == 'image' or kw['type'] == 'audio':
+                self.deploy_subfolder = 'assets/' + self.deploy_subfolder
+
+        if 'karma' in kw and kw['karma']:
+            self.lesson_deploy = False
+        if 'generated' in kw and kw['generated']:
+            self.create_file = True
+
+        if not self.create_file:
+            # find the existing file
+            test_files = []
+            if self.lesson_deploy:
+                test_files.append( os.path.join(lesson_src, self.deploy_subfolder, path) )
+                test_files.append( os.path.join(lesson_src, path) )
+            if len(include_stack) > 0:
+                test_files.append( os.path.join(os.path.dirname(include_stack[-1]), path) )
+            test_files.append( os.path.join(karma_root, path) )
+
+            for f in test_files:
+                abs_path = os.path.abspath(f)
+                if os.path.isfile(abs_path):
+                     self.src = abs_path
+        else:
+            self.src = self.absolute_path()
+
+    def deploy_folder(self):
+        return os.path.abspath( os.path.join(lesson_dest, self.deploy_subfolder) )
 
     def name(self):
         return self._name
@@ -100,40 +78,67 @@ class AssetFile():
     def preload(self):
         return self._name != None
 
-    def relative_path(self, start=None):
-        if start == None:
-            start = self._lesson.directory
-        return os.path.relpath(self.absolute_path(), start)
+    def src_path(self):
+        return self.src
+
+    def relative_path(self, start=None, **kw):
+        if start == None or start == '':
+            # default relative is to lesson output
+            start = lesson_dest
+        elif start == 'deploy':
+            start = self.deploy_folder()
+
+        rel_path = os.path.relpath(self.absolute_path(), start)
+        if 'web' in kw and kw['web']:
+            rel_path = string.replace(rel_path, '\\', '/')
+
+        return rel_path
 
     def absolute_path(self):
-        return os.path.join(self._lesson.directory,
-                            self.dest_dir(),
-                            self.basename())
-
-    def make_available(self):
-        shutil.copy(self._path, self.absolute_path())
-
-    def dest_dir(self):
-        assert(False)
+        if self.lesson_deploy:
+            return os.path.join(
+                self.deploy_folder(),
+                self.basename()
+            )
+        else:
+            return self.src
 
     def basename(self):
-        return os.path.basename(self._path)
+        return os.path.basename(self.src)
+
+    def make_available(self):
+        if self.create_file:
+            f = open(self.absolute_path(), 'w')
+            print >>f, self.data
+            f.close()
+        elif self.lesson_deploy:
+            check_file_exists(self.src_path())
+            shutil.copy(self.src_path(), self.absolute_path())
+
+    def write(self, x):
+        self.data = self.data + x
 
 
-class ImageFile(AssetFile):
-    def __init__(self, lesson, path, name=None):
-        AssetFile.__init__(self, lesson, path, name)
+class GeneratedFile(File):
+    def __init__(self, path, name=None, **kw):
+        kw['generated'] = True
+        File.__init__(self, path, name, **kw)
 
-    def dest_dir(self):
-        return 'assets/image'
+class KarmaFile(File):
+    def __init__(self, path, name=None, **kw):
+        kw['karma'] = True
+        File.__init__(self, path, name, **kw)
 
+class ImageFile(File):
+    def __init__(self, path, name=None, **kw):
+        kw['type'] = 'image'
+        File.__init__(self, path, name, **kw)
 
-class AudioFile(AssetFile):
-    def __init__(self, lesson, path, name):
-        AssetFile.__init__(self, lesson, path, name)
+class AudioFile(File):
+    def __init__(self, path, name=None, **kw):
+        kw['type'] = 'audio'
+        File.__init__(self, path, name, **kw)
 
-    def dest_dir(self):
-        return 'assets/audio'
 
 
 java_script_dependencies = [
@@ -151,31 +156,43 @@ java_script_dependencies = [
     ]
 
 karma_java_script_files = [
-    KarmaFile('jquery', 'js/jquery-1.4.2.js'),
-    KarmaFile('jquery-ui', 'js/jquery-ui-1.8.2.js'),
-    KarmaFile('ui.core', 'js/ui.core.js'),
-    KarmaFile('ui.draggable', 'js/ui.draggable.js'),
-    KarmaFile('ui.droppable', 'js/ui.droppable.js'),
-    KarmaFile('jquery.watermarkinput', 'js/jquery.watermarkinput.js'),
-    KarmaFile('ui.scoreboard', 'js/ui.scoreboard.js'),
-    KarmaFile('jquery.svg', 'js/jquery.svg.js'),
-    KarmaFile('karma', 'js/karma.js'),
-    KarmaFile('global', 'js/global.js'),
-    KarmaFile('common', 'js/common.js'),
-    KarmaFile('jquery.clickable', 'js/jquery.clickable.js'),
-    KarmaFile('multiple-choice', 'js/multiple-choice.js'),
-    KarmaFile('clock', 'js/clock.js')
+    KarmaFile('js/jquery-1.4.2.js', 'jquery'),
+    KarmaFile('js/jquery-ui-1.8.2.js', 'jquery-ui'),
+    KarmaFile('js/ui.core.js', 'ui.core'),
+    KarmaFile('js/ui.draggable.js', 'ui.draggable'),
+    KarmaFile('js/ui.droppable.js', 'ui.droppable'),
+    KarmaFile('js/jquery.watermarkinput.js', 'jquery.watermarkinput'),
+    KarmaFile('js/ui.scoreboard.js', 'ui.scoreboard'),
+    KarmaFile('js/jquery.svg.js', 'jquery.svg'),
+    KarmaFile('js/karma.js', 'karma'),
+    KarmaFile('js/global.js', 'global'),
+    KarmaFile('js/common.js', 'common'),
+    KarmaFile('js/jquery.clickable.js', 'jquery.clickable'),
+    KarmaFile('js/multiple-choice.js', 'multiple-choice'),
+    KarmaFile('js/clock.js', 'clock')
     ]
-
 
 karma_css_files = [
-    KarmaFile('global', 'css/global.css'),
-    KarmaFile('ui.scoreboard', 'css/ui.scoreboard.css')
+    KarmaFile('css/global.css', 'global'),
+    KarmaFile('css/ui.scoreboard.css', 'ui.scoreboard')
     ]
 
-favicon = KarmaFile('favicon', 'image/favicon.ico')
-title_block_lt = KarmaFile('title_block_lt', 'image/title_block_lt.png')
-title_block_rt = KarmaFile('title_block_rt', 'image/title_block_rt.png')
+karma_audio_files = [
+    KarmaFile('audio/en_correct.ogg', 'correct', type='audio'),
+    KarmaFile('audio/en_incorrect.ogg', 'incorrect', type='audio'),
+   #KarmaFile('audio/ne_correct.ogg', 'ne_correct', type='audio'),
+   #KarmaFile('audio/ne_incorrect.ogg', 'ne_incorrect', type='audio'),
+    KarmaFile('audio/byebye.ogg', 'byebye', type='audio'),
+    KarmaFile('audio/trigger.ogg', 'trigger', type='audio')
+    ]
+
+karma_image_files = [
+
+    ]
+
+favicon = KarmaFile('image/favicon.ico', 'favicon')
+title_block_lt = KarmaFile('image/title_block_lt.png', 'title_block_lt')
+title_block_rt = KarmaFile('image/title_block_rt.png', 'title_block_rt')
 
 
 #TBD: factor this out in a separate file, so it is easy to provide
@@ -189,10 +206,10 @@ def generate_header(dir, body, title):
                                      className='linkBack')
 
     lesson_title = header.div(id='lesson_title')
-    lesson_title.img(src=string.replace(title_block_lt.relative_path(dir), '\\', '/'),
+    lesson_title.img(src=title_block_lt.relative_path(dir, web=True),
                      width=33, height=75, align='absmiddle')
     lesson_title.text(title)
-    lesson_title.img(src=string.replace(title_block_rt.relative_path(dir), '\\', '/'),
+    lesson_title.img(src=title_block_rt.relative_path(dir, web=True),
              width=33, height=75, align='absmiddle')
 
 
@@ -222,25 +239,6 @@ def generate_footer(body):
 
     if gFooterConfiguration['link_check_answer']:
         footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
-
-
-def destination_path(name):
-    dirs = {'.js':'js',
-            '.css':'css'}
-    ext = os.path.splitext(name)[1]
-    if ext not in dirs:
-        print 'Don\'t know how to handle', name
-        sys.exit(1)
-    return os.path.join(dirs[ext], name)
-
-
-def absolute_path(path):
-    if os.path.isabs(path):
-        return os.path.normpath(path)
-    else:
-        # paths are relative to the file in which they occur.
-        return os.path.normpath(os.path.join(os.path.dirname(include_stack[-1]),
-                                             path))
 
 
 def topological_sort(nodes, dependencies, key):
@@ -295,7 +293,7 @@ def createDiv(id):
 class Lesson():
     def __init__(self):
         self.parent_directory = ''
-        self.directory = None
+        self.directory = ''
         self.title = ''
         self.lesson_title = ''
         self.java_script_files = []
@@ -303,8 +301,6 @@ class Lesson():
         self.image_files = []
         self.audio_files = []
         self.divs = [createDiv('content')]
-
-        self.java_script_files.append(GeneratedFile(self, 'lesson-karma.js'))
 
     def copy_files(self):
         def create_dir(d):
@@ -338,13 +334,13 @@ class Lesson():
         for file in self.css_files:
             head.link(type='text/css',
                       rel='stylesheet',
-                      href=string.replace(file.relative_path(self.directory), '\\', '/'))
+                      href=file.relative_path(None, web=True))
         head.link(type='image/ico',
                   rel='icon',
-                  href=string.replace(favicon.relative_path(self.directory), '\\', '/'))
+                  href=favicon.relative_path(None, web=True))
         for file in sort_java_script_files(self.java_script_files):
             head.script(type='text/javascript',
-                        src=string.replace(file.relative_path(self.directory), '\\', '/'))
+                        src=file.relative_path(None, web=True))
         body = html.body()
         generate_header(self.directory, body, self.lesson_title)
         body.children.extend(self.divs)
@@ -357,9 +353,9 @@ class Lesson():
             print >>stream, ' *', l
         print >>stream, ' */'
         def format_image(img):
-            return "{name:'%s', file:'%s'}" % (img[0], img[1].basename())
+            return "{name:'%s', file:'%s'}" % (img[0], img[1].relative_path('deploy', web=True))
         def format_audio(a):
-            return "{name:'%s', file:'%s'}" % (a[0], a[1].basename())
+            return "{name:'%s', file:'%s'}" % (a[0], a[1].relative_path('deploy', web=True))
         def format_assets(name, assets, format_asset, indentation):
             prefix = '%s: [' % name
             sep = ',\n' + (len(prefix) + indentation) * ' '
@@ -386,6 +382,7 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
 
     dirname = '%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week);
+    print 'writing lesson to ' + dirname
     theLesson.set_directory( dirname )
     theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
@@ -399,37 +396,38 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
     add_help()
 
 
-def resolve_karma_file(name, karma_files, **kw):
+def resolve_karma_file(path, name, karma_files, **kw):
     for f in karma_files:
         if f.name() == name:
             return f
-    return File(theLesson, name, **kw)
+    return File(path, name, **kw)
 
 
 def java_script(name, **kw):
-    result = None
-    if 'generated' in kw and kw['generated']:
-        result = GeneratedFile(theLesson, name)
-    else:
-        result = resolve_karma_file(name, karma_java_script_files, **kw)
+    kw['type'] = 'js'
+    result = resolve_karma_file(name, name, karma_java_script_files, **kw)
     theLesson.java_script_files.append(result)
     return result
 
 
 def css(name):
-    result = resolve_karma_file(name, karma_css_files)
+    result = resolve_karma_file(name, name, karma_css_files, type='css')
     theLesson.css_files.append(result)
     return result
 
 
 def image(file, name=None):
-    result = ImageFile(theLesson, file, name)
+    if name == None:
+        name = file
+    result = resolve_karma_file(file, name, karma_image_files, type='image')
     theLesson.image_files.append([name, result])
     return result
 
 
-def audio(file, name):
-    result = AudioFile(theLesson, file, name)
+def audio(file, name=None):
+    if name == None:
+        name = file
+    result = resolve_karma_file(file, name, karma_audio_files, type='audio')
     theLesson.audio_files.append([name, result])
     return result
 
@@ -457,9 +455,6 @@ def footer_configuration(**kw):
         java_script('../../deploy/karma/js/scoreboard.js') #TBD: fix path
 
 
-include_stack = []
-
-
 def frob_path(path):
     if not os.path.isabs(path):
         return os.path.normpath(os.path.join(os.path.dirname(include_stack[-1]),
@@ -485,7 +480,7 @@ def add_help():
 
     elif (os.path.exists(help_img)):
         img = image(help_img, 'help')
-        src = string.replace(img.relative_path(), '\\', '/')
+        src = img.relative_path(None, web=True)
         div(id='help').img(src=src)
     else:
         print 'Warning: the file ' + str(help_path) + ' doesn\'t exist.'
@@ -520,6 +515,7 @@ if __name__ == '__main__':
 
     theLesson = Lesson()
     theLesson.parent_directory = os.path.abspath('deploy/Activities')
+    theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
 
     include_stack.append(description)
     check_file_exists(description)
