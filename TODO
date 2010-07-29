@@ -12,8 +12,6 @@ Grep for TBD in the code.
 * convert help.png to help.html for all lessons.
 * help HTML content needs padding and styling
 * ability to have multiple help files, displaying the right one based on the screen showing
-* centralise common assets (correct / incorrect sounds)
-* generation should use a standard folder structure to merge into EPaath framework
 * have POT file for translatable strings, from which JSON language object is generated
 * javascript library to apply translation strings (printf / plural rules)
 * interface guidelines
