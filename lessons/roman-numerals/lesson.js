@@ -1,5 +1,5 @@
-var question_set1 = [10, 2, 150, 50, 500, 1500, 12, 120, 250, 40];
-var question_set2 = [3, 16, 62, 59, 127, 355, 400, 757, 935, 1205];
+var question1 = [10, 2, 150, 50, 500, 1500, 12, 120, 250, 40];
+var question2 = [3, 16, 62, 59, 127, 355, 400, 757, 935, 1205];
 var count_correct;
 var clock = null;
 
@@ -35,7 +35,7 @@ function toRoman(x) {
 
 function showQuestions(karma, content, questions) {
     if(clock == null){
-        clock = new Clock();        
+        clock = createClock();
     }
     clock.reset();
     clock.show();
@@ -95,10 +95,10 @@ function showQuestions(karma, content, questions) {
             gameOver();
         }
     };
-    
+
     var gameOver = function () {
         clock.stop();
-        var hms = clock.hours_minutes_seconds();
+        var hms = clock.hoursMinutesSeconds();
         content
             .append(createDiv('gameOver')
                     .append(karma.createImg('gameOver'))
@@ -147,7 +147,8 @@ function initialScreen(karma, content) {
                 );
 }
 
-setUpMultiScreenLesson([initialScreen,
-                       function (karma, content) { showQuestions(karma, content, question_set1); },
-                       function (karma, content) { showQuestions(karma, content, question_set2); }]);
+setUpMultiScreenLesson(
+    [initialScreen,
+     function (karma, content) { showQuestions(karma, content, question1); },
+     function (karma, content) { showQuestions(karma, content, question2); }]);
 

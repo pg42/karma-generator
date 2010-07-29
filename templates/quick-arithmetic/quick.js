@@ -1,7 +1,7 @@
 var clock;
 
 function initialize() {
-    clock = new Clock();
+    clock = createClock();
     $('#imgDisplay').empty();
     range(0, TOTAL_QUES).forEach(
         function (i) {

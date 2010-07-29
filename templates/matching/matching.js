@@ -1,7 +1,7 @@
 var clock = null;
 
 function initialize() {
-    clock = new Clock();
+    clock = createClock();
     // TBD: move this to common.js
     $('#footer')
         .append(createDiv('clickDisplay')
@@ -76,7 +76,7 @@ function startGame(karma) {
 
     var gameOver = function () {
         clock.stop();
-        var hms = clock.hours_minutes_seconds();
+        var hms = clock.hoursMinutesSeconds();
         var info = 'You have completed the game in <span class="specialText">' +
             click_count +
 	    '</span> clicks within <span class="specialText">' +
