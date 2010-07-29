@@ -25,6 +25,7 @@ theLesson = None
 # TBD: provide a debug and optimized (minimized) version of the framework files.
 
 include_stack = []
+script_root = os.path.abspath(os.path.dirname(argv0))
 karma_root = os.path.abspath(os.path.join(os.path.dirname(argv0), 'deploy', 'karma'))
 lesson_src = '';
 lesson_dest = '';
@@ -500,9 +501,12 @@ if __name__ == '__main__':
                       help='use output as a destination directory')
     parser.add_option('-k', '--karma', dest='karma',
                       help='DEPRECATED - path to the karma directory')
+    parser.add_option('-a', '--all', dest='all', action='store_true',
+                      help='generate all lessons/*/description.py definitions')
     (options, args) = parser.parse_args()
     debug = options.debug
-    if not args:
+
+    if not args and not options.all:
         print 'Specify a file as an argument.'
         parser.print_help()
         sys.exit(1)
@@ -510,18 +514,29 @@ if __name__ == '__main__':
     if options.karma:
         print "WARNING: 'karma' option (-k, --karma) is deprecated and no longer needed"
 
-    description = os.path.abspath(args[0])
-    lesson_src = os.path.abspath(os.path.dirname(description))
+    process_descriptions = []
+    if options.all:
+        lesson_folder = os.path.join(script_root, 'lessons')
+        for root, dirs, files in os.walk(lesson_folder):
+            if 'description.py' in files:
+                process_descriptions.append( os.path.abspath(os.path.join(script_root, root, 'description.py')) )
+    else:
+        process_descriptions.append(args[0])
 
-    theLesson = Lesson()
-    theLesson.parent_directory = os.path.abspath('deploy/Activities')
-    theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
+    for description in process_descriptions:
+        os.chdir(script_root)
+        description = os.path.abspath(description)
+        lesson_src = os.path.abspath(os.path.dirname(description))
 
-    include_stack.append(description)
-    check_file_exists(description)
-    execfile(description)
-    include_stack.pop()
+        theLesson = Lesson()
+        theLesson.parent_directory = os.path.abspath(os.path.join(script_root, 'deploy', 'Activities'))
+        theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
 
-    theLesson.copy_files()
-    theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
-    theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
+        include_stack.append(description)
+        check_file_exists(description)
+        execfile(description)
+        include_stack.pop()
+
+        theLesson.copy_files()
+        theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
+        theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
