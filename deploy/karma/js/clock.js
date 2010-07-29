@@ -7,6 +7,7 @@ function Clock() {
                 .append(createDiv('timerBox3').addClass('timerBoxes'))
                 .hide());
     this.seconds = 0;
+    this.callbacks = [];
     this.interval_id = null;
     this.display();
 }
@@ -18,7 +19,11 @@ Clock.prototype.start = function () {
 };
 
 Clock.prototype.tick = function () {
-    this.seconds++;
+    var current_time = ++this.seconds;
+    var callbacks = this.callbacks.filter(function (x) {
+                                              return x.seconds == current_time;
+                                          });
+    callbacks.forEach(function (callback) { callback.callback(); });
     this.display();
 };
 
@@ -57,4 +62,18 @@ Clock.prototype.hide = function () {
 
 Clock.prototype.show = function () {
     $('#timerBar').show();
+}
+
+// Returns a key that you can use as an argument to remove_callback
+Clock.prototype.add_callback = function (seconds, callback) {
+    var result = {
+        seconds: seconds,
+        callback: callback
+    };
+    this.callbacks.push(result);
+    return result;
+}
+
+Clock.prototype.remove_callback = function (key) {
+    this.callbacks = this.callbacks.filter(function (x) { return x != key; });
 }
