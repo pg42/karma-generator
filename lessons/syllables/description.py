@@ -1,8 +1,8 @@
 lesson(grade=6,subject='English', title='Syllables',week=17)
 for f in ['ui.core',
           'karma',
-          '../../js/clock.js',
-          '../../js/common.js',
+          'clock',
+          'common',
           'global',          
           'lesson.js']:
     java_script(f)
