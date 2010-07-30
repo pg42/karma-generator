@@ -1,17 +1,19 @@
 lesson(grade=6,subject='English', title='Syllables',week=17)
-for f in ['ui.core',         
-          'clock',  
+
+for f in ['ui.core',
+          'clock',
           'lesson.js']:
     java_script(f)
 
-for i in ['computer_body.png',
-          'computer_base.png',
-          'computer_top.png',
-          'player_top.png',
-          'player_body.png',
-          'player_base.png',
-          'bgContainer.png']:
-    image(i)
+for x in ['computer_body',
+          'computer_base',
+          'computer_top',
+          'player_top',
+          'player_body',
+          'player_base',
+          'bgContainer']:
+    image(x + '.png', x)
+
 css('lesson.css')
 css('global')
 
