@@ -87,8 +87,11 @@ var CountdownTimer = Object.create(
             }
         },
         setTime: function (seconds) {
-            this.time = seconds;
+            this.seconds = seconds;
             this.display();
+        },
+        setCallback: function (callback) {
+            this.callback = callback;            
         }
     }
 );

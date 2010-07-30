@@ -1,9 +1,6 @@
 lesson(grade=6,subject='English', title='Syllables',week=17)
-for f in ['ui.core',
-          'karma',
-          'clock',
-          'common',
-          'global',          
+for f in ['ui.core',         
+          'clock',  
           'lesson.js']:
     java_script(f)
 
