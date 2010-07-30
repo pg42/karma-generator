@@ -8,12 +8,11 @@ o  .    6_English_syllables_17_K
 o  .    6_English_vocabularyBirds_4_K
 o       6_Maths_addingAndMultiplyingVariables_11_K
 o       6_Maths_addingAndSubtractingVariables_10_K
-o       6_Maths_estimatingAngles_16_K
 o       6_Maths_goShopping_5_K
 o  .    6_Maths_linesAndTriangle_8_K
 o       6_Maths_lowestCommonMultiple_14_K
 o       6_Maths_multiplyingFractions_18_K
-o       6_Maths_setsPictures_6_K
+o  .    6_Maths_setsPictures_6_K
 o       6_Maths_variables_10_K
 
 o  -   6_English_articles_7_K
@@ -56,6 +55,7 @@ v       6_English_namesOfColor_6_K
 v       6_English_sentencePractice1_12_K
 v       6_English_vocabularyAnimals_4_K
 v       6_Maths_SetMultipleChoice_7_K
+v       6_Maths_estimatingAngles_16_K
 v       6_Maths_linesAndLineSegments1_8_K
 v       6_Maths_matchingAnglesAndShapes_5_K
 v       6_Maths_parallelLines_9_K
@@ -72,3 +72,9 @@ v  -   6_Maths_matchingFactorsAndProducts_4_K
 v  -   6_Maths_quickAddition_1_K
 
 x  -   6_Maths_quickDivision_4_K
+
+o = not finished
+. = in progress
+- = excluded from deployment
+v = finished
+x = not finished, using template
