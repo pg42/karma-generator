@@ -62,13 +62,14 @@ function setUpLesson(initialize, start_game) {
           $("#linkCheck").hide();
 		  disableImageDragging("#lesson_title img");
           var karma = lesson_karma();
+          var $content = $('#content'); // TBD: error if absent
           karma.ready(
               function () {
                   setUpLinkBackLesson();
                   setUpHelp();
                   setUpPlayAgain(karma, start_game);
-                  initialize(karma);
-                  start_game(karma);
+                  initialize(karma, $content);
+                  start_game(karma, $content);
               });
       });
 }
