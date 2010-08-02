@@ -18,10 +18,6 @@ function setUpScreen(karma, instruction,
     $('#content')
         .append(createDiv('main')
                 .append(createDiv('instruction')
-                        .append('Select a ')
-                        .append(createA('pronoun'))
-                        .append(' and a ')
-                        .append(createA('verb'))
                         .append(instruction))
                 .append(createList('subjects', 'pronoun'))
                 .append(createDiv('pic'))
@@ -87,7 +83,7 @@ function screen1(karma) {
             .html('What is ' + subject + ' doing?');
         $('#page1').show();
     };
-    setUpScreen(karma, ' to read a question.', selectSubject, selectAction);
+    setUpScreen(karma, $._('Select a <span class="pronoun">pronoun</span> and a <span class="verb">verb</span> to read a question.'), selectSubject, selectAction);
     $('#main')
         .append(createDiv('page1')
                 .addClass('page')
@@ -158,7 +154,7 @@ function screen2(karma) {
             .appendTo('#page2_box');
     };
 
-    setUpScreen(karma, ' to make a question.', selectSubject, selectAction);
+    setUpScreen(karma, $._('Select a <span class="pronoun">pronoun</span> and a <span class="verb">verb</span> to make a question.'), selectSubject, selectAction);
 
     $('#main')
         .append(createDiv('page2')
@@ -199,7 +195,7 @@ function screen3(karma) {
             .appendTo('#page3_box');
     };
 
-    setUpScreen(karma, '. Then give a correct answer.',
+    setUpScreen(karma, $._('Select a <span class="pronoun">pronoun</span> and a <span class="verb">verb</span>. Then give a correct answer.'),
                 selectSubject, selectAction);
 
     $('#main')

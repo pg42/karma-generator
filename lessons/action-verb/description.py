@@ -1,4 +1,4 @@
-lesson(grade=6, subject='English', title='Action Verb', week=3)
+lesson(grade=6, subject='English', title='Action Verb', week=3, locale='en')
 
 data = [
     dict(subject='he',

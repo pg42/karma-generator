@@ -230,3 +230,13 @@ if (typeof Object.create !== 'function') {
 function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
+
+function objKeys(obj) {
+    var keys = []
+    for (prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            keys.push(prop);
+        }
+    }
+    return keys;
+}

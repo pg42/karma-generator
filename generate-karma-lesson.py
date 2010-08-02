@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from html import HtmlDocument, HtmlElement
+import mo2js
 import codecs
 import os
 import shutil
 import string
 import sys
 import time
+import fnmatch
 from optparse import OptionParser
 
 
@@ -153,7 +155,8 @@ java_script_dependencies = [
     ('jquery-ui', 'ui.scoreboard'),
     ('jquery', 'jquery.svg'),
     ('common', 'multiple-choice'),
-    ('jquery', 'clock')
+    ('jquery', 'clock'),
+    ('jquery', 'i18n')
     ]
 
 karma_java_script_files = [
@@ -170,7 +173,8 @@ karma_java_script_files = [
     KarmaFile('js/common.js', 'common'),
     KarmaFile('js/jquery.clickable.js', 'jquery.clickable'),
     KarmaFile('js/multiple-choice.js', 'multiple-choice'),
-    KarmaFile('js/clock.js', 'clock')
+    KarmaFile('js/clock.js', 'clock'),
+    KarmaFile('js/jquery.i18n.js', 'i18n')
     ]
 
 karma_css_files = [
@@ -309,7 +313,7 @@ class Lesson():
                 os.makedirs(d)
         create_dir(self.directory)
         os.chdir(self.directory)
-        map(create_dir, ['css', 'js', 'assets/image', 'assets/audio', 'assets/video'])
+        map(create_dir, ['css', 'js', 'js/locale', 'assets/image', 'assets/audio', 'assets/video'])
 
         for f in self.java_script_files + self.css_files:
             f.make_available()
@@ -319,6 +323,24 @@ class Lesson():
         screenshot_img = os.path.join(lesson_src, 'screenshot.jpg')
         if (os.path.exists(screenshot_img)):
             shutil.copy(screenshot_img, os.path.join(self.directory, 'screenshot.jpg'))
+
+        self.compile_translations()
+
+    def compile_translations(self):
+        # compile translation JS files from MO files
+
+        for srcfile in os.listdir(lesson_src):
+            if fnmatch.fnmatch(srcfile, '*.mo'):
+                lang = os.path.splitext(srcfile)[0]
+                srcpath = os.path.join(lesson_src, srcfile)
+                targpath = os.path.join(self.directory, 'js', 'locale', lang +'.js')
+                json_translations = mo2js.gettext_json(open(srcpath, 'r'), True)
+
+                f = codecs.open(targpath, encoding='utf-8', mode='w+')
+                f.write('$.i18n.storeLocaleStrings("%s",\n' % lang);
+                f.write(json_translations)
+                f.write(');\n');
+                f.write('$.i18n.setLocale("%s");\n' % lang);
 
     def set_directory(self, dir):
         self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
@@ -377,7 +399,7 @@ class Lesson():
                            indentation)]) + '});'
         print >>stream, '}'
 
-def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
+def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, locale=None):
     def camelcase(str):
         words = str.replace("'", '').split()
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
@@ -390,11 +412,21 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None):
     java_script('jquery')
     java_script('karma')
     java_script('common')
+    java_script('i18n')
     # include the lesson.js if it exists
     lesson_js = frob_path('lesson.js')
-    if (os.path.exists(lesson_js)):
+    if os.path.exists(lesson_js):
         java_script('lesson.js')
     add_help()
+    # include the locale strings too
+
+    if locale != None:
+        theLesson.java_script_files.append(File('js/jquery.i18n.'+ locale +'.js', type='js', karma=True))
+
+        locale_mo = frob_path(locale + '.mo')
+        if os.path.exists(locale_mo):
+            targpath = os.path.join(lesson_dest, 'js', 'locale', locale +'.js')
+            theLesson.java_script_files.append(File(targpath, None, type='js', karma=True))
 
 
 def resolve_karma_file(path, name, karma_files, **kw):
