@@ -41,6 +41,15 @@ class File():
     create_file = False
     data = ''
 
+    def to_string(self):
+        print 'name:', self._name
+        print 'src:', self.src
+        print 'deploy_subfolder:', self.deploy_subfolder
+        print 'lesson_deploy:', self.lesson_deploy
+        print 'create_file:', self.create_file
+        print 'data:', self.data
+        print
+
     def __init__(self, path, name=None, **kw):
         self._name = name
         self.src = path
@@ -145,26 +154,78 @@ class AudioFile(File):
 
 
 java_script_dependencies = [
-    ('jquery', 'jquery-ui'),
-    ('jquery', 'ui.core'),
+    ('effects.core', 'effects.blind'),
+    ('effects.core', 'effects.bounce'),
+    ('effects.core', 'effects.clip'),
+    ('effects.core', 'effects.drop'),
+    ('effects.core', 'effects.explode'),
+    ('effects.core', 'effects.fold'),
+    ('effects.core', 'effects.highlight'),
+    ('effects.core', 'effects.pulsate'),
+    ('effects.core', 'effects.scale'),
+    ('effects.core', 'effects.shake'),
+    ('effects.core', 'effects.slide'),
+    ('effects.core', 'effects.transfer'),
+    ('ui.core', 'ui.accordion'),
+    ('ui.widget', 'ui.accordion'),
+    ('ui.core', 'ui.autocomplete'),
+    ('ui.widget', 'ui.autocomplete'),
+    ('ui.position', 'ui.autocomplete'),
+    ('ui.core', 'ui.button'),
+    ('ui.widget', 'ui.button'),
+    ('ui.core', 'ui.datepicker'),
+    ('ui.core', 'ui.dialog'),
+    ('ui.widget', 'ui.dialog'),
+    ('ui.button', 'ui.dialog'),
+    ('ui.draggable', 'ui.dialog'),
+    ('ui.mouse', 'ui.dialog'),
+    ('ui.position', 'ui.dialog'),
+    ('ui.resizable', 'ui.dialog'),
     ('ui.core', 'ui.draggable'),
+    ('ui.mouse', 'ui.draggable'),
+    ('ui.widget', 'ui.draggable'),
     ('ui.core', 'ui.droppable'),
+    ('ui.widget', 'ui.droppable'),
+    ('ui.mouse', 'ui.droppable'),
+    ('ui.draggable', 'ui.droppable'),
+    ('ui.widget', 'ui.mouse'),
+    ('ui.core', 'ui.progressbar'),
+    ('ui.widget', 'ui.progressbar'),
+    ('ui.core', 'ui.resizable'),
+    ('ui.mouse', 'ui.resizable'),
+    ('ui.widget', 'ui.resizable'),
+    ('ui.core', 'ui.selectable'),
+    ('ui.mouse', 'ui.selectable'),
+    ('ui.widget', 'ui.selectable'),
+    ('ui.core', 'ui.slider'),
+    ('ui.mouse', 'ui.slider'),
+    ('ui.widget', 'ui.slider'),
+    ('ui.core', 'ui.sortable'),
+    ('ui.mouse', 'ui.sortable'),
+    ('ui.widget', 'ui.sortable'),
+    ('ui.core', 'ui.tabs'),
+    ('ui.widget', 'ui.tabs'),
+    # old stuff
+    ('jquery', 'jquery-ui'),
     ('jquery', 'jquery.watermarkinput'),
     ('jquery', 'jquery.clickable'),
     ('ui.core', 'ui.scoreboard'),
     ('jquery-ui', 'ui.scoreboard'),
     ('jquery', 'jquery.svg'),
+    ('karma', 'common'),
     ('common', 'multiple-choice'),
     ('jquery', 'clock'),
     ('jquery', 'i18n')
     ]
 
 karma_java_script_files = [
-    KarmaFile('js/jquery-1.4.2.js', 'jquery'),
-    KarmaFile('js/jquery-ui-1.8.2.js', 'jquery-ui'),
-    KarmaFile('js/ui.core.js', 'ui.core'),
-    KarmaFile('js/ui.draggable.js', 'ui.draggable'),
-    KarmaFile('js/ui.droppable.js', 'ui.droppable'),
+    KarmaFile('js/external/jquery-1.4.2.js', 'jquery'),
+    KarmaFile('js/external/jquery-ui-1.8.2.js', 'jquery-ui'),
+    KarmaFile('js/external/jquery.ui.core.js', 'ui.core'),
+    KarmaFile('js/external/jquery.ui.mouse.js', 'ui.mouse'),
+    KarmaFile('js/external/jquery.ui.widget.js', 'ui.widget'),
+    KarmaFile('js/external/jquery.ui.draggable.js', 'ui.draggable'),
+    KarmaFile('js/external/jquery.ui.droppable.js', 'ui.droppable'),
     KarmaFile('js/jquery.watermarkinput.js', 'jquery.watermarkinput'),
     KarmaFile('js/ui.scoreboard.js', 'ui.scoreboard'),
     KarmaFile('js/jquery.svg.js', 'jquery.svg'),
@@ -282,6 +343,24 @@ def topological_sort(nodes, dependencies, key):
     return result
 
 
+def include_dependencies(files):
+    result = []
+    visited = set()
+    deps = {}
+    for dep in java_script_dependencies:
+        deps[dep[1]] = deps.setdefault(dep[1], []) + [dep[0]]
+    js_files = {}
+    for f in karma_java_script_files:
+        js_files[f.name()] = f
+    def add_dependencies(list):
+        for x in list:
+            if x not in visited:
+                add_dependencies([js_files[name] for name
+                                  in deps.setdefault(x.name(), [])])
+                result.append(x)
+                visited.add(x)
+    add_dependencies(files)
+    return result
 
 def sort_java_script_files(files):
     karma_files = filter(lambda x: isinstance(x, KarmaFile), files)
@@ -361,7 +440,8 @@ class Lesson():
         head.link(type='image/ico',
                   rel='icon',
                   href=favicon.relative_path(None, web=True))
-        for file in sort_java_script_files(self.java_script_files):
+        all_java_script_files = include_dependencies(self.java_script_files)
+        for file in sort_java_script_files(all_java_script_files):
             head.script(type='text/javascript',
                         src=file.relative_path(None, web=True))
         body = html.body()
