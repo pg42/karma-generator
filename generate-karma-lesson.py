@@ -224,6 +224,7 @@ karma_java_script_files = [
     KarmaFile('js/external/jquery.ui.core.js', 'ui.core'),
     KarmaFile('js/external/jquery.ui.mouse.js', 'ui.mouse'),
     KarmaFile('js/external/jquery.ui.widget.js', 'ui.widget'),
+    KarmaFile('js/external/jquery.ui.position.js', 'ui.position'),
     KarmaFile('js/external/jquery.ui.draggable.js', 'ui.draggable'),
     KarmaFile('js/external/jquery.ui.droppable.js', 'ui.droppable'),
     KarmaFile('js/jquery.watermarkinput.js', 'jquery.watermarkinput'),
