@@ -21,6 +21,5 @@ audio('incorrect')
 
 image('correct.png', 'correct')
 image('incorrect.png', 'incorrect')
-image('gameOver.png', 'gameOver')
 
 footer_configuration(link_next=True, link_previous=True, scoreboard=True, link_check_answer=True)

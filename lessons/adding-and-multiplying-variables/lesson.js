@@ -1,11 +1,12 @@
-﻿var questions = Karma.shuffle([
+﻿var questions = [
     {
         q1: 'एउटा बट्टामा {variable} ओटा लडडुहरु छन ',
         q2: 'यदि एउटा बट्टामा {per} ओटा लडडुहरु छन भने {qty} ओटा  बट्टामा',
         q3: 'ओटा लडडुहरु छन',
         variable: 'y',
         per: 20,
-        qty: 5
+        qty: 5,
+        img: 0
     },
     {
         q1: 'एउटा सीसाकलमको बट्टामा {variable} ओटा सीसाकलमहरु छन',
@@ -13,7 +14,8 @@
         q3: 'सीसाकलमहरु छन',
         variable: 'p',
         per: 10,
-        qty: 4
+        qty: 4,
+        img: 1
     },
     {
         q1: 'एउटा बोरामा {variable} केजी  चामल  छ ',
@@ -21,7 +23,8 @@
         q3: 'केजी  चामल  छ',
         variable: 'r',
         per: 50,
-        qty: 4
+        qty: 4,
+        img: 2
     },
     {
         q1: 'एउटा सिसीमा {variable} लिटर तेल छ ',
@@ -29,7 +32,8 @@
         q3: 'लिटर तेल छ',
         variable: 'z',
         per: 2,
-        qty: 4
+        qty: 4,
+        img: 3
     },
     {
         q1: 'एउटा कार्टुनमा {variable} प्याकेट चाउचाउ छन ',
@@ -37,7 +41,8 @@
         q3: 'प्याकेट चाउचाउ छन',
         variable: 'x',
         per: 30,
-        qty: 3
+        qty: 3,
+        img: 4
     },
     {
         q1: 'एउटा डालोमा {variable} ओटा नरिवलहरु छन ',
@@ -45,7 +50,8 @@
         q3: 'ओटा नरिवलहरु छन',
         variable: 'n',
         per: 25,
-        qty: 3
+        qty: 3,
+        img: 5
     },
     {
         q1: 'एउटा झोलामा {variable} केजी  आपहरु छन',
@@ -53,7 +59,8 @@
         q3: 'केजी  आपहरु छन',
         variable: 'm',
         per: 7,
-        qty: 2
+        qty: 2,
+        img: 6
     },
     {
         q1: 'यो एउटा  बिस्कुटको प्याकेटमा {variable} ओटा बिस्कुटहरु छन ',
@@ -61,9 +68,11 @@
         q3: 'बिस्कुटहरु छन'	,
         variable: 'x',
         per: 15,
-        qty: 3
+        qty: 3,
+        img: 7
     },
-]);
+];
+
 var current_question_index = -1;
 var attempted_answer = false;
 var correct_subtotal = false;
@@ -112,8 +121,8 @@ function askQuestion() {
 
     var question = questions[current_question_index];
 
-    $("#questionTopImage").append(Karma.createImg('img' + current_question_index));
-    $("#questionBottomImage").append(Karma.createImg('img' + current_question_index + 'More'));
+    $("#questionTopImage").append(Karma.createImg('img' + question['img']));
+    $("#questionBottomImage").append(Karma.createImg('img' + question['img'] + 'More'));
 
     $("#questionTopText").html($.format(question['q1'], question));
 
@@ -153,6 +162,8 @@ function initialize(){
 function startLesson(karma, contentDiv) {
     current_question_index = -1;
     scoreboardReset();
+
+    questions = karma.shuffle(questions);
 
     contentDiv = $("#content");
     contentDiv.empty();
