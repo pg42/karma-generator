@@ -3,9 +3,7 @@ lesson(grade=6, subject='English', title='Names of Colors', week=6)
 css('global')
 css('lesson.css')
 
-for f in ['ui.core',
-          'lesson.js']:
-    java_script(f)
+java_script('ui.core')
 
 for x in ['correct', 'incorrect']:
     audio(x + '.ogg', x)

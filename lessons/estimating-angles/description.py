@@ -5,9 +5,6 @@ lesson(grade=6, subject='Maths', title='Estimating Angles', week=16,
 css('global')
 css('lesson.css')
 
-for f in ['lesson.js']:
-    java_script(f)
-
 for x in ['correct', 'incorrect']:
     audio('ne_' + x + '.ogg', x)
 
@@ -27,7 +24,6 @@ image('medal.png')
 image('section3ImgTop.png', 'section3ImgTop')
 image('section3.png')
 image('ball.png')
-#image('check.png')
 image('boom.png', 'boom')
 
 audio('explode.ogg', 'explode')

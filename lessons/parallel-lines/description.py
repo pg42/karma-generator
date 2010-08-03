@@ -6,8 +6,7 @@ css('global')
 css('lesson.css')
 
 for f in ['ui.core',
-          'jquery.clickable',
-          'lesson.js']:
+          'jquery.clickable']:
     java_script(f)
 
 for i in range(0, 10):

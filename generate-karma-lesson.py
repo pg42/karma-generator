@@ -214,6 +214,7 @@ java_script_dependencies = [
     ('jquery', 'jquery.svg'),
     ('karma', 'common'),
     ('common', 'multiple-choice'),
+    ('common', 'clock'),
     ('jquery', 'clock'),
     ('jquery', 'i18n')
     ]
@@ -288,25 +289,21 @@ def generate_header(dir, body, title):
                                              id='linkOle')
 
 
-gFooterConfiguration = dict(link_previous=True,
-                            link_next=True,
-                            scoreboard=False,
-                            link_check_answer=False)
-
-
 def generate_footer(body):
     footer = body.div(id='footer')
 
-    if gFooterConfiguration['link_next']:
+    config = theLesson.footer_configuration
+
+    if config['link_next']:
         footer.div(title='Next', id='linkNextLesson', className='linkNext')
-    if gFooterConfiguration['link_previous']:
+    if config['link_previous']:
         footer.div(title='Previous', id='linkPrevLesson', className='linkBack')
-    if gFooterConfiguration['scoreboard']:
+    if config['scoreboard']:
         footer.div(id='score_box', display='none')
 
     footer.div(className='botbtn_right').div(title='Play Again', id='linkPlayAgain')
 
-    if gFooterConfiguration['link_check_answer']:
+    if config['link_check_answer']:
         footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
 
 
@@ -388,6 +385,10 @@ class Lesson():
         self.image_files = []
         self.audio_files = []
         self.divs = [createDiv('content')]
+        self.footer_configuration = dict(link_previous=True,
+                                         link_next=True,
+                                         scoreboard=False,
+                                         link_check_answer=False)
 
     def copy_files(self):
         def create_dir(d):
@@ -522,7 +523,10 @@ def resolve_karma_file(path, name, karma_files, **kw):
 def java_script(name, **kw):
     kw['type'] = 'js'
     result = resolve_karma_file(name, name, karma_java_script_files, **kw)
-    theLesson.java_script_files.append(result)
+    if name in [f.name() for f in theLesson.java_script_files]:
+        print 'Warning: the java_script file \'' + name + '\' is included twice.'
+    else:
+        theLesson.java_script_files.append(result)
     return result
 
 
@@ -558,14 +562,15 @@ def div(**info):
 
 
 def footer_configuration(**kw):
-    global gFooterConfiguration
+    global theLesson
+    config = theLesson.footer_configuration
     for k,v in kw.items():
-        if not k in gFooterConfiguration:
+        if not k in config:
             print 'Error: unsupported footer configuration option: ' + k + '.'
-            print 'Possible options:', ', '.join(gFooterConfiguration.keys())
+            print 'Possible options:', ', '.join(config.keys())
             sys.exit(1)
-        gFooterConfiguration[k] = v
-    if gFooterConfiguration['scoreboard']:
+        config[k] = v
+    if config['scoreboard']:
         css('ui.scoreboard')
         java_script('ui.scoreboard')
         java_script('../../deploy/karma/js/scoreboard.js') #TBD: fix path

@@ -91,7 +91,7 @@ var CountdownTimer = Object.create(
             this.display();
         },
         setCallback: function (callback) {
-            this.callback = callback;            
+            this.callback = callback;
         }
     }
 );

@@ -6,8 +6,7 @@ css('lesson.css')
 for f in ['ui.position',
           'ui.draggable',
           'ui.droppable',
-          'jquery.clickable',
-          'lesson.js']:
+          'jquery.clickable']:
     java_script(f)
 
 for x in ['correct', 'incorrect']:

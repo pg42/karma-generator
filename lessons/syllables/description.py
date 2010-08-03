@@ -1,8 +1,7 @@
 lesson(grade=6,subject='English', title='Syllables',week=17)
 
 for f in ['ui.core',
-          'clock',
-          'lesson.js']:
+          'clock']:
     java_script(f)
 
 for x in ['computer_body',
