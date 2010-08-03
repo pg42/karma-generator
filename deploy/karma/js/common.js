@@ -45,7 +45,9 @@ function setUpHelp() {
 
 function setUpPlayAgain(karma, start_game) {
     controlButtonClickCallback($('#linkPlayAgain'),
-                               function () { start_game(karma); });
+                               function () {
+                                   start_game(karma, $('#content'));
+                               });
 }
 
 /*
@@ -208,6 +210,7 @@ function extend(object, properties) {
             object[prop] = properties[prop];
         }
     }
+    return object;
 }
 
 function toBeOverridden(method) {
@@ -232,8 +235,88 @@ function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
 
+/*
+ * Simple Drag and Drop:
+ *  - you can drag the draggables to a droppable and drop it.
+ *  - there can only be one draggable per droppable.
+ *  - if you drop a draggable where there is no (free) droppable it will
+ *    revert its position.
+ *  - you can drag a previously dropped draggable.
+ *  - once dropped the draggable will center itself on the droppable.
+ *  - the dropHover class is removed if a droppable is occupied.
+ *
+ * The options_draggable argument accepts the same options as a
+ * ui.draggable, except start/stop.
+ *
+ * The options_drobbale argument accepts the same options as a
+ * ui.draggable, except drop.
+ * It takes an extra option dropSuccess, a callback that will be
+ * invoked on a successful drop.
+ */
+function enableSimpleDragAndDrop(draggables,
+                                 options_draggable,
+                                 droppables,
+                                 options_droppable) {
+    var vacateDroppable = function (draggable) {
+        var droppable = draggable.data('droppable');
+        if (droppable) {
+            droppable.data('draggable', null);
+            draggable.data('droppable', null);
+            var hover_class = options_droppable.hoverClass;
+            if (hover_class) {
+                droppable.droppable('option',
+                                    'hoverClass',
+                                    hover_class);
+            }
+        }
+    };
+    var revertOnMissedDrop = function (draggable) {
+        if (!draggable.data('droppable')) {
+            draggable.animate({ left: 0, top: 0 });
+        }
+    };
+    $(draggables).draggable(
+        extend(options_draggable,
+               {
+                   start: function (event, ui) {
+                       vacateDroppable(ui.helper);
+                   },
+                   stop: function (event, ui) {
+                       revertOnMissedDrop(ui.helper);
+                   }
+               })
+    );
+    var isVacant = function (droppable) {
+        return !droppable.data('draggable');
+    };
+    var occupy = function (droppable, draggable) {
+        droppable.data('draggable', draggable);
+        draggable.data('droppable', droppable);
+        draggable.position({ my: 'center', at: 'center', of: droppable });
+        droppable.droppable('option', 'hoverClass', '');
+    };
+    $(droppables).droppable(
+        extend(
+            options_droppable,
+            {
+                drop: function (event, ui) {
+                    var droppable = $(this);
+                    var draggable = ui.draggable;
+                    if (isVacant(droppable)) {
+                        occupy(droppable, draggable);
+                        var success = options_droppable.dropSuccess;
+                        if (success) {
+                            success.apply(this, [event, ui]);
+                        }
+                    }
+                }
+            }
+        )
+    );
+}
+
 function objKeys(obj) {
-    var keys = []
+    var keys = [];
     for (prop in obj) {
         if (obj.hasOwnProperty(prop)) {
             keys.push(prop);
