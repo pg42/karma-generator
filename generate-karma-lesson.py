@@ -236,7 +236,9 @@ karma_java_script_files = [
     KarmaFile('js/jquery.clickable.js', 'jquery.clickable'),
     KarmaFile('js/multiple-choice.js', 'multiple-choice'),
     KarmaFile('js/clock.js', 'clock'),
-    KarmaFile('js/jquery.i18n.js', 'i18n')
+    KarmaFile('js/jquery.i18n.js', 'i18n'),
+    KarmaFile('js/jquery.strings.js', 'jquery.strings'),
+    KarmaFile('js/jquery.keyfilter.js', 'jquery.keyfilter')
     ]
 
 karma_css_files = [
