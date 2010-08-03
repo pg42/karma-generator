@@ -432,7 +432,7 @@ class Lesson():
     def print_html_on(self, stream):
         doc = HtmlDocument()
         for line in warning_text_lines:
-            doc.comment(line)
+            doc.comment(string.replace(line, '--', '__'))
         html = doc.html()
         head = html.head()
         head.title().text(self.title)

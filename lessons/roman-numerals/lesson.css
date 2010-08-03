@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 #content {
     position: relative;
@@ -134,35 +134,4 @@
 .focus {
     border: 2px solid #AA88FF;
     background-color: #FFEEAA;
-}
-
-#timerBar {
-    float: left;
-    width: 215px;
-    height: 35px;
-    padding-left: 10px;
-    padding-top: 0px;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: #FFFF00;
-    font-size: 16pt;
-    font-weight: bold;
-}
-
-#timerTitle {
-    float: left;
-    margin: 10px 0 0 -10px;
-    width: 50px;
-    height: 35px;
-}
-
-.timerBoxes {
-    float: right;
-    margin: .1em 0 0 0.1em;
-    width: 35px;
-    height: 30px;
-    border: 2px dotted green;
-    padding: 3px;
-    color: blue;
-    font : bold 25px Arial Black, Times New Roman;
-    background: #ACC;
 }

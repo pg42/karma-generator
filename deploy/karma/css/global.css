@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+﻿@CHARSET "UTF-8";
 
 /*  Designed for 1200*900 px screen resolution  */
 
@@ -181,30 +181,31 @@ body {
     left: 10px;
 }
 
-#timerBar {
-    position: absolute;
-    left: 30%;
-    bottom: 25%;
-    width: 210px;
-    height: 35px;
-    padding-left: 10px;
-    color: #FFFF00;
-    font-size: 16pt;
-    font-weight: bold;
-}
 
 #picClock {
     float: left;
     width: 32px;
     height: 32px;
+    margin-top: 10px;
     background: url(../image/picClock.png);
 }
 
+#timerBar {
+    position: absolute;
+    left: 30%;
+    bottom: 25%;
+    width: 220px;
+
+    color: #ff0;
+    font-size:16pt;
+    font-weight:bold;
+}
 .timerBoxes {
     float: right;
-    width: 50px;
-    height: 35px;
+    height: 32px;
     border: 2px dotted green;
+    margin: 3px 0 0 3px;
+    padding: 3px;
     color: blue;
     text-align: center;
     font : bold 25px Arial Black, Times New Roman;

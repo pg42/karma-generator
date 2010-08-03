@@ -2,11 +2,12 @@
 
 /**** Game Styles  ****/
 
-
+#content{
+	text-align: left;
+}
 
 #section{
 	margin:150px auto;
-	
 }
 
 	#topText{

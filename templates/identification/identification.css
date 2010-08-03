@@ -16,6 +16,7 @@
 
 #content {
     background: url(../assets/image/background.jpg) no-repeat center;
+	text-align: left;
 }
 
 #listenAgain {

@@ -48,15 +48,15 @@ p#blue {
 
 #keys1 {
     margin-left: 18px;
+	clear:both;
 }
-
 #keys2 {
-    margin: 0px auto;
-    width: 520px;
+    margin-left: 55px;
+	clear:both;
 }
-
 #keys3 {
     margin-left: 85px;
+	clear:both;
 }
 
 .alphaKeys {

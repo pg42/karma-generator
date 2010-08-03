@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+﻿@CHARSET "UTF-8";
 /****** Page Styles ****/
 
 /*  Designed for 1200*900 px screen resolution  */
@@ -19,26 +19,22 @@
 }
 
 #quesSection {
-    margin: 2em auto;
-    width: 80em;
-    height: 40em;
+    margin: 20px auto;
+    height: 560px;
 }
 
 .imgArea {
     float: left;
-    position: relative;
     width: 185px;
     height: 200px;
     padding: 5px;
-    margin: 1em 2em;
+    margin: 15px 45px;
 }
 
 .imgObject {
     position: relative;
-    width: 150px;
     height: 150px;
-    margin: 0.25em;
-    padding-left: 50px;
+    margin: 5px auto;
 }
 
 #optionSection {
@@ -67,12 +63,11 @@
 
 .dropObjects {
     width: 125px;
-    height: 33px;
-    margin: 0.5em 2em;
+    height: 40px;
+    margin: 12px auto;
     border: 2px solid black;
     text-align: center;
     font: 30px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    line-height: 30px;
 }
 
 .dragObjects {
