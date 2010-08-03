@@ -94,6 +94,11 @@ function askQuestion() {
             .keyfilter(/[\d]/);
     }
 
+    if ( current_question_index >= questions.length ){
+        showGameOver();
+        return;
+    }
+
     // reset screen
     attempted_answer = false;
     correct_subtotal = false;
@@ -103,11 +108,8 @@ function askQuestion() {
     $("#questionBottomImage").empty();
     $("#questionTopText").empty();
     $("#questionBottomText").empty();
+    $("#gameOver").empty().hide();
 
-    if ( current_question_index >= questions.length ){
-        showGameOver();
-        return;
-    }
     var question = questions[current_question_index];
 
     $("#questionTopImage").append(Karma.createImg('img' + current_question_index));
@@ -149,7 +151,7 @@ function initialize(){
 }
 
 function startLesson(karma, contentDiv) {
-    current_list_index = -1;
+    current_question_index = -1;
     scoreboardReset();
 
     contentDiv = $("#content");
@@ -177,7 +179,7 @@ function startLesson(karma, contentDiv) {
 }
 
 function checkAnswer(){
-    if (correct_total){
+    if (correct_total || current_question_index >= questions.length){
         return;
     }
     var question = questions[current_question_index];
@@ -207,6 +209,7 @@ function checkAnswer(){
         // check the subtotal
         if ( $('#subtotalInput').val() == question['per'] ){
             correct_subtotal = true;
+            Karma.play('correct');
 
             $('#subtotalLine').empty()
                 .html(
@@ -240,9 +243,8 @@ function incorrect() {
 }
 
 function showGameOver(){
-    $("#gameOver").empty();
+    $("#gameOver").empty().show();
     scoreboardAppendGameOverMessage($("#gameOver"));
-    $("#gameOver").show();
 }
 
 setUpLesson(initialize, startLesson);

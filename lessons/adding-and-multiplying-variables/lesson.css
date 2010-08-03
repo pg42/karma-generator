@@ -68,13 +68,13 @@
 }
 
 #gameOver{
+    font: 20px bold Arial,Verdana,Geneva,Helvetica;
+    color: #AA0000;
     background:none repeat scroll 0 0 #DDDDDD;
     border:1px solid #333333;
-    color:#AA0000;
-    margin:0 auto;
     padding:40px;
-    position:relative;
-    top:400px;
-    width:400px;
-    font: 20px bold Arial,Verdana,Geneva,Helvetica;
+    position:absolute;
+    top:200px;
+    width:350px;
+    left: 400px;
 }
