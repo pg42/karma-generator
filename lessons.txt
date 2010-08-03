@@ -1,10 +1,9 @@
 o  .    2_Maths_largestNumber_6_K
 o  .    2_Maths_quickMultiplication_15_K
 o       2_Maths_shapes_10_K
-o  .    6_English_alphabeticalOrder_13_K
 o  .    6_English_sentencePractice2_12_K
 o  .    6_English_vocabularyBirds_4_K
-o       6_Maths_addingAndMultiplyingVariables_11_K
+o  .    6_Maths_addingAndMultiplyingVariables_11_K
 o       6_Maths_addingAndSubtractingVariables_10_K
 o       6_Maths_goShopping_5_K
 o  .    6_Maths_linesAndTriangle_8_K
@@ -48,6 +47,7 @@ v       2_Maths_barGraph_16_K
 v       2_Maths_countingSheep_2_K
 v       2_Maths_moneyIdentification_18_K
 v       2_Maths_numericPuzzle_1_K
+v       6_English_alphabeticalOrder_13_K
 v       6_English_matchingProductsAndWords_8_K
 v       6_English_namesOfColor_6_K
 v       6_English_oneOrMany_5_K
