@@ -53,7 +53,7 @@ function setUpPlayAgain(karma, start_game) {
 /*
  * initialize is called once before the game is started. It is passed
  * the karma object as an argument.
- * Each time a game is started or restarted, starte_game is called
+ * Each time a game is started or restarted, start_game is called
  * with the karma object as an argument.
  */
 function setUpLesson(initialize, start_game) {
@@ -323,4 +323,8 @@ function objKeys(obj) {
         }
     }
     return keys;
+}
+
+function constantly (x) {
+    return function () { return x; };
 }
