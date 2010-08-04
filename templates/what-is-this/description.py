@@ -43,5 +43,5 @@ image('ant.png', 'ant')
 
 print >>objects_js, 'objects = [%s];' % (', '.join(["'%s'" % o for o in objects]))
 
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
+audio('correct')
+audio('incorrect')

@@ -24,4 +24,4 @@ for x in ['tv','borderWall','cupBoard']:
 	image(x+'.png');
 
 for x in ['correct', 'incorrect']:
-    audio(x + '.ogg', x)
+    audio(x)

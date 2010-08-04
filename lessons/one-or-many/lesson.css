@@ -149,15 +149,15 @@
 .dropObjects {
     width: 125px;
     height: 40px;
-    margin: 1.7em 0.5em 0.2em 0.5em;
+    margin: 20px 10px 10px;
     border-bottom: 2px solid black;
     float: left;
 }
 
 #dropThere {
     width: 125px;
-    height: 30px;
-    margin: 1.3em 0.5em 0.5em 0.5em;
+    height: 40px;
+    margin: 20px 10px 10px;
     border-bottom: 2px solid black;
     float: left;
     font: 25px/5px bold Arial,Verdana,Geneva,Helvetica;
@@ -166,5 +166,5 @@
 
 #dropThereText {
     position: relative;
-    top: 10px;
+    top: 20px;
 }

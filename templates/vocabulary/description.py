@@ -2,10 +2,10 @@ css('global')
 css('vocabulary.css')
 
 central_js_files = [
-    'ui.core',
-    'ui.draggable',
-    'ui.droppable',
-    'jquery.clickable']
+	'ui.position',
+	'ui.draggable',
+	'ui.droppable',
+	'jquery.clickable']
 
 for f in central_js_files:
     java_script(f)
@@ -28,5 +28,5 @@ def register_objects(objects):
          for o in objects]) + '];'
 
 for x in ['correct', 'incorrect', 'trigger']:
-    audio(x + '.ogg', x)
+    audio(x)
 

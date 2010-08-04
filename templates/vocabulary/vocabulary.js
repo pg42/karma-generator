@@ -20,62 +20,73 @@ function generateScreen0(karma, $container) {
 
 function generateScreen1(karma, $container) {
     var createImage = function (object) {
-        var img_area = createDiv()
-            .addClass('imgArea');
-        // TBD: is this div needed?
-        var imgObject = createDiv()
-            .addClass('imgObject')
-            .append(karma.createImg(object.name))
-            .appendTo(img_area);
-        createDiv()
-            .addClass('dropObjects')
-            .appendTo(img_area);
-        return img_area;
+        return createDiv()
+            .addClass('imgArea')
+			.append(createDiv()
+				.addClass('imgObject')
+				.append(karma.createImg(object.name))
+			)
+			.append(createDiv()
+				.addClass('dropObjects')
+				.data('word', object.name)
+			);
     };
 
     var createWord = function (object) {
         return createDiv()
             .addClass('dragObjects')
-            .html(object.name);
+            .html(object.name)
+			.data('word', object.name);
     };
 
-    var images = objects.map(createImage);
-    var words = objects.map(createWord);
+    var images = Karma.shuffle(objects.map(createImage));
+    var words = Karma.shuffle(objects.map(createWord));
+	
+	var dropAllow = function(event, ui){
+		if ($(event.target).data('word') == $(ui.draggable).data('word')){
+			karma.play('correct');
+			return true;
+		} else {
+			karma.play('incorrect');
+			return false;
+		}
+	}
+	
+	var dropSuccess = function(event, ui){
+		// if they've all been placed, game over
+		all_placed = true;
+		$('.dropObjects').each(function(){
+			console.log('checking droppable: ', $(this), $(this).data('draggable'));
+			if (!$(this).data('draggable')){
+				all_placed = false;
+			}
+		});
+		if (all_placed){
+			gameOver();
+		}
+	}
+	
+	$container.append(createDiv('quesSection'))
+		.append(createDiv('optionSection'));
+	
+    $(images).appendTo('#quesSection');
+    $(words).appendTo('#optionSection');
+	
+	enableSimpleDragAndDrop($('.dragObjects'),
+							{ containment: '#content' },
+							$('.dropObjects'),
+							{ tolerance: 'intersect',
+							  hoverClass: 'drophover',
+							  dropTest: dropAllow,
+							  dropSuccess: dropSuccess});
+}
 
-    var enableDragAndDrop = function (word, target) {
-        word.draggable({containment: '#content', revert: true});
-        target.droppable(
-            {tolerance: 'intersect',
-             hoverClass: 'drophover',
-             drop: function (event, ui) {
-                 var dropped_word = ui.draggable;
-                 if (dropped_word.get()[0] === word.get()[0]) {
-                     dropped_word.remove();
-                     $(this).text(dropped_word.text());
-                     karma.play('correct');
-                 } else {
-                     karma.play('incorrect');
-                 }
-                 if ($('.dragObjects').size() == 0) {
-                     createDiv()
-                         .addClass('gameOver')
-                         .text('GAME OVER')
-                         .appendTo($('#optionSection'));
-                 }
-             }});
-    };
-
-    for (var i = 0; i < images.length; ++i) {
-        enableDragAndDrop(words[i], $('.dropObjects', images[i]));
-    }
-
-    var $ques_section = createDiv('quesSection')
-        .appendTo($container);
-    $(Karma.shuffle(images)).appendTo($ques_section);
-
-    var $option_section = createDiv('optionSection')
-        .appendTo($container);
-    $(Karma.shuffle(words)).appendTo($option_section);
+function gameOver(){
+	$('#optionSection').append(createDiv()
+		.addClass('gameOver')
+		.text('GAME OVER')
+	);
+	$('.dragObjects').draggable('disable');
 }
 
 setUpMultiScreenLesson([generateScreen0, generateScreen1]);

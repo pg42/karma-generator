@@ -1,4 +1,4 @@
-css('global')
+﻿css('global')
 css('vocabulary-with-game.css')
 
 for f in ['ui.core',
@@ -8,8 +8,8 @@ for f in ['ui.core',
           'vocabulary-with-game.js']:
     java_script(f)
 
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
+audio('correct')
+audio('incorrect')
 
 def register_objects(objects):
     objects_js = java_script('objects.js', generated=True)
@@ -19,5 +19,5 @@ def register_objects(objects):
     print >>objects_js, 'setUp(objects);'
 
     for x in objects:
-        image(x + '.png', x)
+        image(x + '.jpg', x)
         audio(x + '.ogg', x)

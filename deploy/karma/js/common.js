@@ -303,11 +303,17 @@ function enableSimpleDragAndDrop(draggables,
                     var droppable = $(this);
                     var draggable = ui.draggable;
                     if (isVacant(droppable)) {
-                        occupy(droppable, draggable);
-                        var success = options_droppable.dropSuccess;
-                        if (success) {
-                            success.apply(this, [event, ui]);
-                        }
+						allowDrop = true;
+						if ( options_droppable.dropTest ){
+							allowDrop = options_droppable.dropTest.apply(this, [event, ui]);
+						}
+						if ( allowDrop != false ){
+							occupy(droppable, draggable);
+							var success = options_droppable.dropSuccess;
+							if (success) {
+								success.apply(this, [event, ui]);
+							}
+						}
                     }
                 }
             }
