@@ -1,4 +1,4 @@
-#! /usr/bin/env python2.6
+﻿#! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
 from html import HtmlDocument, HtmlElement
@@ -250,8 +250,8 @@ karma_css_files = [
 karma_audio_files = [
     KarmaFile('audio/en_correct.ogg', 'correct', type='audio'),
     KarmaFile('audio/en_incorrect.ogg', 'incorrect', type='audio'),
-   #KarmaFile('audio/ne_correct.ogg', 'ne_correct', type='audio'),
-   #KarmaFile('audio/ne_incorrect.ogg', 'ne_incorrect', type='audio'),
+    KarmaFile('audio/ne_correct.ogg', 'ne_correct', type='audio'),
+    KarmaFile('audio/ne_incorrect.ogg', 'ne_incorrect', type='audio'),
     KarmaFile('audio/byebye.ogg', 'byebye', type='audio'),
     KarmaFile('audio/trigger.ogg', 'trigger', type='audio')
     ]
@@ -537,17 +537,21 @@ def css(name):
 
 
 def image(file, name=None):
+    search_framework_files = []
     if name == None:
         name = file
-    result = resolve_karma_file(file, name, karma_image_files, type='image')
+        search_framework_files = karma_image_files
+    result = resolve_karma_file(file, name, search_framework_files, type='image')
     theLesson.image_files.append([name, result])
     return result
 
 
 def audio(file, name=None):
+    search_framework_files = []
     if name == None:
         name = file
-    result = resolve_karma_file(file, name, karma_audio_files, type='audio')
+        search_framework_files = karma_audio_files
+    result = resolve_karma_file(file, name, search_framework_files, type='audio')
     theLesson.audio_files.append([name, result])
     return result
 
