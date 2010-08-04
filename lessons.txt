@@ -2,7 +2,6 @@ o  .    2_Maths_largestNumber_6_K
 o  .    2_Maths_quickMultiplication_15_K
 o  .    2_Maths_shapes_10_K
 o  .    6_English_vocabularyBirds_4_K
-o  .    6_Maths_goShopping_5_K
 o  .    6_Maths_linesAndTriangle_8_K
 o  .    6_Maths_lowestCommonMultiple_14_K
 o       6_Maths_multiplyingFractions_18_K
@@ -56,6 +55,7 @@ v       6_Maths_SetMultipleChoice_7_K
 v       6_Maths_addingAndMultiplyingVariables_11_K
 v       6_Maths_addingAndSubtractingVariables_10_K
 v       6_Maths_estimatingAngles_16_K
+v       6_Maths_goShopping_5_K
 v       6_Maths_linesAndLineSegments1_8_K
 v       6_Maths_matchingAnglesAndShapes_5_K
 v       6_Maths_parallelLines_9_K
