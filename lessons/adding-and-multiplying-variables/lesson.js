@@ -70,7 +70,7 @@
         per: 15,
         qty: 3,
         img: 7
-    },
+    }
 ];
 
 var current_question_index = -1;
@@ -101,7 +101,7 @@ function askQuestion() {
                 $(this).removeClass("focus");
             })
             .keyfilter(/[\d]/);
-    }
+    };
 
     if ( current_question_index >= questions.length ){
         showGameOver();
