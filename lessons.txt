@@ -5,7 +5,7 @@ o  .    6_English_vocabularyBirds_4_K
 o  .    6_Maths_addingAndMultiplyingVariables_11_K
 o       6_Maths_goShopping_5_K
 o  .    6_Maths_linesAndTriangle_8_K
-o       6_Maths_lowestCommonMultiple_14_K
+o  .    6_Maths_lowestCommonMultiple_14_K
 o       6_Maths_multiplyingFractions_18_K
 o  .    6_Maths_setsPictures_6_K
 o       6_Maths_variables_10_K
