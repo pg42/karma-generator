@@ -1,5 +1,4 @@
 o  .    2_Maths_quickMultiplication_15_K
-o  .    6_English_vocabularyBirds_4_K
 o  .    6_Maths_linesAndTriangle_8_K
 o  .    6_Maths_lowestCommonMultiple_14_K
 o  .    6_Maths_multiplyingFractions_18_K
@@ -51,6 +50,7 @@ v       6_English_sentencePractice1_12_K
 v       6_English_sentencePractice2_12_K
 v       6_English_syllables_17_K
 v       6_English_vocabularyAnimals_4_K
+v       6_English_vocabularyBirds_4_K
 v       6_Maths_SetMultipleChoice_7_K
 v       6_Maths_addingAndMultiplyingVariables_11_K
 v       6_Maths_addingAndSubtractingVariables_10_K
