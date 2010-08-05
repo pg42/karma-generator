@@ -12,9 +12,19 @@ var dropTargetText = [	["फलफूलको  समूह","तरकार�
 			["चराको  समूह","पानीमा पाइने  जनावरको समूह","अन्य जनावरको समूह"],
 			["पढ्ने सामग्रीको  समूह","खेल्ने सामग्रीको समूह","बोक्ने सामग्रीको समूह"]
 ];
+var droppedObject =[];
 var imgPath = "assets/image/";
 var zIndex = 0;
 var objectCount = 0;
+var TOTAL_QUES = 12;
+var initialized = false;
+
+function initialize(){
+    if(!initialized) {
+	scoreboardInitialize({'layout':'horizontal','winningScore': TOTAL_QUES});
+	initialized = true;
+    }
+}
 
 function dragAndDrop(index){
 
@@ -25,32 +35,66 @@ function dragAndDrop(index){
 	dragObject = '.dragObjectsText';
 	dropObject = '.dropObjects1';
     }
+
     $(dragObject).bind('dragstart',
 		       function(event, ui) {
 			   currentDragObject = event.target.id;
 			   currentObject = event.target.id.slice(event.target.id.lastIndexOf('_')+1,event.target.id.length);
 			   $('#'+event.target.id).css({'z-index':zIndex});
+			   objectCount++;
 			   zIndex++;
+			   checkComplete(index);
 		       });
 
     $(dropObject).bind('drop',
 		       function(event, ui) {
 			   currentDropObject = event.target.id;
-			   if(currentObject === currentDropObject || currentObject === currentDropObject || currentObject === currentDropObject){
-			       $('#'+currentDragObject).css({'z-index':zIndex});  //drop the object to fit the drop area
+			   if(currentObject === currentDropObject){
 			       $('#'+currentDragObject).draggable( 'disable' );
-			       objectCount++;
-
+			       if(droppedObject.indexOf(ui.draggable) < 0) {
+				   scoreboardHit();
+			       }
 			   }
 			   else{
 			       ui.draggable.animate({left:0,top:0});
+			       if(droppedObject.indexOf(ui.draggable) < 0) {
+				   scoreboardMiss();
+				   droppedObject.push(ui.draggable);
+			       }
+			       console.log(droppedObject);
+
 			   }
 		       });
 }
 
+function checkComplete(page) {
+    if(objectCount == 12) {
+	if(page == 0) {
+	    $('#linkNextLesson').show();
+	    $('#linkPrevLesson').hide();
+	}else if(page == 1) {
+	    $('#linkNextLesson').show();
+	    $('#linkPrevLesson').show();
+	}else if(page == 2) {
+	    $('#linkNextLesson').hide();
+	    $('#linkPrevLesson').show();
+	}else {
+	    $('#linkNextLesson').hide();
+	    $('#linkPrevLesson').hide();
+	}
+    }
+}
+
 
 function firstScreen(karma, content) {
-    var object = Karma.shuffle(objects[0]);
+    objectCount = 0;
+    initialize();
+    scoreboardReset();
+    object = Karma.shuffle(objects[0]);
+
+    $('#linkNextLesson').hide();
+    $('#linkPrevLesson').hide();
+    $('#score_box').show();
 
     $('#content')
 	.append(createDiv('section')
@@ -79,13 +123,17 @@ function firstScreen(karma, content) {
 		  .append(obj)
 		  .addClass('dropText');
 	  })).appendTo($('#dropSection'));
-
+    dragAndDrop(0);
 };
 
 
 function textScreen(karma, content, index) {
+    objectCount = 0;
+    scoreboardReset();
     var object = Karma.shuffle(objects[index]);
 
+    $('#linkNextLesson').hide();
+    $('#linkPrevLesson').hide();
     $('#content')
 	.append(createDiv('section1')
 		.append(createDiv('shapesSection1'))
@@ -112,7 +160,7 @@ function textScreen(karma, content, index) {
 		  .append(obj)
 		  .addClass('dropText');
 	  })).appendTo($('#dropSection1'));
-
+    dragAndDrop(index);
 };
 
 

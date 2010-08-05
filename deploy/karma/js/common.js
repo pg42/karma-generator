@@ -95,7 +95,7 @@ function setUpMultiScreenLesson(draw_screen_fns) {
 
           var updateScreen = function () {
               $content.empty();
-              draw_screen_fns[current_screen](karma, $content);
+
               if (current_screen == 0) {
                   $('#linkPrevLesson').hide();
               } else {
@@ -106,6 +106,7 @@ function setUpMultiScreenLesson(draw_screen_fns) {
               } else {
                   $('#linkNextLesson').show();
               }
+	      draw_screen_fns[current_screen](karma, $content);
           };
 
           $('#linkNextLesson')

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 lesson(grade=6,subject='Maths',title='Sets',week=6,lesson_title=u'समूहको ज्ञान ')
 for f in ['ui.core',
-		  'ui.draggable',
-		  'ui.droppable']:
+	  'ui.draggable',
+	  'ui.droppable']:
 	java_script(f)
 
 
@@ -14,7 +14,5 @@ for i in ['dragHere','dropHere','dropHere1',
 
 css('lesson.css')
 css('global')
-css('ui.scoreboard')
-
-footer_configuration(link_next=True, link_previous=False,scoreboard=True)
+footer_configuration(link_next=True, link_previous=True,scoreboard=True)
 
