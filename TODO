@@ -18,6 +18,7 @@ Grep for TBD in the code.
 * sounds are sometimes truncated (e.g. march in months-of-the-year lesson)
 * in vocabulary-plants: if you quickly drag two objects, correct is only played once.
 * use content parameter in callbacks i.s.o. $('#content')
+* add initialize function to setUpMultiScreenLesson (useful for e.g. scoreboard)
 
 Bugs in existing lessons:
 * vocabulary clothes: dress looks more like a suit
