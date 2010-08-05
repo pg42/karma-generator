@@ -22,27 +22,27 @@
 }
 
 #section1, #section2 {
-	margin: 10em auto;		
+	margin: 10em auto;
 }
 
 #section3 {
 	float:left;
-	margin-left: 7.8em;	
+	margin-left: 7.8em;
 	margin-top: 3.1em;
 }
 
 #shapesSection1{
 	margin: 10px auto;
 	padding: 5px;
-	border: 4px solid #38F7F8;	
+	border: 4px solid #38F7F8;
 	width: 365px;
-	height: 175px;	
+	height: 175px;
 }
 
 #shapesSection2{
 	margin: 10px auto;
 	padding: 5px;
-	border: 4px solid #38F7F8;	
+	border: 4px solid #38F7F8;
 	width: 550px;
 	height: 175px;
 }
@@ -50,28 +50,28 @@
 #shapesSection3{
 	margin: 10px auto;
 	padding: 5px;
-	border: 4px solid #38F7F8;	
+	border: 4px solid #38F7F8;
 	width: 800px;
 	height: 225px;
 }
 
 #dropSection1{
 	margin: 70px auto;
-	margin-bottom: 2px;	
+	margin-bottom: 2px;
 	width: 550px;
 	height:150px;
 }
 
 #dropSection2{
 	margin: 70px auto;
-	margin-bottom: 2px;	
+	margin-bottom: 2px;
 	width: 825px;
 	height:150px;
 }
 
 #dropSection3{
 	margin: 40px auto;
-	margin-bottom: 2px;	
+	margin-bottom: 2px;
 	width: 700px;
 	height:150px;
 }
@@ -89,7 +89,7 @@
 	height:225px;
 	background: url(../assets/image/main.png) no-repeat;
 }
-.dropObjects{	
+.dropObjects{
 	float: left;
 	width: 252px;
 	height: 132px;
@@ -97,9 +97,9 @@
 	background-image: url(../assets/image/dropHere.png);
 }
 
-.dropText{	
+.dropText{
 	margin-top: .22em;
-	margin-left:3em;	
+	margin-left:3em;
 	text-align:center;
 	float:left;
 	width: 150px;
@@ -109,14 +109,14 @@
 	color: red;
 }
 
-.dropText3{	
+.dropText3{
 	margin-top: .22em;
-	margin-left:4em;	
+	margin-left:4em;
 	text-align:center;
-	float:left;	
+	float:left;
 	width: 80px;
 	height: 30px;
-	font-size: 30px;	
+	font-size: 30px;
 	font-weight: bold;
 	color: red;
 }
