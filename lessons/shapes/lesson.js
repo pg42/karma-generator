@@ -1,77 +1,167 @@
-var shapes1 = ['quad1','quad2','quad3','quad4','circle1','circle2','circle3','circle4'];
-var shapes2 = ['quad21','quad22','quad23','quad24','circle21','circle22','circle23','circle24','triangle21','triangle22','triangle23','triangle24'];
+var shapes1 = [
+    {
+        name: 'quad1',
+        shape: 'quad'
+    },
+    {
+        name: 'quad2',
+        shape: 'quad'
+    },
+    {
+        name: 'quad3',
+        shape: 'quad'
+    },
+    {
+        name: 'quad4',
+        shape: 'quad'
+    },
+    {
+        name: 'circle1',
+        shape: 'circle'
+    },
+    {
+        name: 'circle2',
+        shape: 'circle'
+    },
+    {
+        name: 'circle3',
+        shape: 'circle'
+    },
+    {
+        name: 'circle4',
+        shape: 'circle'
+    }
+];
+var shapes2 = [
+    {
+        name: 'quad21',
+        shape: 'quad'
+    },
+    {
+        name: 'quad22',
+        shape: 'quad'
+    },
+    {
+        name: 'quad23',
+        shape: 'quad'
+    },
+    {
+        name: 'quad24',
+        shape: 'quad'
+    },
+    {
+        name: 'circle21',
+        shape: 'circle'
+    }
+    ,
+    {
+        name: 'circle22',
+        shape: 'circle'
+    }
+    ,
+    {
+        name: 'circle23',
+        shape: 'circle'
+    }
+    ,
+    {
+        name: 'circle24',
+        shape: 'circle'
+    },
+    {
+        name: 'triangle21',
+        shape: 'triangle'
+    }
+    ,
+    {
+        name: 'triangle22',
+        shape: 'triangle'
+    }
+    ,
+    {
+        name: 'triangle23',
+        shape: 'triangle'
+    }
+    ,
+    {
+        name: 'triangle24',
+        shape: 'triangle'
+    }
+];
 var shapes3 = [
     {
         name: 'triangle31',
         shape: 'triangle',
-        position: { left: 138, top: 65, width: 56, height: 36 }
+        position: { left: 136, top: 63, width: 56, height: 36 }
     },
     {
         name: 'triangle32',
         shape: 'triangle',
-        position: { left: 410, top: 170, width: 53, height: 31 }
+        position: { left: 408, top: 168, width: 53, height: 31 }
     },
     {
         name: 'triangle33',
         shape: 'triangle',
-        position: { left: 536, top: 177, width: 36, height: 34 }
+        position: { left: 534, top: 175, width: 36, height: 34 }
     },
     {
         name: 'triangle34',
         shape: 'triangle',
-        position: { left: 658, top: 177, width: 49, height: 35 }
+        position: { left: 656, top: 175, width: 49, height: 35 }
     },
     {
         name: 'quad31',
         shape: 'quad',
-        position: { left: 258, top: 125, width: 56, height: 32 }
+        position: { left: 256, top: 123, width: 56, height: 32 }
     },
     {
         name: 'quad31',
         shape: 'quad',
-        position: { left: 364, top: 107, width: 56, height: 32 }
+        position: { left: 362, top: 105, width: 56, height: 32 }
     },
     {
         name: 'quad32',
         shape: 'quad',
-        position: { left: 333, top: 172, width: 57, height: 33 }
+        position: { left: 331, top: 170, width: 57, height: 33 }
     },
     {
         name: 'quad33',
         shape: 'quad',
-        position: { left: 338, top: 215, width: 53, height: 31 }
+        position: { left: 336, top: 213, width: 53, height: 31 }
     },
     {
         name: 'quad34',
         shape: 'quad',
-        position: { left: 572, top: 180, width: 40, height: 30 }
+        position: { left: 570, top: 178, width: 40, height: 30 }
     },
     {
         name: 'quad34',
         shape: 'quad',
-        position: { left: 616, top: 180, width: 40, height: 30 }
+        position: { left: 614, top: 178, width: 40, height: 30 }
     },
     {
         name: 'circle31',
         shape: 'circle',
-        position: { left: 508, top: 240, width: 55, height: 35 }
+        position: { left: 506, top: 238, width: 55, height: 35 }
     },
     {
         name: 'circle31',
         shape: 'circle',
-        position: { left: 733, top: 235, width: 55, height: 35 }
+        position: { left: 731, top: 233, width: 55, height: 35 }
     },
     {
         name: 'circle32',
         shape: 'circle',
-        position: { left: 693, top: 107, width: 52, height: 42 }
+        position: { left: 691, top: 105, width: 52, height: 42 }
     },
     {
         name: 'circle32',
         shape: 'circle',
-        position: { left: 788, top: 165, width: 52, height: 42 }
+        position: { left: 786, top: 163, width: 52, height: 42 }
     }
 ];
+
+var zIndex = 1;
 
 function handleDrop(karma, event, ui) {
     var draggable = ui.draggable;
@@ -87,7 +177,7 @@ function handleDrop(karma, event, ui) {
 }
 
 function createLesson (karma, content, shapes, lessonId) {
-    var zIndex = 1;
+    zIndex = 1;
     content
         .append(createDiv('section' + lessonId)
                 .append(createDiv('shapesSection' + lessonId))
@@ -126,10 +216,10 @@ function createLesson (karma, content, shapes, lessonId) {
     Karma.shuffle(shapes)
         .forEach(function (img) {
                      $('#shapesSection' + lessonId)
-                         .append(createDiv(img)
+                         .append(createDiv()
                                  .addClass('dragObjects')
-                                 .append(Karma.createImg(img))
-                                 .data('shape', img.substring(0, img.length-lessonId))
+                                 .append(Karma.createImg(img.name))
+                                 .data('shape', img.shape)
                                  .data('original_position', { top: 0, left: 0 })
                                 );
                  });
@@ -145,8 +235,7 @@ function createLesson (karma, content, shapes, lessonId) {
 }
 
 function lessonThree(karma, content) {
-    var zIndex = 1;
-    var img_count = 0;
+    zIndex = 1;
     content
         .append(createDiv('section3')
                 .append(createDiv('shapesSection3')
