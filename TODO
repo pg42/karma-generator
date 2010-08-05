@@ -61,3 +61,4 @@ Bugs in existing lessons:
 * 2_English_whatSomeoneIsDoing_15_K: in the lesson, click on play icon, immediately go to the next screen. Part of the div is displayed.
 * 6_English_namesOfColor_6_K: names of colors vs names of color
 * 6_Maths_estimatingAngles_16_K: last screen, no explosion for angle == -45
+* 6_Maths_lowestCommonMultiple_14_K: tasks in second and third exercise are incorrect (wrong index into levelNumbers), giving rise to crazy LCMs (> 10000) in third exercise, and the same tasks in first and second exercise

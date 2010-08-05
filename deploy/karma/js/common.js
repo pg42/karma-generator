@@ -335,3 +335,33 @@ function objKeys(obj) {
 function constantly (x) {
     return function () { return x; };
 }
+
+function toRoman(x) {
+    var mapping = [
+        { roman: 'M', arabic: 1000 },
+        { roman: 'CM', arabic: 900 },
+        { roman: 'D', arabic: 500 },
+        { roman: 'CD', arabic: 400 },
+        { roman: 'C', arabic: 100 },
+        { roman: 'XC', arabic: 90 },
+        { roman: 'L', arabic: 50 },
+        { roman: 'XL', arabic: 40 },
+        { roman: 'X', arabic: 10 },
+        { roman: 'IX', arabic: 9 },
+        { roman: 'V', arabic: 5 },
+        { roman: 'IV', arabic: 4 },
+        { roman: 'I', arabic: 1 }
+    ];
+    var i = 0;
+    var result = [];
+    while (x > 0) {
+        var arabic = mapping[i].arabic;
+        if (arabic <= x) {
+            result.push(mapping[i].roman);
+            x -= arabic;
+        } else {
+            ++i;
+        }
+    }
+    return String.prototype.concat.apply('', result);
+}
