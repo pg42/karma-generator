@@ -1,63 +1,59 @@
 @CHARSET "UTF-8";
-/****** Page Styles ****/
 
-
-#help{
-    display:none;
-    position:absolute;
+#help {
+    display: none;
+    position: absolute;
     right: 60px;
     top: 75px;;
     width: 297px;
     height: 697px;
-    z-index:40;
+    z-index: 40;
 }
-/**** End of the page style ****/
 
-/**** Game Styles  ****/
-#content{
+#content {
     margin: 2px auto;
     margin-top: 74px;
     width: 1198;
-    height:750px;
+    height: 750px;
     position: relative;
-    overflow-y:hidden;
+    overflow-y: hidden;
 }
 
-#section{
-    display:block;
+#section {
+    display: block;
 }
 
-#shapesSection{
+#shapesSection {
     margin: 75px auto;
     background-image: url(../assets/image/dragHere.png);
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     width: 658px;
     height: 221px;
 }
 
-#dropSection{
-    text-align:center;
+#dropSection {
+    text-align: center;
     margin: 75px auto;
     width: 900px;
-    height:130px;
+    height: 130px;
 }
 
-.dragObjects{
-    position:relative;
+.dragObjects {
+    position: relative;
     float: left;
     cursor: move;
-    width:68px;
-    height:62px;
+    width: 68px;
+    height: 62px;
     margin-left: 2em;
     padding-left: 2px;
 }
 
-.dragObjectsText{
-    position:relative;
+.dragObjectsText {
+    position: relative;
     float: left;
     cursor: move;
-    width:75px;
-    height:45px;
+    width: 75px;
+    height: 45px;
     margin-left: 0.7em;
     padding-left: 2px;
     font-size: 25px;
@@ -65,57 +61,48 @@
     font-weight: bold;
 }
 
-
-.dropObjects{
+.dropObjects {
     float: left;
-    width:252px;
-    height:118px;
+    width: 252px;
+    height: 118px;
     margin: 0.5em;
     background-image: url(../assets/image/dropHere.png);
 }
 
-.dropText{
+.dropText {
     margin-top: .11em;
-    margin-left:0.9em;
-    text-align:center;
-    float:left;
+    margin-left: 0.9em;
+    text-align: center;
+    float: left;
     width: 235px;
     height: 30px;
-    font:24px/30px "Courier New", Courier, monospace;
+    font: 24px/30px "Courier New", Courier, monospace;
     font-weight: bold;
     color: red;
 }
 
-.drophover{
+.drophover {
     background-color: #FF9900;
 }
 
-#section1{
-    display:block;
-}
-
-#shapesSection1{
+#shapesSection1 {
     margin: 120px auto;
     width: 1150px;
     height: 45px;
-    padding:5px 20px 5px 20px;
+    padding: 5px 20px 5px 20px;
     border: 4px solid #38F7F8;
 }
 
-#dropSection1{
+#dropSection1 {
     margin: 2px auto;
     width: 900px;
-    height:130px;
+    height: 130px;
 }
 
-.dropObjects1{
+.dropObjects1 {
     float: left;
-    width:252px;
-    height:118px;
+    width: 252px;
+    height: 118px;
     margin: 0.5em;
     background-image: url(../assets/image/dropHere1.png);
 }
-
-
-
-

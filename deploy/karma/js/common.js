@@ -332,8 +332,12 @@ function objKeys(obj) {
     return keys;
 }
 
-function constantly (x) {
+function constantly(x) {
     return function () { return x; };
+}
+
+function identity(x) {
+    return x;
 }
 
 function toRoman(x) {
