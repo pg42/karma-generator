@@ -57,6 +57,7 @@ function createLesson (karma, content, shapes, lessonId) {
             .append(createDiv(img)
                 .addClass('dragObjects')
                 .append(Karma.createImg(img))
+                .data('shape', img.substring(0, img.length-lessonId))
             );
     };
     
@@ -73,7 +74,7 @@ function createLesson (karma, content, shapes, lessonId) {
             tolerence: 'intersect',
             hoverClass: 'drophover',
             drop : function (event, ui) {
-                if(event.target.id == dragged_object.substring(0,dragged_object.length-lessonId)) {
+                if(event.target.id == $('#' + dragged_object).data('shape')) {
                     karma.play('correct');
                     $('#' + dragged_object)
                         .draggable({disabled: true, revert: 'invalid'})
@@ -133,6 +134,7 @@ function lessonThree(karma, content) {
         $("#shapesSection3")
             .append(createDiv(shapes3[img_count] + identify)
                 .addClass('dragObjects')
+                .data('shape', (shapes3[img_count]).substring(0, (shapes3[img_count]).length-2))
         );
         $('#' + shapes3[img_count] + identify)
             .css(dragObj)
@@ -170,7 +172,7 @@ function lessonThree(karma, content) {
             tolerence: 'intersect',
             hoverClass: 'drophover',
             drop : function (event, ui) {
-                if(event.target.id == dragged_object.substring(0,dragged_object.length-4)) {
+                if(event.target.id == $('#' + dragged_object).data('shape')) {
                     karma.play('correct');
                     $('#' + dragged_object)
                         .draggable({disabled: true, revert: 'invalid'})
