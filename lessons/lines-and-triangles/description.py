@@ -13,8 +13,8 @@ for f in ['ui.core',
 
 
 
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
+audio('correct')
+audio('incorrect')
 
 
 image('dot.png','dot')

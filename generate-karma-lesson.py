@@ -639,7 +639,7 @@ def footer_configuration(**kw):
     if config['scoreboard']:
         css('ui.scoreboard')
         java_script('ui.scoreboard')
-        java_script('../../deploy/karma/js/scoreboard.js') #TBD: fix path
+        #java_script('../../deploy/karma/js/scoreboard.js') #TBD: fix path
 
 
 def frob_path(path):
