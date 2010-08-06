@@ -1,4 +1,4 @@
-lesson(grade=2, subject='English', title='Vocabulary Plant', week=17)
+lesson(grade=2, subject='English', title='Vocabulary Plants', week=17)
 
 include('../../templates/vocabulary/description.py')
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=2, subject='Maths', title='Geometrical Shapes', week=12,
+lesson(grade=2, subject='Maths', title='Shapes', week=10,
        browser_title='Geometrical Shapes',
        lesson_title=u'ज्यामितीय आकारहरु')
 

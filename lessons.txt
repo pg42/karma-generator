@@ -9,8 +9,8 @@ o  -   6_English_yesNoQuestions_5_K
 o  -   6_Maths_addSubtract_2_K
 o  -   6_Maths_quickMultiplication1_1_K
 o  -   6_Maths_quickMultiplication3_2_K
-o -    6_English_rajuAndTheWolf_7_K
-o -    6_Maths_complexAddition_2_K
+o  -   6_English_rajuAndTheWolf_7_K
+o  -   6_Maths_complexAddition_2_K
 
 v       2_English_alphabetPuzzle_1_K
 v       2_English_animalIdentification_8_K

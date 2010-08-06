@@ -1,4 +1,4 @@
-lesson(grade=2, subject='English', title='Colour Identification', week=8)
+lesson(grade=2, subject='English', title='Colour Identification', week=19)
 
 java_script('configuration.js')
 
