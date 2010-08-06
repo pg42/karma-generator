@@ -7,10 +7,8 @@ css('global')
 css('lesson.css')
 
 for f in ['ui.core',
-          'clock'
-		  ]:
+          'clock']:
     java_script(f)
-
 
 audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')
