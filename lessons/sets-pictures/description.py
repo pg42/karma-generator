@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
-lesson(grade=6,subject='Maths',title='Sets',week=6,lesson_title=u'समूहको ज्ञान')
+﻿# -*- coding: utf-8 -*-
+lesson(grade=6, subject='Maths', title='Sets', week=6,
+    lesson_title=u'समूहको ज्ञान',
+    summary=u'समूह छुट्याउन सिकाउने क्रियाकलाप')
 
 for f in ['ui.core',
 	  'ui.draggable',

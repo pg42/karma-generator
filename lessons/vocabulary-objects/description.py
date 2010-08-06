@@ -1,4 +1,5 @@
-lesson(grade=2, subject='English', title='Vocabulary Objects', week=5)
+﻿lesson(grade=2, subject='English', title='Vocabulary Objects', week=5,
+    summary=u'विभिन्न वस्तुहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 objects = [

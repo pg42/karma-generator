@@ -1,5 +1,8 @@
-# -*- coding: utf-8 -*-
-lesson(grade=6, subject='English', title='Months of the Year', week=1, browser_title='Class 6 English Months', lesson_title='Months of the Year')
+﻿# -*- coding: utf-8 -*-
+lesson(grade=6, subject='English', title='Months of the Year', week=1,
+    browser_title='Class 6 English Months',
+    lesson_title='Months of the Year',
+    summary=u'अङ्ग्रेजी महिनाका नामहरूको हिज्जे र क्रम मिलाउन सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

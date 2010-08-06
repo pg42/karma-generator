@@ -1,4 +1,5 @@
-lesson(grade=2, subject='English', title='Vocabulary Wild Animals', week=6)
+﻿lesson(grade=2, subject='English', title='Vocabulary Wild Animals', week=6,
+    summary=u'केही जङ्गली जनावरहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 

@@ -1,4 +1,5 @@
-lesson(grade=6, subject='Maths', title='Quick Addition', week=1)
+﻿lesson(grade=6, subject='Maths', title='Quick Addition', week=1,
+    summary=u'छिटोछिटो जोड गर्न सिकाउने क्रियाकलाप')
 
 #java_script('../../templates/quick-arithmetic/division.js')
 java_script('../../templates/quick-arithmetic/addition.js')

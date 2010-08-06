@@ -1,4 +1,5 @@
-lesson(grade=2, subject='English', title='Alphabet Puzzle', week=1)
+﻿lesson(grade=2, subject='English', title='Alphabet Puzzle', week=1,
+    summary=u'वर्णमालाको क्रममा अङ्ग्रेजीका ठूला अक्षरहरूको पहिचान')
 
 include('../../templates/puzzle/description.py')
 

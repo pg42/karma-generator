@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Bar Graph', week=16,
-       lesson_title=u'ग्राफ')
+    lesson_title=u'ग्राफ',
+    summary=u'ग्राफ बुझ्न सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

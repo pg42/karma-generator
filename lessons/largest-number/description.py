@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Largest Number', week=6,
-       lesson_title=u'ठूलासाना सङ्ख्याहरू ')
+    lesson_title=u'ठूलासाना सङ्ख्याहरू',
+    summary=u'ठूलासाना सङ्ख्याहरू चिन्ने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

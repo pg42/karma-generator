@@ -1,5 +1,8 @@
-# -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Adding and Multiplying Variables', week=11, browser_title='Class 6 Maths Adding and Multiplying Variables', lesson_title='Adding and Multiplying Variables')
+﻿# -*- coding: utf-8 -*-
+lesson(grade=6, subject='Maths', title='Adding and Multiplying Variables', week=11,
+    browser_title='Class 6 Maths Adding and Multiplying Variables',
+    lesson_title='Adding and Multiplying Variables'
+    summary=u'चलहरूको जोड र गुणन गर्न सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

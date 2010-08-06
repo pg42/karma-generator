@@ -1,4 +1,5 @@
-lesson(grade=6, subject='English', title='Names of Colors', week=6)
+﻿lesson(grade=6, subject='English', title='Names of Colors', week=6,
+    summary=u'रमाइला कविताहरूद्वारा रङ्गहरू चिन्ने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

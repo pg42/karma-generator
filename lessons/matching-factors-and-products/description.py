@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Matching Factors and Products',
-       lesson_title=u'गुणनखण्ड र गुणनफल',
-       week=4)
+﻿# -*- coding: utf-8 -*-
+lesson(grade=6, subject='Maths', title='Matching Factors and Products', week=4,
+    lesson_title=u'गुणनखण्ड र गुणनफल',
+    summary=u'गुणनखण्ड र गुणनफल पत्ता लगाउने क्रियाकलाप')
 
 include('../../templates/matching/description.py')

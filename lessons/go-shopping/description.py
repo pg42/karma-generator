@@ -1,5 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Go Shopping', week=5, browser_title='Class 6 Maths Go Shopping', lesson_title='Go Shopping')
+lesson(grade=6, subject='Maths', title='Go Shopping', week=5,
+    browser_title='Class 6 Maths Go Shopping',
+    lesson_title='Go Shopping',
+    summary=u'किनमेल गर्न सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

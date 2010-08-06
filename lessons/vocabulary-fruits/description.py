@@ -1,4 +1,5 @@
-lesson(grade=2, subject='English', title='Vocabulary Fruits', week=10)
+﻿lesson(grade=2, subject='English', title='Vocabulary Fruits', week=10,
+    summary=u'केही फलफूलहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 

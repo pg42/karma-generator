@@ -1,7 +1,9 @@
 ﻿# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Lines and Triangles', week=8,
-       browser_title='Lines and Triangles',
-       lesson_title=u'रेखा र त्रिभुजहरू')
+    browser_title='Lines and Triangles',
+    lesson_title=u'रेखा र त्रिभुजहरू',
+    summary=u'रेखा र त्रिभुजहरू छुट्याउन सिकाउने क्रियाकलाप')
+
 css('global')
 css('lesson.css')
 

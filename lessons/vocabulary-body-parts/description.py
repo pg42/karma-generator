@@ -1,4 +1,5 @@
-lesson(grade=2, subject='English', title='Vocabulary Body Parts', week=14)
+﻿lesson(grade=2, subject='English', title='Vocabulary Body Parts', week=14,
+    summary=u'शरीरका केही अङ्गहरुका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 

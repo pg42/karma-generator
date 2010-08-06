@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Counting Sheep', week=2,
-       lesson_title=u'क्रमिक जोड')
+    lesson_title=u'क्रमिक जोड',
+    summary=u'क्रमिक जोड गर्न सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

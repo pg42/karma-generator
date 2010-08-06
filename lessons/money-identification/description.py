@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Money Identification', week=18,
-       lesson_title=u'रुपियाँको चिनारी')
+    lesson_title=u'रुपियाँको चिनारी',
+    summary=u'चलनचल्तिका रुपियाँ चिन्ने क्रियाकलाप')
 
 css('global')
 

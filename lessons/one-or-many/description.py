@@ -1,4 +1,5 @@
-lesson(grade=6, subject='English', title='One or Many', week=5)
+﻿lesson(grade=6, subject='English', title='One or Many', week=5,
+    summary=u'How many प्रयोग भएका प्रश्नका उत्तर दिन सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

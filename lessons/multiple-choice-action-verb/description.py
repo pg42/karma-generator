@@ -1,4 +1,5 @@
-lesson(grade=6, subject='English', title='Multiple Choice Action Verb', week=3)
+﻿lesson(grade=6, subject='English', title='Multiple Choice Action Verb', week=3,
+    summary=u'Action verbs को प्रयोग सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

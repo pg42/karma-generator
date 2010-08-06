@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Set Multiple Choice', week=7,
-       lesson_title=u'समूहको मिश्रित')
+    lesson_title=u'समूहको मिश्रित',
+    summary=u'समूहको पुनरावलोकन गराउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

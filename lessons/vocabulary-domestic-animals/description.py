@@ -1,4 +1,5 @@
-lesson(grade=2, subject='English', title='Vocabulary Domestic Animals', week=4)
+﻿lesson(grade=2, subject='English', title='Vocabulary Domestic Animals', week=4,
+    summary=u'घरपालुवा जनावरहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 
