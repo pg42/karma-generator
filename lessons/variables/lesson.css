@@ -1,0 +1,131 @@
+@CHARSET "UTF-8";
+/****** Page Styles ****/
+
+
+	
+
+	#linkCheck{
+			margin: 1em 3em 0 0;
+			width: 101px;			height: 30px;
+			background-image: url(../assets/image/check.png);
+			cursor:pointer;
+		}
+		
+	
+
+/**** End of the page style ****/
+
+/**** Game Styles  ****/
+
+
+#content{
+	position:relative;	
+	margin: 0 auto;
+	margin-top: 74px;
+	width: 1198px;
+	height: 750px;
+
+}
+	#section{		
+		padding-top: 75px;	
+		margin: 50px auto;				
+	}
+	
+		#leftSide{
+			float:left;
+			width: 350px;
+			height: 360px;
+		}
+			#topText{
+				width: 350px;
+				height: 30px;
+				font: 25px/30px Verdana, Geneva, Arial, Helvetica, sans-serif;
+				color: #0000FF;
+			}
+			.bgQues{
+				margin: 1em auto;
+				width: 501px;
+				height: 383px;
+				background: url(../assets/image/bgQues.png) no-repeat;
+				padding-top: 1.5em;
+				text-align:center;
+			}
+			.bgAns{				
+				margin: 1em 0 0 0;
+				width: 570px;
+				height: 120px;
+				background: url(../assets/image/bgAns.png) no-repeat;
+				text-align:center;
+				padding-top: 1em;
+			}
+		#rightSide{
+			float:right;
+			width: 350px;
+			height: 360px;
+            margin: 30px 150px 0 0px;
+		}
+			
+			.bgQuestion{
+				margin: 0.1em auto;
+				width: 497px;
+				height: 161px;
+				background: url(../assets/image/bgQuestion.png) no-repeat;
+				text-align:center;
+				padding-top: 1em;
+
+			}
+			.bgInfo{
+				margin: 0.1em auto;
+				width:497px;
+				height: 160px;
+				background: url(../assets/image/bgMessage.png) no-repeat;
+				text-align:center;
+				padding-top: 1em;
+			}
+		.quesText{
+			
+			font: 22px/90px Verdana, Geneva, Arial, Helvetica, sans-serif;
+			color: #000000;
+            text-align:center;
+            margin-left: -40px;
+		}
+		input.textBox{
+			size:2;  color:#30C;
+			font: 25px/40px Verdana, Geneva, Arial, Helvetica, sans-serif;
+			font-weight: bold;
+			height:35px;
+			width: 50px;
+			text-align:center;
+		}
+		.focus {
+		     background-color: #FFEEAA;
+		}
+		.correct{
+			background-color: #C0F9F3;
+		}
+		.incorrect{
+			background-color: #FFFF00;
+		}
+		.backOpaque{
+			background-color: #A4A4A4;
+			opacity: 0.2;
+		}
+		
+#help{
+	display:none;
+	position:absolute;
+	right: 60px;
+	top: 75px;;
+	width: 297px;
+	height: 697px;
+	background:url(../assets/image/help.png);
+	z-index:40;
+}
+#gameOver{
+	position:absolute;
+	bottom: 22em;
+	left: 25em;
+	width:427px;
+	height:133px;
+	background: url(../assets/image/gameOver.png) no-repeat center;	
+}	
