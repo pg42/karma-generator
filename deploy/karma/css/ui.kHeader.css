@@ -1,5 +1,5 @@
-#kHeader{
-    background-image: url('./images/bg_header.png');
+#kHeader {
+    background-image: url('../image/bg_header.png');
     background-repeat: repeat-x;
     height: 70px;
     width: 100%;
@@ -9,152 +9,150 @@
     border: none;
 }
 
-	#kHeader .left{
-    	    float: left;
-	}
+#kHeader .left {
+    float: left;
+}
 
-	#kHeader .right{
-    	    float: right;
-	}
+#kHeader .right {
+    float: right;
+}
 
-	#kHeader>ul{
-	    margin: 0;
-	    margin-left: 5px;
-	    padding: 0;
-	}
+#kHeader>ul {
+    margin: 0;
+    margin-left: 5px;
+    padding: 0;
+}
 
-	#kHeader>ul>li{
-		display:inline;
-		margin: 0;
-		padding: 0;
-		margin-top: 5px;
-		margin-right:15px;
-	}
-	
-	#kHeader .kHeader-btn{
-  		 width: 60px;
-		 height: 60px;
-		 display: block;
-		 cursor:pointer;
-	}
+#kHeader>ul>li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    margin-right: 15px;
+}
 
-	#kHeader .kHeader-back{
-		background-image:url(./images/btn_back.png);
-	}
+#kHeader .kHeader-btn {
+    width: 60px;
+    height: 60px;
+    display: block;
+    cursor: pointer;
+}
 
-	#kHeader .kHeader-back:hover{
-		background:url('./images/btn_back_hover.png');
-	}
+#kHeader .kHeader-back {
+    background-image: url(../image/btn_back.png);
+}
 
-	#kHeader .kHeader-title {
-	    font-weight: bold;
-	    color: #FFFFFF;
-	    margin-top: 10px;
-	    border:4px solid #e774ec;
-	    padding: 5px 20px 5px 20px;
-	    -moz-border-radius:25px;
-	    -webkit-border-radius: 25px;
-	}
-	
-	#kHeader .kHeader-title span{
-	    float:left;
-	}
+#kHeader .kHeader-back:hover {
+    background: url(../image/btn_back_hover.png);
+}
 
-	#kHeader .kHeader-title .kHeader-kDoc{
-	    background-image: url(images/arrow_down_white.png);
-	    background-repeat: no-repeat;
-	    width: 22px;
-	    height: 22px;
-	    cursor: pointer;
-	    margin-left: 10px;
-	    margin-top: 3px;
-	    position: relative;
-	}
+#kHeader .kHeader-title {
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-top: 10px;
+    border: 4px solid #e774ec;
+    padding: 5px 20px 5px 20px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+}
 
-	#kHeader .kHeader-title .kHeader-kDoc .drop-down{
-	    display: none;
-	    position: absolute;
-	    top: 22px;
-	    left: -20px;
-	    width: 90px;
-	    background-color: rgba(0, 0, 0, 0.8);
-	    -webkit-border-radius: 5px;
-	    -moz-border-radius: 5px;
-	    border: 1px solid white;	    
-	    padding-left: 5px;
-	}
-	#kHeader .kHeader-title .kHeader-kDoc .drop-down a{
-	    color: white;
-	    text-decoration: none;
-	    font-size: 0.6em;
-	   
-	}
-	
-	#kHeader .kHeader-title .kHeader-kDoc .drop-down a:hover{
-	    text-decoration: underline;
-	}
-	
-	#kHeader .kHeader-zoomIn{
-	    background-image: url(images/btn_plus.png);
-	}
+#kHeader .kHeader-title span {
+    float: left;
+}
 
-	#kHeader .kHeader-zoomOut{
-	    background-image: url(images/btn_minus.png);
-	}
+#kHeader .kHeader-title .kHeader-kDoc {
+    background-image: url(../image/arrow_down_white.png);
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 3px;
+    position: relative;
+}
 
-	#kHeader .kHeader-zoomIn:hover{
-	    -moz-border-radius: 90px;
-	    -webkit-border-radius: 90px;
-	    border: 3px solid rgba(0,0,230, 0.8);
-	    margin-top:2px;
-	    margin-left:-6px;
-	}
+#kHeader .kHeader-title .kHeader-kDoc .drop-down {
+    display: none;
+    position: absolute;
+    top: 22px;
+    left: -20px;
+    width: 90px;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px solid white;
+    padding-left: 5px;
+}
 
-	#kHeader .kHeader-zoomOut:hover{
-	    -moz-border-radius: 90px;
-	    -webkit-border-radius: 90px;
-	    border: 3px solid rgba(0,0,230, 0.8);
-	    margin-top:2px;
-	    margin-left:-6px;
-	}
+#kHeader .kHeader-title .kHeader-kDoc .drop-down a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.6em;
+}
 
-	#kHeader .kHeader-brand{
-	    background-image:url(./images/btn_ole.png);
-	}
+#kHeader .kHeader-title .kHeader-kDoc .drop-down a:hover {
+    text-decoration: underline;
+}
 
-	#kHeader .kHeader-brand:hover{
-	    background-image:url(./images/btn_ole_hover.png);
-	}
+#kHeader .kHeader-zoomIn {
+    background-image: url(../image/btn_plus.png);
+}
 
-	#kHeader .kHeader-help{
-	    background-image:url(./images/btn_help.png);
-	}
+#kHeader .kHeader-zoomOut {
+    background-image: url(../image/btn_minus.png);
+}
 
-	#kHeader .kHeader-help:hover{
-	    background-image:url(./images/btn_help_hover.png);
-	}
+#kHeader .kHeader-zoomIn:hover {
+    -moz-border-radius: 90px;
+    -webkit-border-radius: 90px;
+    border: 3px solid rgba(0,0,230, 0.8);
+    margin-top: 2px;
+    margin-left: -6px;
+}
 
-	/* Styles for Help Text  */
-	.kHeader-help{
-	    top: 20px !important;
-	}
+#kHeader .kHeader-zoomOut:hover {
+    -moz-border-radius: 90px;
+    -webkit-border-radius: 90px;
+    border: 3px solid rgba(0,0,230, 0.8);
+    margin-top: 2px;
+    margin-left: -6px;
+}
 
-	.kHeader-help>div:first>span:first{
-	  font-size:larger;
-	}
+#kHeader .kHeader-brand {
+    background-image: url(../image/btn_ole.png);
+}
 
-	.kHeader-help .ui-dialog-titlebar-close {
-	    top: 10px;
-	    margin-right: 20px;
-	}
+#kHeader .kHeader-brand:hover {
+    background-image: url(../image/btn_ole_hover.png);
+}
 
-	.kHeader-help .ui-dialog-content{
-	    font-size: 0.8em;
-	}
+#kHeader .kHeader-help {
+    background-image: url(../image/btn_help.png);
+}
 
-	#kHeader .kHeader-preload-img{
-	    height:0;
-	    width:0;
-	    display:inline;
-	}
+#kHeader .kHeader-help:hover {
+    background-image: url(../image/btn_help_hover.png);
+}
 
+.kHeader-help {
+    top: 20px !important;
+}
+
+.kHeader-help>div:first>span:first {
+    font-size: larger;
+}
+
+.kHeader-help .ui-dialog-titlebar-close {
+    top: 10px;
+    margin-right: 20px;
+}
+
+.kHeader-help .ui-dialog-content {
+    font-size: 0.8em;
+}
+
+#kHeader .kHeader-preload-img {
+    height: 0;
+    width: 0;
+    display: inline;
+}
