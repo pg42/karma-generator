@@ -1,4 +1,4 @@
-#! /usr/bin/env python2.6
+﻿#! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
 from html import HtmlDocument, HtmlElement
@@ -384,6 +384,9 @@ class Lesson():
         self.directory = ''
         self.title = ''
         self.lesson_title = ''
+        self.grade = '';
+        self.subject = '';
+        self.summary = '';
         self.java_script_files = []
         self.css_files = []
         self.image_files = []
@@ -450,7 +453,7 @@ class Lesson():
         doc = HtmlDocument()
         html = doc.html()
         head = html.head()
-        html.title().text('TBD')
+        html.title().text(self.lesson_title)
         head.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
         head.link(type='image/ico',
                   rel='icon',
@@ -461,6 +464,9 @@ class Lesson():
         for f in [jquery_js, kstart_js]:
             head.script(type='text/javascript',
                         src=f.relative_path(None, web=True))
+
+        displayGrade = u'०१२३४५६७८९'[self.grade];
+        displaySubject = {'English':'English', 'Maths':u'गणित', 'Nepali':u'नेपाली' }[self.subject];
 
         body = html.body(id='kStart')
 
@@ -473,11 +479,11 @@ class Lesson():
         middle = body.div(id='middle')
         grade = middle.div(id='grade', className='center')
         grade.span(id='gradeText').text(u'कक्षा:')
-        grade.span(id='gradeNum')
-        middle.div(id='subject', className='center').text(u'गणित')
+        grade.span(id='gradeNum').text(displayGrade)
+        middle.div(id='subject', className='center').text(displaySubject)
         lesson_title = middle.div(id='lessonTitle', className='center')
         lesson_title.a(href='./index.html').text(self.title)
-        middle.div(id='lessonDesc', className='center').text(u'ज्यामितीय आकारहरू चिन्ने क्रियाकलाप')
+        middle.div(id='lessonDesc', className='center').text(self.summary)
         note = middle.div(id='teachersNoteBtn', className='button')
         a = note.a(href='./kDoc.html?back=start.html&doc=teachersNote')
         a.div().text(u'Teacher\'s Note')
@@ -545,7 +551,7 @@ class Lesson():
                            indentation)]) + '});'
         print >>stream, '}'
 
-def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, locale=None):
+def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, locale=None, summary=''):
     def camelcase(str):
         words = str.replace("'", '').split()
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
@@ -553,8 +559,11 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
     dirname = '%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week);
     print 'writing lesson to ' + dirname
     theLesson.set_directory( dirname )
-    theLesson.lesson_title = lesson_title or title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
+    theLesson.lesson_title = lesson_title or title
+    theLesson.grade = grade
+    theLesson.subject = subject
+    theLesson.summary = summary
     java_script('jquery')
     java_script('karma')
     java_script('common')
