@@ -11,11 +11,20 @@ function startLesson(karma){
     var remaining_player_boxes;
     clearTimeout(timer);
     clock.show();
+	
+	var showArrow = function(an_integer) {
+		$('.arrow').hide();
+		$('#arrow' + an_integer).show();		
+	};
+	
 
     var createLevelButton = function (an_integer) {
        return createDiv()
             .addClass('level')
             .append(karma.createImg('level' + (an_integer + 1)))
+			.append(karma.createImg('levelArrow')
+				.addClass('arrow')
+				.attr('id','arrow' + (an_integer)))
             .click(function () { selectLevel(an_integer); });
     };
 
@@ -78,17 +87,41 @@ function startLesson(karma){
                 .css({
                          zIndex: '300',
                          position: 'absolute',
+ 			 'padding-top': 50,
                          top: 0,
-                         left: 0
-                     }))
+                         left: 0,
+						 font: '2em arial,verdana,geneva,helvetica'
+                     })
+				.bind({
+					mouseover : function(){
+						$('#redTruckArea').append(karma.createImg('imgComputerTruck'));
+										  },
+					mouseout : function(){
+						$('#redTruckArea').empty();
+										 }
+					 })
+				)	 
+
         .append(createDiv('blueTruckArea')
                 .attr('class','truckArea')
                 .css({
                          zIndex: '300',
                          position: 'absolute',
                          top: '8em',
-                         left: 0
-                     }))
+			 'padding-top': 50,
+                         left: 0,
+						 font: '2em arial,verdana,geneva,helvetica'
+                     })
+				.bind({
+					mouseover : function(){
+						$('#blueTruckArea').append(karma.createImg('imgYourTruck'));
+										  },
+					mouseout : function(){
+						$('#blueTruckArea').empty();
+										 }
+					 })
+				)	 
+
         .append(createDiv('questionSection')
                 .css({
                          zIndex: '110',
@@ -106,13 +139,24 @@ function startLesson(karma){
                          position: 'absolute',
                          top: '34em',
                          left: '76em'
-                     }))
+                     })
+		.bind({
+			mouseover : function(){
+				$('#infotextArea').append(karma.createImg('infoText'));
+								  },
+			mouseout : function(){
+				$('#infotextArea').empty();
+								 }
+			 })
+		)
+				
+
         .append(createDiv('infotextArea')
                 .css({
                          zIndex: '120',
                          position: 'absolute',
-                         top: '8em',
-                         left: '17em'
+                         top: '15em',
+                         left: '33em'
                      }))
         .append(createDiv('levelControl')
                 .css({
@@ -152,6 +196,7 @@ function startLesson(karma){
 
 
     function selectLevel(current_level){
+	showArrow(current_level);
         generator = all_generators[current_level];
         showQuestion();
     }
