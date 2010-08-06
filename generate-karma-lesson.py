@@ -11,6 +11,7 @@ import sys
 import time
 import fnmatch
 from optparse import OptionParser
+from kdoctemplate import k_doc_template
 
 
 argv0 = sys.argv[0]
@@ -417,8 +418,8 @@ class Lesson():
             else:
                 print 'Warning: missing ' + src
 
-        for f in ['kDoc.html',
-#                  'start.html', # generated
+        for f in [#'kDoc.html', # generated
+                  #'start.html', # generated
                   'teachersNote.html',
                   'thumbnail.jpg']:
             copy_required(f)
@@ -497,6 +498,10 @@ class Lesson():
 
         doc.print_on(stream)
 
+    def print_kdoc_html_on(self, stream):
+        print >>stream, k_doc_template.format(subject=unicode(self.subject),
+                                              title=unicode(self.title));
+
     def print_html_on(self, stream):
         doc = HtmlDocument()
         for line in warning_text_lines:
@@ -561,8 +566,8 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
     theLesson.set_directory( dirname )
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     theLesson.lesson_title = lesson_title or title
-    theLesson.grade = grade
     theLesson.subject = subject
+    theLesson.grade = grade
     theLesson.summary = summary
     java_script('jquery')
     java_script('karma')
@@ -735,4 +740,5 @@ if __name__ == '__main__':
         theLesson.copy_files()
         theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
         theLesson.print_start_html_on(codecs.open('start.html', 'w', 'UTF-8'))
+        theLesson.print_kdoc_html_on(codecs.open('kDoc.html', 'w', 'UTF-8'))
         theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
