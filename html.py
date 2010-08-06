@@ -56,8 +56,14 @@ class HtmlElementFactory():
     def script(self, **attrs):
         return self.create_element(u'script', attrs)
 
+    def a(self, **attrs):
+        return self.create_element(u'a', attrs)
+
     def div(self, **attrs):
         return self.create_element(u'div', attrs)
+
+    def span(self, **attrs):
+        return self.create_element(u'span', attrs)
 
     def img(self, **attrs):
         return self.create_element(u'img', attrs)
@@ -108,7 +114,7 @@ class HtmlElement(HtmlElementFactory):
 
         def attribute_to_string(kv):
             return u'%s="%s"' % (attribute_key_to_string(kv[0]),
-                                 escape(unicode(kv[1])))
+                                 unicode(kv[1]))
 
         def attributes_to_string(attrs):
             if len(attrs):

@@ -219,8 +219,10 @@ java_script_dependencies = [
     ('jquery', 'i18n')
     ]
 
+jquery_js = KarmaFile('js/external/jquery-1.4.2.js', 'jquery')
+
 karma_java_script_files = [
-    KarmaFile('js/external/jquery-1.4.2.js', 'jquery'),
+    jquery_js,
     KarmaFile('js/external/jquery-ui-1.8.2.js', 'jquery-ui'),
     KarmaFile('js/external/jquery.ui.core.js', 'ui.core'),
     KarmaFile('js/external/jquery.ui.mouse.js', 'ui.mouse'),
@@ -261,6 +263,8 @@ karma_image_files = [
     ]
 
 favicon = KarmaFile('image/favicon.ico', 'favicon')
+kstart_js = KarmaFile('js/kStart.js', 'kstart_js')
+kstart_css = KarmaFile('css/kStart.css', 'kstart_css')
 title_block_lt = KarmaFile('image/title_block_lt.png', 'title_block_lt')
 title_block_rt = KarmaFile('image/title_block_rt.png', 'title_block_rt')
 
@@ -402,6 +406,19 @@ class Lesson():
             f.make_available()
         for f in self.image_files + self.audio_files:
             f[1].make_available()
+
+        def copy_required(f):
+            src = os.path.join(lesson_src, f)
+            if (os.path.exists(src)):
+                shutil.copy(src, self.directory)
+            else:
+                print 'Warning: missing ' + src
+
+        for f in ['kDoc.html',
+#                  'start.html', # generated
+                  'teachersNote.html',
+                  'thumbnail.jpg']:
+            copy_required(f)
         # if a screenshot.jpg exists in the source, copy it to the dest
         screenshot_img = os.path.join(lesson_src, 'screenshot.jpg')
         if (os.path.exists(screenshot_img)):
@@ -428,6 +445,51 @@ class Lesson():
     def set_directory(self, dir):
         self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
         lesson_dest = self.directory
+
+    def print_start_html_on(self, stream):
+        doc = HtmlDocument()
+        html = doc.html()
+        head = html.head()
+        html.title().text('TBD')
+        head.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
+        head.link(type='image/ico',
+                  rel='icon',
+                  href=favicon.relative_path(None, web=True))
+        head.link(type='text/css',
+                  rel='stylesheet',
+                  href=kstart_css.relative_path(None, web=True))
+        for f in [jquery_js, kstart_js]:
+            head.script(type='text/javascript',
+                        src=f.relative_path(None, web=True))
+
+        body = html.body(id='kStart')
+
+        top = body.div(id='top')
+        top.div(id='backBtn', title='Back')
+        top_middle = top.div(id='topMiddle')
+        top_middle.div(id='topDesc', className='center').text(u'साझा शिक्षा ई-पाटीद्वारा निर्मित')
+        top_middle.div(id='topE-Paath', className='center').text(u'ई-पाठ')
+
+        middle = body.div(id='middle')
+        grade = middle.div(id='grade', className='center')
+        grade.span(id='gradeText').text(u'कक्षा:')
+        grade.span(id='gradeNum')
+        middle.div(id='subject', className='center').text(u'गणित')
+        lesson_title = middle.div(id='lessonTitle', className='center')
+        lesson_title.a(href='./index.html').text(self.title)
+        middle.div(id='lessonDesc', className='center').text(u'ज्यामितीय आकारहरू चिन्ने क्रियाकलाप')
+        note = middle.div(id='teachersNoteBtn', className='button')
+        a = note.a(href='./kDoc.html?back=start.html&doc=teachersNote')
+        a.div().text(u'Teacher\'s Note')
+        a.div().text(u'पाठविवरण')
+
+        bottom = body.div(id='bottom')
+        bottom.div(id='logo',
+                   title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित')
+
+        body.div(id='logoHelp')
+
+        doc.print_on(stream)
 
     def print_html_on(self, stream):
         doc = HtmlDocument()
@@ -663,4 +725,5 @@ if __name__ == '__main__':
 
         theLesson.copy_files()
         theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
+        theLesson.print_start_html_on(codecs.open('start.html', 'w', 'UTF-8'))
         theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
