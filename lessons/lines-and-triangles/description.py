@@ -5,7 +5,8 @@ lesson(grade=6, subject='Maths', title='Lines and Triangles', week=8,
 css('global')
 css('lesson.css')
 
-for f in ['ui.core']:
+for f in ['ui.core',
+	'jquery.clickable']:
     java_script(f)
 
 
