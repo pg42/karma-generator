@@ -1,7 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 lesson(grade=6, subject='English', title='Alphabetical Order', week=13,
     browser_title='Class 6 English Alphabetical Order',
-    lesson_title='Alphabetical Order'
+    lesson_title='Alphabetical Order',
     summary=u'शब्दहरूलाई Alphabetical order मा राख्न सिकाउने क्रियाकलाप')
 
 css('global')
