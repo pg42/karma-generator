@@ -134,9 +134,10 @@
     background-image: url(../image/btn_help_hover.png);
 }
 
-.kHeader-help {
-    top: 20px !important;
-}
+/* This doesn't work */
+/* .kHeader-help { */
+/*     top: 20px !important; */
+/* } */
 
 .kHeader-help>div:first>span:first {
     font-size: larger;
