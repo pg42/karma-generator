@@ -5,8 +5,7 @@ lesson(grade=6, subject='Maths', title='Lines and Triangles', week=8,
 css('global')
 css('lesson.css')
 
-for f in ['ui.core',
-          'lesson.js']:
+for f in ['ui.core']:
     java_script(f)
 
 
@@ -14,7 +13,7 @@ for f in ['ui.core',
 audio('correct.ogg', 'correct')
 audio('incorrect.ogg', 'incorrect')
 
-image('lessonHint.png','lesssonHint')
+
 image('dot.png','dot')
 image('a.png','a')
 image('b.png','b')
@@ -23,8 +22,8 @@ image('d.png','d')
 image('check.png','check')
 image('gameOverSuccess.png','gameOverSuccess')
 image('gameOverTry.png','gameOverTry')
-image('ques0.png','ques0')
-image('ques1.png','ques1')
+image('correct.png','correct')
+image('wrong.png','wrong')
 
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)
