@@ -15,8 +15,6 @@ audio('incorrect.ogg', 'incorrect')
 
 image('background.jpg', 'background')
 image('blueTruck0.png', 'blueTruck0')
-image('blueTruck1.png', 'blueTruck1')
-image('blueTruck2.png', 'blueTruck2')
 image('boxes.png', 'boxes')
 image('bridgeUp.png', 'bridgeUp')
 image('chooseLevel.png', 'chooseLevel')
@@ -34,11 +32,8 @@ image('level3.png', 'level3')
 image('levelArrow.png', 'levelArrow')
 image('main_bridge.png', 'main_bridge')
 image('multiplySecImg.png', 'multiplySecImg')
-image('picClock.png', 'picClock')
 image('redTruck0.png', 'redTruck0')
-image('redTruck1.png', 'redTruck1')
-image('redTruck2.png', 'redTruck2')
-image('road.png', 'road')
-image('signEquals.png', 'signEquals')
+
+
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)
