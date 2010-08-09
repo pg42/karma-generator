@@ -46,7 +46,7 @@ function startLesson(karma){
                 .css({
                          zIndex: 101,
                          position: 'absolute',
-                         top: '-3em',
+                         top: 0,
                          left: '27em'
                      }))
         .append(createDiv('imgMainBridge')
