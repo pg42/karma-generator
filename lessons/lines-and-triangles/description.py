@@ -8,7 +8,7 @@ css('global')
 css('lesson.css')
 
 for f in ['ui.core',
-	'jquery.clickable']:
+          'jquery.clickable']:
     java_script(f)
 
 

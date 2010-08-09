@@ -1,465 +1,371 @@
-﻿var questions = [
-			[
-				{
-					qsn:'कतिओटा रेखाहरु छन् ?',
-					options: [4,2,0,6],
-					answer: 4
-					
-				},
-				{
-					qsn:'कतिओटा त्रिभुजहरु छन् ?',
-					options: [0,4,2,6],
-					answer: 0
-				}
-			],
-			[	
-				{
-					qsn:'कतिओटा रेखाहरु छन् ?',
-					options: [8,12,16,20],
-					answer: 8
-				},
-				{
-					qsn:'कतिओटा त्रिभुजहरु छन् ?',
-					options: [4,2,6,8],
-					answer: 4
-				}
-			],
-			[	
-				{
-					qsn:'कतिओटा रेखाहरु छन् ?',
-					options: [12,20,28,32],
-					answer: 12
-				},
-				{
-					qsn:'कतिओटा त्रिभुजहरु छन् ?',
-					options: [8,4,12,16],
-					answer: 8
-				}
-			],
-			[	
-				{
-					qsn:'कतिओटा रेखाहरु छन् ?',
-					options: [16,10,30,40],
-					answer: 16
-				},
-				{
-					qsn:'कतिओटा त्रिभुजहरु छन् ?',
-					options: [12,10,8,4],
-					answer: 12
-				}
-			]//*/
-	]	;
-	
+var questions = [
+    [
+        {
+            question:'कतिओटा रेखाहरु छन् ?',
+            options: [4,2,0,6],
+            answer: 4
 
-	
-var optImages=[ 'a','b','c','d'];
-var answer;
-var question_counter = 0;
-var updateScoreFlag;
+        },
+        {
+            question:'कतिओटा त्रिभुजहरु छन् ?',
+            options: [0,4,2,6],
+            answer: 0
+        }
+    ],
+    [
+        {
+            question:'कतिओटा रेखाहरु छन् ?',
+            options: [8,12,16,20],
+            answer: 8
+        },
+        {
+            question:'कतिओटा त्रिभुजहरु छन् ?',
+            options: [4,2,6,8],
+            answer: 4
+        }
+    ],
+    [
+        {
+            question:'कतिओटा रेखाहरु छन् ?',
+            options: [12,20,28,32],
+            answer: 12
+        },
+        {
+            question:'कतिओटा त्रिभुजहरु छन् ?',
+            options: [8,4,12,16],
+            answer: 8
+        }
+    ],
+    [
+        {
+            question:'कतिओटा रेखाहरु छन् ?',
+            options: [16,10,30,40],
+            answer: 16
+        },
+        {
+            question:'कतिओटा त्रिभुजहरु छन् ?',
+            options: [12,10,8,4],
+            answer: 12
+        }
+    ]//*/
+];
 
 function initialize(karma){
-		
-	scoreboardInitialize();
+    scoreboardInitialize();
 }
 
 function startLesson(karma){
+    var updateScoreFlag;
 
-	scoreboardReset();
-	var question_set_index = -1;
-	var current_question_index = 0;
-		
-		
-	answer;  //holds the answer number after loading each qusstion
-	question_counter=1; //to count the questions.
-	topQsnImgFlag=1; //to toggle the top question , sicne it has only two question, it is displayed on flag changes 1 or 2
-	updateScoreFlag=true; //boolen flag act as memory for the same question, either it has been clicked once or not. true for every question loads
+    var incorrect = function () {
+        karma.play('incorrect');
+        if (updateScoreFlag) {
+            scoreboardMiss();
+            updateScoreFlag = false;
+        }
+    };
 
-	var x1Pos=0;
-	var y1Pos=0;		//the position for ploting dots
-	var x2Pos=360;
-	var y2Pos=360;
-	
-	$('#content')
-			.empty()
-			.append(createDiv('lesssonHint')
-										.html('बिन्दु बिन्दु जोडेर रेखा र त्रिभुज गन।')
-										.attr('class', 'lessonHint'))
-										
-			.append(createDiv('lineNextBtn')
-								.attr('class','linkNext')
-								.css({
-										position:'absolute',
-										left:'500px',
-										top:'600px'
-									})	
-								.clickable(function(){ nextAction(); }))
-													
-			.append(createDiv('outlineBackground')
-					.append(createDiv('canvasBorder'))
-					.append($(document.createElement('canvas'))
-								.attr({
-										id: 'canvasDrawBox',
-										height: '360',
-										width: '360'
-								})
-							)			
-					)
-			.append(createDiv('questionSection')
-						.css('display','block')
-						.append(createDiv('question'))
-						.append(createDiv('optionSection'))
-						.append(createDiv('linkNextLesson')
-									.attr('class','linkNext')
-									.clickable(function(){ selectQuestion();}))
-						.hide()
-			);
-	
-	
-	
-	
-	plotDotNumber(1,x1Pos-20,y1Pos-20);plotDotNumber(2,x2Pos+20,y1Pos-20);
-	plotDotNumber(3,x2Pos+20,y2Pos+20);plotDotNumber(4,x1Pos-20,y2Pos+20);
-																			
-	plotDot(1,x1Pos-7,y1Pos-3.5);	plotDot(2,x2Pos-7,y1Pos-3.5);
-	plotDot(3,x2Pos-7,y2Pos-3.5);	plotDot(4,x1Pos-7,y2Pos-3.5);
-	
-	function plotDotNumber(dotNumId,xPos,yPos){
-		$('#canvasBorder')
-						.append(createDiv('num'+dotNumId)
-									.addClass('number')
-									.css({
-											left:xPos,
-											top:yPos
-										})
-									.html(dotNumId)
-						);
-	}//End of function plotDotNumber
-	
-	function plotDot(dotDivId,xPos,yPos){
-		$('#canvasBorder')
-				.append(createDiv('dot'+dotDivId)
-								.addClass('dot')
-								.css({
-										left:xPos,
-										top:yPos
-									})
-								.append(karma.createImg('dot')
-												.css({
-														position:'absolute',
-													})
-										)
-				);
-	
-	
-	}//End of function plotDot
-	var actions=[   function (){drawline(x1Pos,y1Pos,x2Pos,y1Pos);},
-					function (){drawline(x2Pos,y1Pos,x2Pos,y2Pos);},
-					function (){drawline(x2Pos,y2Pos,x1Pos,y2Pos);},
-					function (){
-						drawline(x1Pos,y2Pos,x1Pos,y1Pos);
-						nextQuestionSet();
-					},
-					function(){			plotDotNumber(5,x2Pos/2,y1Pos-20);	
-										plotDotNumber(6,x2Pos+20,y2Pos/2);	
-										plotDotNumber(8,x1Pos-20,y2Pos/2);	
-										plotDotNumber(7,x2Pos/2,y2Pos+20);		
-										
-										plotDot(5,x2Pos/2-7,y1Pos-3.5);		
-										plotDot(6,x2Pos-7,y2Pos/2-3.5);
-										plotDot(7,x2Pos/2-7,y2Pos-3.5);	
-										plotDot(8,x1Pos-7,y2Pos/2-3.5);
-									},
-					function (){drawline(x2Pos/2,y1Pos,x2Pos,y2Pos/2);},
-					function (){drawline(x2Pos,y2Pos/2,x2Pos/2,y2Pos);},
-					function (){drawline(x2Pos/2,y2Pos,x1Pos,y2Pos/2);},
-					function (){	drawline(x1Pos,y2Pos/2,x2Pos/2,y1Pos);
-									nextQuestionSet();
-									},
-					
-					function(){			plotDotNumber(9,x2Pos/4-20,y2Pos/4-20);
-										plotDotNumber(10,x2Pos*3/4+20,y2Pos/4-20);
-										plotDotNumber(12,x2Pos/4-20,y2Pos*3/4+20);
-										plotDotNumber(11,x2Pos*3/4,y2Pos*3/4+20);
-								
-										plotDot(9,x2Pos/4-7,y2Pos/4-3.5);
-										plotDot(10,x2Pos*3/4-7,y2Pos/4-3.5);
-										plotDot(11,x2Pos*3/4-7,y2Pos*3/4-3.5);
-										plotDot(12,x2Pos/4-7,y2Pos*3/4-3.5);
-							
-									},
-					function (){drawline(x2Pos/4,y2Pos/4,x2Pos*3/4,y2Pos/4);},
-					function (){drawline(x2Pos*3/4,y2Pos/4,x2Pos*3/4,y2Pos*3/4);},
-					function (){drawline(x2Pos*3/4,y2Pos*3/4,x2Pos/4,y2Pos*3/4);},
-					function (){drawline(x2Pos/4,y2Pos*3/4,x2Pos/4,y2Pos/4);
-								nextQuestionSet();
-								},
-					function(){			plotDotNumber(13,x2Pos/2,y2Pos/4-20);
-										plotDotNumber(14,x2Pos*3/4+10,y2Pos/2);	
-										plotDotNumber(15,x2Pos/2,y2Pos*3/4+10);
-										plotDotNumber(16,x2Pos/4-20,y2Pos/2);
-										
-										plotDot(13,x2Pos/2-7,y2Pos/4-3.5);
-										plotDot(14,x2Pos*3/4-7,y2Pos/2-3.5);
-										plotDot(15,x2Pos/2-7,y2Pos*3/4-3.5);
-										plotDot(16,x2Pos/4-7,y2Pos/2-3.5);
-								},				
-					function (){drawline(x2Pos/2,y2Pos/4,x2Pos*3/4,y2Pos/2);},
-					function (){drawline(x2Pos*3/4,y2Pos/2,x2Pos/2,y2Pos*3/4);},
-					function (){drawline(x2Pos/2,y2Pos*3/4,x2Pos/4,y2Pos/2);},
-					function (){	
-								drawline(x2Pos/4,y2Pos/2,x2Pos/2,y2Pos/4);
-								nextQuestionSet();
-								}
-				
-				]; //End of var actions
-	
-					
-	function nextAction (){
-		if ( question_set_index >= questions.length-1 ){
-			
-			// finished all the question sets, so show the table
-			loadTable(1);
-			
-		}else{
-		
-			var action=actions.shift();
-			action();
-		}
-	}//End of function nextAction
-	
-	var drawline = function(x1,y1,x2,y2){
-		var drawBox = $('#canvasDrawBox').get()[0];
-		var context = drawBox.getContext('2d');
-				context.beginPath();
-				context.moveTo(x1,y1);
-				context.lineTo(x2,y2);
-				context.closePath();
-				context.stroke();
-	}//End of function drawline	
-	
-	
-	function nextQuestionSet(){
-		current_question_index = 0;
-			
-		 	question_set_index ++;
-		// shift the next question array from our questions
-			current_question_set = questions[question_set_index];
-		// show the first question in this set
-			selectQuestion();
-			
-		
-	}
-	
-	function selectQuestion(){
-		$('#lineNextBtn').hide();
-		$('#questionSection').show();
-		updateScoreFlag=true;
-		
-		// show the next question from our current "question array"
-		if ( current_question_index < current_question_set.length ){
-			var current_question = current_question_set[current_question_index];
-			
-			loadQuestionElement(question_counter, current_question.qsn, current_question.options, current_question.answer);
-			question_counter++;
-			
-		} else {
-			// finished asking this question set
-			$('#questionSection').hide();
-			$('#lineNextBtn').show();
-			nextAction();
-		}
-		current_question_index ++;
-	}//End of function selectQuestion
+    var correct = function () {
+        karma.play('correct');
+        if (updateScoreFlag) {
+            scoreboardHit();
+        }
+    };
 
-	
+    scoreboardReset();
 
-	function loadQuestionElement(questionNo, questionText, optionsSet, answerIndex){
-			optionsSet=Karma.shuffle(optionsSet);
-			
-			$('#question').empty();
-			$('#optionSection').empty();
-			$('#linkNextLesson').hide();
-			$('#question')
-				.html(questionNo+ " . "+ questionText);
-						
-			for(var i=0;i<4;i++){
-					var opt=optionsSet.shift();
-					if(opt==answerIndex){
-						answer=i;
-					}
-					$('#optionSection')
-						.append(createDiv('checkans'+i)
-									.attr('class','check'))
-						.append(createDiv('option'+i)
-									.attr('class','options')
-									.clickable(function(){
-											checkAnswer($(this).attr('id'));
-										})
-									.append(karma.createImg(optImages[i])))
-						.append(createDiv()
-									.attr('class','optionText')
-									.html(opt));
-			}
-			
+    var question_set_index = -1;
+    var current_question_index = 0;
 
-	}//end of <loadquestionelement></loadquestionelement>
+    var question_counter = 1;
+    updateScoreFlag = true; //boolen flag act as memory for the same question, either it has been clicked once or not. true for every question loads
 
-	function loadTable(table_index){	
-			
-			$('#lineNextBtn').hide();
-			$('#questionSection').show();
-			updateScoreFlag=true;
-			
-			table_def = [
-					['Line Segments','Triangles'],
-					['4', '0'],
-					['8', '4'],
-					['12', '8'],
-					['16', '12']
-			]
+    var drawLine = function(point1, point2) {
+        var drawBox = $('#canvasDrawBox').get()[0];
+        var context = drawBox.getContext('2d');
+        context.beginPath();
+        context.moveTo(point1.left, point1.top);
+        context.lineTo(point2.left, point2.top);
+        context.stroke();
+    };
 
-				if(table_index==1){
-					console.log('inside loadtable 1');			
-					table_def=table_def.concat([
-					['20', $(document.createElement('input'))
-											.attr({
-												 'class':'inputBox',
-												 'type':'text',
-												 'id':'inputBox'
-												 })]
-									]);
-					}
-				else if(table_index==2){
-						
-						table_def=table_def.concat([
-						['20','16'],
-						['24', $(document.createElement('input'))
-								.attr({
-									 'class':'inputBox',
-									 'type':'text',
-									 'id':'inputBox'
-									 })]
-					]);
-					
-					
-			}
-			$('#questionSection')
-						.empty()	
-						.append(make_table(table_def))
-						.append(createDiv('linkCheck')
-												.click(function(){checkAnsTextBox(table_index); }));
-		
-			updateScoreFlag=true;
-		}
-	
+    var drawLabeledDot = function (position, label_offset, label) {
+        $('#canvasBorder')
+            .append(createDiv()
+                    .addClass('dot')
+                    .css({ left: position.left - 7,
+                           top: position.top - 3.5 })
+                    .append(karma.createImg('dot')
+                            .css({ position: 'absolute' })))
+            .append(createDiv()
+                    .addClass('number')
+                    .css({ left: position.left + label_offset.left,
+                           top: position.top + label_offset.top })
+                    .html(label));
+    };
 
-	function checkAnswer(clickedId){
-		var clickedPos=parseInt(clickedId.charAt(6));
-			$('.check').empty();
-		if(answer==clickedPos){
-			$("#checkans"+clickedPos)
-				.append(karma.createImg('correct'));
-			$('.options').unclickable();
-			$('#linkNextLesson').show();
-			karma.audio.correct.play();
-				if(updateScoreFlag){
-					scoreboardHit();
-				}
-		}
-		else{
+    var tiltedSquareDots = function (dots) {
+        var average = function (point1, point2) {
+            return {
+                top: (point1.top + point2.top) / 2,
+                left: (point1.left + point2.left) / 2
+            };
+        };
+        var result = range(0, 4).map(
+            function (i) {
+                return average(dots[i], dots[(i + 1) % 4]);
+            }
+        );
+        return result;
+    };
 
-			$("#checkans"+clickedPos)
-					.append(karma.createImg('wrong'));
-			karma.audio.incorrect.play();
-				
-				if(updateScoreFlag){
-						scoreboardMiss();
-						updateScoreFlag=false;
-				}
-		
-		
-		
-		
-		}
 
-	}//End of function checkAnswer(clickedId)
+    var dots = [{ top: 0, left: 0 },
+                { top: 0, left: 360 },
+                { top: 360, left: 360 },
+                { top: 360, left: 0 }];
 
-	
-	
+    var straight_square_label_offsets = [{ top: -20, left: -20 },
+                                         { top: -20, left: 20 },
+                                         { top: 20, left: 20 },
+                                         { top: 20, left: -20 }];
+    var tilted_square_label_offsets = [{ top: -20, left: 0 },
+                                       { top: 0, left: 20 },
+                                       { top: 20, left: 0 },
+                                       { top: 0, left: -20 }];
 
-	
-	
-	function checkAnsTextBox(table_index){
-		if( (parseInt($('#inputBox').val())==16) && table_index==1){
-			correct();
-			loadTable(2);
-			
-		}else if((parseInt($('#inputBox').val())==20) && table_index==2){
-					correct();
-					showMessage()					
-		
-				
-		}else{
-				incorrect();
-		}
+    var straightSquareDots = function (dots) {
+        var dots2 = tiltedSquareDots(dots);
+        return [dots2[3]].concat(dots2.slice(0, 3));
+    };
 
-	}//End of function checkAnsTextBox
+    var label = 1;
+    var drawDots = function (offsets) {
+        dots.forEach(function (position, i) {
+                         drawLabeledDot(position, offsets[i], label++);
+                     });
 
-	function showMessage(){
-		
+    };
 
-				$('#questionSection')
-						.empty()
-						.append(createDiv('gameOver'));
-				
-				if(scoreboardScore()==scoreboardTotal()){
-							$('#gameOver').append(karma.createImg('gameOverSuccess'));
-				
-				}
-				else{
-						
-						$('#gameOver').append(karma.createImg('gameOverTry'));
-				}
-	}//End of function showMessage()
+    var actionsForSquare = function (label_offsets, nextDots) {
+        return [function () { drawDots(label_offsets); },
+                function () { drawLine(dots[0], dots[1]); },
+                function () { drawLine(dots[1], dots[2]); },
+                function () { drawLine(dots[2], dots[3]); },
+                function () {
+                    drawLine(dots[3], dots[0]);
+                    dots = nextDots(dots);
+                    nextQuestionSet();
+                }];
+    };
 
-function incorrect(){
-			karma.audio.incorrect.play();
-			if(updateScoreFlag){
-							scoreboardMiss();
-							updateScoreFlag=false;
-							
-						}
+    var actions = [].concat(actionsForSquare(straight_square_label_offsets,
+                                            tiltedSquareDots),
+                            actionsForSquare(tilted_square_label_offsets,
+                                            straightSquareDots),
+                            actionsForSquare(straight_square_label_offsets,
+                                            tiltedSquareDots),
+                            actionsForSquare(tilted_square_label_offsets,
+                                            straightSquareDots));
 
+    var nextAction = function () {
+        if (question_set_index >= questions.length - 1) {
+            loadTable();
+        } else {
+            var action = actions.shift();
+            action();
+        }
+    };
+
+    var current_question_set;
+
+    var nextQuestionSet = function () {
+        current_question_index = 0;
+        question_set_index++;
+        current_question_set = questions[question_set_index];
+        selectQuestion();
+    };
+
+    var selectQuestion = function () {
+        $('#lineNextBtn').hide();
+        $('#questionSection').show();
+        updateScoreFlag=true;
+
+        if (current_question_index < current_question_set.length) {
+            var current_question = current_question_set[current_question_index];
+
+            loadQuestionElement(question_counter, current_question);
+            question_counter++;
+        } else {
+            $('#questionSection').hide();
+            $('#lineNextBtn').show();
+            nextAction();
+        }
+        current_question_index++;
+    };
+
+    var loadQuestionElement = function (questionNo, question) {
+        $('#question').empty();
+        $('#optionSection').empty();
+        $('#linkNextLesson').hide();
+        $('#question')
+            .html(questionNo+ " . "+ question.question);
+
+        Karma.shuffle(question.options).forEach(
+            function (option, i) {
+                var check = createDiv()
+                    .addClass('check');
+                $('#optionSection')
+                    .append(check)
+                    .append(createDiv()
+                            .addClass('options')
+                            .clickable(
+                                function () {
+                                    $('.check').empty();
+                                    if (option == question.answer){
+                                        check.append(karma.createImg('correct'));
+                                        $('.options').unclickable();
+                                        $('#linkNextLesson').show();
+                                        correct();
+                                    } else {
+                                        check.append(karma.createImg('wrong'));
+                                        incorrect();
+                                    }
+                                })
+                            .append(karma.createImg('abcd'[i])))
+                    .append(createDiv()
+                            .addClass('optionText')
+                            .html(option));
+            }
+        );
+    };
+
+    var loadTable = function () {
+        $('#lineNextBtn').hide();
+        $('#questionSection').show();
+
+        updateScoreFlag = true;
+
+        var createInputBox = function () {
+            return $(document.createElement('input'))
+                .addClass('inputBox')
+                .attr({
+                          id: 'inputBox',
+                          type: 'text'
+                      });
+        };
+
+        var input_box1 = createInputBox();
+        var input_box2 = createInputBox();
+
+        var table_def = [
+            ['Line Segments','Triangles'],
+            ['4', '0'],
+            ['8', '4'],
+            ['12', '8'],
+            ['16', '12'],
+            ['20', input_box1],
+            ['24', input_box2]
+        ];
+
+        var checkInputBox1 = function () {
+            if (parseInt(input_box1.val()) == 16) {
+                correct();
+                input_box1.replaceWith('16');
+                $('tr').show();
+                updateScoreFlag = true;
+                $('#linkCheck')
+                    .unclickable()
+                    .clickable(checkInputBox2);
+            } else {
+                incorrect();
+            }
+        };
+
+        var checkInputBox2 = function () {
+            if (parseInt(input_box2.val()) == 20) {
+                correct();
+                lessonOver();
+            } else {
+                incorrect();
+            }
+        };
+
+        $('#questionSection')
+            .empty()
+            .append(makeTable(table_def))
+            .append(createDiv('linkCheck')
+                    .clickable(checkInputBox1));
+
+        $('table tr:last-child').hide();
+    };
+
+    var lessonOver = function () {
+        $('#questionSection')
+            .empty()
+            .append(createDiv('gameOver'));
+
+        if (scoreboardScore() == scoreboardTotal()) {
+            $('#gameOver').append(karma.createImg('gameOverSuccess'));
+
+        } else {
+            $('#gameOver').append(karma.createImg('gameOverTry'));
+        }
+    };
+
+    $('#content')
+        .empty()
+        .append(createDiv('lesssonHint')
+                .addClass('lessonHint')
+                .html('बिन्दु बिन्दु जोडेर रेखा र त्रिभुज गन।'))
+        .append(createDiv('lineNextBtn')
+                .addClass('linkNext')
+                .css({
+                         position:'absolute',
+                         left: 500,
+                         top: 600
+                     })
+                .clickable(nextAction))
+        .append(createDiv('outlineBackground')
+                .append(createDiv('canvasBorder'))
+                .append($(document.createElement('canvas'))
+                        .attr({
+                                  id: 'canvasDrawBox',
+                                  height: 360,
+                                  width: 360
+                              })))
+        .append(createDiv('questionSection')
+                .css('display','block')
+                .append(createDiv('question'))
+                .append(createDiv('optionSection'))
+                .append(createDiv('linkNextLesson')
+                        .addClass('linkNext')
+                        .clickable(selectQuestion))
+                .hide());
+
+    nextAction();
 }
-function correct(){
-	karma.audio.correct.play();
-			if(updateScoreFlag){
-							scoreboardHit();
-													
-						}
+
+function makeTable(from_def) {
+    var table = $(document.createElement('table'))
+        .attr({ id: 'finalTable', cellpadding: '10' });
+    var tbody=$(document.createElement('tbody'))
+        .appendTo(table);
+
+    $(from_def.map(
+          function (row_def) {
+              var tr = $(document.createElement('tr'));
+              $(row_def.map(function (data) {
+                                return $(document.createElement('td'))
+                                    .html(data);
+                            }
+                           ))
+                  .appendTo(tr);
+              return tr;
+          }
+      )).appendTo(tbody);
+
+    return table;
 }
-}//End of function startLesson(karma)
 
-
-
-function make_table(from_def){
-			var table = $(document.createElement('table'));
-					table.attr('id','finalTable');
-					table.attr('cellpadding','10');
-			var tbody=$(document.createElement('tbody'));
-			table.append(tbody);
-
-			for ( var i=0; i<from_def.length; i++){
-				var tr = $(document.createElement('tr'))
-				for ( var j=0; j<from_def[i].length; j++){
-					var td = $(document.createElement('td'));
-					td.html(from_def[i][j])
-					tr.append(td);
-				}
-				tbody.append( tr );
-			}
-			return table;
-	}//End of function make_table(from_def)
-	
-	
 setUpLesson(initialize, startLesson);
