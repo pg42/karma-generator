@@ -67,7 +67,7 @@ function enableDragAndDrop(image, piece) {
      */
     piece
         .draggable(
-            {stack: {group: '.piece', min: 10}, // Ensure dragged piece is at front.
+            {stack: '.piece', // Ensure dragged piece is at front.
              stop: function() { scrubPosition(piece); }
             }).
         droppable(
