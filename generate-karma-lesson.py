@@ -698,6 +698,7 @@ if __name__ == '__main__':
     parser.add_option('-d', '--debug', dest='debug', default=True,
                       help='use non-minimized JavaScript libraries')
     parser.add_option('-o', '--output', dest='output',
+                      default=os.path.join(script_root, 'deploy', 'Activities'),
                       help='use output as a destination directory')
     parser.add_option('-k', '--karma', dest='karma',
                       help='DEPRECATED - path to the karma directory')
@@ -729,7 +730,7 @@ if __name__ == '__main__':
         lesson_src = os.path.abspath(os.path.dirname(description))
 
         theLesson = Lesson()
-        theLesson.parent_directory = os.path.abspath(os.path.join(script_root, 'deploy', 'Activities'))
+        theLesson.parent_directory = os.path.abspath(options.output)
         theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
 
         include_stack.append(description)
