@@ -265,6 +265,15 @@ Karma.extend(
 	    }
 	    return this;
         },
+        ready_callback: null,
+        maybe_ready: function () {
+           if (this._counters.loaded == this._counters.total) {
+               if (this.ready_callback) {
+	           this._statusDiv.remove();
+                   this.ready_callback();
+               }
+           }
+        },
         /** Waits until all assets loaded, then calls callback cb
          * @memberOf Karma
          * @param {Function} [cb] callback function
@@ -274,23 +283,11 @@ Karma.extend(
          */
         ready: function (cb) {
 	    var that = this;
+            this.ready_callback = cb;
 	    if (Karma._initialized !== true) {
 	        throw new Error('Karma not initialized');
 	    }
-
-	    if (this._counters.loaded !== this._counters.total) {
-	        setTimeout(function () { that.ready(cb);}, 5);
-	    } else if (cb) {
-	        this._statusDiv.remove();
-	        cb();
-	    } else if (!cb) {
-	        this._statusDiv.remove();
-	        $(document.createElement('div'))
-                .attr('id', 'starterMsg')
-                .append($(document.createElement('h1'))
-                        .append('It works'))
-                .appendTo($('body'));
-	    }
+            this.maybe_ready();
 	    return this;
         },
         _updateStatus: function (error_msg) {
@@ -348,8 +345,7 @@ Karma.kAsset = {
 	}
 
 	this.media = new this._asset_class();
-	// This loads the file.
-	this.media.src = this.src = this.file;
+	this.media.src = this.src = this.file; // Load the file.
 
 	this._addEventHandlers();
 
@@ -362,7 +358,9 @@ Karma.kAsset = {
 	    function (e) {
 		Karma._counters.loaded++;
 		Karma._updateStatus();
-		that.status = 'loaded';},
+                Karma.maybe_ready();
+		that.status = 'loaded';
+            },
             false);
 	that.media.addEventListener(
 	    'error',
