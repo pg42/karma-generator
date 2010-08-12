@@ -4,7 +4,7 @@
     margin: 1em 3em 0 0;
     width: 101px;
     height: 30px;
-    background-image: url(../assets/image/check.png);
+    background-image: url(check.png);
     cursor:pointer;
 }
 
@@ -39,7 +39,7 @@
     margin: 1em auto;
     width: 501px;
     height: 383px;
-    background: url(../assets/image/bgQues.png) no-repeat;
+    background: url(bgQues.png) no-repeat;
     padding-top: 1.5em;
     text-align:center;
 }
@@ -48,7 +48,7 @@
     margin: 1em 0 0 0;
     width: 570px;
     height: 120px;
-    background: url(../assets/image/bgAns.png) no-repeat;
+    background: url(bgAns.png) no-repeat;
     text-align:center;
     padding-top: 1em;
 }
@@ -64,7 +64,7 @@
     margin: 0.1em auto;
     width: 497px;
     height: 161px;
-    background: url(../assets/image/bgQuestion.png) no-repeat;
+    background: url(bgQuestion.png) no-repeat;
     text-align:center;
     padding-top: 1em;
 
@@ -74,7 +74,7 @@
     margin: 0.1em auto;
     width:497px;
     height: 160px;
-    background: url(../assets/image/bgMessage.png) no-repeat;
+    background: url(bgMessage.png) no-repeat;
     text-align:center;
     padding-top: 1em;
 }
@@ -114,7 +114,7 @@ input.textBox {
 }
 
 #help {
-    background:url(../assets/image/help.png);
+    background:url(help.png);
 }
 
 #gameOver {
@@ -123,5 +123,5 @@ input.textBox {
     left: 25em;
     width:427px;
     height:133px;
-    background: url(../assets/image/gameOver.png) no-repeat center;
+    background: url(gameOver.png) no-repeat center;
 }

@@ -5,7 +5,7 @@
     top: 75px;;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 40;
 }
 
@@ -55,7 +55,7 @@
     position: relative;
     top: 10px;
     height: 30px; width: 102px;
-    background: url(../assets/image/icons/clickToListen.png) no-repeat;
+    background: url(icons/clickToListen.png) no-repeat;
     cursor: pointer;
 }
 
@@ -87,7 +87,7 @@
 .volume {
     float: left;
     width: 48px; height: 48px;
-    background: url(../assets/image/volume.png) no-repeat;
+    background: url(volume.png) no-repeat;
     cursor: pointer;
 }
 
@@ -109,7 +109,7 @@
     width: 60px;
     height: 59px;
     border: 1px dotted blue;
-    background: url(../assets/image/icons/Lesson.png) no-repeat;
+    background: url(icons/Lesson.png) no-repeat;
 }
 
 #imgExercise {
@@ -155,7 +155,7 @@
     height: 48px;
     width: 48px;
     position: absolute;
-    background: url(../assets/image/icons/next.png) no-repeat;
+    background: url(icons/next.png) no-repeat;
 }
 
 .specialText {

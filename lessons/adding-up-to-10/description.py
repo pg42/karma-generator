@@ -28,6 +28,6 @@ image('flower37px.png', 'flower')
 image('normalChimp_120x125.png', 'normal_chimp')
 image('happyChimp_120x125.png', 'happy_chimp')
 image('sadChimp_120x125.png', 'sad_chimp')
-
+image('sidebar.png')
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)

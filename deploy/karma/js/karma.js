@@ -227,7 +227,6 @@ Karma.extend(
     {
         image: {},
         audio: {},
-        _assetPath: 'assets/',
         _initialized: false,
         _statusDiv: undefined,
         _loaderDiv: undefined,
@@ -349,9 +348,8 @@ Karma.kAsset = {
 	}
 
 	this.media = new this._asset_class();
-	this._path = Karma._assetPath + this._type + '/';
 	// This loads the file.
-	this.media.src = this.src = this._path + this.file;
+	this.media.src = this.src = this.file;
 
 	this._addEventHandlers();
 

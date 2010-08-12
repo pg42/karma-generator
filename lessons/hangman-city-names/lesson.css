@@ -76,7 +76,7 @@ a {
     bottom: 10px;
     width: 1150px;
     height: 171px;
-    background-image: url(../assets/image/footer_hangman.png);
+    background-image: url(footer_hangman.png);
     background-repeat: no-repeat;
     z-index: 1;
 }

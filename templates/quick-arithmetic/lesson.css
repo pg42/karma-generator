@@ -25,7 +25,7 @@
 			margin-left: 12px;
 			width: 215px;
 			height: 191px;
-			background-image: url(../assets/image/tv.png);
+			background-image: url(tv.png);
 			z-index:5;
 		}
 		#tvLayer{
@@ -56,7 +56,7 @@
 		#cupBoard{
 			width: 280px;
 			height: 259px;
-			background: url(../assets/image/cupBoard.png) no-repeat;
+			background: url(cupBoard.png) no-repeat;
 		}
 
 		#right-side{
@@ -68,7 +68,7 @@
 				position:relative;
 				width: 420px;
 				height: 320px;
-				background: url(../assets/image/borderWall.png) no-repeat;
+				background: url(borderWall.png) no-repeat;
 			}
 				#imgDisplay{
 					position:absolute;

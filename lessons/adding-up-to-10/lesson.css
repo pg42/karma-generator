@@ -20,7 +20,7 @@
 #side {
     margin-top: 50px;
     margin-left: 50px;
-    background-image: url(../assets/generic/images/sidebar.png);
+    background-image: url(sidebar.png);
     float: left;
     height: 600px;
     position: relative;

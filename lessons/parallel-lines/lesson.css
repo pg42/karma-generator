@@ -4,7 +4,7 @@
     margin: 1em 3em 0 0;
     width: 101px;
     height: 30px;
-    background-image: url(../assets/image/check.png);
+    background-image: url(check.png);
 }
 
 #content {
@@ -102,7 +102,7 @@
     top: 75px;;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 40;
 }
 

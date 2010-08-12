@@ -45,12 +45,12 @@ class KarmaFramework():
             self._karma_file('css/kStart.css', 'kstart')
             ]
         self.audio_files = [
-            self._karma_file('audio/en_correct.ogg', 'correct', deploy_subfolder='assets/audio'),
-            self._karma_file('audio/en_incorrect.ogg', 'incorrect', deploy_subfolder='assets/audio'),
-            self._karma_file('audio/ne_correct.ogg', 'ne_correct', deploy_subfolder='assets/audio'),
-            self._karma_file('audio/ne_incorrect.ogg', 'ne_incorrect', deploy_subfolder='assets/audio'),
-            self._karma_file('audio/byebye.ogg', 'byebye', deploy_subfolder='assets/audio'),
-            self._karma_file('audio/trigger.ogg', 'trigger', deploy_subfolder='assets/audio')
+            self._karma_file('audio/en_correct.ogg', 'correct'),
+            self._karma_file('audio/en_incorrect.ogg', 'incorrect'),
+            self._karma_file('audio/ne_correct.ogg', 'ne_correct'),
+            self._karma_file('audio/ne_incorrect.ogg', 'ne_incorrect'),
+            self._karma_file('audio/byebye.ogg', 'byebye'),
+            self._karma_file('audio/trigger.ogg', 'trigger')
             ]
         self.image_files = [
             self._karma_file('image/title_block_lt.png', 'title_block_lt'),
@@ -98,7 +98,6 @@ script_root = os.path.abspath(os.path.dirname(argv0))
 class File():
     _name = None
     src = ''
-    deploy_subfolder = ''
     lesson_deploy = True
     create_file = False
     data = ''
@@ -106,7 +105,6 @@ class File():
     def to_string(self):
         print 'name:', self._name
         print 'src:', self.src
-        print 'deploy_subfolder:', self.deploy_subfolder
         print 'lesson_deploy:', self.lesson_deploy
         print 'create_file:', self.create_file
         print 'data:', self.data
@@ -115,8 +113,6 @@ class File():
     def __init__(self, path, name=None, **kw):
         self._name = name
         self.src = path
-
-        self.deploy_subfolder = kw.setdefault('deploy_subfolder', '')
 
         if 'karma' in kw and kw['karma']:
             self.lesson_deploy = False
@@ -127,7 +123,6 @@ class File():
             # find the existing file
             test_files = []
             if self.lesson_deploy:
-                test_files.append(os.path.join(theLesson.src_directory, self.deploy_subfolder, path))
                 test_files.append(os.path.join(theLesson.src_directory, path))
             if len(include_stack) > 0:
                 test_files.append(os.path.join(os.path.dirname(include_stack[-1]), path))
@@ -142,7 +137,7 @@ class File():
             self.src = self._absolute_path()
 
     def _deploy_folder(self):
-        return os.path.abspath(os.path.join(theLesson.directory, self.deploy_subfolder))
+        return os.path.abspath(theLesson.directory)
 
     def name(self):
         return self._name
@@ -397,7 +392,7 @@ class Lesson():
                 os.makedirs(d)
         create_dir(self.directory)
         os.chdir(self.directory)
-        map(create_dir, ['css', 'js', 'js/locale', 'assets/image', 'assets/audio', 'assets/video'])
+#        map(create_dir, ['css', 'js', 'js/locale', 'assets/image', 'assets/audio', 'assets/video'])
 
         for f in self.java_script_files + self.css_files:
             f.make_available()
@@ -430,7 +425,7 @@ class Lesson():
         self.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
         self.print_start_html_on(codecs.open('start.html', 'w', 'UTF-8'))
         self.print_kdoc_html_on(codecs.open('kDoc.html', 'w', 'UTF-8'))
-        self.print_karma_js_on(open('js/lesson-karma.js', 'w'))
+        self.print_karma_js_on(open('lesson-karma.js', 'w'))
 
     def compile_translations(self):
         # compile translation JS files from MO files
@@ -438,7 +433,7 @@ class Lesson():
             if fnmatch.fnmatch(srcfile, '*.mo'):
                 lang = os.path.splitext(srcfile)[0]
                 srcpath = os.path.join(self.src_directory, srcfile)
-                targpath = os.path.join(self.directory, 'js', 'locale', lang +'.js')
+                targpath = os.path.join(self.directory, lang +'.js')
                 json_translations = mo2js.gettext_json(open(srcpath, 'r'), True)
 
                 f = codecs.open(targpath, encoding='utf-8', mode='w+')
@@ -583,18 +578,17 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
     # include the locale strings too
 
     if locale != None:
-        theLesson.java_script_files.append(File('js/jquery.i18n.'+ locale +'.js', type='js', karma=True))
+        theLesson.java_script_files.append(File('jquery.i18n.'+ locale +'.js', type='js', karma=True))
 
         locale_mo = frob_path(locale + '.mo')
         if os.path.exists(locale_mo):
-            targpath = os.path.join(theLesson.directory, 'js', 'locale', locale +'.js')
+            targpath = os.path.join(theLesson.directory, locale +'.js')
             theLesson.java_script_files.append(File(targpath, None, type='js', karma=True))
 
 
 def java_script(name, **kw):
     result = theLesson.karma.java_script(name)
     if not result:
-        kw['deploy_subfolder'] = 'js'
         result = File(name, name, **kw)
     if name in [f.name() for f in theLesson.java_script_files]:
         print 'Warning: the java_script file \'' + name + '\' is included twice.'
@@ -606,7 +600,7 @@ def java_script(name, **kw):
 def css(name):
     result = theLesson.karma.css(name)
     if not result:
-        result = File(name, name, deploy_subfolder='css')
+        result = File(name, name)
     theLesson.css_files.append(result)
     return result
 
@@ -617,7 +611,7 @@ def image(file, name=None):
         name = file
         result = theLesson.karma.image(name)
     if not result:
-        result = File(file, name, deploy_subfolder='assets/image')
+        result = File(file, name)
     theLesson.image_files.append([name, result])
     return result
 
@@ -628,7 +622,7 @@ def audio(file, name=None):
         name = file
         result = theLesson.karma.audio(name)
     if not result:
-        result = File(file, name, deploy_subfolder='assets/audio')
+        result = File(file, name)
     theLesson.audio_files.append([name, result])
     return result
 
@@ -716,7 +710,6 @@ def process_description(karma, description, output_dir,
     theLesson.karma = karma
     theLesson.parent_directory = os.path.abspath(output_dir)
     theLesson.java_script_files.append(File('lesson-karma.js', None,
-                                            deploy_subfolder='js',
                                             generated=True))
 
     include_stack.append(description)

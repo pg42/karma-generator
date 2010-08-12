@@ -19,14 +19,14 @@
     margin-top: 74px;
     width: 1198px;
     height: 750px;
-    background: url(../assets/image/background.jpg) no-repeat center;
+    background: url(background.jpg) no-repeat center;
     text-align: left;
 }
 .boxes{
     position:absolute;
     width : 85px;
     height: 30px;
-    background: url(../assets/image/boxes.png) no-repeat center;
+    background: url(boxes.png) no-repeat center;
 }
 
 .truckScore{
@@ -39,7 +39,7 @@
 #questionSection{
     width : 525px;
     height: 125px;
-    background: url(../assets/image/multiplySecImg.png) no-repeat;
+    background: url(multiplySecImg.png) no-repeat;
 }
 .quesBoxes{
     position:relative;
@@ -61,7 +61,7 @@
 #infoText{
     width: 78px;
     height: 76px;
-    background: url(../assets/image/info.png);
+    background: url(info.png);
     cursor:pointer;
 }
 .truckArea{
@@ -118,7 +118,7 @@ input.inputBox{
     padding-top: 1.45em;
     width :10em;
     height: 6em;
-    background: url(../assets/image/chooseLevel.png) no-repeat top center;
+    background: url(chooseLevel.png) no-repeat top center;
     z-index: 120;
     position: absolute; top: 15em; left: 0em; font: 2em arial,verdana,geneva,helvetica; z-index: 120;
 }
@@ -140,7 +140,7 @@ input.inputBox{
     top: 75px;;
     width: 297px;
     height: 697px;
-    background:url(../assets/image/help.png);
+    background:url(help.png);
     z-index:240;
 }
 

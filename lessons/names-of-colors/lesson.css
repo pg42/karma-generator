@@ -6,7 +6,7 @@
     margin-top: 74px;
     width: 1198px;
     height: 750px;
-    background: url(../assets/image/background.jpg) no-repeat center;
+    background: url(background.jpg) no-repeat center;
     overflow: hidden;
 }
 
@@ -183,7 +183,7 @@
     top: 75px;;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 40;
 }
 

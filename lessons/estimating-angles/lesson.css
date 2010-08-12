@@ -15,7 +15,7 @@
     margin: 0 auto;
     width: 1000px;
     height: 560px;
-    background: url(../assets/image/section1.png);
+    background: url(section1.png);
 }
 
 #section3 {
@@ -23,7 +23,7 @@
     margin: 0 auto;
     width: 505px;
     height: 460px;
-    background: url(../assets/image/section3.png);
+    background: url(section3.png);
 }
 
 #ballOutline {
@@ -40,7 +40,7 @@
     left: 0;
     width: 32px;
     height: 32px;
-    background: url(../assets/image/ball.png);
+    background: url(ball.png);
 }
 
 #inputArea {
@@ -54,7 +54,7 @@
     float: left;
     width: 101px;
     height: 30px;
-    background: url(../assets/image/check.png);
+    background: url(check.png);
     cursor: pointer;
 }
 
@@ -73,7 +73,7 @@ input.inputBox {
     margin-bottom: 5em;
     width: 496px;
     height: 252px;
-    background: url(../assets/image/protractor.png);
+    background: url(protractor.png);
 }
 
 #lineDefault {
@@ -114,7 +114,7 @@ input.inputBox {
     float: right;
     width: 46px;
     height: 70px;
-    background: url(../assets/image/medal.png);
+    background: url(medal.png);
 }
 
 .clear {
@@ -149,7 +149,7 @@ input.inputBox {
     top: 75px;;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 40;
 }
 

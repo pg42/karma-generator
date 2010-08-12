@@ -58,7 +58,7 @@
     width: 36px;
     height: 60px;
     margin-left: 118px;
-    background-image: url(../assets/image/comma.png);
+    background-image: url(comma.png);
 }
 
 #dot {
@@ -67,7 +67,7 @@
     right: 5%;
     width: 36px;
     height: 60px;
-    background-image: url(../assets/image/dot.png);
+    background-image: url(dot.png);
 }
 
 #dragAnswers {
@@ -86,7 +86,7 @@
     top: 30%;
     width: 222px;
     height: 300px;
-    background: url(../assets/image/backImage.png);
+    background: url(backImage.png);
     text-align: center;
 }
 
@@ -107,7 +107,7 @@
 }
 
 #help {
-    background: url(../assets/image/help.png);
+    background: url(help.png);
 }
 
 #gameOver {
