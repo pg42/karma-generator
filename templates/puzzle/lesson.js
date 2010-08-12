@@ -33,7 +33,7 @@ function makePiece(img, id, column, row, width, height, label) {
         .appendTo(result);
 
     $(document.createElement('div'))
-        .attr({className: 'pieceLabel'})
+        .addClass('pieceLabel')
         .css({textAlign: 'center'})
         .html(label)
         .appendTo(label_div);
@@ -157,6 +157,7 @@ function startGame(karma, puzzle) {
         .appendTo($imgMain);
     var pieces = makePieces(img, 4, 4);
     $(shufflePieces(pieces)).appendTo($('#imgMain'));
+    img.attr('id', 'reward');
 }
 
 setUpLesson(initialize, function(karma) { startGame(karma, puzzles[0]); });
