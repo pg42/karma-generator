@@ -30,6 +30,8 @@ theLesson = None
 include_stack = []
 script_root = os.path.abspath(os.path.dirname(argv0))
 karma_root = os.path.abspath(os.path.join(os.path.dirname(argv0), 'deploy', 'karma'))
+
+# TBD: make File aware of its lesson, move these to lesson
 lesson_src = '';
 lesson_dest = '';
 
@@ -430,6 +432,17 @@ class Lesson():
 
         self.compile_translations()
 
+    def deploy_name(self):
+        return os.path.basename(self.directory)
+
+    def generate(self):
+        print 'writing lesson to ' + self.deploy_name()
+        self.copy_files()
+        self.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
+        self.print_start_html_on(codecs.open('start.html', 'w', 'UTF-8'))
+        self.print_kdoc_html_on(codecs.open('kDoc.html', 'w', 'UTF-8'))
+        self.print_karma_js_on(open('js/lesson-karma.js', 'w'))
+
     def compile_translations(self):
         # compile translation JS files from MO files
 
@@ -562,12 +575,12 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
         return ''.join([words[0].lower()] + [x.capitalize() for x in words[1:]])
 
     dirname = '%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week);
-    print 'writing lesson to ' + dirname
-    theLesson.set_directory( dirname )
+    theLesson.set_directory(dirname)
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     theLesson.lesson_title = lesson_title or title
     theLesson.subject = subject
     theLesson.grade = grade
+    theLesson.week = week
     theLesson.summary = summary
     java_script('jquery')
     java_script('karma')
@@ -692,6 +705,7 @@ def check_file_exists(path):
         print 'Error: the file ' + path + ' doesn\'t exist.'
         sys.exit(1)
 
+
 def find_all_description_files():
     result = []
     lesson_folder = os.path.join(script_root, 'lessons')
@@ -699,6 +713,51 @@ def find_all_description_files():
         if 'description.py' in files:
             result.append(os.path.abspath(os.path.join(script_root, root, 'description.py')))
     return result
+
+
+def constantly(x):
+    return lambda y: x
+
+
+def process_description(description, output_dir, lesson_filter=constantly(True)):
+    os.chdir(script_root)
+    description = os.path.abspath(description)
+    global lesson_src
+    lesson_src = os.path.abspath(os.path.dirname(description))
+
+    global theLesson
+    theLesson = Lesson()
+    theLesson.parent_directory = os.path.abspath(output_dir)
+    theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
+
+    include_stack.append(description)
+    check_file_exists(description)
+    execfile(description, globals())
+    include_stack.pop()
+
+    if lesson_filter(theLesson):
+        theLesson.generate()
+        return theLesson.deploy_name()
+    else:
+        return None
+
+# Called from build.py
+def deploy_lessons(output_dir, grades, subjects, first_week, last_week):
+    def lesson_filter(lesson):
+        if not lesson.grade in grades:
+            return False
+        if not lesson.subject in subjects:
+            return False
+        if lesson.week < first_week or last_week < lesson.week:
+            return False
+        return True
+    result = []
+    for description_file in find_all_description_files():
+        name = process_description(description_file, output_dir, lesson_filter)
+        if name:
+            result.append(name)
+    return result
+
 
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
@@ -729,21 +788,4 @@ if __name__ == '__main__':
         process_descriptions.append(args[0])
 
     for description in process_descriptions:
-        os.chdir(script_root)
-        description = os.path.abspath(description)
-        lesson_src = os.path.abspath(os.path.dirname(description))
-
-        theLesson = Lesson()
-        theLesson.parent_directory = os.path.abspath(options.output)
-        theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
-
-        include_stack.append(description)
-        check_file_exists(description)
-        execfile(description)
-        include_stack.pop()
-
-        theLesson.copy_files()
-        theLesson.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
-        theLesson.print_start_html_on(codecs.open('start.html', 'w', 'UTF-8'))
-        theLesson.print_kdoc_html_on(codecs.open('kDoc.html', 'w', 'UTF-8'))
-        theLesson.print_karma_js_on(open('js/lesson-karma.js', 'w'))
+        process_description(description, options.output)
