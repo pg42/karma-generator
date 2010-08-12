@@ -42,11 +42,6 @@
  * @author Felipe Lopez Toledo <zer.subzero@gmail.com>
  */
 
-//common.js modules use exports object
-if(!this.exports) {
-    exports = {};
-}
-
 /** Karma is the namespace for the Karma library and Karma() is the constructor
  * function for the Karma library object Karma.
  * Karma() checks if the current document type is set to HTML 5, throws
@@ -82,9 +77,7 @@ if(!this.exports) {
  * k.audio.yeehaw.play();
  *
  */
-var Karma = exports.Karma = function (options) {
-    Karma._isHtml5(document.doctype.nodeName);
-
+var Karma = function (options) {
     if (Karma._initialized === true) {
 	return Karma;
     } else {
@@ -131,20 +124,6 @@ Karma.extend = function (target, source) {
 	}
     }
     return target;
-};
-
-//Throws big ugly error if doctype isn't html5
-Karma._isHtml5 = function (doctype) {
-    var regex = new RegExp('^html$', 'i');
-    if(!regex.test(doctype)) {
-	var errorMsg =  'ERROR: The doctype must be set to <!DOCTYPE html> ' +
-	    'in order to use Karma. Karma requires you to use html5';
-	var errorElem = document.createElement('div');
-	errorElem.setAttribute('id', 'errorDoctype');
-	errorElem.innerText = errorMsg;
-	document.body.appendChild(errorElem);
-	throw new Error(errorMsg);
-    }
 };
 
 /**
