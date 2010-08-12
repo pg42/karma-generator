@@ -411,9 +411,7 @@ class Lesson():
             else:
                 print 'Warning: missing ' + src
 
-        for f in [#'kDoc.html', # generated
-                  #'start.html', # generated
-                  'teachersNote.html',
+        for f in ['teachersNote.html',
                   'thumbnail.jpg']:
             copy_required(f)
         # if a screenshot.jpg exists in the source, copy it to the dest
@@ -656,7 +654,6 @@ def footer_configuration(**kw):
     if config['scoreboard']:
         css('ui.scoreboard')
         java_script('ui.scoreboard')
-        #java_script('../../deploy/karma/js/scoreboard.js') #TBD: fix path
 
 
 def frob_path(path):
@@ -665,6 +662,7 @@ def frob_path(path):
                                              path))
     else:
         return os.path.abspath(path)
+
 
 def include(path):
     path = frob_path(path)
@@ -717,7 +715,8 @@ def process_description(karma, description, output_dir,
     theLesson = Lesson(os.path.abspath(os.path.dirname(description)))
     theLesson.karma = karma
     theLesson.parent_directory = os.path.abspath(output_dir)
-    theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
+    theLesson.java_script_files.append(File('lesson-karma.js', None, type='js',
+                                            generated=True))
 
     include_stack.append(description)
     check_file_exists(description)
@@ -729,6 +728,7 @@ def process_description(karma, description, output_dir,
         return theLesson.deploy_name()
     else:
         return None
+
 
 # Called from build.py
 def deploy_lessons(karma_root, output_dir, grades, subjects, first_week,
