@@ -94,11 +94,6 @@ theLesson = None
 include_stack = []
 script_root = os.path.abspath(os.path.dirname(argv0))
 
-# TBD: make File aware of its lesson, move these to lesson
-lesson_src = '';
-lesson_dest = '';
-
-
 class File():
     _name = None
     src = ''
@@ -134,8 +129,8 @@ class File():
             # find the existing file
             test_files = []
             if self.lesson_deploy:
-                test_files.append(os.path.join(lesson_src, self.deploy_subfolder, path))
-                test_files.append(os.path.join(lesson_src, path))
+                test_files.append(os.path.join(theLesson.src_directory, self.deploy_subfolder, path))
+                test_files.append(os.path.join(theLesson.src_directory, path))
             if len(include_stack) > 0:
                 test_files.append(os.path.join(os.path.dirname(include_stack[-1]), path))
             if 'karma_root' in kw:
@@ -149,7 +144,7 @@ class File():
             self.src = self.absolute_path()
 
     def deploy_folder(self):
-        return os.path.abspath(os.path.join(lesson_dest, self.deploy_subfolder))
+        return os.path.abspath(os.path.join(theLesson.directory, self.deploy_subfolder))
 
     def name(self):
         return self._name
@@ -163,7 +158,7 @@ class File():
     def relative_path(self, start=None, **kw):
         if start == None or start == '':
             # default relative is to lesson output
-            start = lesson_dest
+            start = theLesson.directory
         elif start == 'deploy':
             start = self.deploy_folder()
 
@@ -395,7 +390,8 @@ def createDiv(id):
     return HtmlElement('div', True).attr(id=id)
 
 class Lesson():
-    def __init__(self):
+    def __init__(self, src_directory):
+        self.src_directory = src_directory
         self.parent_directory = ''
         self.directory = ''
         self.title = ''
@@ -427,7 +423,7 @@ class Lesson():
             f[1].make_available()
 
         def copy_required(f):
-            src = os.path.join(lesson_src, f)
+            src = os.path.join(self.src_directory, f)
             if (os.path.exists(src)):
                 shutil.copy(src, self.directory)
             else:
@@ -439,7 +435,7 @@ class Lesson():
                   'thumbnail.jpg']:
             copy_required(f)
         # if a screenshot.jpg exists in the source, copy it to the dest
-        screenshot_img = os.path.join(lesson_src, 'screenshot.jpg')
+        screenshot_img = os.path.join(self.src_directory, 'screenshot.jpg')
         if (os.path.exists(screenshot_img)):
             shutil.copy(screenshot_img, os.path.join(self.directory, 'screenshot.jpg'))
 
@@ -458,10 +454,10 @@ class Lesson():
 
     def compile_translations(self):
         # compile translation JS files from MO files
-        for srcfile in os.listdir(lesson_src):
+        for srcfile in os.listdir(self.src_directory):
             if fnmatch.fnmatch(srcfile, '*.mo'):
                 lang = os.path.splitext(srcfile)[0]
-                srcpath = os.path.join(lesson_src, srcfile)
+                srcpath = os.path.join(self.src_directory, srcfile)
                 targpath = os.path.join(self.directory, 'js', 'locale', lang +'.js')
                 json_translations = mo2js.gettext_json(open(srcpath, 'r'), True)
 
@@ -473,8 +469,6 @@ class Lesson():
 
     def set_directory(self, dir):
         self.directory = os.path.abspath(os.path.join(self.parent_directory, dir))
-        global lesson_dest
-        lesson_dest = self.directory
 
     def print_start_html_on(self, stream):
         doc = HtmlDocument()
@@ -613,7 +607,7 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
 
         locale_mo = frob_path(locale + '.mo')
         if os.path.exists(locale_mo):
-            targpath = os.path.join(lesson_dest, 'js', 'locale', locale +'.js')
+            targpath = os.path.join(theLesson.directory, 'js', 'locale', locale +'.js')
             theLesson.java_script_files.append(File(targpath, None, type='js', karma=True))
 
 
@@ -736,11 +730,9 @@ def process_description(karma, description, output_dir,
                         lesson_filter=constantly(True)):
     os.chdir(script_root)
     description = os.path.abspath(description)
-    global lesson_src
-    lesson_src = os.path.abspath(os.path.dirname(description))
 
     global theLesson
-    theLesson = Lesson()
+    theLesson = Lesson(os.path.abspath(os.path.dirname(description)))
     theLesson.karma = karma
     theLesson.parent_directory = os.path.abspath(output_dir)
     theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
