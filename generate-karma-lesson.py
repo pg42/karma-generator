@@ -190,27 +190,9 @@ class File():
         self.data = self.data + x
 
 
-class GeneratedFile(File):
-    def __init__(self, path, name=None, **kw):
-        kw['generated'] = True
-        File.__init__(self, path, name, **kw)
-
-
 class KarmaFile(File):
     def __init__(self, path, name=None, **kw):
         kw['karma'] = True
-        File.__init__(self, path, name, **kw)
-
-
-class ImageFile(File):
-    def __init__(self, path, name=None, **kw):
-        kw['type'] = 'image'
-        File.__init__(self, path, name, **kw)
-
-
-class AudioFile(File):
-    def __init__(self, path, name=None, **kw):
-        kw['type'] = 'audio'
         File.__init__(self, path, name, **kw)
 
 
