@@ -85,8 +85,7 @@ var Karma = function (options) {
     }
 };
 
-
-//helper functions
+// Helper functions
 
 /**This emulates the Object.create method in ecmascript 5 spec
  * This isn't a full implementation as it doesn't support an all of Object.create's features
@@ -128,8 +127,8 @@ Karma.extend = function (target, source) {
 
 /**
  * Shuffles an array of items randomly
- * @param {Array} oldList of choices to be shuffled
- * @returns {Array} newlist of choices randomly reordered
+ * @param {Array} array of choices to be shuffled
+ * @returns {Array} an new array which contains the elements of array, shuffled
  */
 Karma.shuffle = function (array) {
     var result = array.slice(0);
@@ -161,15 +160,12 @@ Karma.convertNumToLocale = function (num, locale) {
  * @name Karma._n
  * @function
  * @public
- * Alias for Karma.convertNumToLocale. Converts a number to numerals to
- * Karma.locale or to specified locale. Currently only supports Nepali
- * @param {Number} Number to be converted
- * @param {locale} locale that number should be converted to
- * @returns {String} Unicode string for localized numeral
- */
+ * Alias for Karma.convertNumToLocale.
+ * */
 Karma._n = Karma.convertNumToLocale;
 
-/* Scales the dimensions of document.body to the innerHeight and innerWidth
+/*
+ * Scales the dimensions of document.body to the innerHeight and innerWidth
  * of the viewport, i.e. browser window, with a minor offset to the height to
  * make sure the scrollbars do not appear
  */
@@ -196,16 +192,11 @@ Karma.radians = function (angle) {
     return (angle / 180) * Math.PI;
 };
 
-/** Returns a random number within the range provided
+/**
+ * Returns a random integer within the range provided
  * @param {Number} lower limit of the range, lowest number that can be returned
  * @param {Number} upper limit of the range, highest number that can be returned
- * @returns {Number} number that is >= lower and <= upper
- * @example
- *
- * var num = rand(0, 10);
- *
- * //num could be 0, 1, 2, 3 ... or 10
- *
+ * @returns {Number} an integer that is >= lower and <= upper
  */
 if (document.location.search == '?test=true') {
     // For testing we want to generate always the same sequence of
@@ -234,19 +225,7 @@ if (document.location.search == '?test=true') {
 Karma.extend(
     Karma,
     {
-        /** Collection of images with special helper
-         * methods added to each reference
-         * @fieldOf Karma
-         * @type object
-         * @default empty object
-         */
         image: {},
-        /** Collection of audio files with special helper
-         * methods added to each reference
-         * @fieldOf Karma
-         * @type object
-         * @default empty object
-         */
         audio: {},
         _assetPath: 'assets/',
         _initialized: false,
@@ -254,30 +233,19 @@ Karma.extend(
         _loaderDiv: undefined,
         _counters: { total: 0, errors: 0, loaded: 0},
 
-        //This constructs the Karma object per values provided by the user
         _init: function (options) {
 	    this._initialized = true;
 
-	    //set up message that show count of assets loaded
-	    //and has an ordered list to append error messages to
-	    var _statusDiv = this._statusDiv = document.createElement('div');
-	    this._loaderDiv = this._loaderDiv = document.createElement('div');
-	    var errorList = document.createElement('ol');
-
-	    _statusDiv.setAttribute('id', 'karma-status');
-	    _statusDiv.setAttribute('style', 'position:absolute;');
-	    _statusDiv.innerHTML = 'Karma is loading ...';
-	    this._loaderDiv.setAttribute('id', 'karma-loader');
-	    this._loaderDiv.setAttribute('class', 'status');
-	    errorList.setAttribute('id', 'errorList');
-
-	    _statusDiv.appendChild(this._loaderDiv);
-	    this._statusDiv.appendChild(errorList);
-	    document.body.appendChild(_statusDiv);
-
-	    //regular expression that matches the name of aprivate property
-	    // the karma object
-	    var regexPrivate = new RegExp('^_.*');
+	    this._statusDiv = $(document.createElement('div'))
+                .attr('id', 'karma-status')
+                .css('position', 'absolute')
+                .append('Karma is loading...')
+                .append(this._loaderDiv = $(document.createElement('div'))
+                        .attr('id', 'karma-loader')
+                        .addClass('status'))
+                .append($(document.createElement('ol'))
+                        .attr('id', 'errorList'))
+                .appendTo($('body'));
 
             var that = this;
             var processAssetsOption = function (kind, x) {
@@ -298,21 +266,12 @@ Karma.extend(
 	    }
 	    return this;
         },
-
-        /** Waits until all assets loaded(ready), then calls callback cb
+        /** Waits until all assets loaded, then calls callback cb
          * @memberOf Karma
          * @param {Function} [cb] callback function
          * @returns this
          * @throws {Error} if Karma is not initialized with the
          * Karma({ options }) function
-         * @example
-         *
-         * var k = Karma({ . . . your assets here . . . });
-         * k.ready(function () { .. your code here . . .});
-         *
-         * your code will not be called until all assets have been loaded
-         * into collections
-         *
          */
         ready: function (cb) {
 	    var that = this;
@@ -323,39 +282,30 @@ Karma.extend(
 	    if (this._counters.loaded !== this._counters.total) {
 	        setTimeout(function () { that.ready(cb);}, 5);
 	    } else if (cb) {
-	        //hide the 'Karma is loading...' message
-	        this._statusDiv.setAttribute('style', 'display:none;');
+	        this._statusDiv.remove();
 	        cb();
 	    } else if (!cb) {
-	        //hide the 'Karma is loading...' message
-	        this._statusDiv.setAttribute('style', 'display:none;');
-
-	        //if no options passed, show it works message
-	        this._showStarterMessage();
+	        this._statusDiv.remove();
+	        $(document.createElement('div'))
+                .attr('id', 'starterMsg')
+                .append($(document.createElement('h1'))
+                        .append('It works'))
+                .appendTo($('body'));
 	    }
 	    return this;
         },
-
-        //Display Apache-like 'It works' message if no options
-        _showStarterMessage: function () {
-	    var starterMsg = document.createElement('div');
-	    starterMsg.setAttribute('id', 'starterMsg');
-	    starterMsg.innerHTML = '<h1>It Works</h1>';
-	    document.body.appendChild(starterMsg);
-        },
-
-        //Updates visible counter of how many assets are loaded
-        _updateStatus: function (errorMsg) {
+        _updateStatus: function (error_msg) {
 	    var loaded = this._counters.loaded;
 	    var total = this._counters.total;
 	    var errors = this._counters.errors;
-	    this._loaderDiv.innerHTML = 'Loaded ' + loaded + ' / ' + total +
-	        '' + (errors > 0 ? ' Errors [ ' + errors +' ]' : '');
-	    if (errorMsg) {
-	        var liError = document.createElement('li');
-	        liError.innerHTML = errorMsg;
-	        var errorList = document.getElementById('errorList');
-	        errorList.appendChild(liError);
+	    this._loaderDiv
+                .empty()
+                .append('Loaded ' + loaded + ' / ' + total +
+	                '' + (errors > 0 ? ' Errors [ ' + errors +' ]' : ''));
+	    if (error_msg) {
+                $('#errorList')
+                    .append($(document.createElement('li'))
+                            .append(error_msg));
 	    }
         }
     });
