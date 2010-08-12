@@ -13,6 +13,73 @@ import fnmatch
 from optparse import OptionParser
 from kdoctemplate import k_doc_template
 
+class KarmaFramework():
+    def __init__(self, root_dir):
+        self.root_dir = root_dir
+        self.java_script_files = [
+            self.karma_file('js/external/jquery-1.4.2.js', 'jquery'),
+            self.karma_file('js/external/jquery-ui-1.8.2.js', 'jquery-ui'),
+            self.karma_file('js/external/jquery.ui.core.js', 'ui.core'),
+            self.karma_file('js/external/jquery.ui.mouse.js', 'ui.mouse'),
+            self.karma_file('js/external/jquery.ui.widget.js', 'ui.widget'),
+            self.karma_file('js/external/jquery.ui.position.js', 'ui.position'),
+            self.karma_file('js/external/jquery.ui.draggable.js', 'ui.draggable'),
+            self.karma_file('js/external/jquery.ui.droppable.js', 'ui.droppable'),
+            self.karma_file('js/jquery.watermarkinput.js', 'jquery.watermarkinput'),
+            self.karma_file('js/ui.scoreboard.js', 'ui.scoreboard'),
+            self.karma_file('js/jquery.svg.js', 'jquery.svg'),
+            self.karma_file('js/karma.js', 'karma'),
+            self.karma_file('js/global.js', 'global'),
+            self.karma_file('js/common.js', 'common'),
+            self.karma_file('js/jquery.clickable.js', 'jquery.clickable'),
+            self.karma_file('js/multiple-choice.js', 'multiple-choice'),
+            self.karma_file('js/clock.js', 'clock'),
+            self.karma_file('js/jquery.i18n.js', 'i18n'),
+            self.karma_file('js/jquery.strings.js', 'jquery.strings'),
+            self.karma_file('js/jquery.keyfilter.js', 'jquery.keyfilter'),
+            self.karma_file('js/kStart.js', 'kstart')
+            ]
+        self.css_files = [
+            self.karma_file('css/global.css', 'global'),
+            self.karma_file('css/ui.scoreboard.css', 'ui.scoreboard'),
+            self.karma_file('css/kStart.css', 'kstart')
+            ]
+        self.audio_files = [
+            self.karma_file('audio/en_correct.ogg', 'correct', type='audio'),
+            self.karma_file('audio/en_incorrect.ogg', 'incorrect', type='audio'),
+            self.karma_file('audio/ne_correct.ogg', 'ne_correct', type='audio'),
+            self.karma_file('audio/ne_incorrect.ogg', 'ne_incorrect', type='audio'),
+            self.karma_file('audio/byebye.ogg', 'byebye', type='audio'),
+            self.karma_file('audio/trigger.ogg', 'trigger', type='audio')
+            ]
+        self.image_files = [
+            self.karma_file('image/title_block_lt.png', 'title_block_lt'),
+            self.karma_file('image/title_block_rt.png', 'title_block_rt'),
+            self.karma_file('image/favicon.ico', 'favicon')
+            ]
+
+    def karma_file(self, path, name, **kw):
+        kw['karma_root'] = self.root_dir
+        return KarmaFile(path, name, **kw)
+
+    def find_file(self, name, files):
+        for f in files:
+            if f.name() == name:
+                return f
+        return None
+
+    def java_script(self, name):
+        return self.find_file(name, self.java_script_files)
+
+    def css(self, name):
+        return self.find_file(name, self.css_files)
+
+    def audio(self, name):
+        return self.find_file(name, self.audio_files)
+
+    def image(self, name):
+        return self.find_file(name, self.image_files)
+
 
 argv0 = sys.argv[0]
 now = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime())
@@ -26,7 +93,6 @@ theLesson = None
 
 include_stack = []
 script_root = os.path.abspath(os.path.dirname(argv0))
-karma_root = os.path.abspath(os.path.join(os.path.dirname(argv0), 'deploy', 'karma'))
 
 # TBD: make File aware of its lesson, move these to lesson
 lesson_src = '';
@@ -68,11 +134,12 @@ class File():
             # find the existing file
             test_files = []
             if self.lesson_deploy:
-                test_files.append( os.path.join(lesson_src, self.deploy_subfolder, path) )
-                test_files.append( os.path.join(lesson_src, path) )
+                test_files.append(os.path.join(lesson_src, self.deploy_subfolder, path))
+                test_files.append(os.path.join(lesson_src, path))
             if len(include_stack) > 0:
-                test_files.append( os.path.join(os.path.dirname(include_stack[-1]), path) )
-            test_files.append( os.path.join(karma_root, path) )
+                test_files.append(os.path.join(os.path.dirname(include_stack[-1]), path))
+            if 'karma_root' in kw:
+                test_files.append(os.path.join(kw['karma_root'], path))
 
             for f in test_files:
                 abs_path = os.path.abspath(f)
@@ -82,7 +149,7 @@ class File():
             self.src = self.absolute_path()
 
     def deploy_folder(self):
-        return os.path.abspath( os.path.join(lesson_dest, self.deploy_subfolder) )
+        return os.path.abspath(os.path.join(lesson_dest, self.deploy_subfolder))
 
     def name(self):
         return self._name
@@ -108,10 +175,7 @@ class File():
 
     def absolute_path(self):
         if self.lesson_deploy:
-            return os.path.join(
-                self.deploy_folder(),
-                self.basename()
-            )
+            return os.path.join(self.deploy_folder(), self.basename())
         else:
             return self.src
 
@@ -136,21 +200,23 @@ class GeneratedFile(File):
         kw['generated'] = True
         File.__init__(self, path, name, **kw)
 
+
 class KarmaFile(File):
     def __init__(self, path, name=None, **kw):
         kw['karma'] = True
         File.__init__(self, path, name, **kw)
+
 
 class ImageFile(File):
     def __init__(self, path, name=None, **kw):
         kw['type'] = 'image'
         File.__init__(self, path, name, **kw)
 
+
 class AudioFile(File):
     def __init__(self, path, name=None, **kw):
         kw['type'] = 'audio'
         File.__init__(self, path, name, **kw)
-
 
 
 java_script_dependencies = [
@@ -219,60 +285,10 @@ java_script_dependencies = [
     ('jquery', 'i18n')
     ]
 
-jquery_js = KarmaFile('js/external/jquery-1.4.2.js', 'jquery')
-
-karma_java_script_files = [
-    jquery_js,
-    KarmaFile('js/external/jquery-ui-1.8.2.js', 'jquery-ui'),
-    KarmaFile('js/external/jquery.ui.core.js', 'ui.core'),
-    KarmaFile('js/external/jquery.ui.mouse.js', 'ui.mouse'),
-    KarmaFile('js/external/jquery.ui.widget.js', 'ui.widget'),
-    KarmaFile('js/external/jquery.ui.position.js', 'ui.position'),
-    KarmaFile('js/external/jquery.ui.draggable.js', 'ui.draggable'),
-    KarmaFile('js/external/jquery.ui.droppable.js', 'ui.droppable'),
-    KarmaFile('js/jquery.watermarkinput.js', 'jquery.watermarkinput'),
-    KarmaFile('js/ui.scoreboard.js', 'ui.scoreboard'),
-    KarmaFile('js/jquery.svg.js', 'jquery.svg'),
-    KarmaFile('js/karma.js', 'karma'),
-    KarmaFile('js/global.js', 'global'),
-    KarmaFile('js/common.js', 'common'),
-    KarmaFile('js/jquery.clickable.js', 'jquery.clickable'),
-    KarmaFile('js/multiple-choice.js', 'multiple-choice'),
-    KarmaFile('js/clock.js', 'clock'),
-    KarmaFile('js/jquery.i18n.js', 'i18n'),
-    KarmaFile('js/jquery.strings.js', 'jquery.strings'),
-    KarmaFile('js/jquery.keyfilter.js', 'jquery.keyfilter')
-    ]
-
-karma_css_files = [
-    KarmaFile('css/global.css', 'global'),
-    KarmaFile('css/ui.scoreboard.css', 'ui.scoreboard')
-    ]
-
-karma_audio_files = [
-    KarmaFile('audio/en_correct.ogg', 'correct', type='audio'),
-    KarmaFile('audio/en_incorrect.ogg', 'incorrect', type='audio'),
-    KarmaFile('audio/ne_correct.ogg', 'ne_correct', type='audio'),
-    KarmaFile('audio/ne_incorrect.ogg', 'ne_incorrect', type='audio'),
-    KarmaFile('audio/byebye.ogg', 'byebye', type='audio'),
-    KarmaFile('audio/trigger.ogg', 'trigger', type='audio')
-    ]
-
-karma_image_files = [
-
-    ]
-
-favicon = KarmaFile('image/favicon.ico', 'favicon')
-kstart_js = KarmaFile('js/kStart.js', 'kstart_js')
-kstart_css = KarmaFile('css/kStart.css', 'kstart_css')
-title_block_lt = KarmaFile('image/title_block_lt.png', 'title_block_lt')
-title_block_rt = KarmaFile('image/title_block_rt.png', 'title_block_rt')
-
-
 #TBD: factor this out in a separate file, so it is easy to provide
 #     your own header/footer
 #TBD: make header/footer customizable
-def generate_header(dir, body, title):
+def generate_header(karma, dir, body, title):
     header = body.div(id='header')
 
     header.div(id='topbtn_left').div(id='linkBackLesson',
@@ -280,10 +296,10 @@ def generate_header(dir, body, title):
                                      className='linkBack')
 
     lesson_title = header.div(id='lesson_title')
-    lesson_title.img(src=title_block_lt.relative_path(dir, web=True),
+    lesson_title.img(src=karma.image('title_block_lt').relative_path(dir, web=True),
                      width=33, height=75, align='absmiddle')
     lesson_title.text(title)
-    lesson_title.img(src=title_block_rt.relative_path(dir, web=True),
+    lesson_title.img(src=karma.image('title_block_rt').relative_path(dir, web=True),
              width=33, height=75, align='absmiddle')
 
 
@@ -347,14 +363,14 @@ def topological_sort(nodes, dependencies, key):
     return result
 
 
-def include_dependencies(files):
+def include_dependencies(karma, files):
     result = []
     visited = set()
     deps = {}
     for dep in java_script_dependencies:
         deps[dep[1]] = deps.setdefault(dep[1], []) + [dep[0]]
     js_files = {}
-    for f in karma_java_script_files:
+    for f in karma.java_script_files:
         js_files[f.name()] = f
     def add_dependencies(list):
         for x in list:
@@ -442,7 +458,6 @@ class Lesson():
 
     def compile_translations(self):
         # compile translation JS files from MO files
-
         for srcfile in os.listdir(lesson_src):
             if fnmatch.fnmatch(srcfile, '*.mo'):
                 lang = os.path.splitext(srcfile)[0]
@@ -457,7 +472,8 @@ class Lesson():
                 f.write('$.i18n.setLocale("%s");\n' % lang);
 
     def set_directory(self, dir):
-        self.directory = os.path.abspath( os.path.join(self.parent_directory, dir) )
+        self.directory = os.path.abspath(os.path.join(self.parent_directory, dir))
+        global lesson_dest
         lesson_dest = self.directory
 
     def print_start_html_on(self, stream):
@@ -468,11 +484,12 @@ class Lesson():
         head.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
         head.link(type='image/ico',
                   rel='icon',
-                  href=favicon.relative_path(None, web=True))
+                  href=self.karma.image('favicon').relative_path(None, web=True))
         head.link(type='text/css',
                   rel='stylesheet',
-                  href=kstart_css.relative_path(None, web=True))
-        for f in [jquery_js, kstart_js]:
+                  href=self.karma.css('kstart').relative_path(None, web=True))
+        for f in [self.karma.java_script('jquery'),
+                  self.karma.java_script('kstart')]:
             head.script(type='text/javascript',
                         src=f.relative_path(None, web=True))
 
@@ -526,13 +543,14 @@ class Lesson():
                       href=file.relative_path(None, web=True))
         head.link(type='image/ico',
                   rel='icon',
-                  href=favicon.relative_path(None, web=True))
-        all_java_script_files = include_dependencies(self.java_script_files)
+                  href=self.karma.image('favicon').relative_path(None, web=True))
+        all_java_script_files = include_dependencies(self.karma,
+                                                     self.java_script_files)
         for file in sort_java_script_files(all_java_script_files):
             head.script(type='text/javascript',
                         src=file.relative_path(None, web=True))
         body = html.body()
-        generate_header(self.directory, body, self.lesson_title)
+        generate_header(self.karma, self.directory, body, self.lesson_title)
         body.children.extend(self.divs)
         generate_footer(body)
         doc.print_on(stream)
@@ -599,16 +617,11 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
             theLesson.java_script_files.append(File(targpath, None, type='js', karma=True))
 
 
-def resolve_karma_file(path, name, karma_files, **kw):
-    for f in karma_files:
-        if f.name() == name:
-            return f
-    return File(path, name, **kw)
-
-
 def java_script(name, **kw):
     kw['type'] = 'js'
-    result = resolve_karma_file(name, name, karma_java_script_files, **kw)
+    result = theLesson.karma.java_script(name)
+    if not result:
+        result = File(name, name, **kw)
     if name in [f.name() for f in theLesson.java_script_files]:
         print 'Warning: the java_script file \'' + name + '\' is included twice.'
     else:
@@ -617,27 +630,31 @@ def java_script(name, **kw):
 
 
 def css(name):
-    result = resolve_karma_file(name, name, karma_css_files, type='css')
+    result = theLesson.karma.css(name)
+    if not result:
+        result = File(name, name, type='css')
     theLesson.css_files.append(result)
     return result
 
 
 def image(file, name=None):
-    search_framework_files = []
+    result = None
     if name == None:
         name = file
-        search_framework_files = karma_image_files
-    result = resolve_karma_file(file, name, search_framework_files, type='image')
+        result = theLesson.karma.image(name)
+    if not result:
+        result = File(file, name, type='image')
     theLesson.image_files.append([name, result])
     return result
 
 
 def audio(file, name=None):
-    search_framework_files = []
+    result = None
     if name == None:
         name = file
-        search_framework_files = karma_audio_files
-    result = resolve_karma_file(file, name, search_framework_files, type='audio')
+        result = theLesson.karma.audio(name)
+    if not result:
+        result = File(file, name, type='audio')
     theLesson.audio_files.append([name, result])
     return result
 
@@ -688,7 +705,6 @@ def add_help():
     if (os.path.exists(help_html)):
         f = codecs.open(help_html, 'r', 'UTF-8')
         div(id='help').div(id='helpText').innerhtml(f.read())
-
     elif (os.path.exists(help_img)):
         img = image(help_img, 'help')
         src = img.relative_path(None, web=True)
@@ -716,7 +732,8 @@ def constantly(x):
     return lambda y: x
 
 
-def process_description(description, output_dir, lesson_filter=constantly(True)):
+def process_description(karma, description, output_dir,
+                        lesson_filter=constantly(True)):
     os.chdir(script_root)
     description = os.path.abspath(description)
     global lesson_src
@@ -724,6 +741,7 @@ def process_description(description, output_dir, lesson_filter=constantly(True))
 
     global theLesson
     theLesson = Lesson()
+    theLesson.karma = karma
     theLesson.parent_directory = os.path.abspath(output_dir)
     theLesson.java_script_files.append(File('lesson-karma.js', None, type='js', generated=True))
 
@@ -739,8 +757,9 @@ def process_description(description, output_dir, lesson_filter=constantly(True))
         return None
 
 # Called from build.py
-def deploy_lessons(output_dir, grades, subjects, first_week, last_week):
-    def lesson_filter(lesson):
+def deploy_lessons(karma_root, output_dir, grades, subjects, first_week,
+                   last_week):
+    def filter(lesson):
         if not lesson.grade in grades:
             return False
         if not lesson.subject in subjects:
@@ -749,8 +768,9 @@ def deploy_lessons(output_dir, grades, subjects, first_week, last_week):
             return False
         return True
     result = []
-    for description_file in find_all_description_files():
-        name = process_description(description_file, output_dir, lesson_filter)
+    karma = KarmaFramework(os.path.abspath(karma_root))
+    for description in find_all_description_files():
+        name = process_description(karma, description, output_dir, filter)
         if name:
             result.append(name)
     return result
@@ -776,5 +796,8 @@ if __name__ == '__main__':
     else:
         process_descriptions.append(args[0])
 
+    karma = KarmaFramework(os.path.abspath(os.path.join(os.path.dirname(argv0),
+                                                        'deploy',
+                                                        'karma')))
     for description in process_descriptions:
-        process_description(description, options.output)
+        process_description(karma, description, options.output)
