@@ -361,9 +361,29 @@ Karma.distance = function ( p0, p1 ) {
  * //num could be 0, 1, 2, 3 ... or 10
  * 
  */
-Karma.rand = function ( lower, upper ){
-  return Math.floor(Math.random() * (upper - lower + 1) + lower);  
-};
+if (document.location.search == '?test=true') {
+    // For testing we want to generate always the same sequence of
+    // random numbers.
+    (function () {
+         // Return a pseudo-random 32 bit integer.
+         // From http://en.wikipedia.org/wiki/Random_number_generation
+         var random = (function (m_w, m_z) {
+                           return function () {
+                               m_z = 36969 * (m_z & 65535) + (m_z >>> 16);
+                               m_w = 18000 * (m_w & 65535) + (m_w >>> 16);
+                               return (m_z << 16) + m_w;
+                           };
+                       })(1, 2);
+         Karma.rand = function (lower, upper) {
+             return lower + Math.abs(random()) % (upper - lower + 1);
+         };
+     })();
+} else {
+    // Otherwise use Math.random()
+    Karma.rand = function ( lower, upper ){
+        return Math.floor(Math.random() * (upper - lower + 1) + lower);
+    };
+}
 
 
 Karma.extend(Karma, {      
