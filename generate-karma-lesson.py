@@ -692,6 +692,13 @@ def check_file_exists(path):
         print 'Error: the file ' + path + ' doesn\'t exist.'
         sys.exit(1)
 
+def find_all_description_files():
+    result = []
+    lesson_folder = os.path.join(script_root, 'lessons')
+    for root, dirs, files in os.walk(lesson_folder):
+        if 'description.py' in files:
+            result.append(os.path.abspath(os.path.join(script_root, root, 'description.py')))
+    return result
 
 if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog [options] file")
@@ -717,10 +724,7 @@ if __name__ == '__main__':
 
     process_descriptions = []
     if options.all:
-        lesson_folder = os.path.join(script_root, 'lessons')
-        for root, dirs, files in os.walk(lesson_folder):
-            if 'description.py' in files:
-                process_descriptions.append( os.path.abspath(os.path.join(script_root, root, 'description.py')) )
+        process_descriptions = find_all_description_files()
     else:
         process_descriptions.append(args[0])
 
