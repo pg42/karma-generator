@@ -6,34 +6,34 @@
  */
 
 /*
- *	Karma Framework
- *	http://karmaeducation.org
+ *      Karma Framework
+ *      http://karmaeducation.org
  *
- *	Copyright (c)  2009
- *	Bryan W Berry		bryan@olenepal.org
- * 	Felipe López Toledo	zer.subzero@gmail.com
+ *      Copyright (c)  2009
+ *      Bryan W Berry           bryan@olenepal.org
+ *      Felipe López Toledo    zer.subzero@gmail.com
  *
- *	Under MIT License:
- *	Permission is hereby granted, free of charge, to any person
- *	obtaining a copy of this software and associated documentation
- *	files (the "Software"), to deal in the Software without
- *	restriction, including without limitation the rights to use,
- *	copy, modify, merge, publish, distribute, sublicense, and/or sell
- *	copies of the Software, and to permit persons to whom the
- *	Software is furnished to do so, subject to the following
- *	conditions:
+ *      Under MIT License:
+ *      Permission is hereby granted, free of charge, to any person
+ *      obtaining a copy of this software and associated documentation
+ *      files (the "Software"), to deal in the Software without
+ *      restriction, including without limitation the rights to use,
+ *      copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *      copies of the Software, and to permit persons to whom the
+ *      Software is furnished to do so, subject to the following
+ *      conditions:
  *
- *	The above copyright notice and this permission notice shall be
- *	included in all copies or substantial portions of the Software.
+ *      The above copyright notice and this permission notice shall be
+ *      included in all copies or substantial portions of the Software.
  *
- *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- *	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- *	OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- *	NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- *	HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- *	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- *	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- *	OTHER DEALINGS IN THE SOFTWARE.
+ *      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ *      OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ *      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ *      HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ *      WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *      FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *      OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
@@ -79,9 +79,9 @@
  */
 var Karma = function (options) {
     if (Karma._initialized === true) {
-	return Karma;
+        return Karma;
     } else {
-	return Karma._init(options);
+        return Karma._init(options);
     }
 };
 
@@ -118,9 +118,9 @@ Karma.create = function (parent, extensions) {
  */
 Karma.extend = function (target, source) {
     for (var i in source) {
-	if (source.hasOwnProperty(i)) {
-	    target[i] = source[i];
-	}
+        if (source.hasOwnProperty(i)) {
+            target[i] = source[i];
+        }
     }
     return target;
 };
@@ -174,9 +174,9 @@ Karma.scaleToViewport = function () {
     var height = window.innerHeight;
     //hack to ensure scrollbars don't appear
     if (height === 900) {
-	height = '' + 900 + 'px';
+        height = '' + 900 + 'px';
     } else {
-	height = '' + (height - 13) + 'px';
+        height = '' + (height - 13) + 'px';
     }
     document.body.style.width = '' + width + 'px';
     document.body.style.height = height;
@@ -233,9 +233,9 @@ Karma.extend(
         _counters: { total: 0, errors: 0, loaded: 0},
 
         _init: function (options) {
-	    this._initialized = true;
+            this._initialized = true;
 
-	    this._statusDiv = $(document.createElement('div'))
+            this._statusDiv = $(document.createElement('div'))
                 .attr('id', 'karma-status')
                 .css('position', 'absolute')
                 .append('Karma is loading...')
@@ -258,18 +258,18 @@ Karma.extend(
                 audio: processAssetsOption
             };
 
-	    for (var option in options) {
+            for (var option in options) {
                 if (option in option_handlers) {
                     option_handlers[option](option, options[option]);
                 }
-	    }
-	    return this;
+            }
+            return this;
         },
         ready_callback: null,
         maybe_ready: function () {
            if (this._counters.loaded == this._counters.total) {
                if (this.ready_callback) {
-	           this._statusDiv.remove();
+                   this._statusDiv.remove();
                    this.ready_callback();
                }
            }
@@ -282,27 +282,27 @@ Karma.extend(
          * Karma({ options }) function
          */
         ready: function (cb) {
-	    var that = this;
+            var that = this;
             this.ready_callback = cb;
-	    if (Karma._initialized !== true) {
-	        throw new Error('Karma not initialized');
-	    }
+            if (Karma._initialized !== true) {
+                throw new Error('Karma not initialized');
+            }
             this.maybe_ready();
-	    return this;
+            return this;
         },
         _updateStatus: function (error_msg) {
-	    var loaded = this._counters.loaded;
-	    var total = this._counters.total;
-	    var errors = this._counters.errors;
-	    this._loaderDiv
+            var loaded = this._counters.loaded;
+            var total = this._counters.total;
+            var errors = this._counters.errors;
+            this._loaderDiv
                 .empty()
                 .append('Loaded ' + loaded + ' / ' + total +
-	                '' + (errors > 0 ? ' Errors [ ' + errors +' ]' : ''));
-	    if (error_msg) {
+                        '' + (errors > 0 ? ' Errors [ ' + errors +' ]' : ''));
+            if (error_msg) {
                 $('#errorList')
                     .append($(document.createElement('li'))
                             .append(error_msg));
-	    }
+            }
         }
     });
 
@@ -312,8 +312,8 @@ Karma._makeCollection = function (configs, type) {
             image: Karma.kImage,
             audio: Karma.kAudio
         };
-	var asset = Karma.create(classes[type])._init(config);
-	Karma[type][config.name] = asset;
+        var asset = Karma.create(classes[type])._init(config);
+        Karma[type][config.name] = asset;
     };
     configs.forEach(makeAsset);
 };
@@ -335,52 +335,52 @@ Karma.kAsset = {
     _asset_class: null,
     _ok_event: '',
     _init: function (options) {
-	Karma._counters.total++;
+        Karma._counters.total++;
 
-	if (options.name === undefined || options.file === undefined) {
-	    throw new Error('properties name and file have to be defined');
-	} else {
-	    this.name = options.name;
-	    this.file = options.file;
-	}
+        if (options.name === undefined || options.file === undefined) {
+            throw new Error('properties name and file have to be defined');
+        } else {
+            this.name = options.name;
+            this.file = options.file;
+        }
 
-	this.media = new this._asset_class();
-	this.media.src = this.src = this.file; // Load the file.
+        this.media = new this._asset_class();
+        this.media.src = this.src = this.file; // Load the file.
 
-	this._addEventHandlers();
+        this._addEventHandlers();
 
-	return this;
+        return this;
     },
     _addEventHandlers: function () {
-	var that = this;
-	that.media.addEventListener(
-	    this._ok_event_name,
-	    function (e) {
-		Karma._counters.loaded++;
-		Karma._updateStatus();
+        var that = this;
+        that.media.addEventListener(
+            this._ok_event_name,
+            function (e) {
+                Karma._counters.loaded++;
+                Karma._updateStatus();
                 Karma.maybe_ready();
-		that.status = 'loaded';
+                that.status = 'loaded';
             },
             false);
-	that.media.addEventListener(
-	    'error',
-	    function (e) {
-		Karma._counters.errors++;
-		that.status = 'error';
-		var errorMsg = 'Error: ' + that._type.toUpperCase() +
-		    ' ' + that.name + ' cannot be loaded.';
-		Karma._updateStatus(errorMsg);
-	    },
-	    false);
-	that.media.addEventListener(
-	    'abort',
-	    function (e) {
-		Karma._counters.total++;
-		that.status = 'aborted';
-		var errorMsg = 'ABORT: ' + that._type.toUpperCase() +
-		    ' ' + that.name + ' loading was aborted.';
-		Karma._updateStatus(errorMsg);
-	    },
+        that.media.addEventListener(
+            'error',
+            function (e) {
+                Karma._counters.errors++;
+                that.status = 'error';
+                var errorMsg = 'Error: ' + that._type.toUpperCase() +
+                    ' ' + that.name + ' cannot be loaded.';
+                Karma._updateStatus(errorMsg);
+            },
+            false);
+        that.media.addEventListener(
+            'abort',
+            function (e) {
+                Karma._counters.total++;
+                that.status = 'aborted';
+                var errorMsg = 'ABORT: ' + that._type.toUpperCase() +
+                    ' ' + that.name + ' loading was aborted.';
+                Karma._updateStatus(errorMsg);
+            },
             false);
     }
 };
@@ -421,15 +421,15 @@ Karma.kAudio = Karma.create(
         _asset_class: Audio,
         _init: function (options) {
             var result = Karma.kAsset._init.apply(this, [options]);
-	    result.media.autobuffer = true;
-	    result.media.load();
-	    return result;
+            result.media.autobuffer = true;
+            result.media.load();
+            return result;
         },
-	//'canplaythrough' event is a Browser Hack recommended by chromium devs
-	//http://code.google.com/p/chromium/issues/detail?id=20251&q=loading%20audio&colspec=ID%20Stars%20Pri%20Area%20Type%20Status%20Summary%20Modified%20Owner%20Mstone%20OS#c4
+        //'canplaythrough' event is a Browser Hack recommended by chromium devs
+        //http://code.google.com/p/chromium/issues/detail?id=20251&q=loading%20audio&colspec=ID%20Stars%20Pri%20Area%20Type%20Status%20Summary%20Modified%20Owner%20Mstone%20OS#c4
         _ok_event_name: 'canplaythrough',
         /** Plays the audio file  */
         play: function () {
-	    this.media.play();
+            this.media.play();
         }
     });
