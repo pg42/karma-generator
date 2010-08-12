@@ -64,7 +64,6 @@
 				$.i18n.localeStrings[locale_id][storeKey][storeContext] = strings[key];
 			}
 
-            console.log('storeLocaleStrings, localeStrings now: ', $.i18n.localeStrings);
 		},
 		
 		setLocale: function (locale){
@@ -81,11 +80,9 @@
 			var readKey = keyContext[0];
 			var readContext = keyContext[1];
 
-            console.log('getString with key: ' + key + ' locale: ' + locale, context);
 			
 			if ( typeof($.i18n.localeStrings[locale]) == "undefined" ||
 				typeof($.i18n.localeStrings[locale][readKey]) == "undefined" ){
-                console.log('getString has no matching locale / key, returning false');
 				return false;
 			}
 			
@@ -108,7 +105,6 @@
 			locale = locale || $.i18n.lang;
 			
 			var translatedString = $.i18n.getString(string, locale);
-            console.log('gettext with scope ', this, ' got string: ', translatedString);
 			if (translatedString === false){
 				return string;
 			}
