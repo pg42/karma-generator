@@ -54,13 +54,13 @@ function generateScreen1(karma, $container) {
 
     var dropSuccess = function(event, ui){
         // if they've all been placed, game over
-        all_placed = true;
+        var all_placed = true;
         $('.dropObjects').each(function(){
-                                   if (!$(this).data('draggable')){
+                                   if (!$(this).data('draggable')) {
                                        all_placed = false;
                                    }
                                });
-        if (all_placed){
+        if (all_placed) {
             gameOver();
         }
     };
@@ -71,21 +71,21 @@ function generateScreen1(karma, $container) {
     $(images).appendTo('#quesSection');
     $(words).appendTo('#optionSection');
 
-        enableSimpleDragAndDrop($('.dragObjects'),
-                                                        { containment: '#content' },
-                                                        $('.dropObjects'),
-                                                        { tolerance: 'intersect',
-                                                          hoverClass: 'drophover',
-                                                          dropTest: dropAllow,
-                                                          dropSuccess: dropSuccess});
+    enableSimpleDragAndDrop($('.dragObjects'),
+                            { containment: '#content' },
+                            $('.dropObjects'),
+                            { tolerance: 'intersect',
+                              hoverClass: 'drophover',
+                              dropTest: dropAllow,
+                              dropSuccess: dropSuccess });
 }
 
 function gameOver(){
-        $('#optionSection').append(createDiv()
+    $('#optionSection')
+        .append(createDiv()
                 .addClass('gameOver')
-                .text('GAME OVER')
-        );
-        $('.dragObjects').draggable('disable');
+                .text('GAME OVER'));
+    $('.dragObjects').draggable('disable');
 }
 
 setUpMultiScreenLesson([generateScreen0, generateScreen1]);

@@ -50,6 +50,8 @@
 .gameOver {
     font: bold 40px Arial, Helvetica, sans-serif;
     color: blue;
+    position: absolute;
+    left: 470px;
 }
 
 .drophover {
