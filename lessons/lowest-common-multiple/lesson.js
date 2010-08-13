@@ -1,5 +1,5 @@
 var timer;
-var one_second = 100;
+var one_second = 1000;
 
 function displayImgInDiv(karma, parent, img, position) {
     return karma.createImg(img)
