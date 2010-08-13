@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Variables', week=10,
-       lesson_title=u'बीजगणितीय चलहरू')
+       lesson_title=u'बीजगणितीय चलहरू',
+       summary=u'बीजगणितीय चलहरू बुझाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')
