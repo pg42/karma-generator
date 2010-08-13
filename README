@@ -1,8 +1,5 @@
-A simple generator for generating karma
-(http://wiki.sugarlabs.org/go/Karma) lessons.
-
-You need to have karma (git://git.olenepal.org/karma/karma) installed
-to generate a working lesson.
+A simple generator for generating karma (http://wiki.sugarlabs.org/go/Karma)
+lessons.
 
 The main script is generate-karma-lesson.py. To get some help about the
 different options:
@@ -12,7 +9,10 @@ The templates directory contains the templates that are used by the
 individual lessons in the lessons directory.
 
 An example of generating a lesson:
-./generate-karma-lesson.py -k <path to karma> lessons/what-is-this-word/description.py
+./generate-karma-lesson.py lessons/what-is-this-word/description.py
 
-Point your browser at 6_English_whatsThisWord_1_K/index.html, and you
-are running the lesson.
+Point your browser at deploy/Activities/6_English_whatsThisWord_1_K/index.html
+to run the lesson.
+
+To generate all lessons:
+./generate-karma-lesson.py -a
