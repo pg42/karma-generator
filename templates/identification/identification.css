@@ -1,10 +1,4 @@
 @CHARSET "UTF-8";
-/****** Page Styles ****/
-
-/*  Designed for 1200*900 px screen resolution  */
-
-
-/**** Game Styles  ****/
 
 #currentTitle {
     width: 150px;
@@ -16,7 +10,6 @@
 
 #content {
     background: url(background.jpg) no-repeat center;
-	text-align: left;
 }
 
 #listenAgain {
