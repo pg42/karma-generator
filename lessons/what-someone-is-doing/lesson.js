@@ -57,12 +57,12 @@ var tasks = [
         answer: 'singing'
     },
     {
-        question: 'What is cat doing ?',
+        question: 'What is the cat doing?',
         answer_template: 'The cat is _ the mouse.',
         answer: 'chasing'
     },
     {
-        question: 'what is girl doing?',
+        question: 'What is the girl doing?',
         answer_template: 'The girl is _ a bicycle.',
         answer: 'riding'
     },
