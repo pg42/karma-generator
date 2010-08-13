@@ -479,7 +479,7 @@ class Lesson():
         grade.span(id='gradeNum').text(displayGrade)
         middle.div(id='subject', className='center').text(displaySubject)
         lesson_title = middle.div(id='lessonTitle', className='center')
-        lesson_title.a(href='./index.html').text(self.title)
+        lesson_title.a(href='./index.html').text(self.start_title)
         middle.div(id='lessonDesc', className='center').text(self.summary)
         note = middle.div(id='teachersNoteBtn', className='button')
         a = note.a(href='./kDoc.html?back=start.html&doc=teachersNote')
@@ -560,6 +560,7 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
 
     dirname = '%s_%s_%s_%s_K' % (grade, subject, camelcase(title), week);
     theLesson.set_directory(dirname)
+    theLesson.start_title = title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     theLesson.lesson_title = lesson_title or title
     theLesson.subject = subject
