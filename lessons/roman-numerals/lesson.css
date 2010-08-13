@@ -17,7 +17,7 @@
     top: 75px;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 240;
 }
 
@@ -47,7 +47,7 @@
     right: 30px;
     width: 101px;
     height: 30px;
-    background: url(../assets/image/confirm.png) no-repeat;
+    background: url(confirm.png) no-repeat;
     cursor: pointer;
 }
 
@@ -57,7 +57,7 @@
     bottom: 200px;
     width: 136px;
     height: 175px;
-    background: url(../assets/image/img_think.png) no-repeat;
+    background: url(img_think.png) no-repeat;
 }
 
 #topText {
@@ -66,7 +66,7 @@
     width: 880px;
     height: 173px;
     font: 25px/30px Arial, Helvetica, sans-serif;
-    background: url(../assets/image/img2title.png) no-repeat;
+    background: url(img2title.png) no-repeat;
     color: #D70123;
     font-weight: bold;
 }
@@ -108,7 +108,7 @@
     width: 125px;
     height: 70px;
     text-align: center;
-    background: url(../assets/image/quesBox.png);
+    background: url(quesBox.png);
     font: 25px/70px Arial, Helvetica, sans-serif;
     font-weight: bold;
 }

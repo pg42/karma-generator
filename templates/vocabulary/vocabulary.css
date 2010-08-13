@@ -7,7 +7,7 @@
 /**** Game Styles  ****/
 
 #content {
-    background: url(../assets/image/background.jpg) no-repeat center;
+    background: url(background.jpg) no-repeat center;
 }
 
 #vocabImg {
@@ -15,7 +15,7 @@
     margin: 3em auto;
     width: 1145px;
     height: 660px;
-    background: url(../assets/image/vocabImg.jpg);
+    background: url(vocabImg.jpg);
 }
 
 #quesSection {
@@ -50,6 +50,8 @@
 .gameOver {
     font: bold 40px Arial, Helvetica, sans-serif;
     color: blue;
+    position: absolute;
+    left: 470px;
 }
 
 .drophover {

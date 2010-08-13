@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-lesson(grade=2, subject='Maths', title='Adding up to 10 Fun Game', week=3,
+lesson(grade=2, subject='Maths', title='Adding up to 10', week=3,
     browser_title='Adding up to 10',
     lesson_title=u'दससम्मको जोड',
     summary=u'दससम्मको जोड गर्न सिकाउने क्रियाकलाप')
@@ -28,6 +28,5 @@ image('flower37px.png', 'flower')
 image('normalChimp_120x125.png', 'normal_chimp')
 image('happyChimp_120x125.png', 'happy_chimp')
 image('sadChimp_120x125.png', 'sad_chimp')
-
 
 footer_configuration(link_next=False, link_previous=False, scoreboard=True)

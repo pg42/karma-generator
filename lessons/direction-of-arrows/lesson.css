@@ -14,7 +14,7 @@
 	color: red;
 }
 #content{
-	background: url(../assets/image/background.jpg) no-repeat center;
+	background: url(background.jpg) no-repeat center;
 }
 #title{
 	margin: 2em auto;
@@ -28,7 +28,7 @@
 	margin: 2em 3em;
 	width: 207px;
     height: 208px;
-	background:url(../assets/image/imageBox.png);
+	background:url(imageBox.png);
 }
 .imgQues{
 	width: 105px;
@@ -50,7 +50,7 @@
 	float:right;
 	width:554px;
 	height:176px;
-	background:url(../assets/image/optionBox.png);
+	background:url(optionBox.png);
 }
 
 .optImg{

@@ -18,11 +18,11 @@
     width: 145px;
     height: 55px;
     cursor: pointer;
-    background: url(../assets/image/nextBtn.png);
+    background: url(nextBtn.png);
 }
 
 .nextBtn: hover {
-    background: url(../assets/image/nextBtnHover.png);
+    background: url(nextBtnHover.png);
 }
 
 .showAns {
@@ -30,11 +30,11 @@
     width: 145px;
     height: 55px;
     cursor: pointer;
-    background: url(../assets/image/showAnsBtn.png);
+    background: url(showAnsBtn.png);
 }
 
 .showAns: hover {
-    background: url(../assets/image/showAnsBtnHover.png);
+    background: url(showAnsBtnHover.png);
 }
 
 .checkAns {
@@ -42,11 +42,11 @@
     width: 145px;
     height: 55px;
     cursor: pointer;
-    background: url(../assets/image/checkAnsBtn.png);
+    background: url(checkAnsBtn.png);
 }
 
 .checkAns: hover {
-    background: url(../assets/image/checkAnsBtnHover.png);
+    background: url(checkAnsBtnHover.png);
 }
 
 #moreQues {
@@ -54,11 +54,11 @@
     width: 145px;
     height: 55px;
     cursor: pointer;
-    background: url(../assets/image/moreQuesBtn.png);
+    background: url(moreQuesBtn.png);
 }
 
 #moreQues: hover {
-    background: url(../assets/image/moreQuesBtnHover.png);
+    background: url(moreQuesBtnHover.png);
 }
 
 .exerciseButtons {
@@ -70,27 +70,27 @@
 }
 
 #exercise1 {
-    background: url(../assets/image/exercise1.png);
+    background: url(exercise1.png);
 }
 
 #exercise1: hover {
-    background: url(../assets/image/exercise1Hover.png);
+    background: url(exercise1Hover.png);
 }
 
 #exercise2 {
-    background: url(../assets/image/exercise2.png);
+    background: url(exercise2.png);
 }
 
 #exercise2: hover {
-    background: url(../assets/image/exercise2Hover.png);
+    background: url(exercise2Hover.png);
 }
 
 #exercise3 {
-    background: url(../assets/image/exercise3.png);
+    background: url(exercise3.png);
 }
 
 #exercise3: hover {
-    background: url(../assets/image/exercise3Hover.png);
+    background: url(exercise3Hover.png);
 }
 
 input.inputBox {
@@ -213,7 +213,7 @@ input.ansBox {
     top: 75px;;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 40;
 }
 

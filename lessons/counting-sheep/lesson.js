@@ -64,7 +64,7 @@ function startLesson(karma) {
         }
     );
 
-    var show_rubbish_can = function (img_name) {
+    var showRubbishCan = function (img_name) {
         $('#discardTarget')
             .empty()
             .append(karma.createImg(img_name));
@@ -74,16 +74,19 @@ function startLesson(karma) {
         {
             tolerance: 'intersect',
             over: function (event, ui) {
+                $('#gameArea').droppable('disable');
                 ui.helper.hide();
-                show_rubbish_can('rubbish_open');
+                showRubbishCan('rubbish_open');
             },
-            out: function(event, ui) {
+            out: function (event, ui) {
+                $('#gameArea').droppable('enable');
                 ui.helper.show();
-                show_rubbish_can('rubbish');
+                showRubbishCan('rubbish');
             },
-            drop: function(event, ui) {
+            drop: function (event, ui) {
+                $('#gameArea').droppable('enable');
                 ui.helper.remove();
-                show_rubbish_can('rubbish');
+                showRubbishCan('rubbish');
             }
         }
     );

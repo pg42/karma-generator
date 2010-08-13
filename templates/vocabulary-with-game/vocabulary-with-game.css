@@ -4,7 +4,7 @@
     margin: 0em 3em 01em 0;
     width: 187px;
     height: 55px;
-    background-image: url(../assets/image/check.png);
+    background-image: url(check.png);
     cursor: pointer;
 }
 
@@ -15,7 +15,7 @@
     top: 75px;;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 40;
 }
 
@@ -119,7 +119,7 @@
     float: left;
     width: 48px;
     height: 48px;
-    background-image: url(../assets/image/volImage.png);
+    background-image: url(volImage.png);
     cursor: pointer;
 }
 

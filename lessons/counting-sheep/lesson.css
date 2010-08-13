@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 #content {
-    background: url(../assets/image/background.jpg) no-repeat center;
+    background: url(background.jpg) no-repeat center;
 }
 
 .panel {
@@ -40,7 +40,7 @@
 }
 
 .ui-draggable-dragging {
-    background: url(../assets/image/shadow.png) no-repeat;
+    background: url(shadow.png) no-repeat;
 }
 
 #discardTarget {

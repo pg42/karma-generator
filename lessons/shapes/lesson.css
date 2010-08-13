@@ -17,7 +17,7 @@
     top: 75px;
     width: 297px;
     height: 697px;
-    background: url(../assets/image/help.png);
+    background: url(help.png);
     z-index: 240;
 }
 
@@ -87,14 +87,14 @@
 #shapes3Img{
 	width:800px;
 	height:225px;
-	background: url(../assets/image/main.png) no-repeat;
+	background: url(main.png) no-repeat;
 }
 .dropObjects{
 	float: left;
 	width: 252px;
 	height: 132px;
 	margin: 0.5em;
-	background-image: url(../assets/image/dropHere.png);
+	background-image: url(dropHere.png);
 }
 
 .dropText{

@@ -1,7 +1,8 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Quick Multiplication', week=15,
        browser_title='Quick Multiplication',
-       lesson_title=u'दससम्मको जोड')
+       lesson_title=u'दससम्मको जोड',
+       summary=u'छिटोछिटो गुणन गर्न सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')
