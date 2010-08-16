@@ -773,7 +773,7 @@ if __name__ == '__main__':
     parser.add_option('-a', '--all', dest='all', action='store_true',
                       help='generate all lessons/*/description.py definitions')
     parser.add_option('-t', '--test', dest='run_tests', action='store_true',
-                      help='run the unit tests after generating the lessons')
+                      help='run the unit tests after generating the lessons (requires that you started the selenium server beforehand: java -jar selenium-server.jar)')
     (options, args) = parser.parse_args()
 
     if not args and not options.all:
