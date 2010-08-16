@@ -720,7 +720,7 @@ def process_description(karma, description, output_dir,
 
     if lesson_filter(theLesson):
         theLesson.generate()
-        return theLesson.deploy_name()
+        return theLesson
     else:
         return None
 
@@ -736,13 +736,33 @@ def deploy_lessons(karma_root, output_dir, grades, subjects, first_week,
         if lesson.week < first_week or last_week < lesson.week:
             return False
         return True
-    result = []
+    lessons = []
     karma = KarmaFramework(os.path.abspath(karma_root))
     for description in find_all_description_files():
-        name = process_description(karma, description, output_dir, filter)
-        if name:
-            result.append(name)
-    return result
+        lesson = process_description(karma, description, output_dir, filter)
+        if lesson:
+            lessons.append(lesson)
+    return [lesson.deploy_name() for lesson in lessons]
+
+
+def run_unit_tests(lessons):
+    print '-------------- Running unit tests ----------------'
+    os.chdir(script_root)
+    import unittest
+    sys.path.extend(['utils', 'utils/selenium-python-client-driver-1.0.1'])
+    import lesson_unittest_support
+    main_suite = unittest.TestSuite()
+    for lesson in lessons:
+        test_py = os.path.join(lesson.src_directory, 'test.py')
+        if os.path.isfile(test_py):
+            globals = {}
+            execfile(os.path.join(test_py), globals)
+            Test = globals['Test']
+            suite = unittest.defaultTestLoader.loadTestsFromTestCase(Test)
+            for test in suite._tests:
+                test.set_deployed_dir(lesson.directory)
+            main_suite.addTest(suite)
+    lesson_unittest_support.KarmaTextTestRunner().run(main_suite)
 
 
 if __name__ == '__main__':
@@ -752,6 +772,8 @@ if __name__ == '__main__':
                       help='use output as a destination directory')
     parser.add_option('-a', '--all', dest='all', action='store_true',
                       help='generate all lessons/*/description.py definitions')
+    parser.add_option('-t', '--test', dest='run_tests', action='store_true',
+                      help='run the unit tests after generating the lessons')
     (options, args) = parser.parse_args()
 
     if not args and not options.all:
@@ -768,5 +790,8 @@ if __name__ == '__main__':
     karma = KarmaFramework(os.path.abspath(os.path.join(os.path.dirname(argv0),
                                                         'deploy',
                                                         'karma')))
+    lessons = []
     for description in process_descriptions:
-        process_description(karma, description, options.output)
+        lessons.append(process_description(karma, description, options.output))
+    if options.run_tests:
+        run_unit_tests(lessons)
