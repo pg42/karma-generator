@@ -7,3 +7,5 @@ include('../../templates/identification/description.py')
 
 register_things(['cat', 'cow', 'deer', 'dog', 'elephant', 'horse', 'sheep'])
 image('background.jpg')
+
+css('lesson.css')
