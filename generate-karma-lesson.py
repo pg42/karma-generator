@@ -426,6 +426,9 @@ class Lesson():
 
         self.compile_translations()
 
+    def name(self):
+        return self.deploy_name()
+
     def deploy_name(self):
         return os.path.basename(self.directory)
 
