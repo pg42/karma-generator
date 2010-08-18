@@ -373,8 +373,9 @@ class Lesson():
         self.directory = ''
         self.title = ''
         self.lesson_title = ''
-        self.grade = '';
-        self.subject = '';
+        self._grade = None;
+        self._subject = '';
+        self._week = None
         self.summary = '';
         self.java_script_files = []
         self.css_files = []
@@ -385,6 +386,15 @@ class Lesson():
                                          link_next=True,
                                          scoreboard=False,
                                          link_check_answer=False)
+
+    def grade(self):
+        return self._grade
+
+    def subject(self):
+        return self._subject
+
+    def week(self):
+        return self._week
 
     def copy_files(self):
         def create_dir(d):
@@ -462,8 +472,8 @@ class Lesson():
             head.script(type='text/javascript',
                         src=f.relative_path(None, web=True))
 
-        displayGrade = u'०१२३४५६७८९'[self.grade];
-        displaySubject = {'English':'English', 'Maths':u'गणित', 'Nepali':u'नेपाली' }[self.subject];
+        displayGrade = u'०१२३४५६७८९'[self.grade()];
+        displaySubject = {'English':'English', 'Maths':u'गणित', 'Nepali':u'नेपाली' }[self.subject()];
 
         body = html.body(id='kStart')
 
@@ -495,7 +505,7 @@ class Lesson():
         doc.print_on(stream)
 
     def print_kdoc_html_on(self, stream):
-        print >>stream, k_doc_template.format(subject=unicode(self.subject),
+        print >>stream, k_doc_template.format(subject=unicode(self.subject()),
                                               title=unicode(self.title));
 
     def print_html_on(self, stream):
@@ -563,9 +573,9 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
     theLesson.start_title = title
     theLesson.title = browser_title or 'Class %s %s %s' % (grade, subject, title)
     theLesson.lesson_title = lesson_title or title
-    theLesson.subject = subject
-    theLesson.grade = grade
-    theLesson.week = week
+    theLesson._grade = grade
+    theLesson._subject = subject
+    theLesson._week = week
     theLesson.summary = summary
     java_script('jquery')
     java_script('karma')
@@ -729,11 +739,11 @@ def process_description(karma, description, output_dir,
 def deploy_lessons(karma_root, output_dir, grades, subjects, first_week,
                    last_week):
     def filter(lesson):
-        if not lesson.grade in grades:
+        if not lesson.grade() in grades:
             return False
-        if not lesson.subject in subjects:
+        if not lesson.subject() in subjects:
             return False
-        if lesson.week < first_week or last_week < lesson.week:
+        if lesson.week() < first_week or last_week < lesson.week():
             return False
         return True
     lessons = []
@@ -743,6 +753,16 @@ def deploy_lessons(karma_root, output_dir, grades, subjects, first_week,
         if lesson:
             lessons.append(lesson)
     return [lesson.deploy_name() for lesson in lessons]
+
+# Called from new build.py
+def deploy_lessons_new(karma_root, output_dir, filter):
+    result = []
+    karma = KarmaFramework(os.path.abspath(karma_root))
+    for description in find_all_description_files():
+        lesson = process_description(karma, description, output_dir, filter)
+        if lesson:
+            result.append(lesson)
+    return result
 
 
 def run_unit_tests(lessons):
