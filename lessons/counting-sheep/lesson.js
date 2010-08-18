@@ -86,6 +86,7 @@ function startLesson(karma) {
             drop: function (event, ui) {
                 $('#gameArea').droppable('enable');
                 ui.helper.remove();
+                updateScore();
                 showRubbishCan('rubbish');
             }
         }
