@@ -1,5 +1,5 @@
 ﻿lesson(grade=2, subject='English', title='Vocabulary Body Parts', week=14,
-    summary=u'शरीरका केही अङ्गहरुका नाम सिक्ने क्रियाकलाप')
+       summary=u'शरीरका केही अङ्गहरुका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 
@@ -13,6 +13,6 @@ parts = [
     dict(name='knee', left=175, top=440, width=115),
     dict(name='foot', left=868, top=497, width=110)]
 
-register_objects(parts)
+register_objects('Click on each word and listen', parts)
 
 image('vocabImg.jpg')

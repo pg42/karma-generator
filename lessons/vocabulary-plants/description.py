@@ -4,7 +4,7 @@ lesson(grade=2, subject='English', title='Vocabulary Plants', week=17,
 
 include('../../templates/vocabulary/description.py')
 
-animals = [
+plants = [
     dict(name='leaf', left=175, top=69, width=110),
     dict(name='branch', left=953, top=130, width=160),
     dict(name='fruit', left=132, top=190, width=115),
@@ -14,6 +14,6 @@ animals = [
     dict(name='grass', left=260, top=605, width=140),
     dict(name='plant', left=580, top=585, width=140)]
 
-register_objects(animals)
+register_objects('Click on each plant and listen', plants)
 
 image('vocabImg.jpg')

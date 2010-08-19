@@ -1,5 +1,5 @@
 ﻿lesson(grade=2, subject='English', title='Vocabulary Domestic Animals', week=4,
-    summary=u'घरपालुवा जनावरहरूका नाम सिक्ने क्रियाकलाप')
+       summary=u'घरपालुवा जनावरहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 
@@ -13,6 +13,6 @@ items = [
     dict(name='duck', left=735, top=590, width=118),
     dict(name='rabbit', left=990, top=505, width=150)]
 
-register_objects(items)
+register_objects('Click on the name of each animal and listen', items)
 
 image('vocabImg.jpg')

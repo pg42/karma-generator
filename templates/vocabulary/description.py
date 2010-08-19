@@ -14,11 +14,12 @@ lesson_js = java_script('lesson.js', generated=True)
 java_script('vocabulary.js')
 
 
-def register_objects(objects):
+def register_objects(instructions, objects):
     for o in objects:
         name = o['name']
         image(name + '.png', name)
         audio(name + '.ogg', name)
+    print >>lesson_js, 'var instructions0 = \'%s\';' % instructions
     prefix = 'var objects = ['
     print >>lesson_js, prefix + (',\n' + ' ' * len(prefix)).join(
         ["{name: '%s', position: {left: %s, top: %s, width: %s}}" % (o['name'],

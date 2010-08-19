@@ -3,7 +3,7 @@
 
 include('../../templates/vocabulary/description.py')
 
-animals = [
+transportations = [
     dict(name='ship', left=125, top=100, width=105),
     dict(name='airplane', left=630, top=70, width=200),
     dict(name='boat', left=940, top=195, width=110),
@@ -13,6 +13,6 @@ animals = [
     dict(name='bicycle', left=195, top=590, width=175),
     dict(name='cart', left=1000, top=540, width=105)]
 
-register_objects(animals)
+register_objects('Click on each word and listen', transportations)
 
 image('vocabImg.jpg')

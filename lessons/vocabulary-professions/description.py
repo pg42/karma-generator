@@ -13,7 +13,7 @@ items = [
     dict(name='tailor', left=372, top=553, width=134),
     dict(name='teacher', left=880, top=287, width=160)]
 
-register_objects(items)
+register_objects('Click on the word below each person to hear his or her profession', items)
 
 image('vocabImg.jpg')
 css('lesson.css')

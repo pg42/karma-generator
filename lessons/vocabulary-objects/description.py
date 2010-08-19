@@ -1,5 +1,5 @@
 ﻿lesson(grade=2, subject='English', title='Vocabulary Objects', week=5,
-    summary=u'विभिन्न वस्तुहरूका नाम सिक्ने क्रियाकलाप')
+       summary=u'विभिन्न वस्तुहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')
 objects = [
@@ -12,6 +12,6 @@ objects = [
     dict(name='ladder', left=890, top=553, width=150),
     dict(name='soap', left=379, top=287, width=120)]
 
-register_objects(objects)
+register_objects('Click on the name of each object and listen', objects)
 
 image('vocabImg.jpg')

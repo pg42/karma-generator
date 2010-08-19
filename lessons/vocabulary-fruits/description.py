@@ -13,6 +13,6 @@ fruits = [
     dict(name='orange', left=622, top=553, width=154),
     dict(name='grapes', left=890, top=553, width=150)]
 
-register_objects(fruits)
+register_objects('Click on the name of each fruit and listen', fruits)
 
 image('vocabImg.jpg', 'vocabImg')

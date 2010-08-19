@@ -13,7 +13,7 @@ foods = [
     dict(name='cake', left=643, top=530, width=115),
     dict(name='ice-cream', left=857, top=530, width=210)]
 
-register_objects(foods)
+register_objects('Click on each food item and listen', foods)
 
 image('vocabImg.jpg')
 css('lesson.css')

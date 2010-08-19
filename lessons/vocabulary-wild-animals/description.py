@@ -14,6 +14,6 @@ items = [
     dict(name='tiger', left=940, top=470, width=126)
     ]
 
-register_objects(items)
+register_objects('Click on each word and listen', items)
 
 image('vocabImg.jpg')

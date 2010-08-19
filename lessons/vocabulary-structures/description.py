@@ -13,6 +13,6 @@ items = [dict(name='house', left=110, top=290, width=135),
          dict(name='garden', left=625, top=553, width=150),
          dict(name='wall', left=910, top=553, width=115)]
 
-register_objects(items)
+register_objects('Click on the name of each structure and listen', items)
 
 image('vocabImg.jpg')
