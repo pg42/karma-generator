@@ -12,4 +12,11 @@ class Test(KarmaLessonTestCase):
         correct_options = [3, 1, 4, 1, 3, 2, 4]
         for option in correct_options:
             self.select_option(option)
-        self.assertTrue(self.selenium.is_visible("//div[@id='gameOver']"))
+        self.assertTrue(self.selenium.is_visible('//div[@id=\'gameOver\']'))
+
+    def test_wrong(self):
+        import os
+        self.selenium.open(self.url)
+        self.select_option(1)
+        self.assertTrue(self.selenium.is_visible('//div[@id=\'listenAgain\']'))
+        self.assertScreenshotEquals('wrong.png')

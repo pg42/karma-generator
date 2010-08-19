@@ -18,6 +18,30 @@ class KarmaLessonTestCase(unittest.TestCase):
         self.selenium.stop()
         self.assertEqual([], self.verificationErrors)
 
+    def assertScreenshotEquals(self, filename):
+        # Kludge so that filename is relative to the test.py file from which
+        # this function is called.
+        import traceback
+        unittest_file = traceback.extract_stack()[-2][0]
+        dir = os.path.dirname(unittest_file)
+        expected_filename = os.path.join(dir, filename)
+        found_filename = os.path.splitext(expected_filename)[0] + '.found.png'
+        expected = ''
+        if os.path.isfile(expected_filename):
+            f = open(expected_filename, 'rb')
+            expected = f.read()
+            f.close()
+        found = self.selenium.capture_entire_page_screenshot_to_string('')
+        import base64
+        found = base64.b64decode(found)
+        if expected != found:
+            f = open(found_filename, 'wb')
+            f.write(found)
+            f.close()
+            self.fail('The screenshots %s and %s differ.' % (expected_filename,
+                                                             found_filename))
+
+
 class KarmaTextTestResult(unittest._TextTestResult):
     def log_current_state(self, test, filename):
         dir = test.deployed_dir
