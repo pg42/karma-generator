@@ -23,12 +23,16 @@
     width: 1198px;
 }
 
+#instruction {
+    font: 24px/60px Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+}
+
 #topText {
-    width: 700px;
-    height: 25px;
+    width: 500px;
     font: 24px/60px Arial, Helvetica, sans-serif;
     color: #30C;
-    margin: 10px 0 0 100px;
+    margin-top: 50px;
     position: absolute;
 }
 
@@ -69,7 +73,7 @@
     position: absolute;
     bottom: 100px;
     left: 100px;
-    height: 250px;
+    height: 200px;
     width: 600px;
     font: 20px Verdana, Helvetica, Geneva, sans-serif;
     line-height: 40px;

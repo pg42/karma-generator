@@ -126,6 +126,8 @@ function makeScreen(screen_i) {
     return function (karma, content) {
         player.initialize(karma);
         content
+            .append(createDiv('instruction')
+                    .append('Click on the button below each picture and listen'))
             .append(createDiv('topText').append('Preeti is busy all day.'))
             .append(createDiv('imgLesson'))
             .append(createDiv('lessonDisplay'));
@@ -195,9 +197,9 @@ function exerciseScreen(karma, content) {
 function displayExerciseScreen(karma, content, screen_i) {
     content
         .empty()
-        .append(createDiv('topText')
-                .append('Choose the right word from the WordBank to fill '
-                        + 'in the space.'))
+        .append(createDiv('instruction')
+                .append('Drag and drop the right words from the Word Bank '
+                        + 'to fill in the blanks'))
         .append(createDiv('exercise')
                 .append($(document.createElement('span'))
                         .attr('id', 'wordBankText')
