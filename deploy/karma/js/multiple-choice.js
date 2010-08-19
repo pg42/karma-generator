@@ -145,7 +145,7 @@ var SimpleMCQuiz = Object.create(
                 } else {
                     scoreboardMiss();
                 }
-                setTimeout(function () { that.progress(); }, 1000);
+                setTimeout(function () { that.progress(); }, 1500);
             } else {
                 this.incorrect();
             }
