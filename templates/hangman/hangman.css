@@ -1,18 +1,7 @@
 @CHARSET "UTF-8";
 
-
-p {
-    color: black;
-    font: 14px Geneva, Helvetica, Verdana, Arial, sans-serif;
-}
-
-p#blue {
-    color: blue;
-    font: 20px/22px Verdana, Geneva, Arial, Helvetica, sans-serif;
-}
-
 #def {
-    margin: 0;
+    margin: 5px;
     width: 50em;
     text-align: left;
 }
@@ -25,10 +14,7 @@ p#blue {
 
 #questionSection {
     color: red;
-    padding: 2px;
     width: 300px;
-    height: 20px;
-    font: 16px Geneva, Helvetica, Verdana, Arial, sans-serif;
 }
 
 #answers {
@@ -43,20 +29,22 @@ p#blue {
     text-align: center;
     width: 590px;
     height: 160px;
-    font: 14px Verdana, Geneva, Helvetica, Arial, sans-serif;
+    font: 18px Verdana, Geneva, Helvetica, Arial, sans-serif;
 }
 
 #keys1 {
     margin-left: 18px;
-	clear:both;
+    clear:both;
 }
+
 #keys2 {
     margin-left: 55px;
-	clear:both;
+    clear:both;
 }
+
 #keys3 {
     margin-left: 85px;
-	clear:both;
+    clear:both;
 }
 
 .alphaKeys {
@@ -83,4 +71,8 @@ p#blue {
     text-align:center;
     width: 590px;
     height: 80px;
+}
+
+.text {
+    font: 24px Geneva, Helvetica, Verdana, Arial, sans-serif;
 }

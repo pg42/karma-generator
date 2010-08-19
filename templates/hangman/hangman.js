@@ -1,4 +1,4 @@
-var qwerty_keys = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
+var qwerty_keys = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
 
 function showHangMan(karma, i) {
     $('#hangManSection')
@@ -6,17 +6,14 @@ function showHangMan(karma, i) {
         .append(karma.createImg('hang' + i).addClass('imgHang'));
 }
 
-function createKeyboard(capitalize) {
+function createKeyboard() {
     var drawRow = function (row, i) {
         var $keys = createDiv('keys' + i);
         $(Array.prototype.map.apply(row,
                                     [function (letter) {
-                                         var x = capitalize ?
-                                             letter.toUpperCase() :
-                                             letter;
                                          return createDiv()
-                                             .html(x)
-                                             .addClass(x)
+                                             .html(letter)
+                                             .addClass(letter)
                                              .addClass('alphaKeys');
                                     }]))
             .appendTo($keys);
@@ -36,8 +33,8 @@ function createAnswerBoxes(string, $answerSection) {
     Array.prototype.forEach.apply(string,
                                   [function (letter) {
                                        $(document.createElement('span'))
-                                           .addClass('answerBox')
-                                           .addClass(letter)
+                                           .addClass('answerBox text')
+                                           .addClass(letter.toUpperCase())
                                            .html('#')
                                            .appendTo($answerSection);
                                    }]);
@@ -59,9 +56,10 @@ function startGame(karma) {
         $(this).unclickable();
         var letter = $(this).html();
         $(this).css('background-color', 'white');
-        if (current_answer.indexOf(letter) != -1) {
+        var index = current_answer.toUpperCase().indexOf(letter);
+        if (index != -1) {
             $('.' + letter, $('#answerSection'))
-                .html(letter)
+                .html(current_answer[index])
                 .addClass('guessed');
             if ($('.guessed').length == current_answer.length) {
                 scoreboardHit();
@@ -86,9 +84,6 @@ function startGame(karma) {
                             });
     };
 
-    var generateAnswerBoxes = function () {
-    };
-
     var nextQuestion = function () {
         $('.alphaKeys')
             .unclickable()
@@ -102,7 +97,6 @@ function startGame(karma) {
             mistakeCount = 0;
             showHangMan(karma, mistakeCount);
             current_answer = setUpAnswer(remaining_tasks.pop());
-            generateAnswerBoxes();
         } else {
             $('#content')
                 .empty()

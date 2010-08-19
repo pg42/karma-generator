@@ -20,10 +20,8 @@ function createContentDivs(karma) {
                 .html('Click on the letters to guess which letters are in this' +
                       ' city. ' +
                       'You are given seven chances to complete the name.'))
-        .append(createKeyboard(true))
+        .append(createKeyboard())
         .append(createDiv('missedText')
-                // TBD: no capitals in first phrase
-                // TBD: on _the_ next button
                 .html('Sorry, you missed it. Click on the next button below.')
                 .hide())
         .append(createDiv('hangManSection'))

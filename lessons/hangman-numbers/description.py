@@ -1,5 +1,5 @@
-﻿lesson(grade=2, subject='English', title='Hangman Numbers', week=9,
-    summary=u'सङ्ख्या सम्बन्धी प्रश्‍नको उत्तर दिन सिक्ने क्रियाकलाप')
+﻿lesson(grade=2, subject='English', title='Spelling Numbers', week=9,
+       summary=u'सङ्ख्या सम्बन्धी प्रश्‍नको उत्तर दिन सिक्ने क्रियाकलाप')
 
 include('../../templates/hangman/description.py')
 

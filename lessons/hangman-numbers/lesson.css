@@ -8,23 +8,20 @@
 
 #gameTitle {
     padding: 5px;
-    width: 200px;
     height: 20px;
     color: blue;
-    font: 20px/22px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font: 24px Verdana, Geneva, Arial, Helvetica, sans-serif;
     text-align: left;
 }
 
 #questionSection {
+    width: 480px;
     text-align: left;
 }
 
 #answerSection {
-    padding: 2px;
     width: 480px;
-    height: 28px;
     color: black;
-    font: 18px Geneva, Helvetica, Verdana, Arial, sans-serif;
     text-align: left;
 }
 
@@ -34,7 +31,6 @@
     color: #82C682;
     padding: 0px 5px;
     margin: 0.1em;
-    font: 18px/30px Verdana, Geneva, Helvetica, Arial, sans-serif;
     border-bottom: 2px solid #000;
 }
 
@@ -47,8 +43,8 @@
     width: 300px;
     height: 50px;
     color: #FF9900;
-    font: 14px Geneva, Helvetica, Verdana, Arial, sans-serif;
     border-left: 2px dotted #CCC;
+    font: 18px Geneva, Helvetica, Verdana, Arial, sans-serif;
 }
 
 #missedText {
