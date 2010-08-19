@@ -1,4 +1,7 @@
 function generateScreen0(karma, $container) {
+    createDiv('instruction')
+        .append('Click on the words and listen')
+        .appendTo($container);
     var $vocab_img = createDiv('vocabImg')
         .appendTo($container);
 
@@ -65,7 +68,10 @@ function generateScreen1(karma, $container) {
         }
     };
 
-    $container.append(createDiv('quesSection'))
+    $container
+        .append(createDiv('instruction')
+                .append('Drag and drop the correct word in each box'))
+        .append(createDiv('quesSection'))
         .append(createDiv('optionSection'));
 
     $(images).appendTo('#quesSection');

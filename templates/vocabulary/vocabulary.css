@@ -1,17 +1,18 @@
 ﻿@CHARSET "UTF-8";
-/****** Page Styles ****/
-
-/*  Designed for 1200*900 px screen resolution  */
-
-
-/**** Game Styles  ****/
 
 #content {
     background: url(background.jpg) no-repeat center;
 }
 
+#instruction {
+    font: 30px Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 8px;
+}
+
 #vocabImg {
     position: relative;
+    top: -25px;
     margin: 3em auto;
     width: 1145px;
     height: 660px;
@@ -19,6 +20,8 @@
 }
 
 #quesSection {
+    position: relative;
+    top: -20px;
     margin: 20px auto;
     height: 560px;
 }
@@ -38,6 +41,8 @@
 }
 
 #optionSection {
+    position: relative;
+    top: -20px;
     margin: 1em auto;
     width: 1100px;
     height: 60px;
