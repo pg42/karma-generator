@@ -508,7 +508,9 @@ class Lesson():
         doc.print_on(stream)
 
     def print_kdoc_html_on(self, stream):
-        print >>stream, k_doc_template.format(subject=unicode(self.subject()),
+        karma_dir = os.path.relpath(self.karma.root_dir, self.directory)
+        print >>stream, k_doc_template.format(karma_dir=karma_dir,
+                                              subject=unicode(self.subject()),
                                               title=unicode(self.title));
 
     def print_html_on(self, stream):

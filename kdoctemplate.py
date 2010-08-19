@@ -5,15 +5,15 @@ k_doc_template = u"""
 <head>
   <title>Lesson Plan for {subject} {title}</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <link type="image/ico" rel="icon" href="../../karma/image/favicon.ico" />
-  <link type="text/css" rel="stylesheet" href="../../karma/css/karma.css" />
-  <link type="text/css" rel="stylesheet" href="../../karma/css/ui.kHeader.css" />
-  <link type="text/css" rel="stylesheet" href="../../karma/css/kDoc.css" />
-  <script type="text/javascript" src="../../karma/js/external/jquery-1.4.2.js"></script>
-  <script type="text/javascript" src="../../karma/js/external/jquery-ui-1.8.2.js"></script>
-  <script type="text/javascript" src="../../karma/js/karma.js"></script>
-  <script type="text/javascript" src="../../karma/js/ui.kHeader.js"></script>
-  <script type="text/javascript" src="../../karma/js/kDoc.js"></script>
+  <link type="image/ico" rel="icon" href="{karma_dir}/image/favicon.ico" />
+  <link type="text/css" rel="stylesheet" href="{karma_dir}/css/karma.css" />
+  <link type="text/css" rel="stylesheet" href="{karma_dir}/css/ui.kHeader.css" />
+  <link type="text/css" rel="stylesheet" href="{karma_dir}/css/kDoc.css" />
+  <script type="text/javascript" src="{karma_dir}/js/external/jquery-1.4.2.js"></script>
+  <script type="text/javascript" src="{karma_dir}/js/external/jquery-ui-1.8.2.js"></script>
+  <script type="text/javascript" src="{karma_dir}/js/karma.js"></script>
+  <script type="text/javascript" src="{karma_dir}/js/ui.kHeader.js"></script>
+  <script type="text/javascript" src="{karma_dir}/js/kDoc.js"></script>
 
 </head>
 <body id="kDoc">
