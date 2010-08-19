@@ -1,3 +1,7 @@
+function instructions() {
+    return 'Click and match products and words';
+}
+
 function createFaces(karma) {
     var pairs = [
         ['Cow', 'Milk'],

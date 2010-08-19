@@ -8,7 +8,10 @@ function initialize() {
                 .append(createDiv('clickTitle').html('Clicks:'))
                 .append(createDiv('clickBox'))
                 .hide());
-    $('#content').append(createDiv('section'));
+    $('#content')
+        .append(createDiv('instructions')
+                .append(instructions()))
+        .append(createDiv('section'));
 }
 
 function startGame(karma) {

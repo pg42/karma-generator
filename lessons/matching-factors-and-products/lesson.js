@@ -1,3 +1,7 @@
+function instructions() {
+    return 'Click and match factors and products';
+}
+
 function createFaces(karma) {
     var pairs = [
         ['3*1', '3'],

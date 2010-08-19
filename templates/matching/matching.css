@@ -5,7 +5,7 @@
 }
 
 #section {
-    margin: 3em auto;
+    margin: 30px auto;
     width: 800px;
 }
 
@@ -78,4 +78,9 @@
     margin-top: 35px;
     text-align: center;
     font: 35px/40px Helvetica,Verdana, Geneva, Arial, sans-serif;
+}
+
+#instructions {
+    font: 30px Helvetica, Verdana, Geneva, Arial, sans-serif;
+    margin-top: 20px;
 }
