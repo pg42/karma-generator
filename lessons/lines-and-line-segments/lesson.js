@@ -53,7 +53,10 @@ function startLesson(karma) {
             $('#content')
                 .empty()
                 .removeClass('backOpaque');
-            createDiv('section')
+	    createDiv('instructions')
+		.append('प्रश्न पढ र सही विकल्पमा क्लिक गर :')
+		.appendTo('#content');
+	    createDiv('section')
                 .append(createDiv('question'))
                 .append(createDiv('optionSection'))
                 .append(createDiv('answer'))
