@@ -1,5 +1,5 @@
 function instructions() {
-    return 'Click and match angles and shapes';
+    return 'दुई कोठामा क्लिक गर्दै ज्यामितीय आकार र नामहरू मिलाऊ';
 }
 
 function createFaces(karma) {
