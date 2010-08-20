@@ -35,7 +35,8 @@ function startLesson(karma) {
                         }
                     }
                 ))
-        .append(createDiv('instructionTxt'))
+        .append(createDiv('instructionTxt')
+               .append('माछालाई कर्सरले तानेर गोहीको मुखमा राख'))
         .append(createDiv('scoreBox')
                 .html(Karma.convertNumToLocale(correctCounter, 'ne')));
 
