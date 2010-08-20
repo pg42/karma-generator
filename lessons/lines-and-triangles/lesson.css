@@ -1,4 +1,9 @@
 @CHARSET "UTF-8";
+#instructions {
+    font:bold 40px Arial,Helvetica,sans-serif;
+    position:relative;
+    top:20px;
+}
 
 #linkCheck {
     position: absolute;
@@ -15,7 +20,7 @@
     margin-top: 74px;
     width: 1198px;
     height: 700px;
-    padding-top: 50px;
+    padding-top: 0;
     background: url(background.png) no-repeat center;
 }
 

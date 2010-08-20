@@ -315,9 +315,8 @@ function startLesson(karma){
 
     $('#content')
         .empty()
-        .append(createDiv('lesssonHint')
-                .addClass('lessonHint')
-                .html('बिन्दु बिन्दु जोडेर रेखा र त्रिभुज गन।'))
+	.append(createDiv('instructions')
+		.html('Arrow मा क्लिक गर्दै बनेको आकारमा रेखा र त्रिभुज गन :'))
         .append(createDiv('lineNextBtn')
                 .addClass('linkNext')
                 .css({
