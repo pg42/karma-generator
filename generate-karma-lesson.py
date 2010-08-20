@@ -260,20 +260,23 @@ java_script_dependencies = [
 #TBD: factor this out in a separate file, so it is easy to provide
 #     your own header/footer
 #TBD: make header/footer customizable
-def generate_header(karma, dir, body, title):
+def generate_header(karma, dir, body, titles):
     header = body.div(id='header')
 
     header.div(id='topbtn_left').div(id='linkBackLesson',
                                      title='Back',
                                      className='linkBack')
 
-    lesson_title = header.div(id='lesson_title')
-    lesson_title.img(src=karma.image('title_block_lt').relative_path(dir, web=True),
-                     width=33, height=75, align='absmiddle')
-    lesson_title.text(title)
-    lesson_title.img(src=karma.image('title_block_rt').relative_path(dir, web=True),
-             width=33, height=75, align='absmiddle')
+    def create_title(text):
+        lesson_title = header.div(className='lesson_title')
+        lesson_title.img(src=karma.image('title_block_lt').relative_path(dir, web=True),
+                         width=33, height=75, align='absmiddle')
+        lesson_title.text(text)
+        lesson_title.img(src=karma.image('title_block_rt').relative_path(dir, web=True),
+                         width=33, height=75, align='absmiddle')
 
+    for title in titles:
+        create_title(title)
 
     header.div(className='topbtn_right').div(title='Help', id='linkHelp')
 
@@ -534,7 +537,10 @@ class Lesson():
             head.script(type='text/javascript',
                         src=file.relative_path(None, web=True))
         body = html.body()
-        generate_header(self.karma, self.directory, body, self.lesson_title)
+        titles = [self.lesson_title]
+        if self.subject() == 'Maths' and self.lesson_title != self.start_title:
+            titles.append(self.start_title)
+        generate_header(self.karma, self.directory, body, titles)
         body.children.extend(self.divs)
         generate_footer(body)
         doc.print_on(stream)
