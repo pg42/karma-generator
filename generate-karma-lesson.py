@@ -492,7 +492,7 @@ class Lesson():
         grade.span(id='gradeNum').text(displayGrade)
         middle.div(id='subject', className='center').text(displaySubject)
         lesson_title = middle.div(id='lessonTitle', className='center')
-        lesson_title.a(href='./index.html').text(self.start_title)
+        lesson_title.a(href='./index.html').text(self.lesson_title)
         middle.div(id='lessonDesc', className='center').text(self.summary)
         note = middle.div(id='teachersNoteBtn', className='button')
         a = note.a(href='./kDoc.html?back=start.html&doc=teachersNote')
