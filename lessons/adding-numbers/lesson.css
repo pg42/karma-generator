@@ -4,6 +4,14 @@
     background: url(background.jpg) no-repeat center;
 }
 
+#instructions {
+    font: 40px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: relative;
+    top: 8px;
+    left: -30px;
+}
+
 #questArea {
     position: absolute;
     top: 100px;

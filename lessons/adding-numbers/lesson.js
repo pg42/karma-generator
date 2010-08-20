@@ -96,6 +96,8 @@ function startLesson(karma) {
     scoreboardReset();
     $('#content')
         .empty()
+        .append(createDiv('instructions')
+                .append('जोड र सही उत्तरमा क्लिक गर'))
         .append(createDiv('questArea')
                 .append(createSpan('number1').html(' &nbsp;&nbsp; '))
                 .append(createSpan('plussign').html(' + '))
