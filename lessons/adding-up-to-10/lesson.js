@@ -14,6 +14,8 @@ function initialize(karma) {
             .hide();
     };
     $('#content')
+        .append(createDiv('instructions')
+                .append('जोड र मिल्ने उत्तर भएको कोठामा क्लिक गर'))
         .append(createDiv('main')
                 .append(createDiv('top')
                         .append(createDiv('topLeftArea')

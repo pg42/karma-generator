@@ -9,6 +9,13 @@
     -webkit-border-radius: 40px;
 }
 
+#instructions {
+    font: 40px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: relative;
+    top: 8px;
+}
+
 #main {
     float: left;
     position: relative;
