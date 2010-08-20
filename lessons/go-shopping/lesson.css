@@ -1,4 +1,10 @@
-﻿#main{
+﻿#instructions {
+    font: 30px Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 8px;
+}
+
+#main{
     padding-top: 80px;
     text-align: left;
 }

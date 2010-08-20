@@ -74,6 +74,8 @@ function startLesson(karma, contentDiv) {
 
     contentDiv
         .empty()
+        .append(createDiv('instructions')
+               .append('हिसाब गर र पुग्यो वा पुगेन क्लिक गर'))
         .append(createDiv('main')
             .append(createDiv('moneySide')
                 .append(createDiv('moneyHeading')
@@ -132,7 +134,7 @@ function addAnswerInput(){
                 checkInputAnswer();
             }
         })
-        .keyfilter(/[\d]/)
+        .keyfilter(/[\d]/);
 }
 
 function answerButtonClick(){
