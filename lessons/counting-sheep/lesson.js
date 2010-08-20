@@ -42,7 +42,7 @@ function startLesson(karma) {
                 .append(createDiv()
                         .addClass('titles')
                         .append($(document.createElement('h2'))
-                                .html('Put sheep in the barn and count them'))
+                                .html('भेडालाई कर्सरले तानेर गोठमा राख र गन'))
                         .append($(document.createElement('h1'))
                                 .attr('id', 'total'))
 						.append($(document.createElement('h2'))
