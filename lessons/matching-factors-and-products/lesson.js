@@ -1,5 +1,5 @@
 function instructions() {
-    return 'Click and match factors and products';
+    return 'दुई कोठामा क्लिक गर्दै गुणनखण्ड र गुणनफल मिलाऊ';
 }
 
 function createFaces(karma) {
