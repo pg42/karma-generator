@@ -275,8 +275,12 @@ var OneShotMCQuiz = Object.create(
         },
         gameOver: function () {
             var that = this;
-            setTimeout(function () { that.displayGameOverMessage(); },
-                       1000);
+            $('#linkNextLesson')
+                .unbind()
+                .click(function () {
+                           that.displayGameOverMessage();
+                       })
+                .show();
         },
         displayGameOverMessage: function () {
             MCQuiz.gameOver.apply(this, []);

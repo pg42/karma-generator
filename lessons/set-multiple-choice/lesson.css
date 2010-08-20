@@ -27,10 +27,9 @@
 #answer {
     margin: 20px auto;
     padding: 2px;
-    width: 600px;
-    height: 80px;
+    width: 700px;
     text-align: center;
-    font: 20px/25px Arial, Helvetica, sans-serif;
+    font: 24px Arial, Helvetica, sans-serif;
     color: #000000;
     border: 5px groove #FF9900;
 }
@@ -38,7 +37,7 @@
 #optionSection {
     margin: 100px auto;
     margin-bottom: 2px;
-    width: 550px;
+    width: 700px;
     height: 210px;
 }
 
@@ -59,9 +58,11 @@
 .optionText {
     float: left;
     margin-left: 0.7em;
-    width: 450px;
+    width: 600px;
     height: 50px;
-    font: 18px/50px Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 8px;
+    font: 24px Arial, Helvetica, sans-serif;
     color: #000000;
 }
 
