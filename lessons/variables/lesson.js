@@ -89,10 +89,10 @@ function startLesson(karma) {
 
     $('#content')
         .empty()
+	.append(createDiv('instructions')
+		.html('निर्देशन अनुसार चलको मान पत्ता लगाऊ :'))
         .append(createDiv('section')
                 .append(createDiv('leftSide')
-                        .append(createDiv('topText')
-                                .html('चलको मान पत्ता लगाउ'))
                         .append(createDiv()
                                 .addClass('bgQues'))
                         .append(createDiv()
