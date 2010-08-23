@@ -13,7 +13,14 @@ function showQuestions(karma, content, questions) {
     content
         .append(createDiv('section')
                 .append(createDiv('gameArea')
-                        .append(createDiv('topText'))))
+                        .append(createDiv('topText')
+                                .append($(document.createElement('span'))
+                                        .addClass('heading')
+                                        .append('तिम्रो सम्झना शक्तिको जाँच :'))
+                                .append($(document.createElement('br')))
+                                .append($(document.createElement('span'))
+                                        .addClass('instruction')
+                                        .append('तलका बाकसमा भएका गुच्चाको सङ्ख्या हिन्दू अरेबिक सङ्ख्याले जनाइको छ। दिइएको हिन्दू अरेबिक सङ्ख्याहरू बराबर रोमन सङ्ख्याहरू टाइप गरेर पक्का हो बटनमा क्लिक गर ।')))))
         .append(createDiv('confirmBtn')
                 .click(function () { checkAnswers(); }))
         .append(createDiv('imgStory'));
