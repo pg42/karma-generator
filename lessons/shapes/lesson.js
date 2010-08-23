@@ -1,94 +1,177 @@
-var shapes1 = [
-    {
-        name: 'quad1',
-        shape: 'quad'
-    },
-    {
-        name: 'quad2',
-        shape: 'quad'
-    },
-    {
-        name: 'quad3',
-        shape: 'quad'
-    },
-    {
-        name: 'quad4',
-        shape: 'quad'
-    },
-    {
-        name: 'circle1',
-        shape: 'circle'
-    },
-    {
-        name: 'circle2',
-        shape: 'circle'
-    },
-    {
-        name: 'circle3',
-        shape: 'circle'
-    },
-    {
-        name: 'circle4',
-        shape: 'circle'
-    }
-];
-var shapes2 = [
-    {
-        name: 'quad21',
-        shape: 'quad'
-    },
-    {
-        name: 'quad22',
-        shape: 'quad'
-    },
-    {
-        name: 'quad23',
-        shape: 'quad'
-    },
-    {
-        name: 'quad24',
-        shape: 'quad'
-    },
-    {
-        name: 'circle21',
-        shape: 'circle'
-    }
-    ,
-    {
-        name: 'circle22',
-        shape: 'circle'
-    }
-    ,
-    {
-        name: 'circle23',
-        shape: 'circle'
-    }
-    ,
-    {
-        name: 'circle24',
-        shape: 'circle'
-    },
-    {
-        name: 'triangle21',
-        shape: 'triangle'
-    }
-    ,
-    {
-        name: 'triangle22',
-        shape: 'triangle'
-    }
-    ,
-    {
-        name: 'triangle23',
-        shape: 'triangle'
-    }
-    ,
-    {
-        name: 'triangle24',
-        shape: 'triangle'
-    }
-];
+var lesson1_data = {
+    instructions: 'वस्तुको आकार हेर र कर्सरले तानेर मिल्ने नाङ्लोमा राख',
+    id: 1,
+    shapes: [
+        {
+            name: 'quad1',
+            shape: 'quad'
+        },
+        {
+            name: 'quad2',
+            shape: 'quad'
+        },
+        {
+            name: 'quad3',
+            shape: 'quad'
+        },
+        {
+            name: 'quad4',
+            shape: 'quad'
+        },
+        {
+            name: 'circle1',
+            shape: 'circle'
+        },
+        {
+            name: 'circle2',
+            shape: 'circle'
+        },
+        {
+            name: 'circle3',
+            shape: 'circle'
+        },
+        {
+            name: 'circle4',
+            shape: 'circle'
+        }
+    ]
+};
+
+var lesson2_data = {
+    instructions: 'दिइएका आकारलाई कर्सरले तानेर मिल्ने नाङ्लोमा राख',
+    id: 2,
+    shapes: [
+        {
+            name: 'quad21',
+            shape: 'quad'
+        },
+        {
+            name: 'quad22',
+            shape: 'quad'
+        },
+        {
+            name: 'quad23',
+            shape: 'quad'
+        },
+        {
+            name: 'quad24',
+            shape: 'quad'
+        },
+        {
+            name: 'circle21',
+            shape: 'circle'
+        }
+        ,
+        {
+            name: 'circle22',
+            shape: 'circle'
+        }
+        ,
+        {
+            name: 'circle23',
+            shape: 'circle'
+        }
+        ,
+        {
+            name: 'circle24',
+            shape: 'circle'
+        },
+        {
+            name: 'triangle21',
+            shape: 'triangle'
+        }
+        ,
+        {
+            name: 'triangle22',
+            shape: 'triangle'
+        }
+        ,
+        {
+            name: 'triangle23',
+            shape: 'triangle'
+        }
+        ,
+        {
+            name: 'triangle24',
+            shape: 'triangle'
+        }
+    ]
+};
+
 var shapes3 = [
+    {
+        name: 'triangle31',
+        shape: 'triangle',
+        position: { top: 7, left: 28, width: 56, height: 36 }
+    },
+    {
+        name: 'triangle32',
+        shape: 'triangle',
+        position: { top: 112, left: 300, width: 53, height: 31 }
+    },
+    {
+        name: 'triangle33',
+        shape: 'triangle',
+        position: { top: 119, left: 424, width: 36, height: 34 }
+    },
+    {
+        name: 'triangle34',
+        shape: 'triangle',
+        position: { top: 119, left: 548, width: 49, height: 35 }
+    },
+    {
+        name: 'quad31',
+        shape: 'quad',
+        position: { top: 67, left: 148, width: 56, height: 32 }
+    },
+    {
+        name: 'quad31',
+        shape: 'quad',
+        position: { top: 49, left: 253, width: 56, height: 32 }
+    },
+    {
+        name: 'quad32',
+        shape: 'quad',
+        position: { top: 114, left: 223, width: 57, height: 33 }
+    },
+    {
+        name: 'quad33',
+        shape: 'quad',
+        position: { top: 157, left: 228, width: 53, height: 31 }
+    },
+    {
+        name: 'quad34',
+        shape: 'quad',
+        position: { top: 122, left: 462, width: 40, height: 30 }
+    },
+    {
+        name: 'quad34',
+        shape: 'quad',
+        position: { top: 122, left: 506, width: 40, height: 30 }
+    },
+    {
+        name: 'circle31',
+        shape: 'circle',
+        position: { top: 182, left: 398, width: 55, height: 35 }
+    },
+    {
+        name: 'circle31',
+        shape: 'circle',
+        position: { top: 177, left: 623, width: 55, height: 35 }
+    },
+    {
+        name: 'circle32',
+        shape: 'circle',
+        position: { top: 49, left: 583, width: 52, height: 42 }
+    },
+    {
+        name: 'circle32',
+        shape: 'circle',
+        position: { top: 107, left: 678, width: 52, height: 42 }
+    }
+];
+
+var shapes3bis = [
     {
         name: 'triangle31',
         shape: 'triangle',
@@ -169,6 +252,8 @@ function handleDrop(karma, event, ui) {
         karma.play('correct');
         draggable
             .draggable({ disabled: true })
+            .unbind('mouseenter')
+            .unbind('mouseleave')
             .css({ 'z-index': zIndex++ });
     } else {
         karma.play('incorrect');
@@ -176,15 +261,18 @@ function handleDrop(karma, event, ui) {
     }
 }
 
-function createLesson (karma, content, shapes, lessonId) {
+function createLesson (karma, content, lesson_data) {
+    var lesson_id = lesson_data.id;
     zIndex = 1;
     content
-        .append(createDiv('section' + lessonId)
-                .append(createDiv('shapesSection' + lessonId))
-                .append(createDiv('dropSection' + lessonId)));
+        .append(createDiv('instructions')
+               .append(lesson_data.instructions))
+        .append(createDiv('section' + lesson_id)
+                .append(createDiv('shapesSection' + lesson_id))
+                .append(createDiv('dropSection' + lesson_id)));
 
-    if (lessonId == 1) {
-        $('#dropSection' + lessonId)
+    if (lesson_id == 1) {
+        $('#dropSection' + lesson_id)
             .append(createDiv('quad')
                     .addClass('dropObjects'))
             .append(createDiv('circle')
@@ -196,7 +284,7 @@ function createLesson (karma, content, shapes, lessonId) {
                     .html('वृत')
                     .addClass('dropText'));
     } else {
-        $('#dropSection' + lessonId)
+        $('#dropSection' + lesson_id)
             .append(createDiv('triangle')
                     .addClass('dropObjects'))
             .append(createDiv('quad')
@@ -213,9 +301,10 @@ function createLesson (karma, content, shapes, lessonId) {
                     .html('वृत')
                     .addClass('dropText'));
     }
+    var shapes = lesson_data.shapes.slice();
     Karma.shuffle(shapes)
         .forEach(function (img) {
-                     $('#shapesSection' + lessonId)
+                     $('#shapesSection' + lesson_id)
                          .append(createDiv()
                                  .addClass('dragObjects')
                                  .append(Karma.createImg(img.name))
@@ -237,6 +326,8 @@ function createLesson (karma, content, shapes, lessonId) {
 function lessonThree(karma, content) {
     zIndex = 1;
     content
+        .append(createDiv('instructions')
+                .append('चित्रमा भएको आकारलाई कर्सरले तानेर मिल्ने कोठामा राख'))
         .append(createDiv('section3')
                 .append(createDiv('shapesSection3')
                         .append(createDiv('shapes3Img')))
@@ -268,8 +359,22 @@ function lessonThree(karma, content) {
                                     .append(karma.createImg(shape.name)));
                     });
 
+    var move = function (x, offset) {
+        x.css({ top: x.position().top + offset.top,
+                left: x.position().left + offset.left });
+    };
+
     $('.dragObjects')
-        .draggable({ revert: 'invalid' });
+        .draggable({ revert: 'invalid',
+                     stop: function () {
+                         move($(this), { top: -3, left: -3 });
+                     }})
+        .hover(function () {
+                   move($(this), { top: 3, left: 3});
+               },
+               function () {
+                   move($(this), { top: -3, left: -3});
+               });
 
     $('.dropObjects3')
         .droppable({
@@ -282,8 +387,8 @@ function lessonThree(karma, content) {
 
 setUpMultiScreenLesson(
     [
-        function (karma, content) { createLesson(karma, content, shapes1, 1); },
-        function (karma, content) { createLesson(karma, content, shapes2, 2); },
+        function (karma, content) { createLesson(karma, content, lesson1_data); },
+        function (karma, content) { createLesson(karma, content, lesson2_data); },
         lessonThree
     ]
 );
