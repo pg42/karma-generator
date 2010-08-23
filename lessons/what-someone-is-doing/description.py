@@ -18,8 +18,6 @@ for i in range(1, 16):
 for i in range(1, 10):
     image('exe%s.png' % i, 'exe%s' % i)
 
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
 audio('what_is_preeti_doing.ogg', 'what_is_preeti_doing')
 
 image('clickToListen.png', 'clickToListen')

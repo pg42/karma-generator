@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=6, subject='English', title='Months of the Year', week=1,
     browser_title='Class 6 English Months',
     lesson_title='Months of the Year',
@@ -32,9 +32,6 @@ for month in months:
     image(month + '.png', month)
     image('small_' + month + '.png', 'small_' + month)
     audio(month + '.ogg', month)
-
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
 
 image('check.png', 'check')
 image('correct.png', 'correct')

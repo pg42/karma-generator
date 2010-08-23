@@ -12,9 +12,6 @@ for f in ['ui.core',
 for i in range(0, 10):
     image('ques%s.png' % i, 'ques%s' % i)
 
-audio('ne_correct.ogg', 'correct')
-audio('ne_incorrect.ogg', 'incorrect')
-
 for x in ['IntersectLines', 'ParallelLines']:
     image('def%s.png' % x, 'def%s' % x)
     image('img%s.png' % x, 'img%s' % x)

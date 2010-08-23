@@ -6,9 +6,6 @@ css('lesson.css')
 
 java_script('ui.core')
 
-for x in ['correct', 'incorrect']:
-    audio(x + '.ogg', x)
-
 audio('back.ogg', 'back')
 audio('bean.ogg', 'bean')
 audio('bed.ogg', 'bed')

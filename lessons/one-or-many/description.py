@@ -11,7 +11,6 @@ for f in ['ui.position',
     java_script(f)
 
 for x in ['correct', 'incorrect']:
-    audio(x + '.ogg', x)
     image(x + '.png', x)
 
 image('comma.png')

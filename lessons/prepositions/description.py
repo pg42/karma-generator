@@ -8,9 +8,6 @@ for f in ['ui.core',
           'multiple-choice']:
     java_script(f)
 
-audio('en_correct.ogg', 'correct')
-audio('en_incorrect.ogg', 'incorrect')
-
 for x in 'abcd':
     image(x + '.png', x)
 

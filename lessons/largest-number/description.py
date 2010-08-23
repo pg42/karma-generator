@@ -12,8 +12,8 @@ for f in ['ui.core',
     java_script(f)
 
 audio('byebye.ogg', 'byebye')
-audio('chhyaa.ogg', 'incorrect')
-audio('GohiEat.ogg', 'correct')
+audio('chhyaa.ogg', 'complain')
+audio('GohiEat.ogg', 'eat')
 audio('GohilaiMachaInstruction.ogg', 'instruction')
 
 image('background.jpg')

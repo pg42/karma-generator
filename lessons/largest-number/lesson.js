@@ -27,9 +27,9 @@ function startLesson(karma) {
                             if (ui.draggable.data('correct')) {
                                 correctCounter++;
                                 $('#scoreBox').html(Karma.convertNumToLocale(correctCounter, 'ne'));
-                                karma.play('correct');
+                                karma.play('eat');
                             } else {
-                                karma.play('incorrect');
+                                karma.play('complain');
                             }
                             timer = setTimeout(nextQuestion, 1000);
                         }

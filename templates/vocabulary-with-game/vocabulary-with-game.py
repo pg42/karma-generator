@@ -8,9 +8,6 @@ for f in ['ui.core',
           'vocabulary-with-game.js']:
     java_script(f)
 
-audio('correct')
-audio('incorrect')
-
 def register_objects(objects):
     objects_js = java_script('objects.js', generated=True)
     print >>objects_js, 'var objects = ['

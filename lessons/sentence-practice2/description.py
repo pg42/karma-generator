@@ -12,7 +12,4 @@ for f in ['ui.draggable',
           'jquery.clickable']:
     java_script(f)
 
-audio('en_correct.ogg', 'correct')
-audio('en_incorrect.ogg', 'incorrect')
-
 image('main.png', 'main')

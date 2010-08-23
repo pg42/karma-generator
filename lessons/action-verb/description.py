@@ -68,9 +68,6 @@ generate_actions_js()
 css('global')
 css('lesson.css')
 
-audio('en_correct.ogg', 'correct')
-audio('en_incorrect.ogg', 'incorrect')
-
 for item in data:
     subject = item['subject']
     image(subject + '.png', subject)

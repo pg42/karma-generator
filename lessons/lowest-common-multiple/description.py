@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Lowest Common Multiple', week=14,
     lesson_title=u'लघुत्तम समापवर्तक',
     summary=u'दुई सङ्ख्याको लघुत्तम समापवर्त्य (ल.स ) निकाल्न सिकाउने क्रियाकलाप')
@@ -7,9 +7,6 @@ css('global')
 css('lesson.css')
 
 java_script('jquery.clickable')
-
-audio('ne_correct.ogg', 'correct')
-audio('ne_incorrect.ogg', 'incorrect')
 
 for x in ['ruler', 'ruler_intersect', 'ruler_ring']:
     image(x + '.png', x)

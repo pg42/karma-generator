@@ -28,6 +28,4 @@ def register_objects(instructions, objects):
                                                                      o['width'])
          for o in objects]) + '];'
 
-for x in ['correct', 'incorrect', 'trigger']:
-    audio(x)
-
+audio('trigger')

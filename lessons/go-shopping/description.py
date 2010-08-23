@@ -35,15 +35,12 @@ for img in [
 		'roti',
 	]:
 	image(img + '.png', img)
-		
+
 for rs in [5,10,25,50,100]:
 	image('rs' + str(rs) + '.jpg', 'rs' + str(rs))
 
 image('moneyNeeded.png', 'moneyNeeded')
 image('moneyOk.png', 'moneyOk')
-
-for x in ['correct', 'incorrect']:
-    audio('ne_' + x + '.ogg', x)
 
 image('correct.png', 'correct')
 image('incorrect.png', 'incorrect')

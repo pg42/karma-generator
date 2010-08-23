@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Set Multiple Choice', week=7,
     lesson_title=u'समूहको मिश्रित',
     summary=u'समूहको पुनरावलोकन गराउने क्रियाकलाप')
@@ -9,9 +9,6 @@ css('lesson.css')
 for f in ['ui.core',
           'multiple-choice']:
     java_script(f)
-
-audio('en_correct.ogg', 'correct')
-audio('en_incorrect.ogg', 'incorrect')
 
 for x in 'abcd':
     image(x + '.png', x)

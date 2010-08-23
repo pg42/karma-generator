@@ -16,6 +16,3 @@ for x in ['computer_body',
 
 css('lesson.css')
 css('global')
-
-audio('correct.ogg','correct')
-audio('incorrect.ogg','incorrect')

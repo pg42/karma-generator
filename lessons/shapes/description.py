@@ -12,9 +12,6 @@ for f in ['ui.core',
           'ui.draggable']:
     java_script(f)
 
-audio('ne_correct.ogg', 'correct')
-audio('ne_incorrect.ogg', 'incorrect')
-
 image('circle1.png', 'circle1')
 image('circle2.png', 'circle2')
 image('circle3.png', 'circle3')

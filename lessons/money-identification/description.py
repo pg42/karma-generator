@@ -20,8 +20,6 @@ image('optionBorder.png')
 image('optionBorderHover.png')
 image('listenAgain.png')
 
-audio('ne_correct.ogg', 'correct')
-audio('ne_incorrect.ogg', 'incorrect')
 audio('byebye.ogg', 'byebye')
 
 css('lesson.css')

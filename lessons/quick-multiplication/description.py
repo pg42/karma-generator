@@ -11,9 +11,6 @@ for f in ['ui.core',
           'clock']:
     java_script(f)
 
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
-
 image('background.jpg', 'background')
 image('blueTruck0.png', 'blueTruck0')
 image('boxes.png', 'boxes')

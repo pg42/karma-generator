@@ -42,6 +42,3 @@ image('ladybird.png', 'ladybird')
 image('ant.png', 'ant')
 
 print >>objects_js, 'objects = [%s];' % (', '.join(["'%s'" % o for o in objects]))
-
-audio('correct')
-audio('incorrect')

@@ -58,9 +58,8 @@ class KarmaFramework():
             self._karma_file('image/favicon.ico', 'favicon')
             ]
 
-    def _karma_file(self, path, name, **kw):
-        kw['karma_root'] = self.root_dir
-        return KarmaFile(path, name, **kw)
+    def _karma_file(self, path, name):
+        return KarmaFile(path, name, karma_root=self.root_dir)
 
     def _find_file(self, name, files):
         for f in files:
@@ -597,8 +596,20 @@ def lesson(grade, subject, title, week, browser_title=None, lesson_title=None, l
     if os.path.exists(lesson_js):
         java_script('lesson.js')
     add_help()
-    # include the locale strings too
 
+    # Math lessons have nepali correct/incorrect sounds
+    def add_audio(name, karma_name):
+        file = theLesson.karma.audio(karma_name)
+        theLesson.audio_files.append([name, file])
+
+    if subject == 'Maths':
+        add_audio('correct', 'ne_correct')
+        add_audio('incorrect', 'ne_incorrect')
+    else:
+        add_audio('correct', 'correct')
+        add_audio('incorrect', 'incorrect')
+
+    # include the locale strings too
     if locale != None:
         theLesson.java_script_files.append(File('jquery.i18n.'+ locale +'.js', type='js', karma=True))
 
@@ -639,6 +650,10 @@ def image(file, name=None):
 
 
 def audio(file, name=None):
+    for x in theLesson.audio_files:
+        if x[0] == name or x[0] == file:
+            print 'Warning: audio file \'%s\' already present.' % (name or file)
+            return x
     result = None
     if name == None:
         name = file

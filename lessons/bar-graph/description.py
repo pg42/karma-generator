@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Bar Graph', week=16,
     lesson_title=u'ग्राफ',
     summary=u'ग्राफ बुझ्न सिकाउने क्रियाकलाप')
@@ -23,7 +23,4 @@ print >>objects_js, 'var objects = [{0}];'.format(', '.join(map(quote, objects))
 
 for object in objects:
     image(object + '.png', object)
-
-audio('ne_correct.ogg', 'correct')
-audio('ne_incorrect.ogg', 'incorrect')
 

@@ -10,17 +10,12 @@ for f in ['ui.core',
           'jquery.clickable']:
     java_script(f)
 
-audio('wrong.ogg', 'incorrect')
-audio('right.ogg', 'correct')
-
-
 image('bgAns.png', 'bgAns')
 image('bgMessage.png', 'bgMessage')
 image('bgQuestion.png', 'bgQuestion')
 image('bgQues.png', 'bgQues')
 image('gameOver.png', 'gameOver')
 image('check.png')
-
 
 for i in range(0, 8):
     image('img%s.png' % i, 'img%s' % i)

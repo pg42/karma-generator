@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Adding up to 10', week=3,
     browser_title='Adding up to 10',
     lesson_title=u'दससम्मको जोड',
@@ -12,8 +12,6 @@ for f in ['ui.core',
     java_script(f)
 
 
-audio('correct.ogg', 'correct')
-audio('incorrect.ogg', 'incorrect')
 audio('trigger.ogg', 'trigger')
 
 image('plussign.png', 'plussign')

@@ -11,9 +11,6 @@ for f in ['ui.core',
     java_script(f)
 
 
-audio('en_correct.ogg', 'correct')
-audio('en_incorrect.ogg', 'incorrect')
-
 objects = ['boy',
            'monkey',
            'duck',

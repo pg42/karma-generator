@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Lines and Triangles', week=8,
     browser_title='Lines and Triangles',
     lesson_title=u'रेखा र त्रिभुजहरू',
@@ -10,12 +10,6 @@ css('lesson.css')
 for f in ['ui.core',
           'jquery.clickable']:
     java_script(f)
-
-
-
-audio('correct')
-audio('incorrect')
-
 
 image('dot.png','dot')
 image('a.png','a')

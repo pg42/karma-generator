@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='Adding Numbers', week=4,
     lesson_title=u'वस्तुहरूको जोड',
     summary=u'दससम्मको जोड गर्न सिकाउने क्रियाकलापदससम्मको जोड गर्न सिकाउने क्रियाकलाप')
@@ -13,8 +13,6 @@ for f in ['ui.core',
 
 
 audio('byebye.ogg', 'byebye')
-audio('ne_correct.ogg', 'correct')
-audio('ne_incorrect.ogg', 'incorrect')
 
 image('background.jpg')
 

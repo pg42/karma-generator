@@ -19,8 +19,6 @@ image('background.jpg')
 image('imageBox.png')
 image('optionBox.png')
 
-audio('en_correct.ogg', 'correct')
-audio('en_incorrect.ogg', 'incorrect')
 audio('byebye.ogg', 'byebye')
 
 

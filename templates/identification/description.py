@@ -16,8 +16,6 @@ for name in ['correct', 'incorrect']:
 for name in ['optionBorder', 'optionBorderHover', 'listenAgain']:
     image(name + '.png')
 
-audio('correct')
-audio('incorrect')
 audio('byebye')
 
 def quote(x):

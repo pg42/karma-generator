@@ -1,15 +1,10 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='Estimating Angles', week=16,
     lesson_title=u'कोणको माप',
     summary=u'प्रोटेक्टरको प्रयोग गरी कोणको माप गर्न सिकाउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')
-
-for x in ['correct', 'incorrect']:
-    audio('ne_' + x + '.ogg', x)
-
-audio('explode.ogg', 'explode')
 
 image('section1.png')
 
