@@ -162,7 +162,7 @@ function startLesson(karma) {
             var task = this.currentTask();
             $('#question')
                 .empty()
-                .append((scoreboardScore() + 1) + '. ' + what);
+                .append((scoreboardTotal() + 1) + '. ' + what);
             $('#answer')
                 .empty()
                 .append(task.answer_template.replace('_', '...........'));
