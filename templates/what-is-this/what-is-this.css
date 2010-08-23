@@ -1,7 +1,10 @@
 @CHARSET "UTF-8";
 
-/**** Game Styles  ****/
-
+#instructions {
+    font: 30px Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 8px;
+}
 
 #questionSection {
     position:absolute;

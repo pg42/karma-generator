@@ -51,7 +51,9 @@ function startGame(karma) {
     $('#gameOver').hide();
     $('#content')
         .empty()
-        .removeClass('backOpaque');
+        .removeClass('backOpaque')
+        .append(createDiv('instructions')
+                .append(instructions()));
 
     var random_objects = Karma.shuffle(objects).slice(0, 10);
 

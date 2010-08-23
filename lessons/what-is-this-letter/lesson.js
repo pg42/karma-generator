@@ -30,3 +30,7 @@ function setUpAnswer(word) {
             input: input,
             answers_div: answers_div};
 }
+
+function instructions() {
+    return 'Read the question, type the missing letter and press enter';
+}
