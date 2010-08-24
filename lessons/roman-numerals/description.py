@@ -2,7 +2,7 @@
 lesson(grade=6, subject='Maths', title='Roman Numerals', week=12,
     browser_title='Roman Numerals',
     lesson_title=u'रोमन सङ्ख्या',
-    summary=u'रोमन सङ्ख्याको जानकारी दिेन क्रियाकलाप')
+    summary=u'रोमन सङ्ख्याको जानकारी दिने क्रियाकलाप')
 
 css('global')
 css('lesson.css')
