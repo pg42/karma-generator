@@ -43,6 +43,8 @@ function protractorScreen(karma, content) {
     };
 
     content
+        .append(createDiv('instructions')
+                .append('रेखाहरूले बनाएको कोणहरू अनुमान गर र टाइप गर'))
         .append(createDiv('medalArea'))
         .append(createDiv('protractor')
                 .append(createDiv('lineDefault')
@@ -150,6 +152,8 @@ function normalizeDegrees(x) {
 function explosionScreen(karma, content) {
     clearTimeout(timer);
     content
+        .append(createDiv('instructions')
+                .append('वस्तुको कोण अनुमान गरेर टाइप गर्दै पक्का हो बटनमा क्लिक गरेर देखिएको वस्तुलाई बलले हान'))
         .append(karma.createImg('section3ImgTop'))
         .append(createDiv('section3')
                 .append(createDiv('ballOutline')
