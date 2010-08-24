@@ -76,6 +76,8 @@ function initialize(karma, content) {
 function startLesson(karma, content) {
     content
         .empty()
+        .append(createDiv('instructions')
+	        .html('हिसाब गरेर सही उत्तर टाइप गर र Enter मा क्लिक गर :'))
         .append(createDiv('section')
                 .append(createDiv('left-side'))
                 .append(createDiv('right-side')

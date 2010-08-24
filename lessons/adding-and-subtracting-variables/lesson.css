@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
-
+#instructions {
+    font:bold 40px Arial,Helvetica,sans-serif;
+    position:relative;
+    top:30px;
+}
 #linkCheck {
     margin: 1em 3em 0 0;
     width: 101px;
