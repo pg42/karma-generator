@@ -18,8 +18,8 @@ function startLesson(karma) {
     $('#content')
         .empty()
         .append(createDiv('imageSection')
-			.append(createDiv('questionText').text('माथी भएका चित्र तला चित्र हेरी तानेर ठीक ठाउँमा राख ।'))
-		)
+			.append(createDiv('questionText')
+                                .text('माथिका वस्तुलाई पालै पालो कर्सरले तानेर ग्राफमा मिलाएर राख')))
         .append(createDiv('questionSection')
                 .hide())
         .append(createDiv('barGraphSection')
@@ -146,6 +146,8 @@ function startLesson(karma) {
             currentTask = tasks.shift();
             $('#questionSection')
                 .empty()
+                .append(createDiv('questionText')
+                        .append('ग्राफमा भएको सङ्ख्यामा क्लिक गरेर उत्तर देऊ'))
                 .append(createDiv()
                         .addClass('questions')
                         .append(currentTask.question));
