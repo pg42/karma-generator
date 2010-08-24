@@ -30,7 +30,7 @@
 
 #imageBox {
     float: left;
-    margin: 2em 0 5em 20em;
+    margin: 20px 0 40px 360px;
     width: 200px;
     height: 200px;
 }
@@ -46,7 +46,7 @@
 
 #optionSection {
     float: left;
-    margin: 4em 0 0 10em;
+    margin: 60px 0 0 165px;
     width: 900px;
     height: 80px;
     clear: both;
