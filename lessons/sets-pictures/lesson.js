@@ -99,6 +99,8 @@ function showScreen(karma, content, sets, configuration) {
 }
 
 function screen1(karma, content) {
+    content.append(createDiv('instructions')
+        .html('खानेकुराहरूलाई कर्सरले तानेर मिल्ने नाङ्लोमा राख :'))
     var createElements = function (set_name) {
         return range(1, 5).map(function (i) {
                                    return karma.createImg(set_name + i);
@@ -139,6 +141,8 @@ var text_screen_configuration = {
 };
 
 function screen2(karma, content) {
+    content.append(createDiv('instructions')
+        .html('जनावरहरूका नामलाई कर्सरले तानेर ठीक समूहमा राख :'))
     var sets = [
         {
             name: 'air',
@@ -147,7 +151,7 @@ function screen2(karma, content) {
         },
 	{ name: 'water',
           text: 'पानीमा पाइने  जनावरको समूह',
-          elements: ['माछा', 'गोही', 'सार्क', 'डोल्फिंन']
+          elements: ['माछा', 'गोही', 'सार्क', 'डोल्फिन']
         },
 	{
             name: 'land',
@@ -162,6 +166,8 @@ function screen2(karma, content) {
 }
 
 function screen3(karma, content) {
+    content.append(createDiv('instructions')
+        .html('वस्तुहरूलाई कर्सरले तानेर ठीक समूहमा राख :'))
     var sets = [
         {
             name: 'reading',

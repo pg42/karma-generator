@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
-
+#instructions {
+    font:bold 40px Arial,Helvetica,sans-serif;
+    position:relative;
+    top:30px;
+}
 #help {
     display: none;
     position: absolute;
