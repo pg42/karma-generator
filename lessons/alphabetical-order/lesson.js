@@ -15,7 +15,7 @@ var word_lists = Karma.shuffle([
     ['bus','flag','glass','nose','pencil','table'],
     ['magic','man','many','master','miracle','mouse'],
     ['pan','pencil','pig','pot','practice','pumpkin'],
-    ['salte','school','short','smile','snake','stick'],
+    ['salt','school','short','smile','snake','stick'],
     ['axe','mountain','plate','umbrella','volley-ball','x-ray'],
     ['television','temple','toggle','trap','trust','turn'],
     ['bottle','fish','house','pan','tree','window']
