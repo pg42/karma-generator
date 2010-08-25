@@ -40,16 +40,18 @@ top:30px;
 }
 
 .bgQues {
-    margin: 1em auto;
+    margin-left: 4em;
+    margin-top: 8em;
     width: 501px;
     height: 383px;
     background: url(bgQues.png) no-repeat;
-    padding-top: 1.5em;
+    padding-top: 2em;
     text-align:center;
 }
 
 .bgAns {
-    margin: 1em 0 0 0;
+    margin-left: -40px;
+    margin-top: 40px;
     width: 570px;
     height: 120px;
     background: url(bgAns.png) no-repeat;

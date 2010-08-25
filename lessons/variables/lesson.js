@@ -3,7 +3,6 @@ var tasks = [
         question1: 'एउटा झोलामा  x ओटा आपहरु छन  ।',
         question2: 'x भनेको कति हो खनाएर हेर्दा थाहा हुन्छ ।',
         info: 'आप खन्याउन झोलामा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा झोलामा 12 ओटा आपहरु रहेछन ।',
         answer: 12,
         variable: 'x',
         img_name: 'img0'
@@ -12,7 +11,6 @@ var tasks = [
         question1: 'एउटा बिस्कुटको प्याकेटमा  x ओटा बिस्कुटहरु छन ।',
         question2: 'x भनेको कति हो प्याकेट खोलेर  हेर्दा थाहा हुन्छ ।',
         info: 'प्याकेट खोल्न प्याकेटमा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा प्याकेटमा 10 ओटा बिस्कुटहरु रहेछन ।',
         answer: 10,
         variable: 'x',
         img_name: 'img1'
@@ -21,7 +19,6 @@ var tasks = [
         question1: 'एउटा प्याकेटमा z ओटा कलमहरु छन ।',
         question2: 'z भनेको कति हो प्याकेट खोलेर  हेर्दा थाहा हुन्छ ।',
         info: 'प्याकेट खोल्न प्याकेटमा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा प्याकेटमा 10 ओटा कलमहरु रहेछन ।',
         answer: 10,
         variable: 'z',
         img_name: 'img2'
@@ -30,7 +27,6 @@ var tasks = [
         question1: 'एउटा झोलामा  y ओटा आपहरु छन ।',
         question2: 'y भनेको कति हो खनाएर हेर्दा थाहा हुन्छ ।',
         info: 'आप खन्याउन झोलामा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा झोलामा 9 ओटा आपहरु रहेछन ।',
         answer: 9,
         variable: 'y',
         img_name: 'img3'
@@ -39,7 +35,6 @@ var tasks = [
         question1: 'एउटा डालोमा  y ओटा आपहरु छन ।',
         question2: 'y भनेको कति हो खनाएर हेर्दा थाहा हुन्छ ।',
         info: 'आप खन्याउन डालोमा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा डालोमा 10 ओटा आपहरु रहेछन ।',
         answer: 10,
         variable: 'y',
         img_name: 'img4'
@@ -48,7 +43,6 @@ var tasks = [
         question1: 'एउटा बिस्कुटको प्याकेटमा  x ओटा बिस्कुटहरु छन ।',
         question2: 'x भनेको कति हो प्याकेट खोलेर  हेर्दा थाहा हुन्छ ।',
         info: 'प्याकेट खोल्न प्याकेटमा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा प्याकेटमा 15 ओटा बिस्कुटहरु रहेछन ।',
         answer: 15,
         variable: 'x',
         img_name: 'img5'
@@ -57,7 +51,6 @@ var tasks = [
         question1: 'एउटा बिस्कुटको प्याकेटमा  x ओटा बिस्कुटहरु छन ।',
         question2: 'x भनेको कति हो प्याकेट खोलेर  हेर्दा थाहा हुन्छ ।',
         info: 'प्याकेट खोल्न प्याकेटमा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एउटा प्याकेटमा 20 ओटा बिस्कुटहरु रहेछन ।',
         answer: 20,
         variable: 'x',
         img_name: 'img6'
@@ -66,7 +59,6 @@ var tasks = [
         question1: 'एउटा बट्टामा z ओटा कलमहरु छन ।',
         question2: 'z भनेको कति हो बट्टा खोलेर  हेर्दा थाहा हुन्छ ।',
         info: 'बट्टा खोल्न बट्टामा  क्लिक गर्नुहोस ।',
-        info_clicked: 'एक बट्टामा 4 ओटा कलमहरु छन ।',
         answer: 4,
         variable: 'z',
         img_name: 'img7'
@@ -94,16 +86,16 @@ function startLesson(karma) {
         .append(createDiv('section')
                 .append(createDiv('leftSide')
                         .append(createDiv()
-                                .addClass('bgQues'))
-                        .append(createDiv()
-                                .addClass('bgAns')))
+                                .addClass('bgQues')))
                 .append(createDiv('rightSide')
                         .append(createDiv('question1')
                                 .addClass('bgQuestion'))
                         .append(createDiv('question2')
                                 .addClass('bgQuestion'))
                         .append(createDiv()
-                                .addClass('bgInfo'))));
+                                .addClass('bgInfo'))
+			.append(createDiv()
+				.addClass('bgAns'))));
 
     var imgClicked = function () {
         $('#linkCheck')
@@ -111,7 +103,9 @@ function startLesson(karma) {
         $('.bgQues')
             .empty()
             .append(karma.createImg(current_task.img_name + 'Clicked'));
-        $('.bgAns')
+        $('.bgInfo')
+	    .remove();
+	$('.bgAns')
             .empty()
             .show()
             .append(createDiv('ans')
@@ -127,9 +121,9 @@ function startLesson(karma) {
                                     }
                                 }))
                     .append(' हुन्छ ।'));
-        $('.bgInfo')
-            .addClass('quesText')
-            .html(current_task.info_clicked);
+        //$('.bgInfo')
+            //.addClass('quesText')
+            //.html(current_task.info_clicked);
         $('.textBox').focus();
     };
 
