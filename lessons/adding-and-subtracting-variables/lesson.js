@@ -82,9 +82,11 @@ function startLesson(karma, content) {
                 .append(createDiv('left-side'))
                 .append(createDiv('right-side')
                         .append(createDiv('rightBack'))
-                        .append(createDiv('bgCalculation'))));
+                        .append(createDiv('bgCalculation'))))
+	.append(createDiv('answerCheck'));
     scoreboardReset();
     clearTimeout(timer);
+    $('#answerCheck').hide();
 
     var remaining_tasks = Karma.shuffle(tasks);
     var current_task;
@@ -136,6 +138,7 @@ function startLesson(karma, content) {
            current_task = remaining_tasks.shift();
            var id = current_task.id;
            var variable = current_task.variable;
+	   $('#answerCheck').empty().hide();
            $('#left-side')
                .empty()
                .append(karma.createImg('img' + id));
@@ -168,6 +171,8 @@ function startLesson(karma, content) {
     var checkX = function () {
         if ($('#x').val() == current_task.x) {
             karma.play('correct');
+	    $('#answerCheck').empty().append(Karma.createImg('correct')).show();
+	    $('#answerCheck').delay(1000).fadeOut(500);
             $('#x').attr('disabled', true);
             $('.blankBoxes')
                 .css({ padding: 0 })
@@ -180,6 +185,8 @@ function startLesson(karma, content) {
             $('input#result').focus();
         } else {
             karma.play('incorrect');
+	    $('#answerCheck').empty().append(Karma.createImg('incorrect')).show();
+	    $('#answerCheck').delay(1000).fadeOut(500);
             adjustScoreboard = scoreboardMiss;
             $('input#x').focus();
         }
@@ -189,11 +196,14 @@ function startLesson(karma, content) {
         if ($('#result').val() == result(current_task)) {
             checkAnswer = function () {};
             karma.play('correct');
+	    $('#answerCheck').empty().append(Karma.createImg('correct')).show();
             $('#result').attr('disabled', true);
             adjustScoreboard();
             timer = setTimeout(next, 1000);
         } else {
             karma.play('incorrect');
+	    $('#answerCheck').empty().append(Karma.createImg('incorrect')).show();
+	    $('#answerCheck').delay(1000).fadeOut(500);
             adjustScoreboard = scoreboardMiss;
             $('input#result').focus();
         }

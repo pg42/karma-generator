@@ -160,3 +160,8 @@ input.textBox {
     height: 68px;
     background: url('gameOver.png');
 }
+#answerCheck{
+    left:966px;
+    position:absolute;
+    top:500px;
+}

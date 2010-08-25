@@ -17,5 +17,7 @@ for i in range(0, 6):
 image('gameOver.png')
 image('bgLeft.png')
 image('check.png')
+image('correct.png','correct')
+image('incorrect.png','incorrect')
 
 footer_configuration(scoreboard=True, link_check_answer=True);
