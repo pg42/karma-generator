@@ -14,6 +14,6 @@ plants = [
     dict(name='grass', left=260, top=605, width=140),
     dict(name='plant', left=580, top=585, width=140)]
 
-register_objects('Click on each plant and listen', plants)
+register_objects('Click on the name of each plant or part of a plant and listen', plants)
 
 image('vocabImg.jpg')
