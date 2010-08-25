@@ -14,10 +14,5 @@ $(function() {
       for (var i = 0; i< TOTAL_QUES; i++) {
           $('#imgDisplay').append(createDiv('img'+i).addClass('default'));
       }
-
-      $("#footer").append(createDiv('timerBar')
-                          .append(createDiv('timerTitle').html('Timer:'))
-                          .append(createDiv('timerBox1').addClass('timerBoxes')));
-
       $('#timerBar').hide();
   });
