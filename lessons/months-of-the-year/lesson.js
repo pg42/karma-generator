@@ -1,4 +1,4 @@
-var month_names = [
+﻿var month_names = [
     'January',
     'February',
     'March',
@@ -14,6 +14,7 @@ var month_names = [
 ];
 
 var currentDroppedPositions = {};
+var gameContentDiv;
 
 function startLesson(karma, contentDiv) {
     var createMonthLessonBox = function (month_name) {
@@ -31,7 +32,7 @@ function startLesson(karma, contentDiv) {
     contentDiv
         .append(createDiv('main')
                 .append(createDiv('heading')
-                        .text('Learn the spelling of each month.')
+                        .text('Learn the spelling and order of the months.')
                         .addClass('topText')
                        )
                 .append(createDiv('monthLessonBoxes'))
@@ -42,6 +43,10 @@ function startLesson(karma, contentDiv) {
 }
 
 function startGame(karma, contentDiv) {
+    currentDroppedPositions = {};
+    if (contentDiv != null){
+        gameContentDiv = contentDiv;
+    }
     var ordinalSuffix = function (num){
         num = num % 100;
         if (num >= 11 && num <= 13){
@@ -60,7 +65,7 @@ function startGame(karma, contentDiv) {
     var createMonthDropBox = function (month_name, i) {
         var index = i + 1;
         return createDiv('monthDrop' + month_name).addClass('dropMonthArea')
-            .append(karma.createImg('small_' + month_name).addClass('imgSmall'))
+            .append(Karma.createImg('small_' + month_name).addClass('imgSmall'))
             .append(createDiv()
                     .text(index + ordinalSuffix(index))
                     .addClass('orderTxt')
@@ -98,10 +103,10 @@ function startGame(karma, contentDiv) {
             .append($(document.createElement('span')).text(month_suf));
     };
 
-    contentDiv
+    gameContentDiv.empty()
         .append(createDiv('main')
                 .append(createDiv('heading')
-                        .text('Fill in the blanks and place month in right order.')
+                        .text('Type in the missing letter and drag and drop the months in the right order:')
                         .addClass('topText')
                        )
                 .append(
@@ -112,7 +117,7 @@ function startGame(karma, contentDiv) {
                );
 
     $(month_names.map(createMonthDropBox)).appendTo($('#gameArea'));
-    $(Karma.shuffle(month_names).map(createMonthDragBox))
+    $(Karma.shuffle(month_names).slice(0,3).map(createMonthDragBox))
         .appendTo('#dragMonthArea');
 
     $('.dragObjects').draggable(
@@ -151,26 +156,39 @@ function startGame(karma, contentDiv) {
             }
         });
 
-    $("#linkCheck").clickable(
+    $("#linkCheck").unclickable().clickable(
         function(){
+			var correctCount = 0;
+            $('.check').html('');
+
             $('.dropObjects').each(
                 function (index, value) {
                     var correctLetter = function (input_field) {
                         return input_field.val().toLowerCase() == input_field.data('correctLetter').toLowerCase();
                     };
                     var dragChild = currentDroppedPositions[$(this).attr('id')];
+					if (dragChild == null){
+						return;
+					}
                     var correct =
-                        dragChild != null &&
                         $(this).data('monthName') == dragChild.data('monthName') &&
-                        correctLetter(dragChild.children('input')) ;
+                        correctLetter(dragChild.children('input'));
 
                     if (correct){
                         $(this).siblings('.check').html(Karma.createImg('correct'));
+                        correctCount ++;
                     } else {
                         $(this).siblings('.check').html(Karma.createImg('incorrect'));
                     }
                 }
             );
+			if (correctCount == $('.dragObjects').length){
+				// show good feedback, after a second show next question
+                Karma.play('correct');
+				$("#linkCheck").delay(1000).show(50, startGame);
+			} else {
+                Karma.play('incorrect');
+            }
         }).show();
 }
 
