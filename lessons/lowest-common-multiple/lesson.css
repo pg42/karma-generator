@@ -248,3 +248,14 @@ input.ansBox {
     color: #FF9900;
     border-bottom: 2px dotted #CCC;
 }
+
+.text{
+    font: 20px/25px Helvetica, Geneva, Arial, Verdana, sans-serif;
+}
+
+#instructions {
+    font:bold 32px Arial,Helvetica,sans-serif;
+    position:relative;
+    top:8px;
+    height:100px;
+}

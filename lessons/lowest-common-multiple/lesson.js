@@ -1,5 +1,6 @@
 var timer;
-var one_second = 1000;
+var one_second = 10;
+
 
 function displayImgInDiv(karma, parent, img, position) {
     return karma.createImg(img)
@@ -57,6 +58,40 @@ function createExplanationDisplayer(karma, content, explanations) {
         return explanations.length == 0;
     };
 }
+
+function createExplanationTextDisplayer(karma, content, explanations) {
+    return function () {
+        var explanation = explanations.shift();
+        if (explanation instanceof Function) {
+            explanation();
+        } else {
+            //displayImgInDiv(karma, content, explanation.img, explanation.pos);
+	    //alert(explanation);
+	    if(explanation.type == 'factor'){
+		createDiv()
+		    .append(explanation.title)
+		    .addClass('text')
+		    .css(explanation.css)
+		    .appendTo(content);
+		createDiv()
+		    .append(explanation.number)
+		    .addClass('text')
+		    .css(explanation.css)
+		    .css({left:350})
+		    .appendTo(content);
+	    }
+	    else{
+		createDiv()
+		    .append(explanation.title)
+		    .css(explanation.css)
+		    .addClass('text')
+		    .appendTo(content);
+	    }
+        }
+        return explanations.length == 0;
+    };
+}
+
 
 function repeat(x, n, separator) {
     var result = [];
@@ -161,22 +196,52 @@ function screen1(karma, content) {
     };
 
     var explanations = function () {
-        var explanations = [
-            { img: 'lesson1ImgDef0',
-              pos: { top: 262, left: 0 } },
-            { img: 'lesson1ImgDef1',
-              pos: { top: 332, left: 0 } },
-            { img: 'lesson1ImgDef2',
-              pos: { top: 402, left: 0 } },
-            { img: 'lesson1ImgDef3',
-              pos: { top: 482, left: 0 } },
-            { img: 'lesson1ImgDef4',
-              pos: { top: 562, left: 50 } }
-        ];
-        var displayNextExplanation = createExplanationDisplayer(karma,
+        var first_screen_text = [{
+			     title:'भ्यागुताले टेकेको स्थान:<br>2 को गुना ( Multiples of 2 )',
+			     number:'2&nbsp;&nbsp;4&nbsp;&nbsp;6&nbsp;&nbsp;8&nbsp;&nbsp;10&nbsp;&nbsp;12&nbsp;&nbsp;14&nbsp;&nbsp;16&nbsp;&nbsp;18',
+			     css:{position:'absolute',top : 262,left:0,color:'#0000FF'},
+			     type:'factor'
+			 },
+			 {
+			     title:'खरायोले टेकेको स्थान :<br>3 को गुना ( Multiples of 3 )',
+			     number:'3&nbsp;&nbsp;6&nbsp;&nbsp;9&nbsp;&nbsp;12&nbsp;&nbsp;15&nbsp;&nbsp;18',
+			     css:{position:'absolute',top : 332,left:0,color:'#7F007F'},
+			     type:'factor'
+			 },
+			 {
+			     title:'दुबैले टेकेको स्थान :<br>6 को गुना ( Multiples of 6 )',
+			     number:'6&nbsp;&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;18',
+			     css:{position:'absolute',top : 402,left:0,color:'#0000FF'},
+			     type:'factor'
+			 },
+			 {
+			     title:'सबै भन्दा पहिले टेकेको समान स्थान :',
+			     number:'6',
+			     css:{position:'absolute',top : 482,left:0,color:'#FF0000'},
+			     type:'factor'
+			 },
+			 {
+			     title:'2 र 3 को समान गुना Common Multiple :',
+			     number:'6',
+			     css:{position:'absolute',top : 542,left:0,color:'#FF0000'},
+			     type:'factor'
+			 },
+			 {
+			     title:'यो नै LCM ( Least Common Multiple ) अथवा लघुत्तम समापवर्त्य हो । त्यसैले खरायो र भ्यागुतो दुबैले टेकेको स्थान अथवा सबैभन्दा छोटो दूरी 6 फिटमा पर्दो रहेछ। ',
+			     css:{position:'absolute',top : 620,left:0,color:'#FF0000',align:'center'},
+			     type:'explain'},
+			 {
+			     title:'लघुत्तम समापवर्त्यलाई छोटकरीमा ल.स भनिन्छ र अङ्ग्रेजीमा L.C.M भनिन्छ।',
+			     css:{position:'absolute',top : 700,left:300,color:'#0000FF',align:'center'},
+			     type:'explain'
+			 }
+			];
+
+
+        var displayNextExplanation = createExplanationTextDisplayer(karma,
                                                                content,
-                                                               explanations);
-        displayNextExplanation();
+                                                               first_screen_text);
+        //displayNextExplanation();
         content
             .append(createDiv()
                     .addClass('nextBtn')
@@ -339,8 +404,11 @@ function screen3(karma, content) {
     var displayText = function (id, position, txt) {
         return displayTextInDiv(content, id, position, txt);
     };
-    displayImg('lesson3ImgDef0', { top: 0, left: 107 });
-    displayImg('lesson3ImgDef1', { top: 93, left: 333 });
+    //displayImg('lesson3ImgDef0', { top: 0, left: 107 });
+    createDiv('instructions')
+	.append('शुन्य बाहेकको सबैभन्दा सानो सङ्ख्या जसलाई दुई वा सोभन्दा बढी सङ्ख्याले भाग गर्दा नि:शेष भाग लाग्छ ।')
+	.appendTo(content);
+    displayImg('lesson3ImgDef1', { top: 105, left: 333 });
 
     var displayDefinition = function (config) {
         var input_box;
@@ -429,7 +497,7 @@ function screen3(karma, content) {
 
     var next_button = createDiv()
         .addClass('nextBtn')
-        .css({ top: 240, left: 467})
+        .css({ top: 250, left: 467})
         .clickable(displayLeftDefinition);
 
     content
@@ -445,13 +513,13 @@ function screen3(karma, content) {
 
     var exercises = [
         function () {
-            exercise(karma, content, tasks1, 'exercise1Title', true);
+            exercise(karma, content, tasks1, 'L.C.M पत्ता लगाऊ र सही उत्तरमा क्लिक गर:', true);
         },
         function () {
-            exercise(karma, content, tasks2, 'exerciseRestTitle', false);
+            exercise(karma, content, tasks2, 'कापीमा हिसाब गरेर L.C.M पत्ता लगाऊ :', false);
         },
         function () {
-            exercise(karma, content, tasks3, 'exerciseRestTitle', false);
+            exercise(karma, content, tasks3, 'कापीमा हिसाब गरेर L.C.M पत्ता लगाऊ :', false);
         }
     ];
 
@@ -489,6 +557,7 @@ function lcm(/* x1, x2, ... */) {
     var args = Array.prototype.slice.apply(arguments, []);
     return args.reduce(lcm2);
 }
+
 
 var tasks1 = [
     [45, 50],
@@ -631,10 +700,8 @@ function exercise(karma, content, tasks, subtitle, display_options) {
         scoreboardReset();
         $('#exerciseContainer')
             .empty()
-            .append(karma.createImg('exerciseTitle')
-                    .addClass('exerciseTitle'))
-            .append(karma.createImg(subtitle)
-                    .addClass('exerciseTitle'));
+	    .append(createDiv('instructions')
+		   .append(subtitle));
         $(range(0, tasks_at_a_time)
           .map(function (i) {
                    var task = remaining_tasks.shift();
