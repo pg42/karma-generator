@@ -40,15 +40,9 @@ function startLesson(karma){
 
     $('#content')
         .empty()
-        .append(createDiv('gameOver'))
-        .append(createDiv('imgLesson1')
-                .append(karma.createImg('imgTop'))
-                .css({
-                         zIndex: 101,
-                         position: 'absolute',
-                         top: 0,
-                         left: '27em'
-                     }))
+        .append(createDiv('instructions')
+                .html('छिटो गुणन गर्दै उत्तर टाइप गरेर Enter मा क्लिक गर : '))
+        .append(createDiv('gameOver'))        
         .append(createDiv('imgMainBridge')
                 .append(karma.createImg('main_bridge'))
                 .css({

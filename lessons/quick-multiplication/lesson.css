@@ -6,6 +6,14 @@
 
 /**** Game Styles  ****/
 
+#instructions {
+    font:bold 30px Arial,Helvetica,sans-serif;    
+    top:5px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 150;
+    position: relative;
+}
 #currentTitle{
     width: 150px;
     height: 80px;
