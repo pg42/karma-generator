@@ -14,6 +14,9 @@ function initialize() {
 function startGame() {
     clock.reset();
     $('#timerBar').show();
+    $('#instructions')
+        .empty()
+        .append(instructions());
 
     var images = range(0, TOTAL_QUES).map(function (i) { return 'img' + i; });
     images = Karma.shuffle(images);
@@ -64,6 +67,7 @@ function startGame() {
 
     var gameOver = function(){
         clock.stop();
+        $('#instructions').empty();
         $('#calcSection').empty();
         $('.correct').toggleClass('correct default');
         $('#tvLayer').toggleClass('tvOff tvOn').html('खेल खत्तम।');

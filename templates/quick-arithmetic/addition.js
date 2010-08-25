@@ -1,3 +1,7 @@
+function instructions() {
+    return 'छिटो जोड र उत्तर टाइप गरेर enter मा क्लिक गर';
+}
+
 function generateTask() {
     var addend1 = Karma.rand(10,99);
     var addend2 = Karma.rand(10,99);

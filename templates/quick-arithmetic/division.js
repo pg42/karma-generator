@@ -1,5 +1,9 @@
 // -*- coding: utf-8 -*-
 
+function instructions() {
+    return '';
+}
+
 function generateTask() {
     var divisor = Karma.rand(2,12);
     // Dividend should be between 20 and 99 (inclusive).

@@ -1,5 +1,11 @@
 ﻿@CHARSET "UTF-8";
 
+#instructions {
+    font: 30px Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 80px;
+}
+
 #section {
     width: 900px;
     height: 375px;
