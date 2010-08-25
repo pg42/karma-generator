@@ -8,7 +8,7 @@ $(function () {
       }
 
       $('#iframeLessonPlan').attr('src', '' + doc + '.html');
-      $('#kHeader').kHeader({ title: 'Teacher\'s Note', zoom: true });
+      $('#kHeader').kHeader({ title: 'Teacher\'s Note', zoom: false });
       $('#kHeaderBackBtn').click(function () { window.location = back; });
 
       Karma.scaleToViewport();
