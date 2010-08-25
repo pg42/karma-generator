@@ -169,7 +169,7 @@ function startLesson(karma, contentDiv) {
     contentDiv.empty();
     contentDiv
         .append(createDiv('instructions')
-                .html('हिसाब गरेर सही उत्तर टाइप गर :')) 
+                .html('हिसाब गरेर सही उत्तर टाइप गर :'))
         .append(createDiv('main')
                 .append(createDiv('imageArea')
                     .append(createDiv('questionTopImage'))
