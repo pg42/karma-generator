@@ -10,9 +10,5 @@ $(function() {
                           .append(createDiv('borderWall')
                                   .append(createDiv('imgDisplay')))
                           .append(createDiv('calcSection'))));
-
-      for (var i = 0; i< TOTAL_QUES; i++) {
-          $('#imgDisplay').append(createDiv('img'+i).addClass('default'));
-      }
       $('#timerBar').hide();
   });

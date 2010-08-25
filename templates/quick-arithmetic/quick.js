@@ -2,24 +2,63 @@ var clock;
 
 function initialize() {
     clock = createClock();
-    $('#imgDisplay').empty();
-    range(0, TOTAL_QUES).forEach(
-        function (i) {
-	    $('#imgDisplay').append(createDiv('img' + i)
-                                    .addClass('default'));
-        }
-    );
 }
 
-function startGame() {
+function startGame(karma) {
     clock.reset();
     $('#timerBar').show();
     $('#instructions')
         .empty()
         .append(instructions());
 
-    var images = range(0, TOTAL_QUES).map(function (i) { return 'img' + i; });
-    images = Karma.shuffle(images);
+    $('#imgDisplay').empty();
+
+    var clipRectangle = function (left, top, width, height) {
+        var right = left + width;
+        var bottom = top + height;
+        return 'rect(' + top + 'px ' + right + 'px '
+            + bottom + 'px ' + left + 'px)';
+    };
+
+    var createPiece = function (img_name, column, row, width, height) {
+        var left = column * width;
+        var top = row * height;
+
+        var result = $(document.createElement('div'))
+            .css({
+                     position: 'absolute',
+                     left: left,
+                     top: top,
+                     width: width,
+                     height: height
+                 });
+
+        karma.createImg(img_name)
+            .css({
+                     position: 'absolute',
+                     clip: clipRectangle(left, top, width, height),
+                     left: -left,
+                     top: -top
+                 })
+            .appendTo(result);
+        return result;
+    };
+
+    var all_pieces = [];
+    range(0, 4).forEach(
+        function (row) {
+            range(0, 4).forEach(
+                function (col) {
+                    var piece = createPiece('reward', col, row, 73, 52)
+                        .appendTo('#imgDisplay')
+                        .hide();
+                    all_pieces.push(piece);
+                }
+            );
+        }
+    );
+
+    var pieces = Karma.shuffle(all_pieces);
 
     clock.start();
 
@@ -52,9 +91,8 @@ function startGame() {
                         if ($('#answerBox').val() == task.answer) {
                             $('#answerBox').unbind('keypress');
 	                    Karma.audio.correct.play();
-                            $('#' + images.pop())
-                                .toggleClass('default correct');
-                            setTimeout(images.length ? nextQuestion : gameOver,
+                            pieces.pop().show();
+                            setTimeout(pieces.length ? nextQuestion : gameOver,
                                        1000);
                         } else {
 	                    Karma.audio.incorrect.play();
