@@ -168,6 +168,8 @@ function startLesson(karma, contentDiv) {
     contentDiv = $("#content");
     contentDiv.empty();
     contentDiv
+        .append(createDiv('instructions')
+                .html('हिसाब गरेर सही उत्तर टाइप गर :')) 
         .append(createDiv('main')
                 .append(createDiv('imageArea')
                     .append(createDiv('questionTopImage'))
