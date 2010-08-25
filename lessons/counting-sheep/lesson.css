@@ -51,6 +51,7 @@
 
 .sheep {
     position: absolute;
+    cursor: move;
 }
 
 #sheep1 {

@@ -61,7 +61,7 @@
 }
 
 .wordBankTxt {
-    cursor: pointer;
+    cursor: move;
     float: left;
     width: 98px;
     height: 20px;

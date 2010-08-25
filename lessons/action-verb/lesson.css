@@ -126,7 +126,7 @@ li {
     margin: 5px;
     text-align: center;
     font-size: large;
-	cursor:default;
+    cursor: move;
 }
 
 #dot {
