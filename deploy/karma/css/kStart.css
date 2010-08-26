@@ -1,3 +1,12 @@
+body {
+    /*
+      Disable the selection of text and don't change the cursor to a caret
+      over text.
+      */
+    -moz-user-select: none;
+    cursor: default;
+}
+
 #kStart {
     position: relative;
     margin: 0px auto;
