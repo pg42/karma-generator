@@ -61,13 +61,13 @@
     text-align: center;
     background: url(optionBorder.png) no-repeat;
     margin: 0 .6em 0 0;
-    padding-top: 4px;
+    padding-top: 5px;
 }
 
 .optImg:Hover {
     width: 200px;
     height: 64px;
-    background: url(optionBorderHover.png);
+    background: url(optionBorderHover.png) no-repeat;
 }
 
 #gameOver {
