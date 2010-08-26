@@ -1,4 +1,4 @@
-// This file can replace global.js in karma.
+﻿// This file can replace global.js in karma.
 
 function padLeft(str, pad_character, length) {
     str = str.toString();
@@ -58,7 +58,8 @@ function setUpPlayAgain(karma, start_game) {
  */
 function setUpLesson(initialize, start_game) {
     $(function () {
-          disableSelection($('body').get()[0]);
+          setSelectable($('body'), false);
+
           $('#linkPrevLesson').hide();
           $('#linkNextLesson').hide();
           $("#linkCheck").hide();
@@ -72,13 +73,15 @@ function setUpLesson(initialize, start_game) {
                   setUpPlayAgain(karma, start_game);
                   initialize(karma, $content);
                   start_game(karma, $content);
+                  setSelectable($('input'), true);
               });
       });
 }
 
 function setUpMultiScreenLesson(draw_screen_fns) {
     $(function () {
-          disableSelection($('body').get()[0]);
+          setSelectable($('body'), false);
+
           $('#linkPrevLesson').hide();
           $('#linkNextLesson').hide();
           $("#linkCheck").hide();
@@ -106,7 +109,8 @@ function setUpMultiScreenLesson(draw_screen_fns) {
               } else {
                   $('#linkNextLesson').show();
               }
-	      draw_screen_fns[current_screen](karma, $content);
+              draw_screen_fns[current_screen](karma, $content);
+              setSelectable($('input'), true);
           };
 
           $('#linkNextLesson')
@@ -136,15 +140,26 @@ function setUpMultiScreenLesson(draw_screen_fns) {
       });
 }
 
-function disableSelection(target) {
+
+function setSelectable(target, is_selectable) {
+    $(target).map(function(index, elem){
+        setElementSelectable(elem, is_selectable);
+    });
+}
+
+function setElementSelectable(target, is_selectable) {
+    if (is_selectable != true) is_selectable = false;
+
     if (typeof target.onselectstart != 'undefined') { //IE
-        target.onselectstart = function () { return false; };
+        target.onselectstart = function () { return is_selectable; };
     } else if (typeof target.style.MozUserSelect != 'undefined') { //Firefox
-        target.style.MozUserSelect = 'none';
+        target.style.MozUserSelect = is_selectable ? 'text' : '-moz-none';
     } else if (typeof target.style.KhtmlUserSelect != 'undefined') { //Webkit
-        target.style.KhtmlUserSelect = 'none';
+        target.style.KhtmlUserSelect = is_selectable ? 'element' : 'none';
     } else { //Opera
-        target.onmousedown = function () { return false; };
+        target.onmousedown = function () { return is_selectable; };
+    }
+    if (!is_selectable){
         target.style.cursor = 'default';
     }
 }

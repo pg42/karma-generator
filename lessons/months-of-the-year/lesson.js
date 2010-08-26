@@ -97,7 +97,7 @@ function startGame(karma, contentDiv) {
                     .addClass('blankBox')
                     .Watermark('?')
                     .clickable(function(){
-                                   this.select();
+                                   $(this).select();
                                })
                    )
             .append($(document.createElement('span')).text(month_suf));

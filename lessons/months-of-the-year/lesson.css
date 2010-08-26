@@ -79,10 +79,11 @@
 
 input.blankBox {
     font: 22px/25px bold Arial,Verdana,Geneva,Helvetica;
-    height: 20px;
+    height: 29px;
     width: 25px;
     color: #3300CC;
     text-align: center;
+    border: none;
 }
 
 .imgSmall {
