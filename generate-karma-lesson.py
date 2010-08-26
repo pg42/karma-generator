@@ -283,7 +283,7 @@ def generate_header(karma, dir, body, titles):
                                              id='linkOle')
 
 
-def generate_footer(body):
+def generate_footer(subject, body):
     footer = body.div(id='footer')
 
     config = theLesson.footer_configuration
@@ -295,7 +295,11 @@ def generate_footer(body):
     if config['scoreboard']:
         footer.div(id='score_box', display='none')
 
-    footer.div(className='botbtn_right').div(title='Play Again', id='linkPlayAgain')
+    play_again = footer.div(className='botbtn_right');
+    if subject == 'English':
+        play_again.div(title='Play Again', id='linkPlayAgain', className='english').text('Play Again')
+    else:
+        play_again.div(title='Play Again', id='linkPlayAgain', className='nepali').text(u'फेरी खेलौँ')
 
     if config['link_check_answer']:
         footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
@@ -541,7 +545,7 @@ class Lesson():
             titles.append(self.start_title)
         generate_header(self.karma, self.directory, body, titles)
         body.children.extend(self.divs)
-        generate_footer(body)
+        generate_footer(self.subject(), body)
         doc.print_on(stream)
 
     def print_karma_js_on(self, stream):
