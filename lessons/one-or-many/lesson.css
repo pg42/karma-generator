@@ -11,8 +11,8 @@
 
 #instructions {
     font: 24px Arial, Helvetica, sans-serif;
-    position: absolute;
-    top: 8px;
+    position: relative;
+    top: -66px;
 }
 
 #tabs {
@@ -69,7 +69,7 @@
 
 #dot {
     position: absolute;
-    top: 30em;
+    top: 430px;
     right: 5%;
     width: 36px;
     height: 60px;
