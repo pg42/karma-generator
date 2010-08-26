@@ -253,8 +253,7 @@ function handleDrop(karma, event, ui) {
         draggable
             .draggable({ disabled: true })
             .unbind('mouseenter')
-            .unbind('mouseleave')
-            .css({ 'z-index': zIndex++ });
+            .unbind('mouseleave');
     } else {
         karma.play('incorrect');
         draggable.animate(draggable.data('original_position'), 1000);
@@ -309,11 +308,15 @@ function createLesson (karma, content, lesson_data) {
                                  .addClass('dragObjects')
                                  .append(Karma.createImg(img.name))
                                  .data('shape', img.shape)
-                                 .data('original_position', { top: 0, left: 0 })
+                                 .data('original_position', { top: 0, left: 0})
                                 );
                  });
     $('.dragObjects')
-        .draggable({ revert: 'invalid' });
+        .draggable( { revert: 'invalid',
+		      start: function(evt,ui){
+			  $(this).css({ 'z-index': zIndex++});
+		      }
+		    });
     $('.dropObjects')
         .droppable({
                        hoverClass: 'drophover',
