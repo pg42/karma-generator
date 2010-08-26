@@ -59,8 +59,9 @@
     height: 64px;
     font: 40px/50px Verdana, Geneva, Arial, sans-serif;
     text-align: center;
-    background: url(optionBorder.png);
+    background: url(optionBorder.png) no-repeat;
     margin: 0 .6em 0 0;
+    padding-top: 4px;
 }
 
 .optImg:Hover {
