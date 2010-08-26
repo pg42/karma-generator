@@ -9,11 +9,6 @@ function createButton(karma, button_spec) {
 
 
 function screen1(karma, content) {
-    // Kludge
-    if (!$('#namesOfColors').length) {
-       content.after(createDiv('namesOfColors')
-                     .append(karma.createImg('names_of_colors')));
-    }
     var panels = [
         {
             original_img: 'fish',
@@ -166,18 +161,18 @@ function screen3(karma, content) {
         [{ kind: 'text', label: 'The turtle is ' },
          { kind: 'button', label: 'purple.', color: 'purple', audio: 'purple',
            click: showImage(karma, '#turtle', 'turtle_purple') }],
-        [{ kind: 'text', label: 'His name is Punckle.' }],
-        [{ kind: 'text', label: 'He has a ' },
+        [{ kind: 'text', label: 'Its name is Punckle.' }],
+        [{ kind: 'text', label: 'It has a ' },
          { kind: 'button', label: 'brown', color: 'brown', audio: 'brown' },
          { kind: 'button', label: 'uncle.', color: 'yellow', audio: 'uncle' }],
         [{ kind: 'text', label: 'The turtle ate a ' },
          { kind: 'button', label: 'bean.', color: 'yellow', audio: 'bean' }],
-        [{ kind: 'text', label: 'He became ' },
+        [{ kind: 'text', label: 'It became ' },
          { kind: 'button', color: 'green', audio: 'green',
            click: showImage(karma, '#turtle', 'turtle_green') }],
         [{ kind: 'text', label: 'The turtle went to '},
          { kind: 'button', label: 'bed.', color: 'yellow', audio: 'bed' }],
-        [{ kind: 'text', label: 'He became '},
+        [{ kind: 'text', label: 'It became '},
          { kind: 'button', label: 'red.', color: 'red', audio: 'red',
            click: showImage(karma, '#turtle', 'turtle_red') }]
     ];
@@ -212,9 +207,9 @@ function screen4(karma, content) {
         [{ kind: 'text', label: 'This animal is ' },
          { kind: 'button', label: 'yellow.', color: 'yellow', audio: 'yellow',
            click: showImage(karma, '#giraffe', 'giraffe_yellow') }],
-        [{ kind: 'text', label: 'She is a tall ' },
+        [{ kind: 'text', label: 'It is a tall ' },
          { kind: 'button', label: 'fellow.', color: 'yellow', audio: 'fellow' }],
-        [{ kind: 'text', label: 'We go to sea the birds.' }],
+        [{ kind: 'text', label: 'We go to see the birds.' }],
         [{ kind: 'text', label: 'A bird just '},
          { kind: 'button', label: 'flew.', color: 'yellow', audio: 'flew' }],
         [{ kind: 'text', label: 'Its color is '},
@@ -262,7 +257,7 @@ function screen5(karma, content) {
          { kind: 'button', color: 'orange', audio: 'orange',
            click: showImage(karma, '#orange', 'orange') },
          { kind: 'text', label: ' in ', className: 'smallclickTextInfo' },
-         { kind: 'button', label: 'november.', color: 'yellow', audio: 'november' }]
+         { kind: 'button', label: 'November.', color: 'yellow', audio: 'november' }]
     ];
     var images = [
         { name: 'orange', css: { top: 190, left: 600 } },

@@ -9,6 +9,12 @@
     padding-top: 100px;
 }
 
+#instructions {
+    font: 24px Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 8px;
+}
+
 #tabs {
     margin-left: 2em;
     width: 650px;

@@ -207,6 +207,8 @@ function startLesson(karma, content) {
 
     content
         .empty()
+        .append(createDiv('instructions')
+               .append('Click the following to select questions. Drag and drop the words for the correct answer.'))
         .append(createDiv('tabs'))
         .append(createDiv('section')
                .append(createDiv('imgItems'))

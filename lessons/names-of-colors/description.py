@@ -1,5 +1,5 @@
-﻿lesson(grade=6, subject='English', title='Names of Colors', week=6,
-    summary=u'रमाइला कविताहरूद्वारा रङ्गहरू चिन्ने क्रियाकलाप')
+﻿lesson(grade=6, subject='English', title='Names of Colours', week=6,
+       summary=u'रमाइला कविताहरूद्वारा रङ्गहरू चिन्ने क्रियाकलाप')
 
 css('global')
 css('lesson.css')
@@ -69,7 +69,6 @@ image('grey_glass.png', 'grey_glass')
 image('head.png', 'head')
 image('house.png', 'house')
 image('mouse.png', 'mouse')
-image('names_of_colors.png', 'names_of_colors')
 image('orange.png', 'orange')
 image('orange_green.png', 'orange_green')
 image('pink_glass.png', 'pink_glass')
