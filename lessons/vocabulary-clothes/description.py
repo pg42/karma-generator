@@ -1,4 +1,4 @@
-﻿lesson(grade=2, subject='English', title='Vocabulary Clothes', week=15,
+﻿lesson(grade=2, subject='English', title='VOCABULARY COLTHES', week=15,
        summary=u'केही लुगाहरूका नाम सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')

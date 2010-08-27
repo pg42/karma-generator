@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Adding and Subtracting Variables', week=10,
+lesson(grade=6, subject='Maths', title='ADDING AND SUBTRACTING VARIABLES', week=10,
        lesson_title=u'चलहरूको जोड र घटाउ',
        summary=u'चलहरूको जोड र घटाउ गर्न सिकाउने क्रियाकलाप')
 

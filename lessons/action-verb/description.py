@@ -1,4 +1,4 @@
-﻿lesson(grade=6, subject='English', title='Action Verb', week=3, locale='en',
+﻿lesson(grade=6, subject='English', title='PRESENT CONTINUOUS WORDS', week=3, locale='en',
     summary=u'Action verbs को प्रयोग सिकाउने क्रियाकलाप')
 
 data = [

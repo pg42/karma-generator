@@ -1,4 +1,4 @@
-﻿lesson(grade=6, subject='English', title='Prepositions', week=11,
+﻿lesson(grade=6, subject='English', title='PREPOSITIONS', week=11,
     summary=u'Prepositions को प्रयोग सिकाउने क्रियाकलाप')
 
 css('global')

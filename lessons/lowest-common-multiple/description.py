@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Lowest Common Multiple', week=14,
+lesson(grade=6, subject='Maths', title='LOWEST COMMON MULTIPLES', week=14,
     lesson_title=u'लघुत्तम समापवर्तक',
     summary=u'दुई सङ्ख्याको लघुत्तम समापवर्त्य (ल.स ) निकाल्न सिकाउने क्रियाकलाप')
 

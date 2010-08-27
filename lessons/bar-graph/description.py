@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=2, subject='Maths', title='Bar Graph', week=16,
+lesson(grade=2, subject='Maths', title='PICTOGRAPH', week=16,
     lesson_title=u'ग्राफ',
     summary=u'ग्राफ बुझ्न सिकाउने क्रियाकलाप')
 

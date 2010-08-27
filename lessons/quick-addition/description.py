@@ -1,4 +1,4 @@
-﻿lesson(grade=6, subject='Maths', title='Quick Addition', week=1,
+﻿lesson(grade=6, subject='Maths', title='QUICK ADDITION', week=1,
        lesson_title=u'द्रुत जोड',
        summary=u'छिटोछिटो जोड गर्न सिकाउने क्रियाकलाप')
 

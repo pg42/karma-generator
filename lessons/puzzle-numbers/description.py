@@ -1,4 +1,4 @@
-﻿lesson(grade=2, subject='Maths', title='Numeric Puzzle', week=1,
+﻿lesson(grade=2, subject='Maths', title='NUMERIC PUZZLE', week=1,
     lesson_title = u'सङ्ख्याको क्रम',
     summary=u'सङ्ख्याहरूको क्रम मिलाउन सिक्ने क्रियाकलाप')
 

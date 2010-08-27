@@ -1,4 +1,4 @@
-﻿lesson(grade=6, subject='English', title='Syllables', week=17,
+﻿lesson(grade=6, subject='English', title='SYLLABLES', week=17,
     summary=u'दुईओटा Syllables मिलेर बनेका शब्दहरू उच्चारण गर्न सिक्ने क्रियाकलाप')
 
 for f in ['ui.core',

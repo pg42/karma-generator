@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Variables', week=10,
+﻿# -*- coding: utf-8 -*-
+lesson(grade=6, subject='Maths', title='ALGEBRAIC VARIABLES', week=10,
        lesson_title=u'बीजगणितीय चलहरू',
        summary=u'बीजगणितीय चलहरू बुझाउने क्रियाकलाप')
 

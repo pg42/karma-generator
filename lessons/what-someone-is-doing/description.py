@@ -1,5 +1,5 @@
-﻿lesson(grade=2, subject='English', title='What Someone is Doing', week=15,
-    lesson_title='What is Someone Doing?',
+﻿lesson(grade=2, subject='English', title='WHAT SOMEONE IS DOING', week=15,
+    lesson_title='WHAT SOMEONE IS DOING',
     summary=u'प्रश्न र उत्तर सुन्दै र पढ्दै कसले के गर्दैछ बुझ्ने क्रियाकलाप')
 
 css('global')

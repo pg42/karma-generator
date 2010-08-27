@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Go Shopping', week=2,
+lesson(grade=6, subject='Maths', title='GO SHOPPING', week=2,
        browser_title='Class 6 Maths Go Shopping',
        lesson_title=u'किनमेल',
        summary=u'किनमेल गर्न सिकाउने क्रियाकलाप')

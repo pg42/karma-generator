@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-lesson(grade=2, subject='Maths', title='Adding Numbers', week=4,
+lesson(grade=2, subject='Maths', title='ADDING OBJECTS', week=3,
     lesson_title=u'वस्तुहरूको जोड',
-    summary=u'दससम्मको जोड गर्न सिकाउने क्रियाकलापदससम्मको जोड गर्न सिकाउने क्रियाकलाप')
+    summary=u'वस्तुहरूको जोड गर्न सिकाउने क्रियाकलाप')
 
 
 css('global')

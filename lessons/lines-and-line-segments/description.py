@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Lines and Line Segments', week=8,
+lesson(grade=6, subject='Maths', title='LINES AND LINE SEGMENTS', week=8,
     lesson_title=u'रेखा र रेखाखण्डहरू',
     summary=u'ज्यामितीय रेखाका परिभाषाहरू सिकाउने क्रियाकलाप')
 

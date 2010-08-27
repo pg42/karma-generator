@@ -1,4 +1,4 @@
-﻿lesson(grade=2, subject='English', title='Vocabulary Food', week=16,
+﻿lesson(grade=2, subject='English', title='VOCABULARY FOOD', week=16,
     summary=u'केही खानेकुराका नामहरू सिक्ने क्रियाकलाप')
 
 include('../../templates/vocabulary/description.py')

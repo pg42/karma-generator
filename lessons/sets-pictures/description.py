@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Sets', week=5,
+lesson(grade=6, subject='Maths', title='SETS', week=5,
     lesson_title=u'समूहको ज्ञान',
     summary=u'समूह छुट्याउन सिकाउने क्रियाकलाप')
 

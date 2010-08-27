@@ -1,4 +1,4 @@
-﻿lesson(grade=6, subject='Maths', title='Parallel Lines', week=9,
+﻿lesson(grade=6, subject='Maths', title='PARALLEL LINES', week=9,
     lesson_title=u'समानान्तर रेखाहरू',
     summary=u'समानान्तर रेखाहरू बुझाउने क्रियाकलाप')
 

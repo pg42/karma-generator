@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-lesson(grade=2, subject='English', title='Color Identification', week=19,
+lesson(grade=2, subject='English', title='COLOUR IDENTIFICATION', week=19,
        summary=u'चित्र हेरेर विभिन्न रङ्गहरू चिन्ने क्रियाकलाप')
 
 java_script('configuration.js')
