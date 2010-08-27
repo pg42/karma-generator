@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-lesson(grade=6, subject='Maths', title='Matching Angles and Shapes', week=5,
+lesson(grade=6, subject='Maths', title='Matching Angles and Shapes', week=3,
     lesson_title=u'ज्यामितीय आकारका नामहरू',
     summary=u'ज्यामितीय आकारका नामहरू सिक्ने क्रियाकलाप')
 
