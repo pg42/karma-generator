@@ -96,7 +96,7 @@ var words = [
     }
 ];
 
-var colors = ['green', 'purple', 'orange', 'brown', 'pink'];
+var colors = ['green', 'purple', 'orange', 'brown'];
 
 var alphabet = range(0, 26).map(
     function (i) {
