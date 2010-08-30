@@ -1,6 +1,6 @@
-﻿lesson(grade=6, subject='English', title='SENTENCE PRACTICE I', week=12,
-    browser_title='Sentence Practice I',
-    lesson_title='Sentence Practice I',
+﻿lesson(grade=6, subject='English', title='ASENTENCE PRACTICE I', week=12,
+    browser_title='SENTENCE PRACTICE I',
+    lesson_title='SENTENCE PRACTICE I',
     summary=u'सही शब्दहरू प्रयोग गरेर वाक्य बनाउन सिक्ने क्रियाकलाप')
 
 css('global')
