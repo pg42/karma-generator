@@ -1,7 +1,7 @@
 var arrows = range(1, 9).map(function (i) { return 'arrow' + i; });
 
 setUpSimpleMCQuiz(
-    { title: 'Identify the direction' },
+    { title: 'बायाँतिर भएको तीरसगँ मिल्ने तीरमा क्लिक गर :' },
     {
         presentOption: function (x) {
             return createDiv()
