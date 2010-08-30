@@ -1,3 +1,5 @@
+var pieces_cache = {};
+
 function clipRectangle(left, top, width, height) {
     var right = left + width;
     var bottom = top + height;
@@ -120,13 +122,13 @@ function shufflePieces(pieces) {
 }
 
 function showReward(image) {
-    $('.piece').remove();
+    $('.piece').hide();
     image.fadeIn(3000);
 }
 
 
 function checkGameOver(image) {
-    if (wrongCount($('.piece')) == 0) {
+    if (wrongCount($('.piece:visible')) == 0) {
         showReward(image);
     }
 }
@@ -149,17 +151,25 @@ function initialize(karma) {
                 .append(instructions()));
     $(puzzles.map(function (puzzle) { return createThumbnail(karma, puzzle); }))
         .appendTo($imageBar);
+
+    var $imgMain = $('#imgMain');
+    puzzles.forEach(function (puzzle) {
+                        var img = karma.createImg(puzzle)
+                            .hide()
+                            .appendTo($imgMain);
+                        var pieces = makePieces(img, 4, 4);
+                        img.addClass('reward');
+                        $(pieces).hide();
+                        pieces_cache[puzzle] = pieces;
+                    });
 }
 
 function startGame(karma, puzzle) {
     var $imgMain = $('#imgMain');
-    $imgMain.empty();
-    var img = karma.createImg(puzzle)
-        .hide()
-        .appendTo($imgMain);
-    var pieces = makePieces(img, 4, 4);
-    $(shufflePieces(pieces)).appendTo($('#imgMain'));
-    img.attr('id', 'reward');
+    $('.piece').hide();
+    $('.reward').hide();
+    var pieces = pieces_cache[puzzle];
+    $(shufflePieces(pieces)).appendTo($imgMain).show();
 }
 
 setUpLesson(initialize, function(karma) { startGame(karma, puzzles[0]); });
