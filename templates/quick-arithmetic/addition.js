@@ -1,5 +1,5 @@
 function instructions() {
-    return 'छिटो जोड र उत्तर टाइप गरेर enter मा क्लिक गर';
+    return 'छिटो जोड र उत्तर टाइप गरेर enter मा क्लिक गर :';
 }
 
 function generateTask() {
