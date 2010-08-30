@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='ADDING AND MULTIPLYING VARIABLES', week=11,
     browser_title='Class 6 Maths Adding and Multiplying Variables',
     lesson_title=u'चलहरूको जोड र गुणन',

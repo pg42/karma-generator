@@ -9,6 +9,7 @@ table, td{
 
 table {
 	border-collapse: collapse;
+    font-size:100%;
 }
 
 #heading {

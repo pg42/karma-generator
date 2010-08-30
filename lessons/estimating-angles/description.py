@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='ESTIMATING ANGLES', week=16,
     lesson_title=u'कोणको माप',
     summary=u'प्रोटेक्टरको प्रयोग गरी कोणको माप गर्न सिकाउने क्रियाकलाप')

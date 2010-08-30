@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=6, subject='Maths', title='GO SHOPPING', week=2,
        browser_title='Class 6 Maths Go Shopping',
        lesson_title=u'किनमेल',

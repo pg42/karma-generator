@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 lesson(grade=2, subject='Maths', title='CURRENCY NOTES', week=18,
        lesson_title=u'रुपैयाँ चिनौ',
        summary=u'चलनचल्तिका रुपैयाँ चिन्ने क्रियाकलाप')
