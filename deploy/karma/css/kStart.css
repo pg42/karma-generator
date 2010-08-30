@@ -17,6 +17,7 @@ body {
     background-image: url(../image/bg.png);
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
+    font-family: samanata;
 }
 
 #kStart .center {
@@ -91,7 +92,7 @@ body {
 }
 
 #lessonTitle>a {
-    font-size: 2.5em;
+    font-size: 3.5em;
     color: yellow;
     text-decoration: none;
 }
