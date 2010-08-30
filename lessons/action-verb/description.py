@@ -1,5 +1,6 @@
-﻿lesson(grade=6, subject='English', title='PRESENT CONTINUOUS SENTENCES', week=3, locale='en',
-    summary=u'Action verbs को प्रयोग सिकाउने क्रियाकलाप')
+# -*- coding: utf-8 -*-
+lesson(grade=6, subject='English', title='PRESENT CONTINUOUS SENTENCES', week=3, locale='en',
+       summary=u'Action verbs को प्रयोग सिकाउने क्रियाकलाप')
 
 data = [
     dict(subject='he',
