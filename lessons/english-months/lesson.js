@@ -122,7 +122,7 @@ function startGame(karma, contentDiv) {
     gameContentDiv.empty()
         .append(createDiv('main')
                 .append(createDiv('heading')
-                        .text('Type in the missing letter and drag and drop'
+                        .text('Type in the missing letter then drag and drop'
                               + ' the months in the right order:')
                         .addClass('topText'))
                 .append(createDiv('gameArea')
