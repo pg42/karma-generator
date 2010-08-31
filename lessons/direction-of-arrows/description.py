@@ -1,5 +1,5 @@
 ﻿lesson(grade=2, subject='English', title='DIRECTION OF ARROWS', week=1,
-    summary=u'Arrow को दीशा छुट्यउने क्रियाकलाप')
+    summary=u'Arrow को दीशा छुट्याउने क्रियाकलाप')
 
 css('global')
 css('lesson.css')

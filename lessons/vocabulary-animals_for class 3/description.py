@@ -1,4 +1,4 @@
-﻿lesson(grade=3, subject='English', title='cANIMALS', week=4,
+﻿lesson(grade=3, subject='English', title='BANIMALS', week=4,
     lesson_title='ANIMALS',
     summary=u'केही जङ्गली जनावरहरूका नाम सिक्ने क्रियाकलाप')
 

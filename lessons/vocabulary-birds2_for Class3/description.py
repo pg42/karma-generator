@@ -1,4 +1,4 @@
-﻿lesson(grade=3, subject='English', title='VOCABULARY BIRDS', week=4,
+﻿lesson(grade=3, subject='English', title='AVOCABULARY BIRDS', week=4,
     lesson_title='Vocabulary: Birds',
     summary=u'केही चराहरूका नाम सिक्ने क्रियाकलाप')
 
