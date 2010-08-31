@@ -1,261 +1,162 @@
-var img_names = ['ball', 'banana', 'balloon', 'chilli', 'fish', 'flower'];
-var timer;
+var LEVELS = 5;
 
-var BOX_SIZE = 190;
+var boxes = [
+    {
+        width: '3.7em',
+        height: '2.6em',
+        right: '11em',
+        bottom: '.9em'
+    },
+    {
+        width: '3.3em',
+        height: '2.8em',
+        right: '7.5em',
+        bottom: '1.6em'
+    },
+    {
+        width: '3.8em',
+        height: '2.9em',
+        right: '3.5em',
+        bottom: '3.0em'
+    },
+    {
+        width: '3.8em',
+        height: '2.6em',
+        right: '3.5em',
+        bottom: '0.1em'
+    },
+    {
+        width: '3.3em',
+        height: '2.6em',
+        right: '0.1em',
+        bottom: '1.6em'
+    }
+];
 
-function initialize(karma) {
-    var createBox = function (id) {
-        return createDiv(id).addClass('box');
-    };
-    var createChimp = function (id) {
-        return karma.createImg(id)
-            .attr('id', id)
-            .addClass('chimp')
-            .hide();
-    };
-    $('#content')
-        .append(createDiv('instructions')
-                .append('जोड र मिल्ने उत्तर भएको कोठामा क्लिक गर'))
-        .append(createDiv('main')
-                .append(createDiv('top')
-                        .append(createDiv('topLeftArea')
-                                .append(createBox('topLeftBox')))
-                        .append(createDiv('topMiddleArea')
-                                .append(karma.createImg('plussign')
-                                        .attr('id', 'plusSign')))
-                        .append(createDiv('topRightArea')
-                                .append(createBox('topRightBox'))))
-                .append(createDiv('bottom')
-                        .append(createDiv('bottomLeft')
-                                .addClass('bottom')
-                                .append(createBox('bottomLeftBox')
-                                        .addClass('bottomCard')))
-                        .append(createDiv('bottomMiddle')
-                                .addClass('bottom')
-                                .append(createBox('bottomMiddleBox')
-                                        .addClass('bottomCard')))
-                        .append(createDiv('bottomRight')
-                                .addClass('bottom')
-                                .append(createBox('bottomRightBox')
-                                        .addClass('bottomCard')))))
-        .append(createDiv('side')
-                .append(createDiv()
-                        .addClass('sideItem')
-                        .append(karma.createImg('scorebox')
-                                .attr('id', 'timer'))
-                        .append(createDiv('timerIndicator')))
-                .append(createDiv()
-                        .addClass('sideItem')
-                        .append(karma.createImg('scorebox')
-                                .attr('id', 'scoreBox'))
-                        .append(createDiv('scoreBoxText')))
-                .append(createDiv()
-                        .addClass('sideItem')
-                        .append(createDiv('chimpDiv')
-                                .append(createChimp('normal_chimp'))
-                                .append(createChimp('happy_chimp'))
-                                .append(createChimp('sad_chimp')))))
-        .append(createDiv('overlay'))
-        .append(createDiv('overlayPaper'));
+function initialize() {
+    scoreboardInitialize({});
 }
+
+function createSpan(id) {
+    return $(document.createElement('span'))
+        .attr('id', id);
+}
+
+function createOptionBox(css) {
+    return createDiv()
+        .addClass('optionBox')
+        .css(css);
+}
+
+function combinations(list1, list2) {
+    var result = [];
+    list1.forEach(function (x1) {
+                      list2.forEach(function (x2) {
+                                        result.push([x1, x2]);
+                                    });
+                  });
+    return result;
+}
+
+function all_tasks_for_level(level) {
+    var r = range((level - 1) * 2, level * 2 + 1);
+    var result = Karma.shuffle(combinations(r, r));
+    return result.map(
+        function (combination) {
+            var x1 = combination[0];
+            var x2 = combination[1];
+            var sum = x1 + x2;
+            return {
+                x1: x1,
+                x2: x2,
+                correct_option: sum,
+                options: randomElementsIncluding(range(level * 2,
+                                                       (level + 1) * 3 + 1),
+                                                 sum,
+                                                 5)
+            };
+        }
+    );
+}
+
+function task_generator_for_level(level) {
+    var tasks = all_tasks_for_level(level);
+    var i = 0;
+    return function () {
+        var result = tasks[i];
+        i = (i + 1) % tasks.length;
+        return result;
+    };
+}
+
+var timer;
 
 function startLesson(karma) {
     clearTimeout(timer);
-    $('.chimp').hide();
-    $('#normal_chimp').show();
-    $('#overlay').hide();
-    $('#overlayPaper').hide();
-    var level = 0;
-    var choice_papers = [$('#bottomLeftBox'),
-                         $('#bottomMiddleBox'),
-                         $('#bottomRightBox')];
-    var score = 0;
+    scoreboardReset();
+    $('#content')
+        .empty()
+        .append(createDiv('instructions')
+                .append('जोड र सही उत्तरमा क्लिक गर'))
+        .append(createDiv('questArea')
+                .append(createSpan('number1').html(' &nbsp;&nbsp; '))
+                .append(createSpan('plussign').html(' + '))
+                .append(createSpan('number2').html(' &nbsp;&nbsp; ')))
+        .append(createDiv('optionArea'));
 
-    var processAnswer = function (is_correct) {
-        $('.bottomCard').unclickable();
-        if (is_correct) {
-            score++;
-        } else {
-            score--;
-        }
-        animateChimp(is_correct);
-        next();
-    };
+    var option_boxes = $(boxes).map(function (i, css) {
+                                        return createOptionBox(css);
+                                    })
+        .appendTo('#optionArea');
 
-    var displayScore = function () {
-        $('#scoreBoxText').html(score);
-    };
+    var level = 1;
+    var correct_count = 0;
 
-    var displayObjects = function (where, what, n) {
-        // The initial points ensure that we stay out of the (rounded) corners.
-        var r = 25;
-        var points = [{ x: r, y: r },
-                      { x: r, y: BOX_SIZE - r },
-                      { x: BOX_SIZE - r, y: r },
-                      { x: BOX_SIZE - r, y: BOX_SIZE - r }];
-        var includes = function (rectangle, point) {
-            var top_left = rectangle.top_left;
-            var bottom_right = rectangle.bottom_right;
-            var x = point.x;
-            var y = point.y;
-            return (top_left.x <= x) && (x <= bottom_right.x) &&
-                (top_left.y <= y) && (y <= bottom_right.y);
-        };
-        var is_good = function (rectangle) {
-            // We don't want any object to be obscured, so we make sure
-            // that the (bounding) rectangle doesn't include any of the
-            // other rectangles' center points.
-            // This ensures that every center point always is visible.
-            return !points.some(function (point) {
-                                    return includes(rectangle, point);
-                                });
-        };
-        where.empty();
-        range(0, n).forEach(
-            function () {
-                var img = karma.createImg(what)
-                    .addClass('object')
-                    .appendTo(where);
-                var top, left;
-                var w, h;
-                do {
-                    w = img.width();
-                    h = img.height();
-                    var inset = 1;
-                    top = Karma.random(inset, BOX_SIZE - inset - h);
-                    left = Karma.random(inset, BOX_SIZE - inset - w);
-                } while (!is_good({
-                                      top_left: { x: left, y: top },
-                                      bottom_right: { x: left + w,
-                                                      y: top + h }
-                                  }));
-                img.css({
-                            position: 'absolute',
-                            left: left,
-                            top: top
-                        });
-                points.push({ x: left + w / 2,
-                              y: top + h / 2 });
-            }
-        );
-    };
-
-    var animateChimp = function (correct) {
-        $('.chimp').hide();
-        $(correct ? '#happy_chimp' : '#sad_chimp').show();
-        setTimeout(function () {
-                       $('.chimp').hide();
-                       $('#normal_chimp').show();
-                   },
-                   800);
-    };
-
-    var resetTimer = function () {
-        $('#timerIndicator')
-            .css({
-                     position: 'absolute',
-                     width: 85,
-                     height: 20,
-                     left: 33,
-                     top: 37,
-                     backgroundColor: 'white'
-                 });
-    };
-
-    var startTimer = function () {
-        resetTimer();
-        $('#timerIndicator')
-            .animate({ top: 130 },
-                     12000 - level * 1000,
-                     function () {
-                         karma.play('trigger');
-                         // Timeout is needed because otherwise it doesn't
-                         // start counting down again after time runs out.
-                         setTimeout(function () { processAnswer(false); }, 0);
-                     });
-    };
+    var task_generator = task_generator_for_level(level);
+    var current_task;
 
     var gameOver = function () {
-        resetTimer();
-        $('#scoreBoxText').empty();
-        $('.object').remove();
-        $('#overlay')
-            .show()
-            .css({
-                     position: 'absolute',
-                     background: 'white',
-                     opacity: 0.7,
-		     width: 800,
-                     height: 600,
-                     zIndex: 10
-                 });
-	$('#overlayPaper')
-            .show()
-            .css({
-                     position: 'absolute',
-                     zIndex: 100
-                 })
+        karma.play('byebye');
+        $('#content')
             .empty()
-            .append(karma.createImg('happy_chimp')
-                    .css({
-                             position: 'absolute',
-                             left: 200,
-                             top: 100,
-                             width: 300,
-                             height: 400
-                         })
-                    .clickable(function () {
-                                   $('#overlay').hide();
-                                   $('#overlayPaper').hide();
-                               }))
-            .append(createDiv()
-                    .html('Great Job!')
-                    .css({
-                             position: 'absolute',
-                             left: 35,
-                             top: 500,
-                             width: 800,
-                             fontSize: 80
-                         }));
+            .append(createDiv('gameOver')
+                    .html('GAME OVER'));
     };
 
-    var next = function () {
-        var total = Karma.rand(2, 5 + level);
-        var x1 = total - Karma.rand(1, total - 1);
-        var x2 = total - x1;
-        var img_name;
-        var choices = randomElementsIncluding(range(1, 10), total, 3);
-
-        $('#timerIndicator').stop();
-        displayScore();
-
-        if (score == 30) {
-            gameOver();
-            return;
+    var nextTask = function() {
+        if (correct_count == 5) {
+            level++;
+            correct_count = 0;
+            if (level > LEVELS) {
+                gameOver();
+                return;
+            }
+            task_generator = task_generator_for_level(level);
         }
-        if (score % 5 == 0) {
-            level = score < 0 ? 0 : Math.floor(score / 5);
-        }
-        img_name = img_names[level];
-
-
-        displayObjects($('#topLeftBox'), img_name, x1);
-        displayObjects($('#topRightBox'), img_name, x2);
-        choices.forEach(
-            function (choice, i) {
-                var paper = choice_papers[i];
-                displayObjects(paper, img_name, choice);
-                paper.clickable(function () {
-                                    var correct = choice == total;
-                                    karma.play(correct ? 'correct' : 'incorrect');
-                                    processAnswer(correct);
-                                });
+        current_task = task_generator();
+        $('#number1').html(current_task.x1);
+        $('#number2').html(current_task.x2);
+        current_task.options.forEach(
+            function (option, i) {
+                option_boxes[i]
+                    .html(option)
+                    .clickable(function () {
+                                   $('.optionBox').unclickable();
+                                   if (option == current_task.correct_option) {
+                                       correct_count++;
+                                       scoreboardHit();
+                                       karma.play('correct');
+                                   } else {
+                                       scoreboardMiss();
+                                       karma.play('incorrect');
+                                   }
+                                   timer = setTimeout(nextTask, 1000);
+                               });
             }
         );
-        startTimer();
     };
-    choice_papers.forEach(function (x) { x.unclickable(); });
-    next();
+
+    nextTask();
 }
 
 setUpLesson(initialize, startLesson);

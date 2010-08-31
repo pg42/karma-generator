@@ -1,12 +1,7 @@
-@charset "UTF-8";
+@CHARSET "UTF-8";
 
-.box {
-    width: 190px;
-    height: 190px;
-    background-color: #EDED0A; /* Original color is a dirty yellow. */
-    border: 5px solid black;
-    -moz-border-radius: 40px;
-    -webkit-border-radius: 40px;
+#content {
+    background: url(background.jpg) no-repeat center;
 }
 
 #instructions {
@@ -14,141 +9,46 @@
     font-weight: bold;
     position: relative;
     top: 8px;
+    left: -30px;
 }
 
-#main {
-    float: left;
-    position: relative;
-    margin: 50px 0 0 100px;
-    width: 650px;
-    height: 600px;
-}
-
-#side {
-    margin-top: 50px;
-    margin-left: 50px;
-    float: left;
-    height: 600px;
-    position: relative;
-    width: 150px;
-}
-
-#top {
-    width: 650px;
-    height: 300px;
-    position: relative;
-}
-
-#bottom {
-    clear: both;
-    float: left;
-    width: 650px;
-    height: 300px;
-    position: relative;
-}
-
-#topLeftArea {
-    float: left;
-    width: 300px;
-    height: 300px;
-    position: relative;
-}
-
-#topMiddleArea {
-    float: left;
-    width: 50px;
-    height: 300px;
-    position: relative;
-}
-
-#topRightArea {
-    float: left;
-    width: 300px;
-    height: 300px;
-    position: relative;
-}
-
-#topLeftBox {
-    left: 60px;
+#questArea {
     position: absolute;
-    top: 50px;
+    top: 100px;
+    left: 400px;
+    width: 200px;
+    height: 80px;
+    font: 50px/70px Arial Black,Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: gold;
 }
 
-#plusSign {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 150px;
-}
-
-#topRightBox {
+#optionArea {
     position: absolute;
-    top: 50px;
-    right: 50px;
-}
-
-.bottom {
-    float: left;
-    width: 216.5px;
+    right: 0;
+    bottom: 0;
+    width: 750px;
     height: 300px;
-    position: relative;
+    font: 50px/120px Arial Black,Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
 
-.bottomCard {
-    left: 25px;
+.optionBox {
     position: absolute;
-    top: 20px;
-}
-
-
-.sideItem {
-    clear: both;
-    float: left;
-    width: 150px;
-    height: 200px;
-    position: relative;
-}
-
-#timer {
-    position: absolute;
-    width: 100px;
-    height: 150px;
-    top: 10px;
-    left: 25px;
-}
-
-#timerIndicator {
-    position: absolute;
-    width: 100px;
-    height: 150px;
-    top: 10px;
-    left: 25px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-}
-
-#scoreBox {
-    position: absolute;
-    width: 100px;
-    height: 150px;
-    top: 10px;
-    left: 25px;
-    z-index: 10;
-}
-
-#scoreBoxText {
-    position: relative;
-    top: 60px;
-    font: 65px Arial;
-    color: #fff;
     text-align: center;
-    z-index: 100;
+    color: green;
 }
 
-#chimpDiv {
+.optionBox:hover {
+    color:  red;
+}
+
+#gameOver {
+    opacity: 1;
     position: absolute;
-    top: 10px;
-    left: 25px;
-    width: 120px;
-    height: 125px;
+    top: 100px;
+    left: 400px;
+    color: blue;
+    text-align: center;
+    font : bold 45px/65px Arial Black, Times New Roman;
 }
