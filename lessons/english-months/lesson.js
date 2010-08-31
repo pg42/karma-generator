@@ -13,19 +13,16 @@
     'December'
 ];
 
-var currentDroppedPositions = {};
 var gameContentDiv;
 
 function startLesson(karma, contentDiv) {
     var createMonthLessonBox = function (month_name) {
-        return createDiv('monthLesson' + month_name).addClass('imgArea')
+        return createDiv('monthLesson' + month_name)
+            .addClass('imgArea')
             .append(createDiv('title')
                     .text(month_name)
                     .addClass('monthsName')
-                    .clickable(function(){
-                                   karma.play(month_name);
-                               })
-                   )
+                    .clickable(function () { karma.play(month_name); }))
             .append(karma.createImg(month_name).addClass('imgBox'));
     };
 
@@ -33,26 +30,22 @@ function startLesson(karma, contentDiv) {
         .append(createDiv('main')
                 .append(createDiv('heading')
                         .text('Learn the spelling and order of the months.')
-                        .addClass('topText')
-                       )
-                .append(createDiv('monthLessonBoxes'))
-               );
+                        .addClass('topText'))
+                .append(createDiv('monthLessonBoxes')));
 
     $(month_names.map(createMonthLessonBox)).appendTo($('#monthLessonBoxes'));
-    $("#linkCheck").hide();
 }
 
 function startGame(karma, contentDiv) {
-    currentDroppedPositions = {};
-    if (contentDiv != null){
+    if (contentDiv != null) {
         gameContentDiv = contentDiv;
     }
-    var ordinalSuffix = function (num){
+    var ordinalSuffix = function (num) {
         num = num % 100;
-        if (num >= 11 && num <= 13){
+        if (num >= 11 && num <= 13) {
             return 'th';
         }
-        switch(num % 10){
+        switch (num % 10) {
         case 1:
             return 'st';
         case 2:
@@ -68,128 +61,134 @@ function startGame(karma, contentDiv) {
             .append(Karma.createImg('small_' + month_name).addClass('imgSmall'))
             .append(createDiv()
                     .text(index + ordinalSuffix(index))
-                    .addClass('orderTxt')
-                   )
+                    .addClass('orderTxt'))
             .append(createDiv('drop' + index)
                     .addClass('dropObjects')
-                    .data('monthName', month_name)
-                   )
+                    .data('monthName', month_name))
             .append($(document.createElement('span')).addClass('check'));
     };
-    var createMonthDragBox = function (month_name) {
-        var missing_char = Karma.random(0, month_name.length - 1);
-
-        var month_pref = '';
-        if (missing_char > 0) month_pref = month_name.substring(0, missing_char);
-
-        var month_suf = '';
-        if (missing_char < month_name.length - 1) month_suf = month_name.substring(missing_char +1);
-        return createDiv('monthDrag' + month_name)
+    var makeMonthDraggable = function (month) {
+        month
             .addClass('dragObjects')
+            .draggable({ containment: '#content', revert: 'invalid' });
+    };
+
+    var createSpan = function (text) {
+       return $(document.createElement('span')).text(text);
+    };
+
+    var createMonthDragBox = function (month_name) {
+        var i = Karma.random(0, month_name.length - 1);
+
+        var prefix = month_name.substring(0, i);
+        var missing_char = month_name[i];
+        var suffix = month_name.substring(i + 1);
+
+        var result = createDiv()
             .data('monthName', month_name)
-            .append($(document.createElement('span')).text(month_pref))
+            .addClass('month')
+            .addClass('unfinished')
+            .append(createSpan(prefix))
             .append($(document.createElement('input'))
-                    .attr({
-                              type: 'text',
-                              maxlength: 1
-                          })
-                    .data('correctLetter', month_name[missing_char])
+                    .attr({ type: 'text',
+                            maxlength: 1 })
                     .addClass('blankBox')
                     .Watermark('?')
-                    .clickable(function(){
-                                   $(this).select();
-                               })
-                   )
-            .append($(document.createElement('span')).text(month_suf));
+                    .clickable(function () { $(this).select(); })
+                    .keypress(function (event) {
+                                  if (event.which == 8 || event.which == 0) {
+                                      // Backspace or tab
+                                      return;
+                                  }
+                                  var ch = String.fromCharCode(event.which);
+                                  if (ch.toLowerCase() == missing_char.toLowerCase()) {
+                                      karma.play('correct');
+                                      result
+                                          .empty()
+                                          .append(month_name);
+                                      makeMonthDraggable(result);
+                                  } else {
+                                      karma.play('incorrect');
+                                      $(this)
+                                          .addClass('incorrectLetter')
+                                          .Watermark(ch, 'red')
+                                          .select();
+                                  }
+                              }))
+            .append(createSpan(suffix));
+        return result;
     };
 
     gameContentDiv.empty()
         .append(createDiv('main')
                 .append(createDiv('heading')
-                        .text('Type in the missing letter and drag and drop the months in the right order:')
-                        .addClass('topText')
-                       )
-                .append(
-                    createDiv('gameArea')
-                        .append(createDiv('dragMonthArea'))
-                )
-                .append(createDiv('gameOver'))
-               );
+                        .text('Type in the missing letter and drag and drop'
+                              + ' the months in the right order:')
+                        .addClass('topText'))
+                .append(createDiv('gameArea')
+                        .append(createDiv('dragMonthArea'))));
 
     $(month_names.map(createMonthDropBox)).appendTo($('#gameArea'));
-    $(Karma.shuffle(month_names).slice(0,3).map(createMonthDragBox))
-        .appendTo('#dragMonthArea');
 
-    $('.dragObjects').draggable(
-        {
-            containment: '#content',
-            start: function(event, ui){
-                for (var target in currentDroppedPositions){
-                    if (currentDroppedPositions[target] == ui.helper){
-                        currentDroppedPositions[target] = null;
-                        $('#' + target).droppable('option' , 'hoverClass' , 'drophover');
-                        return;
-                    }
-                }
-            },
-            stop: function(event, ui) {
-                for (var target in currentDroppedPositions){
-                    if (currentDroppedPositions[target] == ui.helper){
-                        return;
-                    }
-                }
-                // not on a valid target, so animate back home
-                ui.helper.animate({left: 0, top: 0});
-            }
-        });
+    var remaining_month_names = Karma.shuffle(month_names);
+
     $('.dropObjects').droppable(
         {
             tolerance: 'intersect',
             hoverClass: 'drophover',
-            drop: function(event, ui) {
-                if (currentDroppedPositions[ $(this).attr('id') ] == null){
-                    currentDroppedPositions[ $(this).attr('id') ] = ui.draggable;
-                    // snap draggable to this drop point
-                    ui.draggable.position({ my: 'center', at: 'center', of: $(this) });
-                    $(this).droppable('option' , 'hoverClass' , '');
+            drop: function (event, ui) {
+                var month = ui.draggable;
+                if ($(this).data('monthName') == ui.draggable.data('monthName')) {
+                    month
+                        .draggable('disable')
+                        .removeClass('dragObjects')
+                        .removeClass('unfinished')
+                        .position({ my: 'center', at: 'center', of: $(this) });
+                    var correct_month;
+                    createDiv()
+                        .addClass('correctMonth')
+                        .append($(this).data('monthName'))
+                        .appendTo($(this))
+                        .position({ my: 'center', at: 'center', of: $(this) })
+                        .hide();
+                    $(this)
+                        .droppable('disable');
+                    karma.play('correct');
+                    if (!$('.unfinished').length) {
+                        next();
+                    }
+                } else {
+                    month.animate({ top: 0, left: 0 });
+                    karma.play('incorrect');
                 }
             }
         });
 
-    $("#linkCheck").unclickable().clickable(
-        function(){
-			var correctCount = 0;
-            $('.check').html('');
-
-            $('.dropObjects').each(
-                function (index, value) {
-                    var correctLetter = function (input_field) {
-                        return input_field.val().toLowerCase() == input_field.data('correctLetter').toLowerCase();
-                    };
-                    var dragChild = currentDroppedPositions[$(this).attr('id')];
-					if (dragChild == null){
-						return;
-					}
-                    var correct =
-                        $(this).data('monthName') == dragChild.data('monthName') &&
-                        correctLetter(dragChild.children('input'));
-
-                    if (correct){
-                        $(this).siblings('.check').html(Karma.createImg('correct'));
-                        correctCount ++;
-                    } else {
-                        $(this).siblings('.check').html(Karma.createImg('incorrect'));
-                    }
+    var next = function () {
+        $('.correctMonth').show();
+        $('#dragMonthArea').empty();
+        if (remaining_month_names.length) {
+            range(0, 3).forEach(
+                function () {
+                    createMonthDragBox(remaining_month_names.shift())
+                        .appendTo('#dragMonthArea');
                 }
             );
-			if (correctCount == $('.dragObjects').length){
-				// show good feedback, after a second show next question
-                Karma.play('correct');
-				$("#linkCheck").delay(1000).show(50, startGame);
-			} else {
-                Karma.play('incorrect');
-            }
-        }).show();
+        } else {
+            setTimeout(gameOver, 1000);
+        }
+    };
+
+    var gameOver = function () {
+        $('#main')
+            .addClass('backOpaque');
+        gameContentDiv
+            .append(createDiv()
+                    .addClass('gameOver')
+                    .text('GAME OVER'));
+    };
+
+    next();
 }
 
 setUpMultiScreenLesson([startLesson, startGame]);

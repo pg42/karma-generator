@@ -52,29 +52,38 @@
 
 .dropObjects {
     width: 160px;
-    height: 33px;
+    height: 43px;
     margin: 10px 0px 10px 100px;
     border-bottom: 2px solid black;
 }
 
 #dragMonthArea {
     position: absolute;
-    left: 5px;
+    left: 300px;
     top: 600px;
-    width: 1185px;
+    width: 600px;
     height: 90px;
     border: 1px solid #D0F692;
 }
 
-.dragObjects {
+.month {
     float: left;
-    cursor: move;
     height: 30px;
     margin: 0.3em;
-    padding: 5px 15px;
+    padding: 5px 15px 11px;
     color: rgb(51, 0, 204);
-    font: 22px/25px bold Arial,Verdana,Geneva,Helvetica;
+    font: 28px bold Arial,Verdana,Geneva,Helvetica;
     position: relative;
+}
+
+.correctMonth {
+    color: rgb(51, 0, 204);
+    font: 28px bold Arial,Verdana,Geneva,Helvetica;
+    position: absolute;
+}
+
+.dragObjects {
+    cursor: move;
 }
 
 input.blankBox {
@@ -109,22 +118,15 @@ input.blankBox {
     height: 20px;
 }
 
-#gameOver {
-    display: none;
+.gameOver {
+    font: bold 40px Arial, Helvetica, sans-serif;
+    color: blue;
     position: absolute;
-    width: 300px;
-    text-align: center;
-    top: 40%;
-    left: 40%;
-    font: 30px/35px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    color: red;
+    left: 470px;
+    top: 300px;
 }
 
-#gameOverInfo {
-    margin-top: 35px;
-    text-align: center;
-    font: 20px/25px Helvetica, Geneva, Arial, Verdana, sans-serif;
-    font-weight: bold;
-    color: #06D946;
+.backOpaque {
+    background-color: #A4A4A4;
+    opacity: 0.2;
 }

@@ -37,4 +37,4 @@ image('check.png', 'check')
 image('correct.png', 'correct')
 image('incorrect.png', 'incorrect')
 
-footer_configuration(link_next=True, link_previous=True, scoreboard=True, link_check_answer=True)
+footer_configuration(link_next=True, link_previous=True, scoreboard=True)
