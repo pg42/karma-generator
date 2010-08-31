@@ -264,7 +264,7 @@ function capitalize(str) {
  * The options_draggable argument accepts the same options as a
  * ui.draggable, except start/stop.
  *
- * The options_drobbale argument accepts the same options as a
+ * The options_droppable argument accepts the same options as a
  * ui.draggable, except drop.
  * It takes an extra option dropSuccess, a callback that will be
  * invoked on a successful drop.
