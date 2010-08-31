@@ -75,7 +75,7 @@
     left: 100px;
     height: 200px;
     width: 600px;
-    font: 20px Verdana, Helvetica, Geneva, sans-serif;
+    font: 24px Verdana, Helvetica, Geneva, sans-serif;
     line-height: 40px;
 }
 
@@ -178,13 +178,13 @@
 }
 
 .wordBankTxt {
-    cursor: pointer;
+    cursor: move;
     float: left;
     width: 90px;
     height: 20px;
     margin: .5em 0.5em;
     padding: 5px;
-    font: 20px/25px sans-serif,Verdana, Helvetica, Geneva ;
+    font: 24px sans-serif,Verdana, Helvetica, Geneva ;
     text-align: center;
     z-index: 10;
 }
