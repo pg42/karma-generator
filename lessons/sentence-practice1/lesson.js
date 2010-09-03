@@ -89,7 +89,7 @@ function startLesson(karma) {
             scoreboardAppendGameOverMessage($('#gameOverInfo'));
         }
     };
-    var q = Object
+    var q = Karma
         .create(OneShotMCQuiz, extensions)
         .initialize(karma, { tasks_in_order: true }, tasks);
     q.start();

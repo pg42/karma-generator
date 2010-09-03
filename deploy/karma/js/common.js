@@ -1,4 +1,4 @@
-﻿// This file can replace global.js in karma.
+// This file can replace global.js in karma.
 
 function padLeft(str, pad_character, length) {
     str = str.toString();
@@ -232,18 +232,6 @@ function extend(object, properties) {
 function toBeOverridden(method) {
     return function () {
         alert('Override ' + method);
-    };
-}
-
-if (typeof Object.create !== 'function') {
-    Object.create = function (o, extensions) {
-        function F() {}
-        F.prototype = o;
-        var result = new F();
-        if (extensions) {
-            extend(result, extensions);
-        }
-        return result;
     };
 }
 

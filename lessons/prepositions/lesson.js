@@ -186,7 +186,7 @@ function startLesson(karma) {
             scoreboardAppendGameOverMessage($('#gameOverInfo'));
         }
     };
-    var q = Object
+    var q = Karma
         .create(OneShotMCQuiz, extensions)
         .initialize(karma, {}, tasks);
     q.start();

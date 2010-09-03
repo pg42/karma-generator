@@ -1,4 +1,4 @@
-var MCQuiz = Object.create(
+var MCQuiz = Karma.create(
     {},
     {
         initialize: function (karma, configuration, tasks) {
@@ -75,7 +75,7 @@ var MCQuiz = Object.create(
 );
 
 
-var SimpleMCQuiz = Object.create(
+var SimpleMCQuiz = Karma.create(
     MCQuiz,
     {
         initialize: function (karma, configuration, tasks) {
@@ -178,7 +178,7 @@ function setUpSimpleMCQuiz(configuration, extensions, objects) {
         }
     );
     var startLesson = function (karma) {
-        Object
+        Karma
             .create(SimpleMCQuiz, extensions)
             .initialize(karma, configuration, tasks)
             .start();
@@ -188,7 +188,7 @@ function setUpSimpleMCQuiz(configuration, extensions, objects) {
 }
 
 
-var OneShotMCQuiz = Object.create(
+var OneShotMCQuiz = Karma.create(
     MCQuiz,
     {
         initialize: function (karma, configuration, tasks) {

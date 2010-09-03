@@ -1,4 +1,4 @@
-﻿var tasks = [
+var tasks = [
     {
         question: 'चित्रको कुन सरलरेखा (line) हो ?',
         options: ['AD', 'BC', 'BD', 'AB'],
@@ -112,7 +112,7 @@ function startLesson(karma) {
             }
         }
     };
-    var q = Object
+    var q = Karma
         .create(OneShotMCQuiz, extensions)
         .initialize(karma, {}, tasks);
     q.start();

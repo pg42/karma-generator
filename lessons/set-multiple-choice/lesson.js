@@ -1,4 +1,4 @@
-﻿var tasks = [
+var tasks = [
     {
         question: 'समूह V = {a,e,i,o,u} लाई  कसरी लेख्दा ठिक हुदैन ?',
         options: ['V = {e,a,i,a,u}',
@@ -131,7 +131,7 @@ function startLesson(karma) {
             }
         }
     };
-    var q = Object
+    var q = Karma
         .create(OneShotMCQuiz, extensions)
         .initialize(karma, {}, tasks);
     q.start();

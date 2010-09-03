@@ -1,4 +1,4 @@
-var AbstractTimer = Object.create(
+var AbstractTimer = Karma.create(
     {},
     {
         initialize: function () {
@@ -54,7 +54,7 @@ var AbstractTimer = Object.create(
     }
 );
 
-var Clock = Object.create(
+var Clock = Karma.create(
     AbstractTimer,
     {
         tick: function () {
@@ -65,11 +65,11 @@ var Clock = Object.create(
 );
 
 function createClock() {
-    return Object.create(Clock, {})
+    return Karma.create(Clock, {})
         .initialize();
 }
 
-var CountdownTimer = Object.create(
+var CountdownTimer = Karma.create(
     AbstractTimer,
     {
         initialize: function (callback, seconds) {
@@ -97,6 +97,6 @@ var CountdownTimer = Object.create(
 );
 
 function createCountdownTimer(callback, seconds) {
-    return Object.create(CountdownTimer, {})
+    return Karma.create(CountdownTimer, {})
         .initialize(callback, seconds);
 }
