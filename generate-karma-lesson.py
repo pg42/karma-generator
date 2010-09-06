@@ -1,7 +1,8 @@
 #! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
-from html import HtmlDocument, HtmlElement
+import html3
+import lesson_html
 import mo2js
 import codecs
 import os
@@ -37,12 +38,17 @@ class KarmaFramework():
             self._karma_file('js/jquery.i18n.js', 'i18n'),
             self._karma_file('js/jquery.strings.js', 'jquery.strings'),
             self._karma_file('js/jquery.keyfilter.js', 'jquery.keyfilter'),
-            self._karma_file('js/kStart.js', 'kstart')
+            self._karma_file('js/kStart.js', 'kstart'),
+            self._karma_file('js/ui.kHeader.js', 'ui.kHeader'),
+            self._karma_file('js/kDoc.js', 'kDoc')
             ]
         self.css_files = [
             self._karma_file('css/global.css', 'global'),
             self._karma_file('css/ui.scoreboard.css', 'ui.scoreboard'),
-            self._karma_file('css/kStart.css', 'kstart')
+            self._karma_file('css/kStart.css', 'kstart'),
+            self._karma_file('css/karma.css', 'karma'),
+            self._karma_file('css/ui.kHeader.css', 'ui.kHeader'),
+            self._karma_file('css/kDoc.css', 'kDoc')
             ]
         self.audio_files = [
             self._karma_file('audio/en_correct.ogg', 'correct'),
@@ -259,50 +265,6 @@ java_script_dependencies = [
 #TBD: factor this out in a separate file, so it is easy to provide
 #     your own header/footer
 #TBD: make header/footer customizable
-def generate_header(karma, dir, body, titles):
-    header = body.div(id='header')
-
-    header.div(id='topbtn_left').div(id='linkBackLesson',
-                                     title='Back',
-                                     className='linkBack')
-
-    def create_title(text):
-        lesson_title = header.div(className='lesson_title')
-        lesson_title.img(src=karma.image('title_block_lt').relative_path(dir, web=True),
-                         width=33, height=75, align='absmiddle')
-        lesson_title.text(text)
-        lesson_title.img(src=karma.image('title_block_rt').relative_path(dir, web=True),
-                         width=33, height=75, align='absmiddle')
-
-    for title in titles:
-        create_title(title)
-
-    header.div(className='topbtn_right').div(title='Help', id='linkHelp')
-
-    header.div(className='topbtn_right').div(title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित',
-                                             id='linkOle')
-
-
-def generate_footer(subject, body):
-    footer = body.div(id='footer')
-
-    config = theLesson.footer_configuration
-
-    if config['link_next']:
-        footer.div(title='Next', id='linkNextLesson', className='linkNext')
-    if config['link_previous']:
-        footer.div(title='Previous', id='linkPrevLesson', className='linkBack')
-    if config['scoreboard']:
-        footer.div(id='score_box', display='none')
-
-    play_again = footer.div(className='botbtn_right');
-    if subject == 'English':
-        play_again.div(title='Play Again', id='linkPlayAgain', className='english').text('Play Again')
-    else:
-        play_again.div(title='Play Again', id='linkPlayAgain', className='nepali').text(u'फेरी खेलौँ')
-
-    if config['link_check_answer']:
-        footer.div(className='botbtn_right').div(title='Check Answer', id='linkCheck')
 
 
 def topological_sort(nodes, dependencies, key):
@@ -370,7 +332,7 @@ def sort_java_script_files(files):
 
 
 def createDiv(id):
-    return HtmlElement('div', True).attr(id=id)
+    return html3.HtmlElement(None, 'div', True).attr(id=id)
 
 class Lesson():
     def __init__(self, src_directory):
@@ -392,6 +354,10 @@ class Lesson():
                                          link_next=True,
                                          scoreboard=False,
                                          link_check_answer=False)
+
+    def all_java_script_files(self):
+        files = include_dependencies(self.karma, self.java_script_files)
+        return sort_java_script_files(files)
 
     def grade(self):
         return self._grade
@@ -441,8 +407,8 @@ class Lesson():
     def generate(self):
         print 'writing lesson to ' + self.deploy_name()
         self.copy_files()
-        self.print_html_on(codecs.open('index.html', 'w', 'UTF-8'))
-        self.print_start_html_on(codecs.open('start.html', 'w', 'UTF-8'))
+        self.print_index_html()
+        self.print_start_html()
         self.print_kdoc_html_on(codecs.open('kDoc.html', 'w', 'UTF-8'))
         self.print_karma_js_on(open('lesson-karma.js', 'w'))
 
@@ -464,89 +430,14 @@ class Lesson():
     def set_directory(self, dir):
         self.directory = os.path.abspath(os.path.join(self.parent_directory, dir))
 
-    def print_start_html_on(self, stream):
-        doc = HtmlDocument()
-        html = doc.html()
-        head = html.head()
-        html.title().text(self.lesson_title)
-        head.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
-        head.link(type='image/ico',
-                  rel='icon',
-                  href=self.karma.image('favicon').relative_path(None, web=True))
-        head.link(type='text/css',
-                  rel='stylesheet',
-                  href=self.karma.css('kstart').relative_path(None, web=True))
-        for f in [self.karma.java_script('jquery'),
-                  self.karma.java_script('kstart')]:
-            head.script(type='text/javascript',
-                        src=f.relative_path(None, web=True))
-
-        displayGrade = u'०१२३४५६७८९'[self.grade()];
-        displaySubject = {'English':'English', 'Maths':u'गणित', 'Nepali':u'नेपाली' }[self.subject()];
-
-        body = html.body(id='kStart')
-
-        top = body.div(id='top')
-        top.div(id='backBtn', title='Back')
-        top_middle = top.div(id='topMiddle')
-        top_middle.div(id='topDesc', className='center').text(u'साझा शिक्षा ई-पाटीद्वारा निर्मित')
-        top_middle.div(id='topE-Paath', className='center').text(u'ई-पाठ')
-
-        middle = body.div(id='middle')
-        grade = middle.div(id='grade', className='center')
-        grade.span(id='gradeText').text(u'कक्षा:')
-        grade.span(id='gradeNum').text(displayGrade)
-        middle.div(id='subject', className='center').text(displaySubject)
-        lesson_title = middle.div(id='lessonTitle', className='center')
-        lesson_title.a(href='./index.html').text(self.lesson_title)
-        middle.div(id='lessonDesc', className='center').text(self.summary)
-        note = middle.div(id='teachersNoteBtn', className='button')
-        a = note.a(href='./kDoc.html?back=start.html&doc=teachersNote')
-        a.div().text(u'Teacher\'s Note')
-        a.div().text(u'पाठविवरण')
-
-        bottom = body.div(id='bottom')
-        bottom.div(id='logo',
-                   title=u'साझा शिक्षा ई-पाटी द्वारा निर्मित')
-
-        body.div(id='logoHelp')
-
-        doc.print_on(stream)
+    def print_start_html(self):
+        lesson_html.start_html(self).to_file('start.html')
 
     def print_kdoc_html_on(self, stream):
-        karma_dir = os.path.relpath(self.karma.root_dir, self.directory)
-        print >>stream, k_doc_template.format(karma_dir=karma_dir,
-                                              subject=unicode(self.subject()),
-                                              title=unicode(self.title));
+        lesson_html.kdoc_html(self).to_file('kDoc.html')
 
-    def print_html_on(self, stream):
-        doc = HtmlDocument()
-        for line in warning_text_lines:
-            doc.comment(string.replace(line, '--', '__'))
-        html = doc.html()
-        head = html.head()
-        head.title().text(self.title)
-        head.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
-        for file in self.css_files:
-            head.link(type='text/css',
-                      rel='stylesheet',
-                      href=file.relative_path(None, web=True))
-        head.link(type='image/ico',
-                  rel='icon',
-                  href=self.karma.image('favicon').relative_path(None, web=True))
-        all_java_script_files = include_dependencies(self.karma,
-                                                     self.java_script_files)
-        for file in sort_java_script_files(all_java_script_files):
-            head.script(type='text/javascript',
-                        src=file.relative_path(None, web=True))
-        body = html.body()
-        titles = [self.lesson_title]
-        if self.subject() == 'Maths' and self.lesson_title != self.start_title:
-            titles.append(self.start_title)
-        generate_header(self.karma, self.directory, body, titles)
-        body.children.extend(self.divs)
-        generate_footer(self.subject(), body)
-        doc.print_on(stream)
+    def print_index_html(self):
+        lesson_html.index_html(self, warning_text_lines).to_file('index.html')
 
     def print_karma_js_on(self, stream):
         print >>stream, '/*'

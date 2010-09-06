@@ -1,14 +1,10 @@
 #! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
-import codecs
-import sys
-
-
 attribute_names = dict(
     httpEquiv='http-equiv',
     className='class'
-    )
+)
 
 
 html_escapes = [(u'&', u'&amp;'),
@@ -24,85 +20,136 @@ def escape(string):
             string = string.replace(x, y)
     return string
 
-
-class HtmlElementFactory():
+class HtmlFragment():
     def __init__(self):
         self.children = []
 
-    def create_element(self, tag, attrs, separate_closing_tag=True):
-        result = HtmlElement(tag, separate_closing_tag)
+    def append_child(self, child):
+        self.children.append(child)
+
+    def _create_element(self, tag, attrs, separate_closing_tag=True):
+        result = HtmlElement(self.document(), tag, separate_closing_tag)
+        self._hookup_to_parent(result)
         result.attr(**attrs)
-        self.children.append(result)
         return result
 
     def html(self, **attrs):
-        return self.create_element(u'html', attrs)
+        return self._create_element(u'html', attrs)
 
     def head(self, **attrs):
-        return self.create_element(u'head', attrs)
+        return self._create_element(u'head', attrs)
 
     def body(self, **attrs):
-        return self.create_element(u'body', attrs)
+        return self._create_element(u'body', attrs)
 
     def meta(self, **attrs):
-        return self.create_element(u'meta', attrs, False)
+        return self._create_element(u'meta', attrs, False)
 
     def link(self, **attrs):
-        return self.create_element(u'link', attrs, False)
+        return self._create_element(u'link', attrs, False)
 
     def title(self, **attrs):
-        return self.create_element(u'title', attrs)
+        return self._create_element(u'title', attrs)
 
     def script(self, **attrs):
-        return self.create_element(u'script', attrs)
+        return self._create_element(u'script', attrs)
 
     def a(self, **attrs):
-        return self.create_element(u'a', attrs)
+        return self._create_element(u'a', attrs)
+
+    def p(self, **attrs):
+        return self._create_element(u'p', attrs)
+
+    def br(self, **attrs):
+        return self._create_element(u'br', attrs, False)
+
+    def iframe(self, **attrs):
+        return self._create_element(u'iframe', attrs)
 
     def div(self, **attrs):
-        return self.create_element(u'div', attrs)
+        return self._create_element(u'div', attrs)
 
     def span(self, **attrs):
-        return self.create_element(u'span', attrs)
+        return self._create_element(u'span', attrs)
 
     def img(self, **attrs):
-        return self.create_element(u'img', attrs)
+        return self._create_element(u'img', attrs)
 
     def text(self, txt):
         result = HtmlText(txt)
-        self.children.append(result)
+        self._hookup_to_parent(result)
         return result
 
     def innerhtml(self, html):
         result = HtmlSource(html)
-        self.children.append(result)
+        self._hookup_to_parent(result)
         return result
 
     def comment(self, txt):
         result = HtmlComment(txt)
-        self.children.append(result)
+        self._hookup_to_parent(result)
         return result
+
+    # Utility functions
+    def meta_utf8(self):
+        self.meta(content='text/html, charset=utf-8', httpEquiv='Content-Type')
+
+    def favicon(self, href):
+        self.link(type='image/ico', rel='icon', href=href)
+
+    def css(self, href):
+        self.link(type='text/css', rel='stylesheet', href=href)
+
+    def java_script(self, src):
+        self.script(type='text/javascript', src=src)
 
     def print_on(self, stream):
         for child in self.children:
             child.print_on(stream)
 
 
-class HtmlDocument(HtmlElementFactory):
+class HtmlDocument(HtmlFragment):
     def __init__(self):
-        HtmlElementFactory.__init__(self)
+        HtmlFragment.__init__(self)
+        self.stack = [self]
+
+    def document(self):
+        return self
+
+    def _hookup_to_parent(self, child):
+        self.document().stack[-1].append_child(child)
 
     def print_on(self, stream):
         print >>stream, '<!DOCTYPE html>'
-        HtmlElementFactory.print_on(self, stream)
+        HtmlFragment.print_on(self, stream)
+
+    def to_file(self, file_name):
+        import codecs
+        f = codecs.open(file_name, 'w', 'UTF-8')
+        self.print_on(f)
+        f.close()
 
 
-class HtmlElement(HtmlElementFactory):
-    def __init__(self, tag, separate_closing_tag):
-        HtmlElementFactory.__init__(self)
+class HtmlElement(HtmlFragment):
+    def __init__(self, document, tag, separate_closing_tag):
+        HtmlFragment.__init__(self)
+        self._document = document
         self.tag = tag
-        self.attributes = {}
         self._separate_closing_tag = separate_closing_tag
+
+    def _hookup_to_parent(self, child):
+        self.append_child(child)
+
+    def document(self):
+        return self._document
+
+    # __enter__ and __exit__ enable use of 'with' statement
+    def __enter__(self):
+        self.document().stack.append(self)
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.document().stack.pop()
 
     def attr(self, **kw):
         self.attributes = kw
@@ -130,7 +177,7 @@ class HtmlElement(HtmlElementFactory):
             tag_close = u'</%s>' % self.tag
             if len(self.children):
                 print >>stream, tag_open
-                HtmlElementFactory.print_on(self, stream)
+                HtmlFragment.print_on(self, stream)
                 print >>stream, tag_close
             else:
                 print >>stream, tag_open + tag_close
