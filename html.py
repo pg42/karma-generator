@@ -73,7 +73,7 @@ class HtmlFragment():
         return self._create_element(u'span', attrs)
 
     def img(self, **attrs):
-        return self._create_element(u'img', attrs)
+        return self._create_element(u'img', attrs, False)
 
     def text(self, txt):
         result = HtmlText(txt)

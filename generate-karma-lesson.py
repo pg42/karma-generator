@@ -1,7 +1,7 @@
 #! /usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
-import html3
+import html
 import lesson_html
 import mo2js
 import codecs
@@ -332,7 +332,7 @@ def sort_java_script_files(files):
 
 
 def createDiv(id):
-    return html3.HtmlElement(None, 'div', True).attr(id=id)
+    return html.HtmlElement(None, 'div', True).attr(id=id)
 
 class Lesson():
     def __init__(self, src_directory):
